@@ -7,22 +7,35 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import java.util.ArrayList;
+
 public class Themenuebersicht extends AppCompatActivity {
     private static final int REQUESTCODE = 1;
-    public  String[] items = {"Thema1", "Thema2", "Thema3", "Thema4"};
+    ArrayList<String> items = new ArrayList<String>();
+    ArrayList<String> checkeditems = new ArrayList<String>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_themenuebersicht);
+        getListItems();
         fillListView();
     }
 
+    public void getListItems(){
+        items.add("Thema1");
+        items.add("Thema2");
+        items.add("Thema3");
+        items.add("Thema4");
+        items.add("Thema5");
+    }
     public void fillListView(){
-        ListView faecheranzeige = (ListView) findViewById(R.id.themenliste);
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_multiple_choice, items);
-        faecheranzeige.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
-        faecheranzeige.setAdapter(arrayAdapter);
+        ListView listview = (ListView) findViewById(R.id.themenliste);
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_multiple_choice, items);
+        // ab da geht klasse los dann
+
+        ListviewHelper fachview = new ListviewHelper(listview, arrayAdapter, items);
+        checkeditems = fachview.getCheckeditems();
     }
 
 //    public void onClick(View view) {  //öffnet Kartenerstellung

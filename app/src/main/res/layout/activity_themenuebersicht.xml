@@ -10,6 +10,7 @@
         android:id="@+id/neueKarte"
         android:layout_width="51dp"
         android:layout_height="51dp"
+        android:layout_marginEnd="16dp"
         app:icon="@android:drawable/ic_input_add"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -40,21 +41,24 @@
     <Button
         android:id="@+id/zurueckzumfach"
         style="@style/Widget.AppCompat.Button"
-        android:layout_width="59dp"
+        android:layout_width="51dp"
         android:layout_height="51dp"
         android:onClick="zurueck"
         app:icon="?attr/homeAsUpIndicator"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
+    <TextView
         android:id="@+id/fachname"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:inputType="textPersonName"
         android:text="Fach"
-        app:layout_constraintStart_toEndOf="@+id/zurueckzumfach"
+        android:textAlignment="center"
+        android:textSize="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
