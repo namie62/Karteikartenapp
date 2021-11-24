@@ -11,7 +11,7 @@ import android.widget.ImageView;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-public class grafikeinfuegen extends AppCompatActivity {
+public class Grafikeinfuegen extends AppCompatActivity {
     public Uri imgUri;
 
     @Override
