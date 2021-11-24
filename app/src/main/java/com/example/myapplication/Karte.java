@@ -33,12 +33,15 @@ public class Karte extends AppCompatActivity {
             if (resultCode == RESULT_OK) {
                 try{
                     Uri uri = data.getParcelableExtra("pic");
+                    if (uri != null){
                     Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), uri);
-                    // System.out.println("bitmap");
                     grafik.setImageBitmap(bitmap);
+                    }else {
+                        System.out.println("kein Bild ausgewählt");
+                    }
                 } catch (Exception e) {
                     Bitmap bitmap = null;
-                    System.out.println("konnte Bild nicht laden"); // Stattdessen Errormessage dialog
+                    System.out.println("konnte Bild konnte nicht geparsed werden"); // Stattdessen Errormessage dialog
                 }
             }
         }

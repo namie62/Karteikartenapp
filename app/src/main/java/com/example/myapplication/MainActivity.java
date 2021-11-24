@@ -1,15 +1,11 @@
 package com.example.myapplication;
 
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 
+import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.view.View;
-import android.widget.ImageView;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -21,7 +17,7 @@ public class MainActivity extends AppCompatActivity {
     private static final int REQUESTCODE = 1;
 
     public void onClick(View view) {   // Die Methode openGalery muss in Jennys Knopf onClick rein
-        Intent i = new Intent(this, Karte.class);
+        Intent i = new Intent(this, Fach.class);
         startActivityForResult(i, REQUESTCODE);
     }
 

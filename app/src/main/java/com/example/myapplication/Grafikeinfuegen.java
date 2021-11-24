@@ -1,13 +1,8 @@
 package com.example.myapplication;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
-import android.view.View;
-import android.widget.ImageView;
-
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -24,14 +19,12 @@ public class Grafikeinfuegen extends AppCompatActivity {
         final int RESULT_GALLERY = 1;
         Intent galery = new Intent(Intent.ACTION_GET_CONTENT);
         galery.setType("image/*");
-        // galery.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivityForResult(galery, RESULT_GALLERY);
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        ImageView grafik = (ImageView) findViewById(R.id.imageView);
         if (requestCode == 1) {
             if (resultCode == RESULT_OK) {
                 try {

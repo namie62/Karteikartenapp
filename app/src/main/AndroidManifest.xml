@@ -10,6 +10,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication">
         <activity
+            android:name=".Thema"
+            android:exported="true" />
+        <activity
+            android:name=".Fach"
+            android:exported="true" />
+        <activity
             android:name=".Karte"
             android:exported="true" />
         <activity
@@ -21,7 +27,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Grafikeinfuegen"></activity>
+        <activity android:name=".Grafikeinfuegen" />
     </application>
 
 </manifest>
