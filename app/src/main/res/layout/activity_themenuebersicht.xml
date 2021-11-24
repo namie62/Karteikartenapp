@@ -8,12 +8,9 @@
 
     <Button
         android:id="@+id/neueKarte"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:layout_marginEnd="4dp"
-        android:text="neue Karte"
-        android:onClick="onClick"
+        android:layout_width="51dp"
+        android:layout_height="51dp"
+        app:icon="@android:drawable/ic_input_add"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -28,26 +25,46 @@
         android:id="@+id/abfrageTema"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Abfrage starten"
+        android:text="Abfrage"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintStart_toEndOf="@+id/lernmodusthema" />
 
     <Button
         android:id="@+id/lernmodusthema"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Lernmodus"
+        android:text="Lernen"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/zurueckzumfach"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="zurück"
+        style="@style/Widget.AppCompat.Button"
+        android:layout_width="59dp"
+        android:layout_height="51dp"
         android:onClick="zurueck"
+        app:icon="?attr/homeAsUpIndicator"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/fachname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Fach"
+        app:layout_constraintStart_toEndOf="@+id/zurueckzumfach"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/vorwaerts"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="vorwärts"
+        android:onClick="vorwaerts"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/abfrageTema" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

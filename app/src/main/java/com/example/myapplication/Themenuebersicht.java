@@ -25,13 +25,19 @@ public class Themenuebersicht extends AppCompatActivity {
         faecheranzeige.setAdapter(arrayAdapter);
     }
 
-    public void onClick(View view) {  //öffnet Kartenerstellung
-        Intent i = new Intent(this, Kartenerstellung.class);
-        startActivityForResult(i, REQUESTCODE);
-    }
+//    public void onClick(View view) {  //öffnet Kartenerstellung
+//        Intent i = new Intent(this, Kartenerstellung.class);
+//        startActivityForResult(i, REQUESTCODE);
+//    }
 
     public void zurueck(View view) {
         Intent i = new Intent(this, Fachuebersicht.class);
+        startActivityForResult(i, REQUESTCODE);
+    }
+
+
+    public void vorwaerts(View view) {  //öffnet Kartenerstellung
+        Intent i = new Intent(this, Kartenerstellung.class);
         startActivityForResult(i, REQUESTCODE);
     }
 }
