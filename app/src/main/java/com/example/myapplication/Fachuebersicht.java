@@ -62,11 +62,10 @@ public class Fachuebersicht extends AppCompatActivity {   //später dann durch D
         }
         else if(checkeditems.size() == 1 ){
             Intent i = new Intent(this, Themenuebersicht.class);
-            i.putExtra("Fachname", checkeditems);
+            i.putExtra("Fachname", checkeditems.get(0));
             startActivityForResult(i, REQUESTCODE);
         }else{
             System.out.println("errormessage: Bitte nur ein Fach auswählen");
-
         }
     }
 }

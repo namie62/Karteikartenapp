@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">Karteikatenapp</string>
     <string name="action_settings">Settings</string>
+    <string name="Abfrageknopf">Abfrage</string>
+    <string name="Lernmodusknopf">Lernen</string>
+    <string name="Vorwärtsknopf">vorwärts</string>
 </resources>

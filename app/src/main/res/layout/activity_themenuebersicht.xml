@@ -26,7 +26,7 @@
         android:id="@+id/abfrageTema"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Abfrage"
+        android:text="@string/Abfrageknopf"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/lernmodusthema" />
 
@@ -65,7 +65,7 @@
         android:id="@+id/vorwaerts"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="vorwärts"
+        android:text="@string/Vorwärtsknopf"
         android:onClick="vorwaerts"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/abfrageTema" />

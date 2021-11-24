@@ -12,15 +12,18 @@ import android.view.View;
 import android.widget.ImageView;
 
 public class Kartenerstellung extends AppCompatActivity {
+    String fachname;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_kartenerstellung);
+        fachname = getIntent().getExtras().getString("Fachname");
+
     }
     private static final int REQUESTCODE = 1;
 
-    public void onClick(View view) {   // Die Methode openGalery muss in Jennys Knopf onClick rein
+    public void onClick() {   // Die Methode openGalery muss in Jennys Knopf onClick rein
         Intent i = new Intent(this, Grafikeinfuegen.class);
         startActivityForResult(i, REQUESTCODE);
     }
@@ -48,8 +51,13 @@ public class Kartenerstellung extends AppCompatActivity {
     }
 
     public void zurueck(View view) {   // Die Methode openGalery muss in Jennys Knopf onClick rein
+        try{
         Intent i = new Intent(this, Themenuebersicht.class);
-        startActivityForResult(i, REQUESTCODE);
+        i.putExtra("Fachname", fachname);
+        startActivityForResult(i, REQUESTCODE);}
+        catch (Exception e){
+            System.out.println("Ging was schief");
+        }
     }
 
 }

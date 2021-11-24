@@ -13,6 +13,7 @@ public class Grafikeinfuegen extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         openGalery();
+
     }
 
     public void openGalery() {   // Öffnet Galerie und returnt dann ein Bild

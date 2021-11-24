@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -20,8 +21,12 @@ public class Themenuebersicht extends AppCompatActivity {
         setContentView(R.layout.activity_themenuebersicht);
         getListItems();
         fillListView();
-    }
 
+        String fachname = getIntent().getExtras().getString("Fachname");
+        TextView textview = (TextView) findViewById(R.id.fachname);
+        textview.setText(fachname);
+
+    }
     public void getListItems(){
         items.add("Thema1");
         items.add("Thema2");
@@ -50,7 +55,15 @@ public class Themenuebersicht extends AppCompatActivity {
 
 
     public void vorwaerts(View view) {  //öffnet Kartenerstellung
-        Intent i = new Intent(this, Kartenerstellung.class);
-        startActivityForResult(i, REQUESTCODE);
+        if (checkeditems.size() == 0) {
+            System.out.println("errormessage: Bitte  ein Fach auswählen");
+        }
+        else if(checkeditems.size() == 1 ){
+            Intent i = new Intent(this, Kartenerstellung.class);
+            i.putExtra("Themenname", checkeditems.get(0));
+            startActivityForResult(i, REQUESTCODE);
+        }else{
+            System.out.println("errormessage: Bitte nur ein Fach auswählen");
+        }
     }
 }

@@ -27,7 +27,7 @@
         android:id="@+id/abfragefach"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Abfrage"
+        android:text="@string/Abfrageknopf"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/lernmodusfach" />
 
@@ -35,7 +35,7 @@
         android:id="@+id/lernmodusfach"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Lernen"
+        android:text="@string/Lernmodusknopf"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -54,7 +54,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:onClick="vorwaerts"
-        android:text="vorwärts"
+        android:text="@string/Vorwärtsknopf"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/abfragefach" />
 
