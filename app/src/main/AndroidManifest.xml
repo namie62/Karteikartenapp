@@ -10,13 +10,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication">
         <activity
-            android:name=".Thema"
+            android:name=".Themenuebersicht"
             android:exported="true" />
         <activity
-            android:name=".Fach"
+            android:name=".Fachuebersicht"
             android:exported="true" />
         <activity
-            android:name=".Karte"
+            android:name=".Kartenerstellung"
             android:exported="true" />
         <activity
             android:name=".MainActivity"

@@ -7,15 +7,14 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-public class Thema extends AppCompatActivity {
+public class Themenuebersicht extends AppCompatActivity {
     private static final int REQUESTCODE = 1;
     public  String[] items = {"Thema1", "Thema2", "Thema3", "Thema4"};
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_thema);
+        setContentView(R.layout.activity_themenuebersicht);
         fillListView();
     }
 
@@ -26,9 +25,13 @@ public class Thema extends AppCompatActivity {
         faecheranzeige.setAdapter(arrayAdapter);
     }
 
+    public void onClick(View view) {  //öffnet Kartenerstellung
+        Intent i = new Intent(this, Kartenerstellung.class);
+        startActivityForResult(i, REQUESTCODE);
+    }
 
-    public void onClick(View view) {   // Die Methode openGalery muss in Jennys Knopf onClick rein
-        Intent i = new Intent(this, Karte.class);
+    public void zurueck(View view) {
+        Intent i = new Intent(this, Fachuebersicht.class);
         startActivityForResult(i, REQUESTCODE);
     }
 }

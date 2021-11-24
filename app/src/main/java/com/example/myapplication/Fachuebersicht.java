@@ -6,23 +6,17 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.ListView;
 
-import java.util.ArrayList;
-import java.util.List;
-
-public class Fach extends AppCompatActivity {   //später dann durch DB iterieren um Fächer zu holen
+public class Fachuebersicht extends AppCompatActivity {   //später dann durch DB iterieren um Fächer zu holen
 
     private static final int REQUESTCODE = 1;
-
     public  String[] items = {"Fach1", "Fach2", "Fach3", "Fach4"};
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_fach);
+        setContentView(R.layout.activity_fachuebersicht);
         fillListView();
     }
 
@@ -35,10 +29,13 @@ public class Fach extends AppCompatActivity {   //später dann durch DB iteriere
         listview.setAdapter(arrayAdapter);
     }
 
+    public void onClick(View view) {  //öffnet Themenübersicht
+        Intent i = new Intent(this, Themenuebersicht.class);
+        startActivityForResult(i, REQUESTCODE);
+    }
 
-
-    public void onClick(View view) {   // Die Methode openGalery muss in Jennys Knopf onClick rein
-        Intent i = new Intent(this, Thema.class);
+    public void zurueck(View view){
+        Intent i = new Intent(this, MainActivity.class);
         startActivityForResult(i, REQUESTCODE);
     }
 }

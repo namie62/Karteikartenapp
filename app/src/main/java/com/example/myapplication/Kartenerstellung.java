@@ -11,12 +11,12 @@ import android.provider.MediaStore;
 import android.view.View;
 import android.widget.ImageView;
 
-public class Karte extends AppCompatActivity {
+public class Kartenerstellung extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_karte);
+        setContentView(R.layout.activity_kartenerstellung);
     }
     private static final int REQUESTCODE = 1;
 
@@ -46,4 +46,10 @@ public class Karte extends AppCompatActivity {
             }
         }
     }
+
+    public void zurueck(View view) {   // Die Methode openGalery muss in Jennys Knopf onClick rein
+        Intent i = new Intent(this, Themenuebersicht.class);
+        startActivityForResult(i, REQUESTCODE);
+    }
+
 }
