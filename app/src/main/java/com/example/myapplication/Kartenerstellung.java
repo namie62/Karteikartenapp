@@ -23,7 +23,7 @@ public class Kartenerstellung extends AppCompatActivity {
     }
     private static final int REQUESTCODE = 1;
 
-    public void onClick() {   // Die Methode openGalery muss in Jennys Knopf onClick rein
+    public void onClick(View view) {   // Die Methode openGalery muss in Jennys Knopf onClick rein
         Intent i = new Intent(this, Grafikeinfuegen.class);
         startActivityForResult(i, REQUESTCODE);
     }

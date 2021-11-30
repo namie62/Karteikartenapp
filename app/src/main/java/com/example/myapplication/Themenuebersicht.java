@@ -43,10 +43,6 @@ public class Themenuebersicht extends AppCompatActivity {
         checkeditems = fachview.getCheckeditems();
     }
 
-//    public void onClick(View view) {  //öffnet Kartenerstellung
-//        Intent i = new Intent(this, Kartenerstellung.class);
-//        startActivityForResult(i, REQUESTCODE);
-//    }
 
     public void zurueck(View view) {
         Intent i = new Intent(this, Fachuebersicht.class);
@@ -59,9 +55,9 @@ public class Themenuebersicht extends AppCompatActivity {
             System.out.println("errormessage: Bitte  ein Fach auswählen");
         }
         else if(checkeditems.size() == 1 ){
-            Intent i = new Intent(this, Kartenerstellung.class);
-            i.putExtra("Themenname", checkeditems.get(0));
-            startActivityForResult(i, REQUESTCODE);
+            System.out.println("Should open");
+            //Intent i = new Intent(this, Kartenerstellung.class);
+           ////startActivityForResult(i, REQUESTCODE);
         }else{
             System.out.println("errormessage: Bitte nur ein Fach auswählen");
         }
