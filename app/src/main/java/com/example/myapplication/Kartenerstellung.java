@@ -9,18 +9,37 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 
 public class Kartenerstellung extends AppCompatActivity {
-    String fachname;
+    String themenname;
+    private static final int REQUESTCODE = 1;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_kartenerstellung);
-        fachname = getIntent().getExtras().getString("Fachname");
+
+        themenname = getIntent().getExtras().getString("Themenname");
+
+
+        Button buttonabbrechen = (Button) findViewById(R.id.buttonabbrechen);
+        buttonabbrechen.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                openPopUpWindow();
+            }
+        });
     }
-    private static final int REQUESTCODE = 1;
+    private void openPopUpWindow() {
+        Intent popupwindow = new Intent(Kartenerstellung.this, PopUpWindow.class);
+        popupwindow.putExtra("Themenname", themenname);
+        startActivity(popupwindow);
+    }
+
 
     public void onClick(View view) {   // Die Methode openGalery muss in Jennys Knopf onClick rein
         Intent i = new Intent(this, Grafikeinfuegen.class);
@@ -48,15 +67,4 @@ public class Kartenerstellung extends AppCompatActivity {
             }
         }
     }
-
-    public void zurueck(View view) {   // Die Methode openGalery muss in Jennys Knopf onClick rein
-        try{
-        Intent i = new Intent(this, Themenuebersicht.class);
-        i.putExtra("Fachname", fachname);
-        startActivityForResult(i, REQUESTCODE);}
-        catch (Exception e){
-            System.out.println("Ging was schief");
-        }
-    }
-
 }

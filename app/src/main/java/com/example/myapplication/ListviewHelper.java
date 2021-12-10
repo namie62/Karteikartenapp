@@ -22,13 +22,13 @@ public class ListviewHelper {
             listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    checkchecker[position] = !checkchecker[position];
+                    checkchecker[position] =! checkchecker[position];
                     if (checkchecker[position]){
                         checkeditems.add(items.get(position));
-                        System.out.println("Das Item"+ items.get(position) + "wurde angeklickt");}
+                        //System.out.println("Das Item"+ items.get(position) + "wurde angeklickt");
+                        }
                     else
-                        checkeditems.add(items.remove(position));
-                    System.out.println("Das Item wurde deselected");
+                        checkeditems.remove(items.get(position));
                 }
             });
             listview.setAdapter(arrayAdapter);

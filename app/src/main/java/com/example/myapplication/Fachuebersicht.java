@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +26,9 @@ public class Fachuebersicht extends AppCompatActivity {   //später dann durch D
         setContentView(R.layout.activity_fachuebersicht);
         getListItems();
         fillListView();
+        String ueberschrift = "Fächer";
+        TextView textview = (TextView) findViewById(R.id.ueberschrift);
+        textview.setText(ueberschrift);
     }
 
     public void getListItems(){
@@ -38,18 +42,9 @@ public class Fachuebersicht extends AppCompatActivity {   //später dann durch D
     public void fillListView() {
         ListView listview = (ListView) findViewById(R.id.fachliste);
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_multiple_choice, items);
-        // ab da geht klasse los dann
-
         ListviewHelper fachview = new ListviewHelper(listview, arrayAdapter, items);
         checkeditems = fachview.getCheckeditems();
-
-
-
-//    public void onClick(View view) {
-//        Intent i = new Intent(this, Themenuebersicht.class);
-//        startActivityForResult(i, REQUESTCODE);
     }
-
 
     public void zurueck(View view){
         Intent i = new Intent(this, MainActivity.class);

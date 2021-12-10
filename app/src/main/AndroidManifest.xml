@@ -10,6 +10,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication">
         <activity
+            android:name=".PopUpWindow"
+            android:exported="true" />
+        <activity
+            android:name=".Kartenuebersicht"
+            android:exported="true" />
+        <activity
             android:name=".Themenuebersicht"
             android:exported="true" />
         <activity
