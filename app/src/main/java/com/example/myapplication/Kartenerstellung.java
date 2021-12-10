@@ -11,7 +11,7 @@ import android.provider.MediaStore;
 import android.view.View;
 import android.widget.ImageView;
 
-public class Kartenerstellung_Namie extends AppCompatActivity {
+public class Kartenerstellung extends AppCompatActivity {
     String fachname;
 
     @Override

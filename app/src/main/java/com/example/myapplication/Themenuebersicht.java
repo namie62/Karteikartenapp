@@ -27,6 +27,7 @@ public class Themenuebersicht extends AppCompatActivity {
         textview.setText(fachname);
 
     }
+
     public void getListItems(){
         items.add("Thema1");
         items.add("Thema2");
@@ -37,18 +38,14 @@ public class Themenuebersicht extends AppCompatActivity {
     public void fillListView(){
         ListView listview = (ListView) findViewById(R.id.themenliste);
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_multiple_choice, items);
-        // ab da geht klasse los dann
-
         ListviewHelper fachview = new ListviewHelper(listview, arrayAdapter, items);
         checkeditems = fachview.getCheckeditems();
     }
-
 
     public void zurueck(View view) {
         Intent i = new Intent(this, Fachuebersicht.class);
         startActivityForResult(i, REQUESTCODE);
     }
-
 
     public void vorwaerts(View view) {  //öffnet Kartenerstellung
         if (checkeditems.size() == 0) {
@@ -56,8 +53,9 @@ public class Themenuebersicht extends AppCompatActivity {
         }
         else if(checkeditems.size() == 1 ){
             System.out.println("Should open");
-            //Intent i = new Intent(this, Kartenerstellung.class);
-           ////startActivityForResult(i, REQUESTCODE);
+            Intent i = new Intent(this, Kartenerstellung.class);
+            i.putExtra("Fachname", checkeditems.get(0));
+            startActivityForResult(i, REQUESTCODE);
         }else{
             System.out.println("errormessage: Bitte nur ein Fach auswählen");
         }
