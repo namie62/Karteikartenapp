@@ -11,7 +11,7 @@ import android.provider.MediaStore;
 import android.view.View;
 import android.widget.ImageView;
 
-public class Kartenerstellung extends AppCompatActivity {
+public class Kartenerstellung_Namie extends AppCompatActivity {
     String fachname;
 
     @Override
@@ -19,7 +19,6 @@ public class Kartenerstellung extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_kartenerstellung);
         fachname = getIntent().getExtras().getString("Fachname");
-
     }
     private static final int REQUESTCODE = 1;
 
