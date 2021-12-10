@@ -4,21 +4,18 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.List;
 
-public class Fachuebersicht extends AppCompatActivity {   //später dann durch DB iterieren um Fächer zu holen
+public class FachuebersichtsActivity extends AppCompatActivity {   //später dann durch DB iterieren um Fächer zu holen
 
     private static final int REQUESTCODE = 1;
     ArrayList<String> items = new ArrayList<String>();
     boolean[] checkchecker;
     ArrayList<String> checkeditems = new ArrayList<String>();
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +39,7 @@ public class Fachuebersicht extends AppCompatActivity {   //später dann durch D
     public void fillListView() {
         ListView listview = (ListView) findViewById(R.id.fachliste);
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_multiple_choice, items);
-        ListviewHelper fachview = new ListviewHelper(listview, arrayAdapter, items);
+        ListviewHelperClass fachview = new ListviewHelperClass(listview, arrayAdapter, items);
         checkeditems = fachview.getCheckeditems();
     }
 
@@ -56,11 +53,25 @@ public class Fachuebersicht extends AppCompatActivity {   //später dann durch D
             System.out.println("errormessage: Bitte  ein Fach auswählen");
         }
         else if(checkeditems.size() == 1 ){
-            Intent i = new Intent(this, Themenuebersicht.class);
+            Intent i = new Intent(this, ThemenuebersichtsActivity.class);
             i.putExtra("Fachname", checkeditems.get(0));
             startActivityForResult(i, REQUESTCODE);
         }else{
             System.out.println("errormessage: Bitte nur ein Fach auswählen");
+        }
+    }
+
+    public void starteLernmodus(View view){
+        if (checkeditems.size() != 0){
+            //KartensammlerfürAnzeigeClass lernmodus = new KartensammlerfürAnzeigeClass();
+            //lernmodus.starteLernmodus("Fachuebersicht", checkeditems, themen, karten);
+            Intent lernmodus = new Intent(this, Kartenanzeige_Lernmodus.class);
+            lernmodus.putStringArrayListExtra("Faecherliste", checkeditems);
+            lernmodus.putExtra("Abfrage", "Fachuebersicht");
+            startActivityForResult(lernmodus, REQUESTCODE);
+        }
+        else{
+            System.out.println("Bitte mindestens 1 Fach auswählen");
         }
     }
 }

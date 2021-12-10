@@ -6,14 +6,13 @@ import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-public class Grafikeinfuegen extends AppCompatActivity {
+public class GrafikeinfuegenHelperClass extends AppCompatActivity {
     public Uri imgUri;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         openGalery();
-
     }
 
     public void openGalery() {   // Öffnet Galerie und returnt dann ein Bild

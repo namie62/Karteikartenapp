@@ -10,7 +10,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 
-public class PopUpWindow extends AppCompatActivity {
+public class KartenerstellungAbbrechenPopupActivity extends AppCompatActivity {
     private static final int REQUESTCODE = 1;
 
     Button buttonja;
@@ -44,7 +44,7 @@ public class PopUpWindow extends AppCompatActivity {
         buttonja.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(PopUpWindow.this, Kartenuebersicht.class);
+                Intent i = new Intent(KartenerstellungAbbrechenPopupActivity.this, KartenuebersichtsActivity.class);
                 i.putExtra("Themenname", themenname);
                 startActivityForResult(i, REQUESTCODE);
             }

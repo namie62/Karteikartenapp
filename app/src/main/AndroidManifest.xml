@@ -10,19 +10,22 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication">
         <activity
-            android:name=".PopUpWindow"
+            android:name=".Kartenanzeige_Lernmodus"
             android:exported="true" />
         <activity
-            android:name=".Kartenuebersicht"
+            android:name=".KartenerstellungAbbrechenPopupActivity"
             android:exported="true" />
         <activity
-            android:name=".Themenuebersicht"
+            android:name=".KartenuebersichtsActivity"
             android:exported="true" />
         <activity
-            android:name=".Fachuebersicht"
+            android:name=".ThemenuebersichtsActivity"
             android:exported="true" />
         <activity
-            android:name=".Kartenerstellung"
+            android:name=".FachuebersichtsActivity"
+            android:exported="true" />
+        <activity
+            android:name=".KartenerstellungsActivity"
             android:exported="true" />
         <activity
             android:name=".MainActivity"
@@ -33,7 +36,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Grafikeinfuegen" />
+        <activity android:name=".GrafikeinfuegenHelperClass" />
 
         <meta-data
             android:name="preloaded_fonts"

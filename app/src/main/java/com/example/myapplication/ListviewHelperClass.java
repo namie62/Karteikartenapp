@@ -10,11 +10,11 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 
-public class ListviewHelper {
+public class ListviewHelperClass {
     boolean[] checkchecker;
     ArrayList<String> checkeditems = new ArrayList<String>();
 
-    public ListviewHelper(ListView listview, ArrayAdapter arrayAdapter, ArrayList<String> items) {
+    public ListviewHelperClass(ListView listview, ArrayAdapter arrayAdapter, ArrayList<String> items) {
 
         listview.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
             this.checkchecker = new boolean[items.size()];

@@ -1,8 +1,6 @@
 package com.example.myapplication;
-
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -10,12 +8,14 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 
-public class Kartenerstellung extends AppCompatActivity {
+public class KartenerstellungsActivity extends AppCompatActivity {
     String themenname;
     private static final int REQUESTCODE = 1;
-
+    KartenClass karte = new KartenClass();
+    Bitmap grafik;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,7 +23,6 @@ public class Kartenerstellung extends AppCompatActivity {
         setContentView(R.layout.activity_kartenerstellung);
 
         themenname = getIntent().getExtras().getString("Themenname");
-
 
         Button buttonabbrechen = (Button) findViewById(R.id.buttonabbrechen);
         buttonabbrechen.setOnClickListener(new View.OnClickListener() {
@@ -34,37 +33,66 @@ public class Kartenerstellung extends AppCompatActivity {
             }
         });
     }
+
     private void openPopUpWindow() {
-        Intent popupwindow = new Intent(Kartenerstellung.this, PopUpWindow.class);
+        Intent popupwindow = new Intent(KartenerstellungsActivity.this, KartenerstellungAbbrechenPopupActivity.class);
         popupwindow.putExtra("Themenname", themenname);
         startActivity(popupwindow);
     }
 
-
-    public void onClick(View view) {   // Die Methode openGalery muss in Jennys Knopf onClick rein
-        Intent i = new Intent(this, Grafikeinfuegen.class);
+    public void onClick(View view) {
+        Intent i = new Intent(this, GrafikeinfuegenHelperClass.class);
         startActivityForResult(i, REQUESTCODE);
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        ImageView grafik = (ImageView) findViewById(R.id.imageView);
+        ImageView imageview = (ImageView) findViewById(R.id.imageView);
         if (requestCode == 1) {
             if (resultCode == RESULT_OK) {
                 try{
                     Uri uri = data.getParcelableExtra("pic");
                     if (uri != null){
-                    Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), uri);
-                    grafik.setImageBitmap(bitmap);
+                    this.grafik = MediaStore.Images.Media.getBitmap(this.getContentResolver(), uri);
+                    imageview.setImageBitmap(this.grafik);
                     }else {
                         System.out.println("kein Bild ausgewählt");
                     }
                 } catch (Exception e) {
                     Bitmap bitmap = null;
-                    System.out.println("konnte Bild konnte nicht geparsed werden"); // Stattdessen Errormessage dialog
+                    System.out.println("Bild konnte nicht geparsed werden"); // Stattdessen Errormessage dialog
                 }
             }
         }
+    }
+
+    public void speichereInhalte(View view){    // setzt die Inhalte in Klasse Karte und sichert damit das Abspeichern
+        karte.setFrage(getFrageText());
+        karte.setAntwort(getAntwortText());
+        karte.setLernstufe(getLernstufe());
+        karte.setGrafik(getGrafik());
+    }
+
+    public String getFrageText(){    // Getter für speichereInhalt Methode
+        EditText themengebietfeld = (EditText) findViewById(R.id.editTextFrage);
+        String frage = themengebietfeld.getText().toString();
+        return frage;
+    }
+
+    public String getAntwortText(){
+        EditText themengebietfeld = (EditText) findViewById(R.id.editTextAntwort);
+        String antwort = themengebietfeld.getText().toString();
+        return antwort;
+    }
+
+    public Integer getLernstufe(){
+        Integer lernstufe = 0;
+        return lernstufe;
+    }
+
+    public Bitmap getGrafik(){
+        Bitmap grafik = this.grafik;
+        return grafik;
     }
 }
