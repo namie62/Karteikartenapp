@@ -10,6 +10,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication">
         <activity
+            android:name=".Fach_oder_Thema_erstellen_PopUp"
+            android:exported="true" />
+        <activity
+            android:name=".HinweisPopUpActivity"
+            android:exported="true" />
+        <activity
+            android:name=".FlipCard"
+            android:exported="true" />
+        <activity
             android:name=".Kartenanzeige_Lernmodus"
             android:exported="true" />
         <activity

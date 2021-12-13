@@ -11,6 +11,7 @@
         android:id="@+id/ThementextView"
         android:layout_width="416dp"
         android:layout_height="66dp"
+        android:layout_marginTop="48dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -18,8 +19,8 @@
 
     <TextView
         android:id="@+id/InhalttextView"
-        android:layout_width="413dp"
-        android:layout_height="400dp"
+        android:layout_width="409dp"
+        android:layout_height="349dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -59,5 +60,14 @@
         app:layout_constraintStart_toEndOf="@+id/nichtgewusstButton"
         app:layout_constraintTop_toBottomOf="@+id/InhalttextView"
         app:layout_constraintVertical_bias="0.0" />
+
+    <Button
+        android:id="@+id/zuerueckbutton"
+        android:layout_width="61dp"
+        android:layout_height="52dp"
+        android:onClick = "zurueck"
+        app:icon="?attr/actionModeCloseDrawable"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

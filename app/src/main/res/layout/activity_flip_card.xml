@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".FlipCard">
+
+    <com.wajahatkarim3.easyflipview.EasyFlipView
+        android:id="@+id/easyFlipView"
+        android:layout_width="358dp"
+        android:layout_height="416dp"
+        android:layout_gravity="center"
+        android:gravity="center"
+        app:flipDuration="400"
+        app:flipEnabled="true"
+        app:flipFrom="front"
+        app:flipOnTouch="true"
+        app:flipType="horizontal"
+        app:layout_constraintTop_toBottomOf="@+id/zurueck"
+        tools:layout_editor_absoluteX="1dp">
+
+        <TextView
+            android:id="@+id/card_front"
+            android:layout_width="match_parent"
+            android:layout_height="500dp"
+            android:background="@android:color/holo_green_dark"
+            android:gravity="center"
+            android:text="Inhalt"
+            android:textAlignment="center"
+            android:textSize="22sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/card_back"
+            android:layout_width="match_parent"
+            android:layout_height="500dp"
+            android:background="@android:color/holo_blue_dark"
+            android:gravity="center"
+            android:text="Themengebiet"
+            android:textAlignment="center"
+            android:textSize="22sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </com.wajahatkarim3.easyflipview.EasyFlipView>
+
+    <Button
+        android:id="@+id/zurueck"
+        android:layout_width="65dp"
+        android:layout_height="45dp"
+        android:onClick = "zurueck"
+        app:icon="?attr/actionModeCloseDrawable"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/nichtgewusstButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="nichtgewusst"
+        app:icon="@android:drawable/ic_delete"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/teilweisegewusstButton"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <Button
+        android:id="@+id/gewusstButton"
+        android:layout_width="97dp"
+        android:layout_height="49dp"
+        android:onClick="gewusst"
+        app:icon="@android:drawable/presence_online"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/easyFlipView" />
+
+    <Button
+        android:id="@+id/teilweisegewusstButton"
+        android:layout_width="117dp"
+        android:layout_height="49dp"
+        android:text="teilweise"
+        android:onClick="teilweisegewusst"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/gewusstButton"
+        app:layout_constraintHorizontal_bias="0.586"
+        app:layout_constraintStart_toEndOf="@+id/nichtgewusstButton"
+        app:layout_constraintTop_toBottomOf="@+id/easyFlipView"
+        app:layout_constraintVertical_bias="0.0" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

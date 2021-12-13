@@ -1,5 +1,7 @@
 package com.example.myapplication;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.View;
@@ -7,8 +9,10 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 public class Kartenanzeige_Lernmodus extends AppCompatActivity {
+    private static final int REQUESTCODE = 1;
     String antwort ="AntwortDummy";
     String frage=  "FrageDummy";
+    String abfrage;
     Integer lernstufe;
     Bitmap grafik;
     KartenClass karte = new KartenClass();
@@ -19,6 +23,8 @@ public class Kartenanzeige_Lernmodus extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_kartenanzeige_lernmodus);
+
+         this.abfrage = getIntent().getExtras().getString("Abfrage");
 
         // karte.getFrage();
         // karte.getAntwort();
@@ -51,5 +57,11 @@ public class Kartenanzeige_Lernmodus extends AppCompatActivity {
     public void teilweisegewusst(View view) {
         // Cornelia muss hier Karte in aktueller Lernstufe lassen
         System.out.println("teilweise gewusst");
+    }
+
+
+    public void zurueck(View view) {
+        Intent i = new Intent(this, FachuebersichtsActivity.class);
+        startActivityForResult(i, REQUESTCODE);
     }
 }

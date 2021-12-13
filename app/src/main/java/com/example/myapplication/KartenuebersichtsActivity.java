@@ -55,12 +55,24 @@ public class KartenuebersichtsActivity extends AppCompatActivity {
 
     public void vorwaerts(View view) {  //öffnet Kartenerstellung
         if (checkeditems.size() == 0) {
-            System.out.println("errormessage: Bitte  ein Fach auswählen");
+            Intent popupwindow = new Intent(this, HinweisPopUpActivity.class);
+            popupwindow.putExtra("InfotextPoUp", "Bitte mindestens 1 Karte auswählen.");
+            // popupwindow.putExtra("Abfrage", "Fachuebersicht");
+            startActivity(popupwindow);
         }
         else if(checkeditems.size() == 1 ){
-            System.out.println("Should open KartendarstellungLernmodus");
-        }else{
-            System.out.println("errormessage: Bitte nur ein Fach auswählen");
+
+            //KartensammlerfürAnzeigeClass lernmodus = new KartensammlerfürAnzeigeClass();
+            //lernmodus.starteLernmodus("Fachuebersicht", checkeditems, themen, karten);
+            Intent lernmodus = new Intent(this, Kartenanzeige_Lernmodus.class);
+            lernmodus.putStringArrayListExtra("Kartenliste", checkeditems);
+            lernmodus.putExtra("Abfrage", "Kartenuebersicht");
+            startActivityForResult(lernmodus, REQUESTCODE);
+            }
+        else{
+            Intent popupwindow = new Intent(this, HinweisPopUpActivity.class);
+            popupwindow.putExtra("InfotextPoUp", "Bitte nur eine Karte auswählen.");
+            startActivity(popupwindow);
         }
     }
 
@@ -74,7 +86,26 @@ public class KartenuebersichtsActivity extends AppCompatActivity {
             startActivityForResult(lernmodus, REQUESTCODE);
         }
         else{
-            System.out.println("Bitte mindestens 1 Fach auswählen");
+            Intent popupwindow = new Intent(this, HinweisPopUpActivity.class);
+            popupwindow.putExtra("InfotextPoUp", "Bitte mindestens 1 Karte auswählen.");
+            // popupwindow.putExtra("Abfrage", "Fachuebersicht");
+            startActivity(popupwindow);
+        }
+    }
+    public void starteAbfrage(View view){
+        if (checkeditems.size() != 0){
+            Intent lernmodus = new Intent(this, FlipCard.class);
+            lernmodus.putStringArrayListExtra("Kartenliste", checkeditems);
+            lernmodus.putExtra("Abfrage", "Kartenuebersicht");
+            lernmodus.putExtra("Themenname", themenname);
+            lernmodus.putExtra("Fachname", fachname);
+            startActivityForResult(lernmodus, REQUESTCODE);
+        }
+        else{
+            Intent popupwindow = new Intent(this, HinweisPopUpActivity.class);
+            popupwindow.putExtra("InfotextPoUp", "Bitte mindestens 1 Karte auswählen.");
+            // popupwindow.putExtra("Abfrage", "Fachuebersicht");
+            startActivity(popupwindow);
         }
     }
 }

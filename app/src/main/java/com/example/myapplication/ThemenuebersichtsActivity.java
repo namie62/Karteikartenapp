@@ -52,7 +52,10 @@ public class ThemenuebersichtsActivity extends AppCompatActivity {
 
     public void vorwaerts(View view) {  //öffnet Kartenerstellung
         if (checkeditems.size() == 0) {
-            System.out.println("errormessage: Bitte  ein Fach auswählen");
+            Intent popupwindow = new Intent(this, HinweisPopUpActivity.class);
+            popupwindow.putExtra("InfotextPoUp", "Bitte ein Thema auswählen.");
+            startActivity(popupwindow);
+
         }
         else if(checkeditems.size() == 1 ){
             System.out.println("Should open");
@@ -61,7 +64,10 @@ public class ThemenuebersichtsActivity extends AppCompatActivity {
             i.putExtra("Fachname", fachname);
             startActivityForResult(i, REQUESTCODE);
         }else{
-            System.out.println("errormessage: Bitte nur ein Fach auswählen");
+            Intent popupwindow = new Intent(this, HinweisPopUpActivity.class);
+            popupwindow.putExtra("InfotextPoUp", "Bitte ein Thema auswählen.");
+            startActivity(popupwindow);
+
         }
     }
 
@@ -74,7 +80,30 @@ public class ThemenuebersichtsActivity extends AppCompatActivity {
             startActivityForResult(lernmodus, REQUESTCODE);
         }
         else{
-            System.out.println("Bitte mindestens 1 Fach auswählen");
+            Intent popupwindow = new Intent(this, HinweisPopUpActivity.class);
+            popupwindow.putExtra("InfotextPoUp", "Bitte mindestens 1 Thema auswählen.");
+            //popupwindow.putExtra("Abfrage", "Themenuebersicht");
+            startActivity(popupwindow);
         }
+    }
+    public void starteAbfrage(View view){
+        if (checkeditems.size() != 0){
+            Intent lernmodus = new Intent(this, FlipCard.class);
+            lernmodus.putStringArrayListExtra("Themenliste", checkeditems);
+            lernmodus.putExtra("Fachname", this.fachname);
+            lernmodus.putExtra("Abfrage", "Themenuebersicht");
+            startActivityForResult(lernmodus, REQUESTCODE);
+        }
+        else{
+            Intent popupwindow = new Intent(this, HinweisPopUpActivity.class);
+            popupwindow.putExtra("InfotextPoUp", "Bitte mindestens 1 Fach auswählen.");
+            // popupwindow.putExtra("Abfrage", "Fachuebersicht");
+            startActivity(popupwindow);
+        }
+    }
+    public void neuesThema(View view){
+        Intent popupeingabe = new Intent(this, Fach_oder_Thema_erstellen_PopUp.class);
+        popupeingabe.putExtra("Kategorie", "Thema");
+        startActivity(popupeingabe);
     }
 }

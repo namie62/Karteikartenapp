@@ -50,17 +50,22 @@ public class FachuebersichtsActivity extends AppCompatActivity {   //später dan
 
     public void vorwaerts(View view){
         if (checkeditems.size() == 0) {
-            System.out.println("errormessage: Bitte  ein Fach auswählen");
+            Intent popupwindow = new Intent(this, HinweisPopUpActivity.class);
+            popupwindow.putExtra("InfotextPoUp", "Bitte ein Fach auswählen.");
+            startActivity(popupwindow);
         }
         else if(checkeditems.size() == 1 ){
             Intent i = new Intent(this, ThemenuebersichtsActivity.class);
             i.putExtra("Fachname", checkeditems.get(0));
             startActivityForResult(i, REQUESTCODE);
-        }else{
-            System.out.println("errormessage: Bitte nur ein Fach auswählen");
+        }else if (checkeditems.size() > 1) {
+            System.out.println("hadskfhäa");
+            Intent popupwindow = new Intent(this, HinweisPopUpActivity.class);
+            popupwindow.putExtra("InfotextPoUp", "Bitte nur 1 Fach auswählen.");
+            startActivity(popupwindow);
+
         }
     }
-
     public void starteLernmodus(View view){
         if (checkeditems.size() != 0){
             //KartensammlerfürAnzeigeClass lernmodus = new KartensammlerfürAnzeigeClass();
@@ -71,7 +76,30 @@ public class FachuebersichtsActivity extends AppCompatActivity {   //später dan
             startActivityForResult(lernmodus, REQUESTCODE);
         }
         else{
-            System.out.println("Bitte mindestens 1 Fach auswählen");
+            Intent popupwindow = new Intent(this, HinweisPopUpActivity.class);
+            popupwindow.putExtra("InfotextPoUp", "Bitte mindestens 1 Fach auswählen.");
+            // popupwindow.putExtra("Abfrage", "Fachuebersicht");
+            startActivity(popupwindow);
         }
+    }
+
+    public void starteAbfrage(View view){
+        if (checkeditems.size() != 0){
+            Intent abfrage = new Intent(this, FlipCard.class);
+            abfrage.putStringArrayListExtra("Faecherliste", checkeditems);
+            abfrage.putExtra("Abfrage", "Fachuebersicht");
+            startActivityForResult(abfrage, REQUESTCODE);
+    }
+        else {
+            Intent popupwindow = new Intent(this, HinweisPopUpActivity.class);
+            popupwindow.putExtra("InfotextPoUp", "Bitte mindestens 1 Fach auswählen.");
+           // popupwindow.putExtra("Abfrage", "Fachuebersicht");
+            startActivity(popupwindow);
+        }
+    }
+    public void neuesFach(View view){
+        Intent popupeingabe = new Intent(this, Fach_oder_Thema_erstellen_PopUp.class);
+        popupeingabe.putExtra("Kategorie", "Fach");
+        startActivity(popupeingabe);
     }
 }
