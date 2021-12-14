@@ -55,7 +55,6 @@ public class ThemenuebersichtsActivity extends AppCompatActivity {
             Intent popupwindow = new Intent(this, HinweisPopUpActivity.class);
             popupwindow.putExtra("InfotextPoUp", "Bitte ein Thema auswählen.");
             startActivity(popupwindow);
-
         }
         else if(checkeditems.size() == 1 ){
             System.out.println("Should open");
@@ -67,7 +66,6 @@ public class ThemenuebersichtsActivity extends AppCompatActivity {
             Intent popupwindow = new Intent(this, HinweisPopUpActivity.class);
             popupwindow.putExtra("InfotextPoUp", "Bitte ein Thema auswählen.");
             startActivity(popupwindow);
-
         }
     }
 

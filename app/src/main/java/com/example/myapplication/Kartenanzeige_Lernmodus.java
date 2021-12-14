@@ -10,8 +10,8 @@ import java.util.ArrayList;
 
 public class Kartenanzeige_Lernmodus extends AppCompatActivity {
     private static final int REQUESTCODE = 1;
-    String antwort ="AntwortDummy";
-    String frage=  "FrageDummy";
+    String inhalt ="Inhalt";
+    String themengebiet=  "Themenegebiet";
     String abfrage;
     Integer lernstufe;
     Bitmap grafik;
@@ -36,12 +36,12 @@ public class Kartenanzeige_Lernmodus extends AppCompatActivity {
 
     public void fill_AntworttextView(){
         TextView textview = (TextView) findViewById(R.id.InhalttextView);
-        textview.setText(antwort);
+        textview.setText(inhalt);
     }
 
     public void fill_FragetextView(){
         TextView textview = (TextView) findViewById(R.id.ThementextView);
-        textview.setText(frage);
+        textview.setText(themengebiet);
     }
 
     public void gewusst(View view) {

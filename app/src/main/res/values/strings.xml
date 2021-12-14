@@ -3,5 +3,7 @@
     <string name="action_settings">Settings</string>
     <string name="Abfrageknopf">Abfrage</string>
     <string name="Lernmodusknopf">Lernen</string>
-    <string name="Vorwärtsknopf">vorwärts</string>
+    <string name="Vorwärtsknopf">ins Fach</string>
+    <string name="InsThema">ins Thema</string>
+    <string name="IndieKarte">In die Karte</string>
 </resources>

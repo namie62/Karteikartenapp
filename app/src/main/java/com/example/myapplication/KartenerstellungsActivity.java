@@ -75,13 +75,13 @@ public class KartenerstellungsActivity extends AppCompatActivity {
     }
 
     public String getFrageText(){    // Getter für speichereInhalt Methode
-        EditText themengebietfeld = (EditText) findViewById(R.id.editTextFrage);
+        EditText themengebietfeld = (EditText) findViewById(R.id.editTextThemengebiet);
         String frage = themengebietfeld.getText().toString();
         return frage;
     }
 
     public String getAntwortText(){
-        EditText themengebietfeld = (EditText) findViewById(R.id.editTextAntwort);
+        EditText themengebietfeld = (EditText) findViewById(R.id.editTextInhalt);
         String antwort = themengebietfeld.getText().toString();
         return antwort;
     }
