@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="20dp"
     tools:context=".MainActivity">
 
     <Button
@@ -13,8 +12,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="20dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginStart="23dp"
+        android:layout_marginBottom="-1dp"
         android:text="Abbrechen"
         android:textColor="@color/black"
         app:backgroundTint="@android:color/holo_red_dark"
@@ -23,6 +22,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.934" />
 
+
     <Button
         android:id="@+id/buttonspeichern"
         android:layout_width="153dp"
@@ -30,10 +30,10 @@
         android:layout_alignParentStart="false"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="20dp"
-        android:text="Speichern"
+        android:layout_marginEnd="17dp"
+        android:layout_marginBottom="0dp"
         android:onClick="speichereInhalte"
+        android:text="Speichern"
         android:textColor="@color/black"
         app:backgroundTint="@android:color/holo_green_dark"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -41,11 +41,10 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/TextInhalt"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="522dp"
         android:layout_below="@id/TextThemengebiet"
         android:textStyle="italic">
 
@@ -61,12 +60,22 @@
             android:textColor="@color/black"
             android:textSize="18sp" />
 
-        <ImageView
-            android:id="@+id/imageView"
+        <EditText
+            android:id="@+id/editTextTextPersonName2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:text="Name" />
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="238dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
             tools:srcCompat="@tools:sample/avatars" />
+
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -79,7 +88,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/editTextThemengebiet"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:height="70dp"
             android:fontFamily="@font/cairo"
             android:hint="Themengebiet"
@@ -95,8 +104,8 @@
         android:layout_width="80dp"
         android:layout_height="70dp"
         android:layout_toRightOf="@id/TextThemengebiet"
-        android:onClick="onClick"
         android:background="@color/purple_500"
+        android:onClick="onClick"
         app:srcCompat="@android:drawable/ic_menu_gallery" />
 
 </RelativeLayout>

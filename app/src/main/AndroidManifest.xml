@@ -16,7 +16,7 @@
             android:name=".HinweisPopUpActivity"
             android:exported="true" />
         <activity
-            android:name=".FlipCard"
+            android:name=".Kartenanzeige_Abfragemodus"
             android:exported="true" />
         <activity
             android:name=".Kartenanzeige_Lernmodus"

@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -23,9 +22,7 @@ public class FachuebersichtsActivity extends AppCompatActivity {   //später dan
         setContentView(R.layout.activity_fachuebersicht);
         getListItems();
         fillListView();
-        String ueberschrift = "Fächer";
-        TextView textview = (TextView) findViewById(R.id.ueberschrift);
-        textview.setText(ueberschrift);
+
     }
 
     public void getListItems(){
@@ -54,18 +51,22 @@ public class FachuebersichtsActivity extends AppCompatActivity {   //später dan
             popupwindow.putExtra("InfotextPoUp", "Bitte ein Fach auswählen.");
             startActivity(popupwindow);
         }
-        else if(checkeditems.size() == 1 ){
+        else if(checkeditems.size() >0 ){
             Intent i = new Intent(this, ThemenuebersichtsActivity.class);
-            i.putExtra("Fachname", checkeditems.get(0));
+            // i.putExtra("Fachname", checkeditems.get(0));
+            i.putExtra("Fachname", checkeditems);
+            System.out.println(checkeditems);
             startActivityForResult(i, REQUESTCODE);
-        }else if (checkeditems.size() > 1) {
+
+        } /*else if (checkeditems.size() > 1) {
             System.out.println("hadskfhäa");
             Intent popupwindow = new Intent(this, HinweisPopUpActivity.class);
             popupwindow.putExtra("InfotextPoUp", "Bitte nur 1 Fach auswählen.");
             startActivity(popupwindow);
-
-        }
+        }*/
     }
+
+
     public void starteLernmodus(View view){
         if (checkeditems.size() != 0){
             //KartensammlerfürAnzeigeClass lernmodus = new KartensammlerfürAnzeigeClass();
@@ -85,7 +86,7 @@ public class FachuebersichtsActivity extends AppCompatActivity {   //später dan
 
     public void starteAbfrage(View view){
         if (checkeditems.size() != 0){
-            Intent abfrage = new Intent(this, FlipCard.class);
+            Intent abfrage = new Intent(this, Kartenanzeige_Abfragemodus.class);
             abfrage.putStringArrayListExtra("Faecherliste", checkeditems);
             abfrage.putExtra("Abfrage", "Fachuebersicht");
             startActivityForResult(abfrage, REQUESTCODE);

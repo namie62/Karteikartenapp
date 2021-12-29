@@ -6,4 +6,7 @@
     <string name="Vorwärtsknopf">ins Fach</string>
     <string name="InsThema">ins Thema</string>
     <string name="IndieKarte">In die Karte</string>
+    <string name="Fächer">Fächer</string>
+    <string name="Themen">Themen</string>
+    <string name="Karten">Karten</string>
 </resources>

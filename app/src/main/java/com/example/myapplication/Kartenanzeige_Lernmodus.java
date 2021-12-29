@@ -31,7 +31,6 @@ public class Kartenanzeige_Lernmodus extends AppCompatActivity {
 
         fill_AntworttextView();
         fill_FragetextView();
-
     }
 
     public void fill_AntworttextView(){
@@ -58,7 +57,6 @@ public class Kartenanzeige_Lernmodus extends AppCompatActivity {
         // Cornelia muss hier Karte in aktueller Lernstufe lassen
         System.out.println("teilweise gewusst");
     }
-
 
     public void zurueck(View view) {
         Intent i = new Intent(this, FachuebersichtsActivity.class);

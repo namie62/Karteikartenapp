@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".FlipCard">
+    tools:context=".Kartenanzeige_Abfragemodus">
 
     <com.wajahatkarim3.easyflipview.EasyFlipView
         android:id="@+id/easyFlipView"
@@ -37,8 +37,8 @@
 
         <TextView
             android:id="@+id/card_back"
-            android:layout_width="match_parent"
-            android:layout_height="500dp"
+            android:layout_width="359dp"
+            android:layout_height="534dp"
             android:background="@android:color/holo_blue_dark"
             android:gravity="center"
             android:text="Themengebiet"
@@ -69,12 +69,13 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/teilweisegewusstButton"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="1.0" />
 
     <Button
         android:id="@+id/gewusstButton"
         android:layout_width="97dp"
         android:layout_height="49dp"
+        android:layout_marginTop="128dp"
         android:onClick="gewusst"
         app:icon="@android:drawable/presence_online"
         app:layout_constraintEnd_toEndOf="parent"
@@ -84,13 +85,13 @@
         android:id="@+id/teilweisegewusstButton"
         android:layout_width="117dp"
         android:layout_height="49dp"
-        android:text="teilweise"
         android:onClick="teilweisegewusst"
+        android:text="teilweise"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/gewusstButton"
         app:layout_constraintHorizontal_bias="0.586"
         app:layout_constraintStart_toEndOf="@+id/nichtgewusstButton"
         app:layout_constraintTop_toBottomOf="@+id/easyFlipView"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.976" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

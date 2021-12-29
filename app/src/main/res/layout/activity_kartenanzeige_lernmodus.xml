@@ -7,10 +7,23 @@
     tools:context=".Kartenanzeige_Lernmodus">
 
 
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="362dp"
+        android:layout_height="134dp"
+        android:layout_weight="1"
+        app:layout_constraintBottom_toTopOf="@+id/teilweisegewusstButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/InhalttextView"
+        app:layout_constraintVertical_bias="0.0"
+        tools:srcCompat="@tools:sample/avatars" />
+
     <TextView
         android:id="@+id/ThementextView"
-        android:layout_width="416dp"
-        android:layout_height="66dp"
+        android:layout_width="358dp"
+        android:layout_height="72dp"
         android:layout_marginTop="48dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -19,10 +32,11 @@
 
     <TextView
         android:id="@+id/InhalttextView"
-        android:layout_width="409dp"
-        android:layout_height="349dp"
+        android:layout_width="360dp"
+        android:layout_height="337dp"
+        android:layout_marginTop="4dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ThementextView" />
 
@@ -35,18 +49,19 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/InhalttextView"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="1.0" />
 
     <Button
         android:id="@+id/gewusstButton"
         android:layout_width="97dp"
         android:layout_height="49dp"
+        android:layout_marginEnd="4dp"
         android:onClick="gewusst"
         app:icon="@android:drawable/presence_online"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/InhalttextView"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="1.0" />
 
     <Button
         android:id="@+id/teilweisegewusstButton"
@@ -56,10 +71,10 @@
         android:text="teilweise"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/gewusstButton"
-        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintHorizontal_bias="0.586"
         app:layout_constraintStart_toEndOf="@+id/nichtgewusstButton"
         app:layout_constraintTop_toBottomOf="@+id/InhalttextView"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="1.0" />
 
     <Button
         android:id="@+id/zuerueckbutton"
@@ -68,6 +83,16 @@
         android:onClick = "zurueck"
         app:icon="?attr/actionModeCloseDrawable"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="81dp"
+        android:layout_height="43dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="4dp"
+        android:text="Number"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

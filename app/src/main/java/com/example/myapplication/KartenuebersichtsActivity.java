@@ -13,8 +13,8 @@ public class KartenuebersichtsActivity extends AppCompatActivity {
     private static final int REQUESTCODE = 1;
     ArrayList<String> items = new ArrayList<String>();
     ArrayList<String> checkeditems = new ArrayList<String>();
-    String themenname;
-    String fachname;
+    String themennamen;
+    String fachnamen;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,10 +22,10 @@ public class KartenuebersichtsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_kartenuebersicht);
         getListItems();
         fillListView();
-        this.themenname = getIntent().getExtras().getString("Themenname");
-        this.fachname = getIntent().getExtras().getString("Fachname");
+        this.themennamen = getIntent().getExtras().getString("Themenname");
+        this.fachnamen = getIntent().getExtras().getString("Fachname");
         TextView textview = (TextView) findViewById(R.id.themenname);
-        textview.setText(themenname);
+        textview.setText(themennamen);
     }
 
     public void getListItems(){
@@ -49,7 +49,7 @@ public class KartenuebersichtsActivity extends AppCompatActivity {
 
     public void newKarte(View view){
         Intent i = new Intent(this, KartenerstellungsActivity.class);
-        i.putExtra("Themenname", this.themenname);
+        i.putExtra("Themenname", this.themennamen);
         startActivityForResult(i, REQUESTCODE);
     }
 
@@ -60,7 +60,7 @@ public class KartenuebersichtsActivity extends AppCompatActivity {
             // popupwindow.putExtra("Abfrage", "Fachuebersicht");
             startActivity(popupwindow);
         }
-        else if(checkeditems.size() == 1 ){
+        else if(checkeditems.size() >0 ){
 
             //KartensammlerfürAnzeigeClass lernmodus = new KartensammlerfürAnzeigeClass();
             //lernmodus.starteLernmodus("Fachuebersicht", checkeditems, themen, karten);
@@ -68,12 +68,12 @@ public class KartenuebersichtsActivity extends AppCompatActivity {
             lernmodus.putStringArrayListExtra("Kartenliste", checkeditems);
             lernmodus.putExtra("Abfrage", "Kartenuebersicht");
             startActivityForResult(lernmodus, REQUESTCODE);
-            }
+            } /*
         else{
             Intent popupwindow = new Intent(this, HinweisPopUpActivity.class);
             popupwindow.putExtra("InfotextPoUp", "Bitte nur eine Karte auswählen.");
             startActivity(popupwindow);
-        }
+        }*/
     }
 
     public void starteLernmodus(View view){
@@ -81,8 +81,8 @@ public class KartenuebersichtsActivity extends AppCompatActivity {
             Intent lernmodus = new Intent(this, Kartenanzeige_Lernmodus.class);
             lernmodus.putStringArrayListExtra("Kartenliste", checkeditems);
             lernmodus.putExtra("Abfrage", "Kartenuebersicht");
-            lernmodus.putExtra("Themenname", themenname);
-            lernmodus.putExtra("Fachname", fachname);
+            lernmodus.putExtra("Themenname", themennamen);
+            lernmodus.putExtra("Fachname", fachnamen);
             startActivityForResult(lernmodus, REQUESTCODE);
         }
         else{
@@ -94,11 +94,11 @@ public class KartenuebersichtsActivity extends AppCompatActivity {
     }
     public void starteAbfrage(View view){
         if (checkeditems.size() != 0){
-            Intent lernmodus = new Intent(this, FlipCard.class);
+            Intent lernmodus = new Intent(this, Kartenanzeige_Abfragemodus.class);
             lernmodus.putStringArrayListExtra("Kartenliste", checkeditems);
             lernmodus.putExtra("Abfrage", "Kartenuebersicht");
-            lernmodus.putExtra("Themenname", themenname);
-            lernmodus.putExtra("Fachname", fachname);
+            lernmodus.putExtra("Themenname", themennamen);
+            lernmodus.putExtra("Fachname", fachnamen);
             startActivityForResult(lernmodus, REQUESTCODE);
         }
         else{
