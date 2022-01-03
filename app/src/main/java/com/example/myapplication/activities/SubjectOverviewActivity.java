@@ -54,7 +54,7 @@ public class SubjectOverviewActivity extends AppCompatActivity {   //später dan
             startActivity(popupwindow);
         }
         else if(checkeditems.size() >0 ){
-            Intent i = new Intent(this, ThemenuebersichtsActivity.class);
+            Intent i = new Intent(this, TopicOverviewActivity.class);
             // i.putExtra("Fachname", checkeditems.get(0));
             i.putExtra("Fachname", checkeditems);
             System.out.println(checkeditems);

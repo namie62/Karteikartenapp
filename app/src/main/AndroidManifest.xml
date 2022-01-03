@@ -28,7 +28,7 @@
             android:name=".activities.CardsOverviewActivity"
             android:exported="true" />
         <activity
-            android:name=".activities.ThemenuebersichtsActivity"
+            android:name=".activities.TopicOverviewActivity"
             android:exported="true" />
         <activity
             android:name=".activities.SubjectOverviewActivity"
