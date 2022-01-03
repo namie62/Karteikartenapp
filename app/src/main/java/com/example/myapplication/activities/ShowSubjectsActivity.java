@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -33,14 +34,17 @@ public class ShowSubjectsActivity extends AppCompatActivity {   //später dann d
     private Context applicationContext;
     private ArrayList<String> allSubjects;
     ArrayAdapter<String> adapter;
+    private String username;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_subjects);
-        this.flashcardDB = FirebaseDatabase.getInstance("https://karteikar-default-rtdb.europe-west1.firebasedatabase.app/");
-        this.reference = flashcardDB.getReference("cornelia"); //cornelia mit username ersetzen
-        this.listView = (ListView) findViewById(R.id.subjects_list_view);
+        this.flashcardDB = getIntent().getExtras().getParcelable("database");
+        this.reference = getIntent().getExtras().getParcelable("reference");
+//        this.flashcardDB = FirebaseDatabase.getInstance("https://karteikar-default-rtdb.europe-west1.firebasedatabase.app/");
+//        this.reference = flashcardDB.getReference("cornelia"); //cornelia mit username ersetzen
+        this.listView = findViewById(R.id.subjects_list_view);
         this.applicationContext = getApplicationContext();
         this.allSubjects = new ArrayList<>();
         this.adapter = new ArrayAdapter<>(applicationContext, android.R.layout.simple_list_item_multiple_choice, allSubjects);
@@ -56,7 +60,6 @@ public class ShowSubjectsActivity extends AppCompatActivity {   //später dann d
                     listView.setAdapter(adapter);
                     ListviewHelperClass subjectView = new ListviewHelperClass(listView, adapter, allSubjects);
                     checkedSubjects = subjectView.getCheckeditems();
-//                    System.out.println(checkedSubjects.toString());
                 }
             }
 
@@ -78,14 +81,14 @@ public class ShowSubjectsActivity extends AppCompatActivity {   //später dann d
         if (checkedSubjects.size() == 0) {
             System.out.println(checkedSubjects.toString());
             Intent popupwindow = new Intent(this, HintPopUpActivity.class);
-            popupwindow.putExtra("InfotextPoUp", "Bitte ein Fach auswählen.");
+            popupwindow.putExtra("InfotextPopUp", "Bitte ein Fach auswählen.");
             startActivity(popupwindow);
         }
         else if(checkedSubjects.size() >0 ){
-            Intent i = new Intent(this, TopicOverviewActivity.class);
-            // i.putExtra("Fachname", checkeditems.get(0));
-            i.putExtra("Fachname", checkedSubjects);
-            System.out.println(checkedSubjects);
+            Intent i = new Intent(this, ShowTopicsActivity.class);
+            i.putExtra("database", (Parcelable) flashcardDB);
+            i.putExtra("reference", (Parcelable) reference);
+            i.putExtra("Subjects", checkedSubjects);
             startActivityForResult(i, REQUESTCODE);
 
         } /*else if (checkeditems.size() > 1) {

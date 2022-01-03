@@ -55,7 +55,7 @@ public class MyFirebaseHelper extends AppCompatActivity {
     }
 
     // show stuff in listview
-    public void showSubjects(ListView listview, Context applicationContext) {
+    public ArrayList<String> showSubjects(ListView listview, Context applicationContext) {
         ArrayList<String> allSubjects = new ArrayList<>();
         ArrayAdapter<String> adapter = new ArrayAdapter<>(applicationContext, android.R.layout.simple_list_item_multiple_choice, allSubjects);
         reference.addValueEventListener(new ValueEventListener() {
@@ -70,7 +70,6 @@ public class MyFirebaseHelper extends AppCompatActivity {
                     ListviewHelperClass subjectView = new ListviewHelperClass(listview, adapter, allSubjects);
                     checkeditems= subjectView.getCheckeditems();
                     listview.setAdapter(adapter);
-                    System.out.println(checkeditems.toString());
                 }
             }
 
@@ -78,6 +77,7 @@ public class MyFirebaseHelper extends AppCompatActivity {
                 Toast.makeText(applicationContext, error.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
+        return checkeditems;
     }
 
     public void showTopics(ArrayList<String> selectedSubjects, ListView listview, Context applicationContext) {

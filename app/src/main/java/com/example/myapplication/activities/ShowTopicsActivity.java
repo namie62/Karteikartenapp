@@ -11,7 +11,7 @@ import com.example.myapplication.R;
 
 import java.util.ArrayList;
 
-public class TopicOverviewActivity extends AppCompatActivity {
+public class ShowTopicsActivity extends AppCompatActivity {
     private static final int REQUESTCODE = 1;
     ArrayList<String> items = new ArrayList<String>();
     ArrayList<String> checkeditems = new ArrayList<String>();

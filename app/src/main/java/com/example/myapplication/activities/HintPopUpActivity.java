@@ -40,7 +40,7 @@ public class HintPopUpActivity extends AppCompatActivity {
         getWindow().setAttributes(params);
 
         textView1 = (TextView) findViewById(R.id.textViewInfo);
-        this.infotext = getIntent().getExtras().getString("InfotextPoUp");
+        this.infotext = getIntent().getExtras().getString("InfotextPopUp");
         textView1.setText(infotext);
 
         okBtn = (Button) findViewById(R.id.okBtn);

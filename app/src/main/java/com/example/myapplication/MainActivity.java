@@ -3,6 +3,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
@@ -17,6 +18,8 @@ import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.Status;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class MainActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener, View.OnClickListener{
     SignInButton signInBtn;
@@ -29,10 +32,15 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
     private static final int RC_SIGN_IN = 9001;
     private static final int REQUESTCODE = 1;
 
+    private FirebaseDatabase flashcardDB;
+    private DatabaseReference reference;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        this.flashcardDB = FirebaseDatabase.getInstance("https://karteikar-default-rtdb.europe-west1.firebasedatabase.app/");
 
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestEmail()
@@ -51,6 +59,8 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
     public void onClick(View v) {
         signIn();
         Intent i = new Intent(this, ShowSubjectsActivity.class); // dem intent möcht ich den username mitgeben wenn irgendwie möglich
+        i.putExtra("database", (Parcelable) flashcardDB);
+        i.putExtra("reference", (Parcelable) reference);
         startActivityForResult(i, REQUESTCODE);
     }
 
@@ -72,10 +82,13 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
     private void handleSignInResult(GoogleSignInResult result) {
         Log.d(TAG, "handleSignInResult:" + result.isSuccess());
         this.statusTextView = (TextView) findViewById(R.id.textView1);
+        String acctName;
         if (result.isSuccess()) {
             //Signed in successfuly, show authenticated UI.
             GoogleSignInAccount acct = result.getSignInAccount();
-            this.username = (String) acct.getDisplayName();
+            String un = acct.getDisplayName();
+            assert un != null;
+            this.reference = flashcardDB.getReference(un);
         } else {
             statusTextView.setText("Sign in unsuccessful");
         }
