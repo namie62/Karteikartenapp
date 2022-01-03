@@ -1,13 +1,18 @@
 package com.example.myapplication.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.example.myapplication.MainActivity;
 import com.example.myapplication.R;
+import com.example.myapplication.myfirebasehelper.MyFirebaseHelper;
+import com.google.firebase.FirebaseApiNotAvailableException;
 
 import java.util.ArrayList;
 
@@ -18,22 +23,21 @@ public class SubjectOverviewActivity extends AppCompatActivity {   //später dan
     boolean[] checkchecker;
     ArrayList<String> checkeditems = new ArrayList<String>();
 
+    MyFirebaseHelper mfh;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fachuebersicht);
-        getListItems();
-        fillListView();
 
+        this.mfh = new MyFirebaseHelper("cornelia");
+        ListView listView = (ListView) findViewById(R.id.fachliste);
+        Context applicationContext = getApplicationContext();
+        mfh.showSubjects(listView, applicationContext);
+        // hier jetzt noch im prinzip in die nächste ansicht eine ArrayListe mit den ausgewählten Fächern nehmen (Strings wären ideal)
+        // außerdem bitte mfh in die nächste ansicht immer überall mit übergeben, den muss es überall hin mit ziehen
     }
 
-    public void getListItems(){
-        items.add("Fach1");
-        items.add("Fach2");
-        items.add("Fach3");
-        items.add("Fach4");
-        items.add("Fach5");
-    }
 
     public void fillListView() {
         ListView listview = (ListView) findViewById(R.id.fachliste);
