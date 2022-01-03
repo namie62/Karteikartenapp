@@ -9,6 +9,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.myapplication.activities.ListviewHelperClass;
 import com.example.myapplication.objectclasses.Flashcard;
 import com.example.myapplication.objectclasses.Subject;
 import com.example.myapplication.objectclasses.Topic;
@@ -26,6 +27,7 @@ public class MyFirebaseHelper extends AppCompatActivity {
     private ArrayList<String> selectedSubjects;
     private ArrayList<String> selectedTopics;
     private ArrayList<String> selectedCards;
+    private ArrayList<String> checkeditems = new ArrayList<String>();
 
     public MyFirebaseHelper(String user)  {
         this.flashcardDB = FirebaseDatabase.getInstance("https://karteikar-default-rtdb.europe-west1.firebasedatabase.app/");
@@ -65,7 +67,10 @@ public class MyFirebaseHelper extends AppCompatActivity {
                         String nameFromDB = dataSnapshot.child("name").getValue(String.class);
                         allSubjects.add(nameFromDB);
                     }
+                    ListviewHelperClass subjectView = new ListviewHelperClass(listview, adapter, allSubjects);
+                    checkeditems= subjectView.getCheckeditems();
                     listview.setAdapter(adapter);
+                    System.out.println(checkeditems.toString());
                 }
             }
 

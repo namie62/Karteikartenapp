@@ -46,7 +46,7 @@ public class TopicOverviewActivity extends AppCompatActivity {
     }
 
     public void goToPrevious(View view) {
-        Intent i = new Intent(this, SubjectOverviewActivity.class);
+        Intent i = new Intent(this, ShowSubjectsActivity.class);
         startActivityForResult(i, REQUESTCODE);
     }
 

@@ -31,7 +31,7 @@ public class ListviewHelperClass {
                         checkeditems.remove(items.get(position));
                 }
             });
-            listview.setAdapter(arrayAdapter);
+//            listview.setAdapter(arrayAdapter);
         }
         public ArrayList<String> getCheckeditems(){
         return checkeditems;

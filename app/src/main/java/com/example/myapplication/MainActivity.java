@@ -5,15 +5,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
-import android.widget.ListView;
 import android.widget.TextView;
 
-import com.example.myapplication.activities.SubjectOverviewActivity;
-import com.example.myapplication.myfirebasehelper.MyFirebaseHelper;
-import com.example.myapplication.objectclasses.Flashcard;
-import com.example.myapplication.objectclasses.Subject;
-import com.example.myapplication.objectclasses.Topic;
+import com.example.myapplication.activities.ShowSubjectsActivity;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
@@ -56,7 +50,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
     @Override
     public void onClick(View v) {
         signIn();
-        Intent i = new Intent(this, SubjectOverviewActivity.class); // dem intent möcht ich den username mitgeben wenn irgendwie möglich
+        Intent i = new Intent(this, ShowSubjectsActivity.class); // dem intent möcht ich den username mitgeben wenn irgendwie möglich
         startActivityForResult(i, REQUESTCODE);
     }
 

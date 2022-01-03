@@ -46,7 +46,7 @@ public class CardsOverviewActivity extends AppCompatActivity {
     }
 
     public void zurueck(View view) {
-        Intent i = new Intent(this, SubjectOverviewActivity.class);
+        Intent i = new Intent(this, ShowSubjectsActivity.class);
         startActivityForResult(i, REQUESTCODE);
     }
 

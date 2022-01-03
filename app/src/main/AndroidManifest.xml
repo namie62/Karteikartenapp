@@ -31,7 +31,7 @@
             android:name=".activities.TopicOverviewActivity"
             android:exported="true" />
         <activity
-            android:name=".activities.SubjectOverviewActivity"
+            android:name=".activities.ShowSubjectsActivity"
             android:exported="true" />
         <activity
             android:name=".activities.CreateNewCardActivity"

@@ -63,7 +63,7 @@ public class StudyModeShowCards extends AppCompatActivity {
     }
 
     public void previous(View view) {
-        Intent i = new Intent(this, SubjectOverviewActivity.class);
+        Intent i = new Intent(this, ShowSubjectsActivity.class);
         startActivityForResult(i, REQUESTCODE);
     }
 }

@@ -1,5 +1,6 @@
 package com.example.myapplication.activities;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
@@ -8,42 +9,64 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.example.myapplication.MainActivity;
 import com.example.myapplication.R;
-import com.example.myapplication.myfirebasehelper.MyFirebaseHelper;
-import com.google.firebase.FirebaseApiNotAvailableException;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-public class SubjectOverviewActivity extends AppCompatActivity {   //später dann durch DB iterieren um Fächer zu holen
+public class ShowSubjectsActivity extends AppCompatActivity {   //später dann durch DB iterieren um Fächer zu holen
 
     private static final int REQUESTCODE = 1;
     ArrayList<String> items = new ArrayList<String>();
     boolean[] checkchecker;
-    ArrayList<String> checkeditems = new ArrayList<String>();
-
-    MyFirebaseHelper mfh;
+    ArrayList<String> checkedSubjects = new ArrayList<String>();
+    private FirebaseDatabase flashcardDB;
+    private DatabaseReference reference;
+    private ListView listView;
+    private Context applicationContext;
+    private ArrayList<String> allSubjects;
+    ArrayAdapter<String> adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_fachuebersicht);
+        setContentView(R.layout.activity_show_subjects);
+        this.flashcardDB = FirebaseDatabase.getInstance("https://karteikar-default-rtdb.europe-west1.firebasedatabase.app/");
+        this.reference = flashcardDB.getReference("cornelia"); //cornelia mit username ersetzen
+        this.listView = (ListView) findViewById(R.id.subjects_list_view);
+        this.applicationContext = getApplicationContext();
+        this.allSubjects = new ArrayList<>();
+        this.adapter = new ArrayAdapter<>(applicationContext, android.R.layout.simple_list_item_multiple_choice, allSubjects);
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                allSubjects.clear();
+                if (snapshot.exists()) {
+                    for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                        String nameFromDB = dataSnapshot.child("name").getValue(String.class);
+                        allSubjects.add(nameFromDB);
+                    }
+                    listView.setAdapter(adapter);
+                    ListviewHelperClass subjectView = new ListviewHelperClass(listView, adapter, allSubjects);
+                    checkedSubjects = subjectView.getCheckeditems();
+//                    System.out.println(checkedSubjects.toString());
+                }
+            }
 
-        this.mfh = new MyFirebaseHelper("cornelia");
-        ListView listView = (ListView) findViewById(R.id.fachliste);
-        Context applicationContext = getApplicationContext();
-        mfh.showSubjects(listView, applicationContext);
-        // hier jetzt noch im prinzip in die nächste ansicht eine ArrayListe mit den ausgewählten Fächern nehmen (Strings wären ideal)
-        // außerdem bitte mfh in die nächste ansicht immer überall mit übergeben, den muss es überall hin mit ziehen
-    }
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(applicationContext, error.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        });
 
 
-    public void fillListView() {
-        ListView listview = (ListView) findViewById(R.id.fachliste);
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_multiple_choice, items);
-        ListviewHelperClass fachview = new ListviewHelperClass(listview, arrayAdapter, items);
-        checkeditems = fachview.getCheckeditems();
+
     }
 
     public void goToPrevious(View view){
@@ -51,17 +74,18 @@ public class SubjectOverviewActivity extends AppCompatActivity {   //später dan
         startActivityForResult(i, REQUESTCODE);
     }
 
-    public void goToNext(View view){
-        if (checkeditems.size() == 0) {
+    public void goToTopics(View view){
+        if (checkedSubjects.size() == 0) {
+            System.out.println(checkedSubjects.toString());
             Intent popupwindow = new Intent(this, HintPopUpActivity.class);
             popupwindow.putExtra("InfotextPoUp", "Bitte ein Fach auswählen.");
             startActivity(popupwindow);
         }
-        else if(checkeditems.size() >0 ){
+        else if(checkedSubjects.size() >0 ){
             Intent i = new Intent(this, TopicOverviewActivity.class);
             // i.putExtra("Fachname", checkeditems.get(0));
-            i.putExtra("Fachname", checkeditems);
-            System.out.println(checkeditems);
+            i.putExtra("Fachname", checkedSubjects);
+            System.out.println(checkedSubjects);
             startActivityForResult(i, REQUESTCODE);
 
         } /*else if (checkeditems.size() > 1) {
@@ -74,11 +98,11 @@ public class SubjectOverviewActivity extends AppCompatActivity {   //später dan
 
 
     public void startStudyMode(View view){
-        if (checkeditems.size() != 0){
+        if (checkedSubjects.size() != 0){
             //KartensammlerfürAnzeigeClass studyMode = new KartensammlerfürAnzeigeClass();
             //studyMode.starteLernmodus("Fachuebersicht", checkeditems, themen, karten);
             Intent studyMode = new Intent(this, StudyModeShowCards.class);
-            studyMode.putStringArrayListExtra("Faecherliste", checkeditems);
+            studyMode.putStringArrayListExtra("Faecherliste", checkedSubjects);
             studyMode.putExtra("Abfrage", "Fachuebersicht");
             startActivityForResult(studyMode, REQUESTCODE);
         }
@@ -91,9 +115,9 @@ public class SubjectOverviewActivity extends AppCompatActivity {   //später dan
     }
 
     public void startTestMode(View view){
-        if (checkeditems.size() != 0){
+        if (checkedSubjects.size() != 0){
             Intent testMode = new Intent(this, QuizModeShowCards.class);
-            testMode.putStringArrayListExtra("Faecherliste", checkeditems);
+            testMode.putStringArrayListExtra("Faecherliste", checkedSubjects);
             testMode.putExtra("Abfrage", "Fachuebersicht");
             startActivityForResult(testMode, REQUESTCODE);
     }
