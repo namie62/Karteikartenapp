@@ -1,4 +1,4 @@
-package com.example.myapplication;
+package com.example.myapplication.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 
+import com.example.myapplication.R;
 import com.google.android.material.textfield.TextInputEditText;
 
 public class CreateSubjectOrTopicPopUpActivity extends AppCompatActivity {

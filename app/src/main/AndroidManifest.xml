@@ -10,34 +10,34 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication">
         <activity
-            android:name=".CreateSubjectOrTopicPopUpActivity"
+            android:name=".activities.CreateSubjectOrTopicPopUpActivity"
             android:exported="true" />
         <activity
-            android:name=".HintPopUpActivity"
+            android:name=".activities.HintPopUpActivity"
             android:exported="true" />
         <activity
-            android:name=".QuizModeShowCards"
+            android:name=".activities.QuizModeShowCards"
             android:exported="true" />
         <activity
-            android:name=".StudyModeShowCards"
+            android:name=".activities.StudyModeShowCards"
             android:exported="true" />
         <activity
-            android:name=".CancelNewCardPopupActivity"
+            android:name=".activities.CancelNewCardPopupActivity"
             android:exported="true" />
         <activity
-            android:name=".CardsOverviewActivity"
+            android:name=".activities.CardsOverviewActivity"
             android:exported="true" />
         <activity
-            android:name=".ThemenuebersichtsActivity"
+            android:name=".activities.ThemenuebersichtsActivity"
             android:exported="true" />
         <activity
-            android:name=".SubjectOverviewActivity"
+            android:name=".activities.SubjectOverviewActivity"
             android:exported="true" />
         <activity
-            android:name=".CreateNewCardActivity"
+            android:name=".activities.CreateNewCardActivity"
             android:exported="true" />
         <activity
-            android:name=".MainActivity"
+            android:name=".activities.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -45,7 +45,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".InsertImgHelperClassActivity" />
+        <activity android:name=".activities.InsertImgHelperClassActivity" />
 
         <meta-data
             android:name="preloaded_fonts"

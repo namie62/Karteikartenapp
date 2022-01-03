@@ -1,4 +1,4 @@
-package com.example.myapplication;
+package com.example.myapplication.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -9,6 +9,8 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
+
+import com.example.myapplication.R;
 
 public class CancelNewCardPopupActivity extends AppCompatActivity {
     private static final int REQUESTCODE = 1;

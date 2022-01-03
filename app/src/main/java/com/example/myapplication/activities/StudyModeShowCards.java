@@ -1,4 +1,4 @@
-package com.example.myapplication;
+package com.example.myapplication.activities;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -6,6 +6,10 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
+
+import com.example.myapplication.KartenClass;
+import com.example.myapplication.R;
+
 import java.util.ArrayList;
 
 public class StudyModeShowCards extends AppCompatActivity {

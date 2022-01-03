@@ -1,4 +1,4 @@
-package com.example.myapplication;
+package com.example.myapplication.activities;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
@@ -10,6 +10,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+
+import com.example.myapplication.KartenClass;
+import com.example.myapplication.R;
 
 public class CreateNewCardActivity extends AppCompatActivity {
     String topic;
