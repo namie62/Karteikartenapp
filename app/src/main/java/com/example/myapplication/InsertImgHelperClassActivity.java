@@ -6,7 +6,7 @@ import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-public class GrafikeinfuegenHelperClass extends AppCompatActivity {
+public class InsertImgHelperClassActivity extends AppCompatActivity {
     public Uri imgUri;
 
     @Override
@@ -17,9 +17,9 @@ public class GrafikeinfuegenHelperClass extends AppCompatActivity {
 
     public void openGalery() {   // Öffnet Galerie und returnt dann ein Bild
         final int RESULT_GALLERY = 1;
-        Intent galery = new Intent(Intent.ACTION_GET_CONTENT);
-        galery.setType("image/*");
-        startActivityForResult(galery, RESULT_GALLERY);
+        Intent gallery = new Intent(Intent.ACTION_GET_CONTENT);
+        gallery.setType("image/*");
+        startActivityForResult(gallery, RESULT_GALLERY);
     }
 
     @Override

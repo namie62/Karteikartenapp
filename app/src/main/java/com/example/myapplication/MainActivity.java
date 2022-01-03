@@ -13,7 +13,7 @@ public class MainActivity extends AppCompatActivity {
     private static final int REQUESTCODE = 1;
 
     public void onClick(View view) {   // Die Methode openGalery muss in Jennys Knopf onClick rein
-        Intent i = new Intent(this, FachuebersichtsActivity.class);
+        Intent i = new Intent(this, SubjectOverviewActivity.class);
         startActivityForResult(i, REQUESTCODE);
     }
 }

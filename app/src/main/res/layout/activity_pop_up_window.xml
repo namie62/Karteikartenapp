@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/cardview_dark_background"
-    tools:context=".KartenerstellungAbbrechenPopupActivity">
+    tools:context=".CancelNewCardPopupActivity">
 
     <TextView
         android:id="@+id/textViewAbbruch"
@@ -19,7 +19,7 @@
         tools:ignore="DuplicateIds" />
 
     <Button
-        android:id="@+id/buttonja"
+        android:id="@+id/yesBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/textViewAbbruch"
@@ -27,11 +27,11 @@
         android:text="Ja" />
 
     <Button
-        android:id="@+id/buttonnein"
+        android:id="@+id/noBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/textViewAbbruch"
-        android:layout_toRightOf="@id/buttonja"
+        android:layout_toRightOf="@id/yesBtn"
         android:text="Nein" />
 
 </RelativeLayout>

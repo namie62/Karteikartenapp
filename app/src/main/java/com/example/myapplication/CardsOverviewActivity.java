@@ -9,23 +9,23 @@ import android.widget.ListView;
 import android.widget.TextView;
 import java.util.ArrayList;
 
-public class KartenuebersichtsActivity extends AppCompatActivity {
+public class CardsOverviewActivity extends AppCompatActivity {
     private static final int REQUESTCODE = 1;
     ArrayList<String> items = new ArrayList<String>();
     ArrayList<String> checkeditems = new ArrayList<String>();
-    String themennamen;
-    String fachnamen;
+    String topics;
+    String subjects;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_kartenuebersicht);
+        setContentView(R.layout.activity_cards_overview);
         getListItems();
         fillListView();
-        this.themennamen = getIntent().getExtras().getString("Themenname");
-        this.fachnamen = getIntent().getExtras().getString("Fachname");
-        TextView textview = (TextView) findViewById(R.id.themenname);
-        textview.setText(themennamen);
+        this.topics = getIntent().getExtras().getString("Themenname");
+        this.subjects = getIntent().getExtras().getString("Fachname");
+        TextView textView = (TextView) findViewById(R.id.topicsTextView);
+        textView.setText(topics);
     }
 
     public void getListItems(){
@@ -43,19 +43,19 @@ public class KartenuebersichtsActivity extends AppCompatActivity {
     }
 
     public void zurueck(View view) {
-        Intent i = new Intent(this, FachuebersichtsActivity.class);
+        Intent i = new Intent(this, SubjectOverviewActivity.class);
         startActivityForResult(i, REQUESTCODE);
     }
 
     public void newKarte(View view){
-        Intent i = new Intent(this, KartenerstellungsActivity.class);
-        i.putExtra("Themenname", this.themennamen);
+        Intent i = new Intent(this, CreateNewCardActivity.class);
+        i.putExtra("Themenname", this.topics);
         startActivityForResult(i, REQUESTCODE);
     }
 
     public void vorwaerts(View view) {  //öffnet Kartenerstellung
         if (checkeditems.size() == 0) {
-            Intent popupwindow = new Intent(this, HinweisPopUpActivity.class);
+            Intent popupwindow = new Intent(this, HintPopUpActivity.class);
             popupwindow.putExtra("InfotextPoUp", "Bitte mindestens 1 Karte auswählen.");
             // popupwindow.putExtra("Abfrage", "Fachuebersicht");
             startActivity(popupwindow);
@@ -64,13 +64,13 @@ public class KartenuebersichtsActivity extends AppCompatActivity {
 
             //KartensammlerfürAnzeigeClass lernmodus = new KartensammlerfürAnzeigeClass();
             //lernmodus.starteLernmodus("Fachuebersicht", checkeditems, themen, karten);
-            Intent lernmodus = new Intent(this, Kartenanzeige_Lernmodus.class);
+            Intent lernmodus = new Intent(this, StudyModeShowCards.class);
             lernmodus.putStringArrayListExtra("Kartenliste", checkeditems);
             lernmodus.putExtra("Abfrage", "Kartenuebersicht");
             startActivityForResult(lernmodus, REQUESTCODE);
             } /*
         else{
-            Intent popupwindow = new Intent(this, HinweisPopUpActivity.class);
+            Intent popupwindow = new Intent(this, HintPopUpActivity.class);
             popupwindow.putExtra("InfotextPoUp", "Bitte nur eine Karte auswählen.");
             startActivity(popupwindow);
         }*/
@@ -78,15 +78,15 @@ public class KartenuebersichtsActivity extends AppCompatActivity {
 
     public void starteLernmodus(View view){
         if (checkeditems.size() != 0){
-            Intent lernmodus = new Intent(this, Kartenanzeige_Lernmodus.class);
+            Intent lernmodus = new Intent(this, StudyModeShowCards.class);
             lernmodus.putStringArrayListExtra("Kartenliste", checkeditems);
             lernmodus.putExtra("Abfrage", "Kartenuebersicht");
-            lernmodus.putExtra("Themenname", themennamen);
-            lernmodus.putExtra("Fachname", fachnamen);
+            lernmodus.putExtra("Themenname", topics);
+            lernmodus.putExtra("Fachname", subjects);
             startActivityForResult(lernmodus, REQUESTCODE);
         }
         else{
-            Intent popupwindow = new Intent(this, HinweisPopUpActivity.class);
+            Intent popupwindow = new Intent(this, HintPopUpActivity.class);
             popupwindow.putExtra("InfotextPoUp", "Bitte mindestens 1 Karte auswählen.");
             // popupwindow.putExtra("Abfrage", "Fachuebersicht");
             startActivity(popupwindow);
@@ -94,15 +94,15 @@ public class KartenuebersichtsActivity extends AppCompatActivity {
     }
     public void starteAbfrage(View view){
         if (checkeditems.size() != 0){
-            Intent lernmodus = new Intent(this, Kartenanzeige_Abfragemodus.class);
+            Intent lernmodus = new Intent(this, QuizModeShowCards.class);
             lernmodus.putStringArrayListExtra("Kartenliste", checkeditems);
             lernmodus.putExtra("Abfrage", "Kartenuebersicht");
-            lernmodus.putExtra("Themenname", themennamen);
-            lernmodus.putExtra("Fachname", fachnamen);
+            lernmodus.putExtra("Themenname", topics);
+            lernmodus.putExtra("Fachname", subjects);
             startActivityForResult(lernmodus, REQUESTCODE);
         }
         else{
-            Intent popupwindow = new Intent(this, HinweisPopUpActivity.class);
+            Intent popupwindow = new Intent(this, HintPopUpActivity.class);
             popupwindow.putExtra("InfotextPoUp", "Bitte mindestens 1 Karte auswählen.");
             // popupwindow.putExtra("Abfrage", "Fachuebersicht");
             startActivity(popupwindow);

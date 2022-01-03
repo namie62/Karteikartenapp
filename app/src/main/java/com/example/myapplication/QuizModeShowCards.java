@@ -4,31 +4,31 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-public class Kartenanzeige_Abfragemodus extends AppCompatActivity {
+public class QuizModeShowCards extends AppCompatActivity {
     private static final int REQUESTCODE = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_kartenanzeige_abfragemodus);
+        setContentView(R.layout.activity_quiz_mode_show_cards);
     }
 
-    public void zurueck(View view){
-        Intent i = new Intent(this, FachuebersichtsActivity.class);
+    public void goToPrevious(View view){
+        Intent i = new Intent(this, SubjectOverviewActivity.class);
         startActivityForResult(i, REQUESTCODE);
     }
 
-    public void gewusst(View view) {
+    public void rightAnswer(View view) {
         // Lernstufe hoch setzen
         System.out.println("gewusst");
     }
 
-    public void nichtgewusst(View view) {
+    public void wrongAnswer(View view) {
         // Cornelia muss hier Karte in Lernstufe 0 schieben
         System.out.println("nicht gewusst");
     }
 
-    public void teilweisegewusst(View view) {
+    public void partiallyRight(View view) {
         // Cornelia muss hier Karte in aktueller Lernstufe lassen
         System.out.println("teilweise gewusst");
     }

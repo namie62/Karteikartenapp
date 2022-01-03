@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".KartenuebersichtsActivity">
+    tools:context=".CardsOverviewActivity">
 
     <Button
         android:id="@+id/neueKarte"
@@ -29,7 +29,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/Abfrageknopf"
-        android:onClick = "starteAbfrage"
+        android:onClick = "startTestMode"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/lernmodusfach" />
 
@@ -38,7 +38,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/Lernmodusknopf"
-        android:onClick="starteLernmodus"
+        android:onClick="startStudyMode"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -47,7 +47,7 @@
         style="@style/Widget.AppCompat.Button"
         android:layout_width="51dp"
         android:layout_height="51dp"
-        android:onClick="zurueck"
+        android:onClick="goToPrevious"
         app:icon="?attr/homeAsUpIndicator"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -56,13 +56,13 @@
         android:id="@+id/reininsFach"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:onClick="vorwaerts"
+        android:onClick="goToNext"
         android:text="@string/IndieKarte"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/abfragekarte" />
 
     <TextView
-        android:id="@+id/themenname"
+        android:id="@+id/topicsTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"

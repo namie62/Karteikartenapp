@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Kartenanzeige_Abfragemodus">
+    tools:context=".QuizModeShowCards">
 
     <com.wajahatkarim3.easyflipview.EasyFlipView
         android:id="@+id/easyFlipView"
@@ -55,7 +55,7 @@
         android:id="@+id/zurueck"
         android:layout_width="65dp"
         android:layout_height="45dp"
-        android:onClick = "zurueck"
+        android:onClick = "goToPrevious"
         app:icon="?attr/actionModeCloseDrawable"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -64,7 +64,7 @@
         android:id="@+id/nichtgewusstButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:onClick="nichtgewusst"
+        android:onClick="wrongAnswer"
         app:icon="@android:drawable/ic_delete"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -76,7 +76,7 @@
         android:layout_width="97dp"
         android:layout_height="49dp"
         android:layout_marginTop="128dp"
-        android:onClick="gewusst"
+        android:onClick="rightAnswer"
         app:icon="@android:drawable/presence_online"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/easyFlipView" />
@@ -85,7 +85,7 @@
         android:id="@+id/teilweisegewusstButton"
         android:layout_width="117dp"
         android:layout_height="49dp"
-        android:onClick="teilweisegewusst"
+        android:onClick="partiallyRight"
         android:text="teilweise"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/gewusstButton"

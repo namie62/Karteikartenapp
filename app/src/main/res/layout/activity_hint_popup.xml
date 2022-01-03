@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".HinweisPopUpActivity">
+    tools:context=".HintPopUpActivity">
 
     <TextView
         android:id="@+id/textViewInfo"
@@ -18,7 +18,7 @@
         tools:ignore="DuplicateIds" />
 
     <Button
-        android:id="@+id/buttonok"
+        android:id="@+id/okBtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/textViewInfo"

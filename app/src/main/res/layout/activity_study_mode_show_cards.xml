@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Kartenanzeige_Lernmodus">
+    tools:context=".StudyModeShowCards">
 
 
     <ImageView
@@ -16,12 +16,12 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/InhalttextView"
+        app:layout_constraintTop_toBottomOf="@+id/contentTextView"
         app:layout_constraintVertical_bias="0.0"
         tools:srcCompat="@tools:sample/avatars" />
 
     <TextView
-        android:id="@+id/ThementextView"
+        android:id="@+id/topicTextView"
         android:layout_width="358dp"
         android:layout_height="72dp"
         android:layout_marginTop="48dp"
@@ -31,24 +31,24 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/InhalttextView"
+        android:id="@+id/contentTextView"
         android:layout_width="360dp"
         android:layout_height="337dp"
         android:layout_marginTop="4dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ThementextView" />
+        app:layout_constraintTop_toBottomOf="@+id/topicTextView" />
 
     <Button
         android:id="@+id/nichtgewusstButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:onClick="nichtgewusst"
+        android:onClick="wrongAnswer"
         app:icon="@android:drawable/ic_delete"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/InhalttextView"
+        app:layout_constraintTop_toBottomOf="@+id/contentTextView"
         app:layout_constraintVertical_bias="1.0" />
 
     <Button
@@ -56,31 +56,31 @@
         android:layout_width="97dp"
         android:layout_height="49dp"
         android:layout_marginEnd="4dp"
-        android:onClick="gewusst"
+        android:onClick="rightAnswer"
         app:icon="@android:drawable/presence_online"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/InhalttextView"
+        app:layout_constraintTop_toBottomOf="@+id/contentTextView"
         app:layout_constraintVertical_bias="1.0" />
 
     <Button
         android:id="@+id/teilweisegewusstButton"
         android:layout_width="117dp"
         android:layout_height="49dp"
-        android:onClick="teilweisegewusst"
+        android:onClick="partiallyRight"
         android:text="teilweise"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/gewusstButton"
         app:layout_constraintHorizontal_bias="0.586"
         app:layout_constraintStart_toEndOf="@+id/nichtgewusstButton"
-        app:layout_constraintTop_toBottomOf="@+id/InhalttextView"
+        app:layout_constraintTop_toBottomOf="@+id/contentTextView"
         app:layout_constraintVertical_bias="1.0" />
 
     <Button
         android:id="@+id/zuerueckbutton"
         android:layout_width="61dp"
         android:layout_height="52dp"
-        android:onClick = "zurueck"
+        android:onClick = "goToPrevious"
         app:icon="?attr/actionModeCloseDrawable"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

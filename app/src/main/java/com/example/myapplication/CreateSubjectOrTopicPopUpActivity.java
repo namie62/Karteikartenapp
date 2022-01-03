@@ -8,27 +8,29 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.TextView;
 
-public class HinweisPopUpActivity extends AppCompatActivity {
+import com.google.android.material.textfield.TextInputEditText;
 
-    Button buttonok;
-    TextView text;
-    String infotext;
-    String abfrage;
+public class CreateSubjectOrTopicPopUpActivity extends AppCompatActivity {
+
+
+    Button okBtn;
+    TextInputEditText hintTextInputEditText;
+    String hint;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_hinweis_popup);
+        setContentView(R.layout.activity_create_subject_or_topic_popup);
 
         DisplayMetrics dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);
 
         int width = dm.widthPixels;
-        int heigth = dm.heightPixels;
+        int height = dm.heightPixels;
 
-        getWindow().setLayout((int) (width * .7), (int) (heigth * .3));
+        getWindow().setLayout((int) (width * .7), (int) (height * .3));
 
         WindowManager.LayoutParams params = getWindow().getAttributes();
         params.gravity = Gravity.CENTER;
@@ -36,13 +38,11 @@ public class HinweisPopUpActivity extends AppCompatActivity {
         params.y = -10;
 
         getWindow().setAttributes(params);
-
-        text = (TextView) findViewById(R.id.textViewInfo);
-        this.infotext = getIntent().getExtras().getString("InfotextPoUp");
-        text.setText(infotext);
-
-        buttonok = (Button) findViewById(R.id.buttonok);
-        buttonok.setOnClickListener(new View.OnClickListener() {
+        this.hint = getIntent().getExtras().getString("Kategorie");
+        hintTextInputEditText = (TextInputEditText) findViewById(R.id.editTexteingabe);
+        hintTextInputEditText.setHint(hint);
+        okBtn = (Button) findViewById(R.id.okBtn);
+        okBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 closeWindow();

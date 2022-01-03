@@ -42,19 +42,19 @@ public class ThemenuebersichtsActivity extends AppCompatActivity {
     }
 
     public void zurueck(View view) {
-        Intent i = new Intent(this, FachuebersichtsActivity.class);
+        Intent i = new Intent(this, SubjectOverviewActivity.class);
         startActivityForResult(i, REQUESTCODE);
     }
 
     public void vorwaerts(View view) {  //öffnet Kartenerstellung
         if (checkeditems.size() == 0) {
-            Intent popupwindow = new Intent(this, HinweisPopUpActivity.class);
+            Intent popupwindow = new Intent(this, HintPopUpActivity.class);
             popupwindow.putExtra("InfotextPoUp", "Bitte ein Thema auswählen.");
             startActivity(popupwindow);
         }
         else if(checkeditems.size() > 0 ){
             System.out.println("Should open");
-            Intent i = new Intent(this, KartenuebersichtsActivity.class);
+            Intent i = new Intent(this, CardsOverviewActivity.class);
             i.putExtra("Themenname", checkeditems);
             i.putExtra("Fachname", fachname);
             startActivityForResult(i, REQUESTCODE);
@@ -63,14 +63,14 @@ public class ThemenuebersichtsActivity extends AppCompatActivity {
 
     public void starteLernmodus(View view){
         if (checkeditems.size() != 0){
-            Intent lernmodus = new Intent(this, Kartenanzeige_Lernmodus.class);
+            Intent lernmodus = new Intent(this, StudyModeShowCards.class);
             lernmodus.putStringArrayListExtra("Themenliste", checkeditems);
             lernmodus.putExtra("Fachname", this.fachname);
             lernmodus.putExtra("Abfrage", "Themenuebersicht");
             startActivityForResult(lernmodus, REQUESTCODE);
         }
         else{
-            Intent popupwindow = new Intent(this, HinweisPopUpActivity.class);
+            Intent popupwindow = new Intent(this, HintPopUpActivity.class);
             popupwindow.putExtra("InfotextPoUp", "Bitte mindestens 1 Thema auswählen.");
             //popupwindow.putExtra("Abfrage", "Themenuebersicht");
             startActivity(popupwindow);
@@ -78,37 +78,37 @@ public class ThemenuebersichtsActivity extends AppCompatActivity {
     }
     public void starteAbfrage(View view){
         if (checkeditems.size() != 0){
-            Intent lernmodus = new Intent(this, Kartenanzeige_Abfragemodus.class);
+            Intent lernmodus = new Intent(this, QuizModeShowCards.class);
             lernmodus.putStringArrayListExtra("Themenliste", checkeditems);
             lernmodus.putExtra("Fachname", this.fachname);
             lernmodus.putExtra("Abfrage", "Themenuebersicht");
             startActivityForResult(lernmodus, REQUESTCODE);
         }
         else{
-            Intent popupwindow = new Intent(this, HinweisPopUpActivity.class);
+            Intent popupwindow = new Intent(this, HintPopUpActivity.class);
             popupwindow.putExtra("InfotextPoUp", "Bitte mindestens 1 Thema auswählen.");
             // popupwindow.putExtra("Abfrage", "Fachuebersicht");
             startActivity(popupwindow);
         }
     }
     public void neuesThema(View view){
-        Intent popupeingabe = new Intent(this, Fach_oder_Thema_erstellen_PopUp.class);
+        Intent popupeingabe = new Intent(this, CreateSubjectOrTopicPopUpActivity.class);
         popupeingabe.putExtra("Kategorie", "Thema");
         startActivity(popupeingabe);
     }
 
     public void Themabearbeiten (View view){
         if (checkeditems.size() == 0){
-            Intent popupwindow = new Intent(this, HinweisPopUpActivity.class);
+            Intent popupwindow = new Intent(this, HintPopUpActivity.class);
             popupwindow.putExtra("InfotextPoUp", "Bitte mindestens 1 Thema auswählen.");
             // popupwindow.putExtra("Abfrage", "Fachuebersicht");
             startActivity(popupwindow);
         }else if (checkeditems.size() == 1){
-            Intent themabearbeiten = new Intent(this, KartenuebersichtsActivity.class);
+            Intent themabearbeiten = new Intent(this, CardsOverviewActivity.class);
             themabearbeiten.putExtra("Thema", checkeditems.get(0));
             startActivity(themabearbeiten);
         }else {
-            Intent popupwindow = new Intent(this, HinweisPopUpActivity.class);
+            Intent popupwindow = new Intent(this, HintPopUpActivity.class);
             popupwindow.putExtra("InfotextPoUp", "Bitte nur 1 Thema zur Bearbeitung auswählen.");
         }
     }

@@ -9,7 +9,7 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 
-public class FachuebersichtsActivity extends AppCompatActivity {   //später dann durch DB iterieren um Fächer zu holen
+public class SubjectOverviewActivity extends AppCompatActivity {   //später dann durch DB iterieren um Fächer zu holen
 
     private static final int REQUESTCODE = 1;
     ArrayList<String> items = new ArrayList<String>();
@@ -40,14 +40,14 @@ public class FachuebersichtsActivity extends AppCompatActivity {   //später dan
         checkeditems = fachview.getCheckeditems();
     }
 
-    public void zurueck(View view){
+    public void goToPrevious(View view){
         Intent i = new Intent(this, MainActivity.class);
         startActivityForResult(i, REQUESTCODE);
     }
 
-    public void vorwaerts(View view){
+    public void goToNext(View view){
         if (checkeditems.size() == 0) {
-            Intent popupwindow = new Intent(this, HinweisPopUpActivity.class);
+            Intent popupwindow = new Intent(this, HintPopUpActivity.class);
             popupwindow.putExtra("InfotextPoUp", "Bitte ein Fach auswählen.");
             startActivity(popupwindow);
         }
@@ -60,47 +60,47 @@ public class FachuebersichtsActivity extends AppCompatActivity {   //später dan
 
         } /*else if (checkeditems.size() > 1) {
             System.out.println("hadskfhäa");
-            Intent popupwindow = new Intent(this, HinweisPopUpActivity.class);
+            Intent popupwindow = new Intent(this, HintPopUpActivity.class);
             popupwindow.putExtra("InfotextPoUp", "Bitte nur 1 Fach auswählen.");
             startActivity(popupwindow);
         }*/
     }
 
 
-    public void starteLernmodus(View view){
+    public void startStudyMode(View view){
         if (checkeditems.size() != 0){
-            //KartensammlerfürAnzeigeClass lernmodus = new KartensammlerfürAnzeigeClass();
-            //lernmodus.starteLernmodus("Fachuebersicht", checkeditems, themen, karten);
-            Intent lernmodus = new Intent(this, Kartenanzeige_Lernmodus.class);
-            lernmodus.putStringArrayListExtra("Faecherliste", checkeditems);
-            lernmodus.putExtra("Abfrage", "Fachuebersicht");
-            startActivityForResult(lernmodus, REQUESTCODE);
+            //KartensammlerfürAnzeigeClass studyMode = new KartensammlerfürAnzeigeClass();
+            //studyMode.starteLernmodus("Fachuebersicht", checkeditems, themen, karten);
+            Intent studyMode = new Intent(this, StudyModeShowCards.class);
+            studyMode.putStringArrayListExtra("Faecherliste", checkeditems);
+            studyMode.putExtra("Abfrage", "Fachuebersicht");
+            startActivityForResult(studyMode, REQUESTCODE);
         }
         else{
-            Intent popupwindow = new Intent(this, HinweisPopUpActivity.class);
-            popupwindow.putExtra("InfotextPoUp", "Bitte mindestens 1 Fach auswählen.");
-            // popupwindow.putExtra("Abfrage", "Fachuebersicht");
-            startActivity(popupwindow);
+            Intent popupWindow = new Intent(this, HintPopUpActivity.class);
+            popupWindow.putExtra("InfotextPoUp", "Bitte mindestens 1 Fach auswählen.");
+            // popupWindow.putExtra("Abfrage", "Fachuebersicht");
+            startActivity(popupWindow);
         }
     }
 
-    public void starteAbfrage(View view){
+    public void startTestMode(View view){
         if (checkeditems.size() != 0){
-            Intent abfrage = new Intent(this, Kartenanzeige_Abfragemodus.class);
-            abfrage.putStringArrayListExtra("Faecherliste", checkeditems);
-            abfrage.putExtra("Abfrage", "Fachuebersicht");
-            startActivityForResult(abfrage, REQUESTCODE);
+            Intent testMode = new Intent(this, QuizModeShowCards.class);
+            testMode.putStringArrayListExtra("Faecherliste", checkeditems);
+            testMode.putExtra("Abfrage", "Fachuebersicht");
+            startActivityForResult(testMode, REQUESTCODE);
     }
         else {
-            Intent popupwindow = new Intent(this, HinweisPopUpActivity.class);
-            popupwindow.putExtra("InfotextPoUp", "Bitte mindestens 1 Fach auswählen.");
-           // popupwindow.putExtra("Abfrage", "Fachuebersicht");
-            startActivity(popupwindow);
+            Intent popupWindow = new Intent(this, HintPopUpActivity.class);
+            popupWindow.putExtra("InfotextPoUp", "Bitte mindestens 1 Fach auswählen.");
+           // popupWindow.putExtra("Abfrage", "Fachuebersicht");
+            startActivity(popupWindow);
         }
     }
-    public void neuesFach(View view){
-        Intent popupeingabe = new Intent(this, Fach_oder_Thema_erstellen_PopUp.class);
-        popupeingabe.putExtra("Kategorie", "Fach");
-        startActivity(popupeingabe);
+    public void newSubject(View view){
+        Intent entryPopup = new Intent(this, CreateSubjectOrTopicPopUpActivity.class);
+        entryPopup.putExtra("Kategorie", "Fach");
+        startActivity(entryPopup);
     }
 }

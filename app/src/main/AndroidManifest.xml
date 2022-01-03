@@ -10,31 +10,31 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication">
         <activity
-            android:name=".Fach_oder_Thema_erstellen_PopUp"
+            android:name=".CreateSubjectOrTopicPopUpActivity"
             android:exported="true" />
         <activity
-            android:name=".HinweisPopUpActivity"
+            android:name=".HintPopUpActivity"
             android:exported="true" />
         <activity
-            android:name=".Kartenanzeige_Abfragemodus"
+            android:name=".QuizModeShowCards"
             android:exported="true" />
         <activity
-            android:name=".Kartenanzeige_Lernmodus"
+            android:name=".StudyModeShowCards"
             android:exported="true" />
         <activity
-            android:name=".KartenerstellungAbbrechenPopupActivity"
+            android:name=".CancelNewCardPopupActivity"
             android:exported="true" />
         <activity
-            android:name=".KartenuebersichtsActivity"
+            android:name=".CardsOverviewActivity"
             android:exported="true" />
         <activity
             android:name=".ThemenuebersichtsActivity"
             android:exported="true" />
         <activity
-            android:name=".FachuebersichtsActivity"
+            android:name=".SubjectOverviewActivity"
             android:exported="true" />
         <activity
-            android:name=".KartenerstellungsActivity"
+            android:name=".CreateNewCardActivity"
             android:exported="true" />
         <activity
             android:name=".MainActivity"
@@ -45,7 +45,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".GrafikeinfuegenHelperClass" />
+        <activity android:name=".InsertImgHelperClassActivity" />
 
         <meta-data
             android:name="preloaded_fonts"
