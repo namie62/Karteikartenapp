@@ -67,7 +67,7 @@ public class MyFirebaseHelper extends AppCompatActivity {
                         String nameFromDB = dataSnapshot.child("name").getValue(String.class);
                         allSubjects.add(nameFromDB);
                     }
-                    ListviewHelperClass subjectView = new ListviewHelperClass(listview, adapter, allSubjects);
+                    ListviewHelperClass subjectView = new ListviewHelperClass(listview, allSubjects);
                     checkeditems= subjectView.getCheckeditems();
                     listview.setAdapter(adapter);
                 }

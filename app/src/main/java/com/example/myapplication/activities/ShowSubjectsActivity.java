@@ -25,40 +25,35 @@ import java.util.ArrayList;
 public class ShowSubjectsActivity extends AppCompatActivity {   //später dann durch DB iterieren um Fächer zu holen
 
     private static final int REQUESTCODE = 1;
-    ArrayList<String> items = new ArrayList<String>();
-    boolean[] checkchecker;
     ArrayList<String> checkedSubjects = new ArrayList<String>();
     private FirebaseDatabase flashcardDB;
     private DatabaseReference reference;
     private ListView listView;
     private Context applicationContext;
-    private ArrayList<String> allSubjects;
+    private ArrayList<String> showObjects;
     ArrayAdapter<String> adapter;
-    private String username;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_subjects);
-        this.flashcardDB = getIntent().getExtras().getParcelable("database");
-        this.reference = getIntent().getExtras().getParcelable("reference");
-//        this.flashcardDB = FirebaseDatabase.getInstance("https://karteikar-default-rtdb.europe-west1.firebasedatabase.app/");
-//        this.reference = flashcardDB.getReference("cornelia"); //cornelia mit username ersetzen
+        this.flashcardDB = FirebaseDatabase.getInstance("https://karteikar-default-rtdb.europe-west1.firebasedatabase.app/");
+        this.reference = flashcardDB.getReference("cornelia"); //cornelia mit username ersetzen
         this.listView = findViewById(R.id.subjects_list_view);
         this.applicationContext = getApplicationContext();
-        this.allSubjects = new ArrayList<>();
-        this.adapter = new ArrayAdapter<>(applicationContext, android.R.layout.simple_list_item_multiple_choice, allSubjects);
+        this.showObjects = new ArrayList<>();
+        this.adapter = new ArrayAdapter<>(applicationContext, android.R.layout.simple_list_item_multiple_choice, showObjects);
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                allSubjects.clear();
+                showObjects.clear();
                 if (snapshot.exists()) {
-                    for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                        String nameFromDB = dataSnapshot.child("name").getValue(String.class);
-                        allSubjects.add(nameFromDB);
+                    for (DataSnapshot dataSnapshot : snapshot.child("subjects").getChildren()) {
+                        String nameFromDB = dataSnapshot.getKey();
+                        showObjects.add(nameFromDB);
                     }
                     listView.setAdapter(adapter);
-                    ListviewHelperClass subjectView = new ListviewHelperClass(listView, adapter, allSubjects);
+                    ListviewHelperClass subjectView = new ListviewHelperClass(listView, showObjects);
                     checkedSubjects = subjectView.getCheckeditems();
                 }
             }
@@ -67,9 +62,6 @@ public class ShowSubjectsActivity extends AppCompatActivity {   //später dann d
                 Toast.makeText(applicationContext, error.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
-
-
-
     }
 
     public void goToPrevious(View view){
@@ -86,9 +78,7 @@ public class ShowSubjectsActivity extends AppCompatActivity {   //später dann d
         }
         else if(checkedSubjects.size() >0 ){
             Intent i = new Intent(this, ShowTopicsActivity.class);
-            i.putExtra("database", (Parcelable) flashcardDB);
-            i.putExtra("reference", (Parcelable) reference);
-            i.putExtra("Subjects", checkedSubjects);
+            i.putExtra("checkedSubjects", checkedSubjects);
             startActivityForResult(i, REQUESTCODE);
 
         } /*else if (checkeditems.size() > 1) {

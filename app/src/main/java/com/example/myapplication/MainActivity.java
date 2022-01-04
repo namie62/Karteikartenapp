@@ -25,7 +25,6 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
     SignInButton signInBtn;
 
     TextView statusTextView;
-    String username;
 
     GoogleApiClient mGoogleApiClient;
     private static final String TAG = "SignInActivity";
@@ -39,8 +38,6 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        this.flashcardDB = FirebaseDatabase.getInstance("https://karteikar-default-rtdb.europe-west1.firebasedatabase.app/");
 
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestEmail()
@@ -58,9 +55,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
     @Override
     public void onClick(View v) {
         signIn();
-        Intent i = new Intent(this, ShowSubjectsActivity.class); // dem intent möcht ich den username mitgeben wenn irgendwie möglich
-        i.putExtra("database", (Parcelable) flashcardDB);
-        i.putExtra("reference", (Parcelable) reference);
+        Intent i = new Intent(this, ShowSubjectsActivity.class);
         startActivityForResult(i, REQUESTCODE);
     }
 
@@ -86,9 +81,6 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
         if (result.isSuccess()) {
             //Signed in successfuly, show authenticated UI.
             GoogleSignInAccount acct = result.getSignInAccount();
-            String un = acct.getDisplayName();
-            assert un != null;
-            this.reference = flashcardDB.getReference(un);
         } else {
             statusTextView.setText("Sign in unsuccessful");
         }

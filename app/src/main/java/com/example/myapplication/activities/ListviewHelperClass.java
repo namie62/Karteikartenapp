@@ -14,7 +14,7 @@ public class ListviewHelperClass {
     boolean[] checkchecker;
     ArrayList<String> checkeditems = new ArrayList<String>();
 
-    public ListviewHelperClass(ListView listview, ArrayAdapter arrayAdapter, ArrayList<String> items) {
+    public ListviewHelperClass(ListView listview, ArrayList<String> items) {
 
         listview.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
             this.checkchecker = new boolean[items.size()];
@@ -25,13 +25,11 @@ public class ListviewHelperClass {
                     checkchecker[position] =! checkchecker[position];
                     if (checkchecker[position]){
                         checkeditems.add(items.get(position));
-                        //System.out.println("Das Item"+ items.get(position) + "wurde angeklickt");
                         }
                     else
                         checkeditems.remove(items.get(position));
                 }
             });
-//            listview.setAdapter(arrayAdapter);
         }
         public ArrayList<String> getCheckeditems(){
         return checkeditems;

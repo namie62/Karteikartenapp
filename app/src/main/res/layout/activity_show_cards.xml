@@ -4,47 +4,46 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.ShowTopicsActivity">
+    tools:context=".activities.CardsOverviewActivity">
 
     <Button
-        android:id="@+id/neuesThema"
+        android:id="@+id/createCard"
         android:layout_width="51dp"
         android:layout_height="51dp"
         android:layout_marginEnd="16dp"
-        android:onClick = "newTopic"
+        android:onClick = "newKarte"
         app:icon="@android:drawable/ic_input_add"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ListView
-        android:id="@+id/themenliste"
+        android:id="@+id/kartenliste"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="48dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button" />
+        app:layout_constraintTop_toBottomOf="@+id/createCard" />
 
     <Button
-        android:id="@+id/abfrageTema"
+        android:id="@+id/abfragekarte"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/Abfrageknopf"
         android:onClick = "startTestMode"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/lernmodusthema" />
+        app:layout_constraintStart_toEndOf="@+id/lernmodusfach" />
 
     <Button
-        android:id="@+id/lernmodusthema"
+        android:id="@+id/lernmodusfach"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Lernen"
+        android:text="@string/Lernmodusknopf"
         android:onClick="startStudyMode"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/zurueckzumfach"
+        android:id="@+id/zurueckzumstart"
         style="@style/Widget.AppCompat.Button"
         android:layout_width="51dp"
         android:layout_height="51dp"
@@ -53,46 +52,43 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <Button
+        android:id="@+id/reininsFach"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="goToTopics"
+        android:text="@string/IndieKarte"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/abfragekarte" />
+
     <TextView
-        android:id="@+id/subjectName"
+        android:id="@+id/topicsTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:text="@string/Themen"
+        android:text="@string/Karten"
         android:textAlignment="center"
         android:textSize="20dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/vorwaerts"
+        android:id="@+id/ReihenfolgeändernButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/InsThema"
-        android:onClick="goToTopics"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/abfrageTema" />
-
-    <Button
-        android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:text="Thema bearbeiten"
-        android:onClick = "editTopic"
+        android:text="Reihenfolge ändern"
+        android:textSize="12dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/zurueckzumfach" />
+        app:layout_constraintTop_toBottomOf="@+id/zurueckzumstart" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/KArtebearbeitenButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:text="PDF-Export"
-        app:layout_constraintStart_toEndOf="@+id/button"
-        app:layout_constraintTop_toBottomOf="@+id/neuesThema" />
-
+        android:text="Karte bearbeiten"
+        android:textSize="12dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/createCard" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

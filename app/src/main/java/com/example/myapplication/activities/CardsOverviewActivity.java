@@ -22,7 +22,7 @@ public class CardsOverviewActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_cards_overview);
+        setContentView(R.layout.activity_show_cards);
         getListItems();
         fillListView();
         this.topics = getIntent().getExtras().getString("Themenname");
@@ -41,7 +41,7 @@ public class CardsOverviewActivity extends AppCompatActivity {
     public void fillListView(){
         ListView listview = (ListView) findViewById(R.id.kartenliste);
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_multiple_choice, items);
-        ListviewHelperClass fachview = new ListviewHelperClass(listview, arrayAdapter, items);
+        ListviewHelperClass fachview = new ListviewHelperClass(listview, items);
         checkeditems = fachview.getCheckeditems();
     }
 
