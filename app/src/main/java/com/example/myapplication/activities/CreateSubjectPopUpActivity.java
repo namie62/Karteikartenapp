@@ -60,7 +60,7 @@ public class CreateSubjectPopUpActivity extends AppCompatActivity {
     public void closeWindow(){
         String newSubject = (String) hintTextInputEditText.getText().toString();
         if (newSubject.trim().length() > 0) {
-            this.reference.child("subjects").push().child("name").setValue(newSubject);
+            this.reference.child("subjects").child(newSubject).child("topics").setValue("[]");
         }
         this.finish();
     }

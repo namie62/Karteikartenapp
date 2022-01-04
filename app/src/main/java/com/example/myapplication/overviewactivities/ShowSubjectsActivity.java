@@ -56,7 +56,7 @@ public class ShowSubjectsActivity extends AppCompatActivity {   //später dann d
                 showObjects.clear();
                 if (snapshot.exists()) {
                     for (DataSnapshot dataSnapshot : snapshot.child("subjects").getChildren()) {
-                        String nameFromDB = dataSnapshot.child("name").getValue(String.class);
+                        String nameFromDB = dataSnapshot.getKey();
                         showObjects.add(nameFromDB);
                     }
                     listView.setAdapter(adapter);

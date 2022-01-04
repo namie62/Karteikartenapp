@@ -13,6 +13,9 @@
             android:name=".activities.CreateSubjectPopUpActivity"
             android:exported="true" />
         <activity
+            android:name=".activities.CreateTopicPopUpActivity"
+            android:exported="true" />
+        <activity
             android:name=".activities.HintPopUpActivity"
             android:exported="true" />
         <activity

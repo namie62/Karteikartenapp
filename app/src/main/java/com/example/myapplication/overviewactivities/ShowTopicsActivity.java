@@ -139,6 +139,7 @@ public class ShowTopicsActivity extends AppCompatActivity {
     public void nothingSelectedError() {
         Intent popupWindow = new Intent(this, HintPopUpActivity.class);
         popupWindow.putExtra("InfotextPoUp", "Bitte mindestens 1 Thema auswählen.");
+        popupWindow.putStringArrayListExtra("checkedSubjects", checkedSubjects);
         startActivity(popupWindow);
     }
 

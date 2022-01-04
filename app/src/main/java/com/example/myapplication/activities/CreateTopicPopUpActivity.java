@@ -27,19 +27,20 @@ public class CreateTopicPopUpActivity extends AppCompatActivity {
     private FirebaseDatabase flashcardDB;
     private DatabaseReference reference;
     ArrayList<String> checkedSubjects;
+    Spinner dropdown;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_create_subject_popup);
+        setContentView(R.layout.activity_create_topic_popup);
 
         this.flashcardDB = FirebaseDatabase.getInstance("https://karteikar-default-rtdb.europe-west1.firebasedatabase.app/");
         this.reference = flashcardDB.getReference("cornelia"); //cornelia mit username ersetzen
 
         this.checkedSubjects = getIntent().getStringArrayListExtra("checkedSubjects");
-        Spinner dropdown = findViewById(R.id.spinner1);
+        this.dropdown = findViewById(R.id.spinner1);
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, checkedSubjects);
-        dropdown.setAdapter(adapter);
+        this.dropdown.setAdapter(adapter);
 
 
         DisplayMetrics dm = new DisplayMetrics();
@@ -69,7 +70,10 @@ public class CreateTopicPopUpActivity extends AppCompatActivity {
     }
     public void closeWindow(){
         String newTopic = (String) hintTextInputEditText.getText().toString();
-        this.reference.child("subjects").push().child("name").setValue(newTopic);
+        String selectedSubject = (String) dropdown.getSelectedItem().toString();
+        if (newTopic.trim().length() > 0) {
+            this.reference.child("subjects").child(selectedSubject).child("topics").child(newTopic).child("cards").setValue("[]");
+        }
         this.finish();
     }
 
