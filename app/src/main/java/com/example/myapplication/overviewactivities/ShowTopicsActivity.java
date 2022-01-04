@@ -1,4 +1,4 @@
-package com.example.myapplication.activities;
+package com.example.myapplication.overviewactivities;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -12,6 +12,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.myapplication.R;
+import com.example.myapplication.activities.CreateSubjectOrTopicPopUpActivity;
+import com.example.myapplication.activities.HintPopUpActivity;
+import com.example.myapplication.activities.ListviewHelperClass;
+import com.example.myapplication.activities.QuizModeShowCards;
+import com.example.myapplication.activities.StudyModeShowCards;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -23,9 +28,7 @@ import java.util.ArrayList;
 public class ShowTopicsActivity extends AppCompatActivity {
     private static final int REQUESTCODE = 1;
     ArrayList<String> checkedSubjects;
-    ArrayList<String> topicsFromCheckedSubjects = new ArrayList<>();
     ArrayList<String> checkedTopics;
-    ArrayList<String> subjectName = new ArrayList<String>();
     FirebaseDatabase flashcardDB;
     DatabaseReference reference;
     ListView listView;
@@ -60,7 +63,7 @@ public class ShowTopicsActivity extends AppCompatActivity {
                     }
                     listView.setAdapter(adapter);
                     ListviewHelperClass subjectView = new ListviewHelperClass(listView, showObjects);
-                    checkedSubjects = subjectView.getCheckeditems();
+                    checkedTopics = subjectView.getCheckeditems();
                 }
             }
 
@@ -78,17 +81,14 @@ public class ShowTopicsActivity extends AppCompatActivity {
         startActivityForResult(i, REQUESTCODE);
     }
 
-    public void goToNext(View view) {  //öffnet Kartenerstellung
+    public void goToCards(View view) {  //öffnet Kartenerstellung
         if (checkedTopics.size() == 0) {
-            Intent popupWindow = new Intent(this, HintPopUpActivity.class);
-            popupWindow.putExtra("InfotextPoUp", "Bitte ein Thema auswählen.");
-            startActivity(popupWindow);
+            nothingSelectedError();
         }
         else if(checkedTopics.size() > 0 ){
-            System.out.println("Should open");
-            Intent i = new Intent(this, CardsOverviewActivity.class);
-            i.putExtra("Themenname", checkedTopics);
-            i.putExtra("Fachname", subjectName);
+            Intent i = new Intent(this, ShowCardsActivity.class);
+            i.putExtra("checkedTopics", checkedTopics);
+            i.putExtra("checkedSubjects", checkedSubjects);
             startActivityForResult(i, REQUESTCODE);
         }
     }
@@ -96,31 +96,23 @@ public class ShowTopicsActivity extends AppCompatActivity {
     public void startStudyMode(View view){
         if (checkedTopics.size() != 0){
             Intent studyMode = new Intent(this, StudyModeShowCards.class);
-            studyMode.putStringArrayListExtra("Themenliste", checkedTopics);
-            studyMode.putExtra("Fachname", this.subjectName);
-            studyMode.putExtra("Abfrage", "Themenuebersicht");
+            studyMode.putExtra("checkedTopics", checkedTopics);
+            studyMode.putExtra("checkedSubjects", checkedSubjects);
             startActivityForResult(studyMode, REQUESTCODE);
         }
         else{
-            Intent popupWindow = new Intent(this, HintPopUpActivity.class);
-            popupWindow.putExtra("InfotextPoUp", "Bitte mindestens 1 Thema auswählen.");
-            //popupWindow.putExtra("Abfrage", "Themenuebersicht");
-            startActivity(popupWindow);
+            nothingSelectedError();
         }
     }
     public void startQuiz(View view){
         if (checkedTopics.size() != 0){
             Intent quizMode = new Intent(this, QuizModeShowCards.class);
-            quizMode.putStringArrayListExtra("Themenliste", checkedTopics);
-            quizMode.putExtra("Fachname", this.subjectName);
-            quizMode.putExtra("Abfrage", "Themenuebersicht");
+            quizMode.putExtra("checkedTopics", checkedTopics);
+            quizMode.putExtra("checkedSubjects", checkedSubjects);
             startActivityForResult(quizMode, REQUESTCODE);
         }
         else{
-            Intent popupWindow = new Intent(this, HintPopUpActivity.class);
-            popupWindow.putExtra("InfotextPoUp", "Bitte mindestens 1 Thema auswählen.");
-            // popupWindow.putExtra("Abfrage", "Fachuebersicht");
-            startActivity(popupWindow);
+            nothingSelectedError();
         }
     }
     public void newTopic(View view){
@@ -131,12 +123,9 @@ public class ShowTopicsActivity extends AppCompatActivity {
 
     public void editTopic(View view){
         if (checkedTopics.size() == 0){
-            Intent popupWindow = new Intent(this, HintPopUpActivity.class);
-            popupWindow.putExtra("InfotextPoUp", "Bitte mindestens 1 Thema auswählen.");
-            // popupWindow.putExtra("Abfrage", "Fachuebersicht");
-            startActivity(popupWindow);
+            nothingSelectedError();
         }else if (checkedTopics.size() == 1){
-            Intent editTopic = new Intent(this, CardsOverviewActivity.class);
+            Intent editTopic = new Intent(this, ShowCardsActivity.class);
             editTopic.putExtra("Thema", checkedTopics.get(0));
             startActivity(editTopic);
         }else {
@@ -144,4 +133,11 @@ public class ShowTopicsActivity extends AppCompatActivity {
             popupWindow.putExtra("InfotextPoUp", "Bitte nur 1 Thema zur Bearbeitung auswählen.");
         }
     }
+
+    public void nothingSelectedError() {
+        Intent popupWindow = new Intent(this, HintPopUpActivity.class);
+        popupWindow.putExtra("InfotextPoUp", "Bitte mindestens 1 Thema auswählen.");
+        startActivity(popupWindow);
+    }
+
 }

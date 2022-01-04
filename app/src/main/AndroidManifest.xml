@@ -25,13 +25,13 @@
             android:name=".activities.CancelNewCardPopupActivity"
             android:exported="true" />
         <activity
-            android:name=".activities.CardsOverviewActivity"
+            android:name=".overviewactivities.ShowCardsActivity"
             android:exported="true" />
         <activity
-            android:name=".activities.ShowTopicsActivity"
+            android:name=".overviewactivities.ShowTopicsActivity"
             android:exported="true" />
         <activity
-            android:name=".activities.ShowSubjectsActivity"
+            android:name=".overviewactivities.ShowSubjectsActivity"
             android:exported="true" />
         <activity
             android:name=".activities.CreateNewCardActivity"

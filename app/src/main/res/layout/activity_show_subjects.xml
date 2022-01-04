@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.ShowSubjectsActivity">
+    tools:context=".overviewactivities.ShowSubjectsActivity">
 
     <Button
         android:id="@+id/create_topic_btn"
@@ -17,7 +17,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ListView
-        android:id="@+id/subjects_list_view"
+        android:id="@+id/subjects_listView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
@@ -25,16 +25,16 @@
         />
 
     <Button
-        android:id="@+id/abfragefach"
+        android:id="@+id/quiz_subject_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/Abfrageknopf"
         android:onClick="startTestMode"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/lernmodusfach" />
+        app:layout_constraintStart_toEndOf="@+id/study_mode_subject_btn" />
 
     <Button
-        android:id="@+id/lernmodusfach"
+        android:id="@+id/study_mode_subject_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/Lernmodusknopf"
@@ -43,7 +43,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/zurueckzumstart"
+        android:id="@+id/back_to_start_btn"
         style="@style/Widget.AppCompat.Button"
         android:layout_width="51dp"
         android:layout_height="51dp"
@@ -53,13 +53,13 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/reininsFach"
+        android:id="@+id/go_to_subject_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:onClick="goToTopics"
         android:text="@string/Vorwärtsknopf"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/abfragefach" />
+        app:layout_constraintStart_toEndOf="@+id/quiz_subject_btn" />
 
     <TextView
         android:id="@+id/ueberschrift"

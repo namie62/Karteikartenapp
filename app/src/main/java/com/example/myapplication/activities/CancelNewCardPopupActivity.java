@@ -11,6 +11,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 
 import com.example.myapplication.R;
+import com.example.myapplication.overviewactivities.ShowCardsActivity;
 
 public class CancelNewCardPopupActivity extends AppCompatActivity {
     private static final int REQUESTCODE = 1;
@@ -46,7 +47,7 @@ public class CancelNewCardPopupActivity extends AppCompatActivity {
         yesBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(CancelNewCardPopupActivity.this, CardsOverviewActivity.class);
+                Intent i = new Intent(CancelNewCardPopupActivity.this, ShowCardsActivity.class);
                 i.putExtra("Themenname", topic);
                 startActivityForResult(i, REQUESTCODE);
             }

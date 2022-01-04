@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.example.myapplication.KartenClass;
 import com.example.myapplication.R;
+import com.example.myapplication.overviewactivities.ShowSubjectsActivity;
 
 import java.util.ArrayList;
 

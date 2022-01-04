@@ -1,4 +1,4 @@
-package com.example.myapplication.activities;
+package com.example.myapplication.overviewactivities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -6,7 +6,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -14,6 +13,11 @@ import android.widget.Toast;
 
 import com.example.myapplication.MainActivity;
 import com.example.myapplication.R;
+import com.example.myapplication.activities.CreateSubjectOrTopicPopUpActivity;
+import com.example.myapplication.activities.HintPopUpActivity;
+import com.example.myapplication.activities.ListviewHelperClass;
+import com.example.myapplication.activities.QuizModeShowCards;
+import com.example.myapplication.activities.StudyModeShowCards;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -39,7 +43,7 @@ public class ShowSubjectsActivity extends AppCompatActivity {   //später dann d
         setContentView(R.layout.activity_show_subjects);
         this.flashcardDB = FirebaseDatabase.getInstance("https://karteikar-default-rtdb.europe-west1.firebasedatabase.app/");
         this.reference = flashcardDB.getReference("cornelia"); //cornelia mit username ersetzen
-        this.listView = findViewById(R.id.subjects_list_view);
+        this.listView = findViewById(R.id.subjects_listView);
         this.applicationContext = getApplicationContext();
         this.showObjects = new ArrayList<>();
         this.adapter = new ArrayAdapter<>(applicationContext, android.R.layout.simple_list_item_multiple_choice, showObjects);

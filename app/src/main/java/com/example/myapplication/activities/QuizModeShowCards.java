@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.example.myapplication.R;
+import com.example.myapplication.overviewactivities.ShowSubjectsActivity;
 
 public class QuizModeShowCards extends AppCompatActivity {
     private static final int REQUESTCODE = 1;
