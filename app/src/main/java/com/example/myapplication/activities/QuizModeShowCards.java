@@ -14,6 +14,7 @@ public class QuizModeShowCards extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quiz_mode_show_cards);
+
     }
 
     public void goToPrevious(View view){

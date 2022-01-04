@@ -13,11 +13,12 @@ import android.widget.Toast;
 
 import com.example.myapplication.MainActivity;
 import com.example.myapplication.R;
-import com.example.myapplication.activities.CreateSubjectOrTopicPopUpActivity;
+import com.example.myapplication.activities.CreateSubjectPopUpActivity;
 import com.example.myapplication.activities.HintPopUpActivity;
 import com.example.myapplication.activities.ListviewHelperClass;
 import com.example.myapplication.activities.QuizModeShowCards;
 import com.example.myapplication.activities.StudyModeShowCards;
+import com.example.myapplication.objectclasses.Flashcard;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -29,7 +30,8 @@ import java.util.ArrayList;
 public class ShowSubjectsActivity extends AppCompatActivity {   //später dann durch DB iterieren um Fächer zu holen
 
     private static final int REQUESTCODE = 1;
-    ArrayList<String> checkedSubjects = new ArrayList<String>();
+    ArrayList<String> checkedSubjects = new ArrayList<>();
+    ArrayList<Flashcard> cardsFromSelectedSubjects = new ArrayList<>();
     private FirebaseDatabase flashcardDB;
     private DatabaseReference reference;
     private ListView listView;
@@ -46,6 +48,7 @@ public class ShowSubjectsActivity extends AppCompatActivity {   //später dann d
         this.listView = findViewById(R.id.subjects_listView);
         this.applicationContext = getApplicationContext();
         this.showObjects = new ArrayList<>();
+
         this.adapter = new ArrayAdapter<>(applicationContext, android.R.layout.simple_list_item_multiple_choice, showObjects);
         reference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -53,7 +56,7 @@ public class ShowSubjectsActivity extends AppCompatActivity {   //später dann d
                 showObjects.clear();
                 if (snapshot.exists()) {
                     for (DataSnapshot dataSnapshot : snapshot.child("subjects").getChildren()) {
-                        String nameFromDB = dataSnapshot.getKey();
+                        String nameFromDB = dataSnapshot.child("name").getValue(String.class);
                         showObjects.add(nameFromDB);
                     }
                     listView.setAdapter(adapter);
@@ -93,14 +96,33 @@ public class ShowSubjectsActivity extends AppCompatActivity {   //später dann d
         }*/
     }
 
+    public void getCardsFromSelectedSubjects() {
+        this.reference.child("subjects").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()) {
+                    for (String subject : checkedSubjects) {
+                        for (DataSnapshot topicSnapshot : snapshot.child(subject).child("topics").getChildren()){
+                            for (DataSnapshot cardSnapshot : topicSnapshot.child("cards").getChildren()){
+//                                Flashcard newCard = cardSnapshot.child("id").getValue(Integer.class);
+//                                cardsFromSelectedSubjects.add(newCard);
+                            }
+                        }
+                    }
+                }
+            }
+
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(applicationContext, error.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+
 
     public void startStudyMode(View view){
         if (checkedSubjects.size() != 0){
-            //KartensammlerfürAnzeigeClass studyMode = new KartensammlerfürAnzeigeClass();
-            //studyMode.starteLernmodus("Fachuebersicht", checkeditems, themen, karten);
+            getCardsFromSelectedSubjects();
             Intent studyMode = new Intent(this, StudyModeShowCards.class);
-            studyMode.putStringArrayListExtra("Faecherliste", checkedSubjects);
-            studyMode.putExtra("Abfrage", "Fachuebersicht");
             startActivityForResult(studyMode, REQUESTCODE);
         }
         else{
@@ -126,7 +148,7 @@ public class ShowSubjectsActivity extends AppCompatActivity {   //später dann d
         }
     }
     public void newSubject(View view){
-        Intent entryPopup = new Intent(this, CreateSubjectOrTopicPopUpActivity.class);
+        Intent entryPopup = new Intent(this, CreateSubjectPopUpActivity.class);
         entryPopup.putExtra("Kategorie", "Fach");
         startActivity(entryPopup);
     }

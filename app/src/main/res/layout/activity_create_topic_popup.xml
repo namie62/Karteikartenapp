@@ -5,8 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
-    tools:context=".activities.CreateSubjectOrTopicPopUpActivity">
+    tools:context=".activities.CreateSubjectPopUpActivity">
 
+    <Spinner
+        android:id="@+id/spinner1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:drawable/btn_dropdown"
+        android:spinnerMode="dropdown"/>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/Texteingabe"
@@ -21,8 +27,8 @@
             android:layout_width="match_parent"
             android:layout_height="74dp"
             android:fontFamily="@font/cairo"
-            android:textColor="@color/black"
             android:maxHeight="120dp"
+            android:textColor="@color/black"
             android:textSize="16sp"
             android:textStyle="italic" />
 
@@ -40,7 +46,6 @@
             tools:targetApi="s" />
 
     </com.google.android.material.textfield.TextInputLayout>
-
 
 
 </RelativeLayout>

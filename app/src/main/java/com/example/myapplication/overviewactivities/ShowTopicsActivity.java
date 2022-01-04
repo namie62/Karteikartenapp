@@ -12,7 +12,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.myapplication.R;
-import com.example.myapplication.activities.CreateSubjectOrTopicPopUpActivity;
+import com.example.myapplication.activities.CreateSubjectPopUpActivity;
+import com.example.myapplication.activities.CreateTopicPopUpActivity;
 import com.example.myapplication.activities.HintPopUpActivity;
 import com.example.myapplication.activities.ListviewHelperClass;
 import com.example.myapplication.activities.QuizModeShowCards;
@@ -115,9 +116,10 @@ public class ShowTopicsActivity extends AppCompatActivity {
             nothingSelectedError();
         }
     }
-    public void newTopic(View view){
-        Intent entryPopup = new Intent(this, CreateSubjectOrTopicPopUpActivity.class);
+    public void createTopic(View view){
+        Intent entryPopup = new Intent(this, CreateTopicPopUpActivity.class);
         entryPopup.putExtra("Kategorie", "Thema");
+        entryPopup.putStringArrayListExtra("checkedSubjects", checkedSubjects);
         startActivity(entryPopup);
     }
 

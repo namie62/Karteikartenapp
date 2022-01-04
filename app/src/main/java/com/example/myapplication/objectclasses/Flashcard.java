@@ -2,7 +2,6 @@ package com.example.myapplication.objectclasses;
 
 public class Flashcard {
     public int sortOrder;
-    public String name;
     public int progress = 0;
     public String front;
     public String frontImg;
@@ -25,14 +24,6 @@ public class Flashcard {
 
     public void setSortOrder(int sortOrder) {
         this.sortOrder = sortOrder;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public int getProgress() {

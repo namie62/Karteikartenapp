@@ -1,29 +1,46 @@
 package com.example.myapplication.activities;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.Spinner;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.myapplication.R;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
-public class CreateSubjectOrTopicPopUpActivity extends AppCompatActivity {
+import java.util.ArrayList;
+
+public class CreateTopicPopUpActivity extends AppCompatActivity {
 
 
     Button okBtn;
     TextInputEditText hintTextInputEditText;
     String hint;
-
+    private FirebaseDatabase flashcardDB;
+    private DatabaseReference reference;
+    ArrayList<String> checkedSubjects;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_create_subject_or_topic_popup);
+        setContentView(R.layout.activity_create_subject_popup);
+
+        this.flashcardDB = FirebaseDatabase.getInstance("https://karteikar-default-rtdb.europe-west1.firebasedatabase.app/");
+        this.reference = flashcardDB.getReference("cornelia"); //cornelia mit username ersetzen
+
+        this.checkedSubjects = getIntent().getStringArrayListExtra("checkedSubjects");
+        Spinner dropdown = findViewById(R.id.spinner1);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, checkedSubjects);
+        dropdown.setAdapter(adapter);
+
 
         DisplayMetrics dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);
@@ -51,6 +68,8 @@ public class CreateSubjectOrTopicPopUpActivity extends AppCompatActivity {
         });
     }
     public void closeWindow(){
+        String newTopic = (String) hintTextInputEditText.getText().toString();
+        this.reference.child("subjects").push().child("name").setValue(newTopic);
         this.finish();
     }
 

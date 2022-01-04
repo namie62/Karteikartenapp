@@ -28,7 +28,7 @@ import java.util.ArrayList;
 
 public class ShowCardsActivity extends AppCompatActivity {
     private static final int REQUESTCODE = 1;
-    ArrayList<String> checkedCards = new ArrayList<String>();
+    ArrayList<String> checkedCards = new ArrayList<>();
     ArrayList<String> checkedSubjects;
     ArrayList<String> checkedTopics;
     FirebaseDatabase flashcardDB;
@@ -97,8 +97,9 @@ public class ShowCardsActivity extends AppCompatActivity {
             //KartensammlerfürAnzeigeClass lernmodus = new KartensammlerfürAnzeigeClass();
             //lernmodus.starteLernmodus("Fachuebersicht", checkeditems, themen, karten);
             Intent lernmodus = new Intent(this, StudyModeShowCards.class);
-            lernmodus.putStringArrayListExtra("Kartenliste", checkedCards);
-            lernmodus.putExtra("Abfrage", "Kartenuebersicht");
+            lernmodus.putStringArrayListExtra("checkedCards", checkedCards);
+            lernmodus.putStringArrayListExtra("checkedTopics", checkedTopics);
+            lernmodus.putStringArrayListExtra("checkedSubjects", checkedSubjects);
             startActivityForResult(lernmodus, REQUESTCODE);
             } /*
         else{
@@ -108,7 +109,7 @@ public class ShowCardsActivity extends AppCompatActivity {
         }*/
     }
 
-    public void starteLernmodus(View view){
+    public void startStudyMode(View view){
         if (checkedCards.size() != 0){
             Intent lernmodus = new Intent(this, StudyModeShowCards.class);
             lernmodus.putStringArrayListExtra("Kartenliste", checkedCards);
