@@ -12,12 +12,10 @@
         android:layout_width="362dp"
         android:layout_height="134dp"
         android:layout_weight="1"
-        app:layout_constraintBottom_toTopOf="@+id/partially_correct_btn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/back_text_view"
-        app:layout_constraintVertical_bias="0.0"
         tools:srcCompat="@tools:sample/avatars" />
 
     <TextView
@@ -44,6 +42,7 @@
         android:id="@+id/wrong_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:onClick="previousCard"
         app:icon="@android:drawable/ic_delete"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -55,6 +54,7 @@
         android:layout_width="97dp"
         android:layout_height="49dp"
         android:layout_marginEnd="4dp"
+        android:onClick="nextCard"
         app:icon="@android:drawable/presence_online"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -62,22 +62,10 @@
         app:layout_constraintVertical_bias="1.0" />
 
     <Button
-        android:id="@+id/partially_correct_btn"
-        android:layout_width="117dp"
-        android:layout_height="49dp"
-        android:text="teilweise"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/correct_btn"
-        app:layout_constraintHorizontal_bias="0.586"
-        app:layout_constraintStart_toEndOf="@+id/wrong_btn"
-        app:layout_constraintTop_toBottomOf="@+id/back_text_view"
-        app:layout_constraintVertical_bias="1.0" />
-
-    <Button
         android:id="@+id/go_to_previous_btn"
         android:layout_width="61dp"
         android:layout_height="52dp"
-        android:onClick = "goToPrevious"
+        android:onClick = "previous"
         app:icon="?attr/actionModeCloseDrawable"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

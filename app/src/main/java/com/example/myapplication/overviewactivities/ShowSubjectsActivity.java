@@ -100,6 +100,7 @@ public class ShowSubjectsActivity extends AppCompatActivity {   //später dann d
         if (checkedSubjects.size() != 0){
             Intent studyMode = new Intent(this, StudyModeShowCards.class);
             studyMode.putStringArrayListExtra("checkedSubjects", checkedSubjects);
+            studyMode.putExtra("index", 0);
             startActivityForResult(studyMode, REQUESTCODE);
         }
         else{
