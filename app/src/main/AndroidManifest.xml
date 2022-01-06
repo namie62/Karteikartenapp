@@ -22,16 +22,16 @@
             android:name=".createactivities.CreateSubjectActivity"
             android:exported="true" />
         <activity
-            android:name=".activities.HintPopUpActivity"
+            android:name=".popups.HintPopUpActivity"
             android:exported="true" />
         <activity
-            android:name=".activities.QuizModeShowCards"
+            android:name=".modesofoperation.QuizModeShowCards"
             android:exported="true" />
         <activity
-            android:name=".activities.StudyModeShowCards"
+            android:name=".modesofoperation.StudyModeShowCards"
             android:exported="true" />
         <activity
-            android:name=".activities.CancelNewCardPopupActivity"
+            android:name=".popups.CancelNewCardPopupActivity"
             android:exported="true" />
         <activity
             android:name=".overviewactivities.ShowCardsActivity"
@@ -54,7 +54,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.InsertImgHelperClassActivity" />
+        <activity android:name=".helperclasses.InsertImgHelperClassActivity" />
 
         <meta-data
             android:name="preloaded_fonts"

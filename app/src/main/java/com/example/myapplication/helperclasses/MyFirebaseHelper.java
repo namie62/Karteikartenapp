@@ -1,4 +1,4 @@
-package com.example.myapplication.myfirebasehelper;
+package com.example.myapplication.helperclasses;
 
 import android.content.Context;
 import android.widget.ArrayAdapter;
@@ -9,7 +9,6 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.myapplication.activities.ListviewHelperClass;
 import com.example.myapplication.objectclasses.Flashcard;
 import com.example.myapplication.objectclasses.Subject;
 import com.example.myapplication.objectclasses.Topic;

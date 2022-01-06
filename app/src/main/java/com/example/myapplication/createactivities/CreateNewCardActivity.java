@@ -11,10 +11,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 
-import com.example.myapplication.KartenClass;
 import com.example.myapplication.R;
-import com.example.myapplication.activities.CancelNewCardPopupActivity;
-import com.example.myapplication.activities.InsertImgHelperClassActivity;
+import com.example.myapplication.popups.CancelNewCardPopupActivity;
+import com.example.myapplication.helperclasses.InsertImgHelperClassActivity;
 import com.example.myapplication.objectclasses.Flashcard;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;

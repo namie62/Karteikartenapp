@@ -1,28 +1,31 @@
-package com.example.myapplication.activities;
+package com.example.myapplication.popups;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.TextView;
 
 import com.example.myapplication.R;
+import com.example.myapplication.overviewactivities.ShowCardsActivity;
 
-public class HintPopUpActivity extends AppCompatActivity {
+public class CancelNewCardPopupActivity extends AppCompatActivity {
+    private static final int REQUESTCODE = 1;
 
-    Button okBtn;
-    TextView textView1;
-    String infotext;
-    String quiz;
+    Button yesBtn;
+    Button noBtn;
+    String topic;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_hint_popup);
+        setContentView(R.layout.activity_pop_up_window);
+
+        topic = getIntent().getExtras().getString("Themenname");
 
         DisplayMetrics dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);
@@ -39,12 +42,19 @@ public class HintPopUpActivity extends AppCompatActivity {
 
         getWindow().setAttributes(params);
 
-        textView1 = (TextView) findViewById(R.id.textViewInfo);
-        this.infotext = getIntent().getExtras().getString("InfotextPopUp");
-        textView1.setText(infotext);
 
-        okBtn = (Button) findViewById(R.id.okBtn);
-        okBtn.setOnClickListener(new View.OnClickListener() {
+        yesBtn = (Button) findViewById(R.id.yesBtn);
+        yesBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(CancelNewCardPopupActivity.this, ShowCardsActivity.class);
+                i.putExtra("Themenname", topic);
+                startActivityForResult(i, REQUESTCODE);
+            }
+        });
+
+        noBtn = (Button) findViewById(R.id.noBtn);
+        noBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 closeWindow();
@@ -54,5 +64,4 @@ public class HintPopUpActivity extends AppCompatActivity {
     public void closeWindow(){
         this.finish();
     }
-
 }

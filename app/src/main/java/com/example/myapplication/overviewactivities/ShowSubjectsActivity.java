@@ -13,10 +13,10 @@ import android.widget.Toast;
 
 import com.example.myapplication.MainActivity;
 import com.example.myapplication.R;
-import com.example.myapplication.activities.HintPopUpActivity;
-import com.example.myapplication.activities.ListviewHelperClass;
-import com.example.myapplication.activities.QuizModeShowCards;
-import com.example.myapplication.activities.StudyModeShowCards;
+import com.example.myapplication.popups.HintPopUpActivity;
+import com.example.myapplication.helperclasses.ListviewHelperClass;
+import com.example.myapplication.modesofoperation.QuizModeShowCards;
+import com.example.myapplication.modesofoperation.StudyModeShowCards;
 import com.example.myapplication.createactivities.CreateSubjectActivity;
 import com.example.myapplication.objectclasses.Flashcard;
 import com.google.firebase.database.DataSnapshot;
