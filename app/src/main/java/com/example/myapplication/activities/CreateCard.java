@@ -14,8 +14,9 @@ import android.widget.ImageView;
 import com.example.myapplication.KartenClass;
 import com.example.myapplication.R;
 
-public class CreateNewCardActivity extends AppCompatActivity {
+public class CreateCard extends AppCompatActivity {
     String topic;
+    String subject;
     private static final int REQUESTCODE = 1;
     KartenClass karte = new KartenClass();
     Bitmap img;
@@ -26,6 +27,8 @@ public class CreateNewCardActivity extends AppCompatActivity {
         setContentView(R.layout.activity_create_new_card);
 
         topic = getIntent().getExtras().getString("Themenname");
+        subject = getIntent().getExtras().getString("Fachname");
+
 
         Button cancelBtn = (Button) findViewById(R.id.cancelBtn);
         cancelBtn.setOnClickListener(new View.OnClickListener() {
@@ -38,7 +41,7 @@ public class CreateNewCardActivity extends AppCompatActivity {
     }
 
     private void openPopUpWindow() {
-        Intent popupWindow = new Intent(CreateNewCardActivity.this, CancelNewCardPopupActivity.class);
+        Intent popupWindow = new Intent(CreateCard.this, CancelNewCardPopupActivity.class);
         popupWindow.putExtra("Themenname", topic);
         startActivity(popupWindow);
     }

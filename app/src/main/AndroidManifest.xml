@@ -10,6 +10,18 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication">
         <activity
+            android:name=".activities.CreateNewCardToTopicandSubject"
+            android:exported="true" />
+        <activity
+            android:name=".activities.CreateNewSubjectTopicCard"
+            android:exported="true" />
+        <activity
+            android:name=".activities.CreateTopicPopUp"
+            android:exported="true" />
+        <activity
+            android:name=".activities.CreateSubjectPopUp"
+            android:exported="true" />
+        <activity
             android:name=".activities.CreateSubjectPopUpActivity"
             android:exported="true" />
         <activity
@@ -37,7 +49,7 @@
             android:name=".overviewactivities.ShowSubjectsActivity"
             android:exported="true" />
         <activity
-            android:name=".activities.CreateNewCardActivity"
+            android:name=".activities.CreateCard"
             android:exported="true" />
         <activity
             android:name=".MainActivity"

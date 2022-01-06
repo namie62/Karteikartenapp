@@ -12,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.myapplication.R;
+import com.example.myapplication.activities.CreateNewSubjectTopicCard;
 import com.example.myapplication.activities.CreateSubjectPopUpActivity;
 import com.example.myapplication.activities.CreateTopicPopUpActivity;
 import com.example.myapplication.activities.HintPopUpActivity;
@@ -117,7 +118,7 @@ public class ShowTopicsActivity extends AppCompatActivity {
         }
     }
     public void createTopic(View view){
-        Intent entryPopup = new Intent(this, CreateTopicPopUpActivity.class);
+        Intent entryPopup = new Intent(this, CreateNewSubjectTopicCard.class);
         entryPopup.putExtra("Kategorie", "Thema");
         entryPopup.putStringArrayListExtra("checkedSubjects", checkedSubjects);
         startActivity(entryPopup);
@@ -142,5 +143,4 @@ public class ShowTopicsActivity extends AppCompatActivity {
         popupWindow.putStringArrayListExtra("checkedSubjects", checkedSubjects);
         startActivity(popupWindow);
     }
-
 }

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Karteikatenapp</string>
+    <string name="app_name">Karteikartenapp</string>
     <string name="action_settings">Settings</string>
     <string name="Abfrageknopf">Abfrage</string>
     <string name="Lernmodusknopf">Lernen</string>
@@ -9,4 +9,16 @@
     <string name="Fächer">Fächer</string>
     <string name="Themen">Themen</string>
     <string name="Karten">Karten</string>
+
+    <string-array name="Fachauswählen">
+        <item>Mathe</item>
+        <item>Englisch</item>
+        <item>Deutsch</item>
+        <item>Geschichte</item>
+    </string-array>
+
+
+    <string-array name="Themaauswählen">
+        <item>bla</item>
+    </string-array>
 </resources>

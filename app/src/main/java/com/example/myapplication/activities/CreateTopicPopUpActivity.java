@@ -76,5 +76,4 @@ public class CreateTopicPopUpActivity extends AppCompatActivity {
         }
         this.finish();
     }
-
 }

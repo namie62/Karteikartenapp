@@ -6,4 +6,46 @@
     android:layout_height="match_parent"
     tools:context=".activities.CreateNewSubjectTopicCard">
 
+    <Button
+        android:id="@+id/buttonNeuesFach"
+        android:layout_width="235dp"
+        android:layout_height="49dp"
+        android:text="Neues Fach erstellen"
+        android:gravity="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.159" />
+
+    <Button
+        android:id="@+id/buttonNeuesThema"
+        android:layout_width="235dp"
+        android:layout_height="49dp"
+        android:layout_marginTop="50dp"
+        android:text="Neues Thema erstellen"
+        android:gravity="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonNeuesFach" />
+
+    <Button
+        android:id="@+id/buttonNeueKarte"
+        android:layout_width="235dp"
+        android:layout_height="49dp"
+        android:layout_marginTop="50dp"
+        android:text="Neue Karte erstellen"
+        android:gravity="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonNeuesThema" />
+
+    <Button
+        android:id="@+id/abbrechen_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Abbrechen"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
