@@ -67,7 +67,7 @@ public class CreateNewSubjectTopicCard extends AppCompatActivity {
     }
 
     public void NeuesThema() {
-        Intent neuesthema = new Intent(this, CreateTopicPopUp.class);
+        Intent neuesthema = new Intent(this, CreateTopicActivity.class);
         startActivity(neuesthema);
     }
 

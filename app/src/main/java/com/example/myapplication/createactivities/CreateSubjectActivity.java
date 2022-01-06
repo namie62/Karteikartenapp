@@ -37,7 +37,7 @@ public class CreateSubjectActivity extends AppCompatActivity {
             }
         });
 
-        createSubjectBtn = (Button)  findViewById(R.id.create_subject_btn);
+        createSubjectBtn = (Button)  findViewById(R.id.create_topic_btn);
         createSubjectBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {saveSubject();}

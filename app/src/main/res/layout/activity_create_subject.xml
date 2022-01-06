@@ -33,7 +33,7 @@
         tools:targetApi="s" />
 
     <Button
-        android:id="@+id/create_subject_btn"
+        android:id="@+id/create_topic_btn"
         android:layout_width="170dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/enterEditText"

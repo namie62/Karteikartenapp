@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".createactivities.CreateTopicPopUp">
+    tools:context=".createactivities.CreateTopicActivity">
 
     <TextView
         android:id="@+id/textView"
@@ -17,7 +17,7 @@
         tools:layout_editor_absoluteX="0dp" />
 
     <Spinner
-        android:id="@+id/spinner_Fachauswählen"
+        android:id="@+id/select_subject_spinner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
@@ -54,7 +54,7 @@
         tools:targetApi="s" />
 
     <Button
-        android:id="@+id/create_subject_btn"
+        android:id="@+id/create_topic_btn"
         android:layout_width="170dp"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"

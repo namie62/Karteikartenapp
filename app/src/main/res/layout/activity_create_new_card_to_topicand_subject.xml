@@ -30,7 +30,7 @@
         android:id="@+id/textView2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/spinner_Fachauswählen"
+        android:layout_below="@+id/select_subject_spinner"
         android:layout_gravity="top"
         android:layout_marginTop="3dp"
         android:text="Thema auswählen:"
@@ -38,7 +38,7 @@
         tools:layout_editor_absoluteX="0dp" />
 
     <Spinner
-        android:id="@+id/spinner_Fachauswählen"
+        android:id="@+id/select_subject_spinner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"

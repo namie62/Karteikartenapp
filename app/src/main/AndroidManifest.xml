@@ -16,13 +16,10 @@
             android:name=".createactivities.CreateNewSubjectTopicCard"
             android:exported="true" />
         <activity
-            android:name=".createactivities.CreateTopicPopUp"
+            android:name=".createactivities.CreateTopicActivity"
             android:exported="true" />
         <activity
             android:name=".createactivities.CreateSubjectActivity"
-            android:exported="true" />
-        <activity
-            android:name=".createactivities.CreateTopicPopUpActivity"
             android:exported="true" />
         <activity
             android:name=".activities.HintPopUpActivity"

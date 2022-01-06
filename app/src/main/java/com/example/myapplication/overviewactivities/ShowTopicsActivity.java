@@ -12,12 +12,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.myapplication.R;
-import com.example.myapplication.createactivities.CreateNewSubjectTopicCard;
 import com.example.myapplication.activities.HintPopUpActivity;
 import com.example.myapplication.activities.ListviewHelperClass;
 import com.example.myapplication.activities.QuizModeShowCards;
 import com.example.myapplication.activities.StudyModeShowCards;
-import com.example.myapplication.createactivities.CreateTopicPopUp;
+import com.example.myapplication.createactivities.CreateTopicActivity;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -117,7 +116,7 @@ public class ShowTopicsActivity extends AppCompatActivity {
         }
     }
     public void createTopic(View view){
-        Intent entryPopup = new Intent(this, CreateTopicPopUp.class);
+        Intent entryPopup = new Intent(this, CreateTopicActivity.class);
         entryPopup.putExtra("Kategorie", "Thema");
         entryPopup.putStringArrayListExtra("checkedSubjects", checkedSubjects);
         startActivity(entryPopup);

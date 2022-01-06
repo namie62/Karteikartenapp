@@ -24,7 +24,7 @@ public class CreateNewCardToTopicandSubject extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_new_card_to_topicand_subject);
 
-        Spinner spinnerFach = findViewById(R.id.spinner_Fachauswählen);
+        Spinner spinnerFach = findViewById(R.id.select_subject_spinner);
         ArrayAdapter<CharSequence> adapter=ArrayAdapter.createFromResource(this, R.array.Fachauswählen, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
         spinnerFach.setAdapter(adapter);
