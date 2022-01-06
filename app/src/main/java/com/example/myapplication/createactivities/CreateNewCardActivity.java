@@ -15,21 +15,28 @@ import com.example.myapplication.KartenClass;
 import com.example.myapplication.R;
 import com.example.myapplication.activities.CancelNewCardPopupActivity;
 import com.example.myapplication.activities.InsertImgHelperClassActivity;
+import com.example.myapplication.objectclasses.Flashcard;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class CreateNewCardActivity extends AppCompatActivity {
     String topic;
     String subject;
     private static final int REQUESTCODE = 1;
-    KartenClass karte = new KartenClass();
     Bitmap img;
+    private FirebaseDatabase flashcardDB;
+    private DatabaseReference reference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_new_card);
 
-        topic = getIntent().getExtras().getString("Themenname");
-        subject = getIntent().getExtras().getString("Fachname");
+        this.flashcardDB = FirebaseDatabase.getInstance("https://karteikar-default-rtdb.europe-west1.firebasedatabase.app/");
+        this.reference = flashcardDB.getReference("cornelia"); //cornelia mit username ersetzen
+
+        topic = getIntent().getExtras().getString("selectedTopic");
+        subject = getIntent().getExtras().getString("selectedSubject");
 
 
         Button cancelBtn = (Button) findViewById(R.id.cancelBtn);
@@ -76,10 +83,9 @@ public class CreateNewCardActivity extends AppCompatActivity {
     }
 
     public void saveContent(View view){    // setzt die Inhalte in Klasse Karte und sichert damit das Abspeichern
-        karte.setFrage(getFrontText());
-        karte.setAntwort(getBackText());
-        karte.setLernstufe(getProgress());
-        karte.setGrafik(getImg());
+        Flashcard card = new Flashcard(getFrontText(), getBackText(), getImg());
+        this.reference.child("subjects").child(subject).child("topics").child(topic).child("cards").push().setValue(card);
+        this.finish();
     }
 
     public String getFrontText(){    // Getter für speichereInhalt Methode

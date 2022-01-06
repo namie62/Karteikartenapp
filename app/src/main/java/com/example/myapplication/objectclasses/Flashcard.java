@@ -1,29 +1,19 @@
 package com.example.myapplication.objectclasses;
 
+import android.graphics.Bitmap;
+
 public class Flashcard {
-    public int sortOrder;
     public int progress = 0;
     public String front;
-    public String frontImg;
     public String back;
-    public String backImg;
+    public Bitmap backImg;
 
     public Flashcard() {}
 
-    public Flashcard(int sortOrder, String front, String frontImg, String back, String backImg) {
-        this.sortOrder = sortOrder;
+    public Flashcard(String front, String back, Bitmap backImg) {
         this.front = front;
-        this.frontImg = frontImg;
         this.back = back;
         this.backImg = backImg;
-    }
-
-    public int getSortOrder() {
-        return sortOrder;
-    }
-
-    public void setSortOrder(int sortOrder) {
-        this.sortOrder = sortOrder;
     }
 
     public int getProgress() {
@@ -42,14 +32,6 @@ public class Flashcard {
         this.front = front;
     }
 
-    public String getFrontImg() {
-        return frontImg;
-    }
-
-    public void setFrontImg(String frontImg) {
-        this.frontImg = frontImg;
-    }
-
     public String getBack() {
         return back;
     }
@@ -58,11 +40,11 @@ public class Flashcard {
         this.back = back;
     }
 
-    public String getBackImg() {
+    public Bitmap getBackImg() {
         return backImg;
     }
 
-    public void setBackImg(String backImg) {
+    public void setBackImg(Bitmap backImg) {
         this.backImg = backImg;
     }
 }
