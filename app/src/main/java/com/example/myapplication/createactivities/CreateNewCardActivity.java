@@ -16,7 +16,7 @@ import com.example.myapplication.R;
 import com.example.myapplication.activities.CancelNewCardPopupActivity;
 import com.example.myapplication.activities.InsertImgHelperClassActivity;
 
-public class CreateCard extends AppCompatActivity {
+public class CreateNewCardActivity extends AppCompatActivity {
     String topic;
     String subject;
     private static final int REQUESTCODE = 1;
@@ -43,7 +43,7 @@ public class CreateCard extends AppCompatActivity {
     }
 
     private void openPopUpWindow() {
-        Intent popupWindow = new Intent(CreateCard.this, CancelNewCardPopupActivity.class);
+        Intent popupWindow = new Intent(CreateNewCardActivity.this, CancelNewCardPopupActivity.class);
         popupWindow.putExtra("Themenname", topic);
         startActivity(popupWindow);
     }

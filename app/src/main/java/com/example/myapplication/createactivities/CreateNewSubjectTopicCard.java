@@ -72,7 +72,7 @@ public class CreateNewSubjectTopicCard extends AppCompatActivity {
     }
 
     public void NeueKarte() {
-        Intent neuekarte = new Intent (this, CreateNewCardStepOneActivity.class);
+        Intent neuekarte = new Intent (this, ChooseSubjectAndTopicForNewCardActivity.class);
         startActivity(neuekarte);
     }
 }

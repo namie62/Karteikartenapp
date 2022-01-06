@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.renderscript.Sampler;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -14,7 +13,6 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.myapplication.R;
-import com.example.myapplication.activities.ListviewHelperClass;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -23,7 +21,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-public class CreateNewCardStepOneActivity extends AppCompatActivity {
+public class ChooseSubjectAndTopicForNewCardActivity extends AppCompatActivity {
     Button cancelBtn;
     Button createCardBtn;
     Spinner subjectSpinner;
@@ -38,7 +36,7 @@ public class CreateNewCardStepOneActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_create_new_card_step_one);
+        setContentView(R.layout.activity_choose_subject_and_topic_for_new_card);
 
         this.flashcardDB = FirebaseDatabase.getInstance("https://karteikar-default-rtdb.europe-west1.firebasedatabase.app/");
         this.reference = flashcardDB.getReference("cornelia"); //cornelia mit username ersetzen
@@ -107,7 +105,7 @@ public class CreateNewCardStepOneActivity extends AppCompatActivity {
     public void createCard(){
         String selectedTopic = (String) topicSpinner.getSelectedItem();
         if (selectedSubject != null && selectedTopic != null) {
-            Intent card = new Intent(this, CreateCard.class);
+            Intent card = new Intent(this, CreateNewCardActivity.class);
             card.putExtra("selectedSubject",  selectedSubject);
             card.putExtra("selectedTopic",  selectedTopic);
             startActivity(card);

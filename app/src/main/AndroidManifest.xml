@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication">
         <activity
-            android:name=".createactivities.CreateNewCardStepOneActivity"
+            android:name=".createactivities.ChooseSubjectAndTopicForNewCardActivity"
             android:exported="true" />
         <activity
             android:name=".createactivities.CreateNewSubjectTopicCard"
@@ -43,7 +43,7 @@
             android:name=".overviewactivities.ShowSubjectsActivity"
             android:exported="true" />
         <activity
-            android:name=".createactivities.CreateCard"
+            android:name=".createactivities.CreateNewCardActivity"
             android:exported="true" />
         <activity
             android:name=".MainActivity"
