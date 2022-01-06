@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication">
         <activity
-            android:name=".createactivities.CreateNewCardToTopicandSubject"
+            android:name=".createactivities.CreateNewCardStepOneActivity"
             android:exported="true" />
         <activity
             android:name=".createactivities.CreateNewSubjectTopicCard"

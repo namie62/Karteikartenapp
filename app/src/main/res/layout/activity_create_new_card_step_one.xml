@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".createactivities.CreateNewCardToTopicandSubject">
+    tools:context=".createactivities.CreateNewCardStepOneActivity">
 
     <Spinner
-        android:id="@+id/spinner_Themaauswählen"
+        android:id="@+id/select_topic_spinner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/textView2"
@@ -51,7 +51,7 @@
         android:id="@+id/cancel_btn"
         android:layout_width="170dp"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/spinner_Themaauswählen"
+        android:layout_below="@+id/select_topic_spinner"
 
         android:layout_alignParentStart="true"
         android:layout_gravity="left"
@@ -65,17 +65,17 @@
         tools:targetApi="s" />
 
     <Button
-        android:id="@+id/buttonKarteerstellen"
+        android:id="@+id/create_card_btn"
         android:layout_width="170dp"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/spinner_Themaauswählen"
-        android:onClick="karteerstellen"
+        android:layout_below="@+id/select_topic_spinner"
         android:layout_alignParentEnd="true"
         android:layout_gravity="right"
         android:layout_marginTop="1dp"
         android:layout_marginEnd="4dp"
         android:background="@android:color/tertiary_text_light"
         android:gravity="center"
+        android:onClick="karteerstellen"
         android:text="Karte erstellen"
         android:textColor="@color/black"
         android:textSize="13sp"

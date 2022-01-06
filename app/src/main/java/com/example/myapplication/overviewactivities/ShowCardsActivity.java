@@ -13,7 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.myapplication.R;
-import com.example.myapplication.createactivities.CreateNewSubjectTopicCard;
+import com.example.myapplication.createactivities.CreateNewCardStepOneActivity;
 import com.example.myapplication.activities.HintPopUpActivity;
 import com.example.myapplication.activities.ListviewHelperClass;
 import com.example.myapplication.activities.QuizModeShowCards;
@@ -84,7 +84,9 @@ public class ShowCardsActivity extends AppCompatActivity {
     }
 
     public void createCard(View view){
-        Intent i = new Intent(this, CreateNewSubjectTopicCard.class);
+        Intent i = new Intent(this, CreateNewCardStepOneActivity.class);
+        i.putStringArrayListExtra("checkedSubjects", checkedSubjects);
+        i.putStringArrayListExtra("checkedTopics", checkedTopics);
         startActivityForResult(i, REQUESTCODE);
     }
 
