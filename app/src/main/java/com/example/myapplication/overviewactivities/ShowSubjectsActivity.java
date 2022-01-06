@@ -96,33 +96,10 @@ public class ShowSubjectsActivity extends AppCompatActivity {   //später dann d
         }*/
     }
 
-    public void getCardsFromSelectedSubjects() {
-        this.reference.child("subjects").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (snapshot.exists()) {
-                    for (String subject : checkedSubjects) {
-                        for (DataSnapshot topicSnapshot : snapshot.child(subject).child("topics").getChildren()){
-                            for (DataSnapshot cardSnapshot : topicSnapshot.child("cards").getChildren()){
-//                                Flashcard newCard = cardSnapshot.child("id").getValue(Integer.class);
-//                                cardsFromSelectedSubjects.add(newCard);
-                            }
-                        }
-                    }
-                }
-            }
-
-            public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(applicationContext, error.getMessage(), Toast.LENGTH_LONG).show();
-            }
-        });
-    }
-
-
     public void startStudyMode(View view){
         if (checkedSubjects.size() != 0){
-            getCardsFromSelectedSubjects();
             Intent studyMode = new Intent(this, StudyModeShowCards.class);
+            studyMode.putStringArrayListExtra("checkedSubjects", checkedSubjects);
             startActivityForResult(studyMode, REQUESTCODE);
         }
         else{

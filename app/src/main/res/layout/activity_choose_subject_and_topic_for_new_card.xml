@@ -10,7 +10,7 @@
         android:id="@+id/select_topic_spinner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/textView2"
+        android:layout_below="@+id/progress_text_view"
         android:layout_marginTop="3dp"
         android:spinnerMode="dropdown"
         tools:ignore="MissingConstraints"
@@ -27,7 +27,7 @@
         tools:layout_editor_absoluteX="0dp" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/progress_text_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/select_subject_spinner"

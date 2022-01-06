@@ -30,10 +30,11 @@ public class ListviewHelperClass {
                         checkeditems.remove(items.get(position));
                 }
             });
-        }
-        public ArrayList<String> getCheckeditems(){
+    }
+    public ArrayList<String> getCheckeditems(){
         return checkeditems;
         }
-    }
+
+}
 
 

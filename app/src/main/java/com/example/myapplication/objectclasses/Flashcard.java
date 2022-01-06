@@ -6,11 +6,11 @@ public class Flashcard {
     public int progress = 0;
     public String front;
     public String back;
-    public Bitmap backImg;
+    public String backImg;
 
     public Flashcard() {}
 
-    public Flashcard(String front, String back, Bitmap backImg) {
+    public Flashcard(String front, String back, String backImg) {
         this.front = front;
         this.back = back;
         this.backImg = backImg;
@@ -40,11 +40,16 @@ public class Flashcard {
         this.back = back;
     }
 
-    public Bitmap getBackImg() {
+    public String getBackImg() {
         return backImg;
     }
 
-    public void setBackImg(Bitmap backImg) {
+    public void setBackImg(String backImg) {
         this.backImg = backImg;
+    }
+
+    @Override
+    public String toString() {
+        return("front = " + front + "\nback = " + back + "\nprogress = " + progress);
     }
 }

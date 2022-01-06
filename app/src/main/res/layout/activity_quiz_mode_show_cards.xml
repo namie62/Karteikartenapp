@@ -61,18 +61,18 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/nichtgewusstButton"
+        android:id="@+id/wrong_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:onClick="wrongAnswer"
         app:icon="@android:drawable/ic_delete"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/teilweisegewusstButton"
+        app:layout_constraintTop_toTopOf="@+id/partially_correct_btn"
         app:layout_constraintVertical_bias="1.0" />
 
     <Button
-        android:id="@+id/gewusstButton"
+        android:id="@+id/correct_btn"
         android:layout_width="97dp"
         android:layout_height="49dp"
         android:layout_marginEnd="32dp"
@@ -82,15 +82,15 @@
         app:layout_constraintEnd_toEndOf="parent" />
 
     <Button
-        android:id="@+id/teilweisegewusstButton"
+        android:id="@+id/partially_correct_btn"
         android:layout_width="117dp"
         android:layout_height="49dp"
         android:onClick="partiallyRight"
         android:text="teilweise"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/gewusstButton"
+        app:layout_constraintEnd_toStartOf="@+id/correct_btn"
         app:layout_constraintHorizontal_bias="0.586"
-        app:layout_constraintStart_toEndOf="@+id/nichtgewusstButton"
+        app:layout_constraintStart_toEndOf="@+id/wrong_btn"
         app:layout_constraintTop_toBottomOf="@+id/easyFlipView"
         app:layout_constraintVertical_bias="0.976" />
 
