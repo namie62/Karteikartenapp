@@ -4,11 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.CreateSubjectPopUp">
+    tools:context=".createactivities.CreateSubjectActivity">
 
 
     <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/editTexteingabe"
+        android:id="@+id/enterEditText"
         android:layout_width="match_parent"
         android:layout_height="74dp"
         android:fontFamily="@font/cairo"
@@ -20,10 +20,10 @@
 
 
     <Button
-        android:id="@+id/buttonabbrechen"
+        android:id="@+id/cancel_btn"
         android:layout_width="170dp"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/editTexteingabe"
+        android:layout_below="@+id/enterEditText"
         android:layout_gravity="left"
         android:background="@android:color/tertiary_text_light"
         android:gravity="center"
@@ -33,10 +33,10 @@
         tools:targetApi="s" />
 
     <Button
-        android:id="@+id/buttonFacherstellen"
+        android:id="@+id/create_subject_btn"
         android:layout_width="170dp"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/editTexteingabe"
+        android:layout_below="@+id/enterEditText"
         android:layout_alignParentEnd="true"
         android:layout_gravity="right"
         android:layout_marginEnd="0dp"

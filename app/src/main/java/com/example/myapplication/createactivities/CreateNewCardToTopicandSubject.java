@@ -1,4 +1,4 @@
-package com.example.myapplication.activities;
+package com.example.myapplication.createactivities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -38,7 +38,7 @@ public class CreateNewCardToTopicandSubject extends AppCompatActivity {
         //String fachname = spinnerFach.getSelectedItem().toString();
         //String themenname = spinnerThema.getSelectedItem().toString();
 
-        buttonabbrechen = (Button) findViewById(R.id.buttonabbrechen);
+        buttonabbrechen = (Button) findViewById(R.id.cancel_btn);
         buttonabbrechen.setOnClickListener(new View.OnClickListener() {
 
             @Override

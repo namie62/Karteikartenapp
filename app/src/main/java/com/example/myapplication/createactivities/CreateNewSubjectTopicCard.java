@@ -1,4 +1,4 @@
-package com.example.myapplication.activities;
+package com.example.myapplication.createactivities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -62,7 +62,7 @@ public class CreateNewSubjectTopicCard extends AppCompatActivity {
 
 
     public void NeuesFach() {
-        Intent neuesfach = new Intent(this, CreateSubjectPopUp.class);
+        Intent neuesfach = new Intent(this, CreateSubjectActivity.class);
         startActivity(neuesfach);
     }
 

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.CreateNewCardToTopicandSubject">
+    tools:context=".createactivities.CreateNewCardToTopicandSubject">
 
     <Spinner
         android:id="@+id/spinner_Themaauswählen"
@@ -48,7 +48,7 @@
         tools:layout_editor_absoluteX="0dp" />
 
     <Button
-        android:id="@+id/buttonabbrechen"
+        android:id="@+id/cancel_btn"
         android:layout_width="170dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/spinner_Themaauswählen"

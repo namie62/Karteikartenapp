@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
-    tools:context=".activities.CreateSubjectPopUpActivity">
+    tools:context=".createactivities.CreateSubjectPopUpActivity">
 
     <Spinner
         android:id="@+id/spinner1"
@@ -22,7 +22,7 @@
 
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/editTexteingabe"
+            android:id="@+id/enterEditText"
             android:layout_width="match_parent"
             android:layout_height="74dp"
             android:fontFamily="@font/cairo"
@@ -35,7 +35,7 @@
             android:id="@+id/okBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/editTexteingabe"
+            android:layout_below="@+id/enterEditText"
             android:layout_gravity="center"
             android:background="@android:color/tertiary_text_light"
             android:gravity="center"

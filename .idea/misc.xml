@@ -33,7 +33,12 @@
         <entry key="..\:/Users/namie/AndroidStudioProjects/TEst/Karteikartenapp/app/src/main/res/layout/activity_main.xml" value="0.13020833333333334" />
         <entry key="..\:/Users/namie/AndroidStudioProjects/TEst/Karteikartenapp/app/src/main/res/layout/grafikeinfuegen_layout.xml" value="0.264" />
         <entry key="app/src/main/res/layout/activity_cards_overview.xml" value="0.24895833333333334" />
+        <entry key="app/src/main/res/layout/activity_create_new_card_to_topicand_subject.xml" value="0.20697463768115942" />
+        <entry key="app/src/main/res/layout/activity_create_new_subject_topic_card.xml" value="0.20697463768115942" />
+        <entry key="app/src/main/res/layout/activity_create_subject.xml" value="0.24895833333333334" />
         <entry key="app/src/main/res/layout/activity_create_subject_or_topic_popup.xml" value="0.24895833333333334" />
+        <entry key="app/src/main/res/layout/activity_create_subject_pop_up.xml" value="0.20697463768115942" />
+        <entry key="app/src/main/res/layout/activity_create_topic_pop_up.xml" value="0.20697463768115942" />
         <entry key="app/src/main/res/layout/activity_create_topic_popup.xml" value="0.335" />
         <entry key="app/src/main/res/layout/activity_fach_oder_thema_erstellen_pop_up.xml" value="0.18931159420289856" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.165" />

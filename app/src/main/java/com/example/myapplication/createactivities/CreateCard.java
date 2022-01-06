@@ -1,4 +1,4 @@
-package com.example.myapplication.activities;
+package com.example.myapplication.createactivities;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
@@ -13,6 +13,8 @@ import android.widget.ImageView;
 
 import com.example.myapplication.KartenClass;
 import com.example.myapplication.R;
+import com.example.myapplication.activities.CancelNewCardPopupActivity;
+import com.example.myapplication.activities.InsertImgHelperClassActivity;
 
 public class CreateCard extends AppCompatActivity {
     String topic;

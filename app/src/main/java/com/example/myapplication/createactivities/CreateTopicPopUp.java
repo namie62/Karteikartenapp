@@ -1,4 +1,4 @@
-package com.example.myapplication.activities;
+package com.example.myapplication.createactivities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -9,10 +9,17 @@ import android.widget.Button;
 import android.widget.Spinner;
 
 import com.example.myapplication.R;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class CreateTopicPopUp extends AppCompatActivity {
 
     Button buttonabbrechen;
+    private FirebaseDatabase flashcardDB;
+    private DatabaseReference reference;
+//    this.flashcardDB = FirebaseDatabase.getInstance("https://karteikar-default-rtdb.europe-west1.firebasedatabase.app/");
+//    this.reference = flashcardDB.getReference("cornelia"); //cornelia mit username ersetzen
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,7 +33,7 @@ public class CreateTopicPopUp extends AppCompatActivity {
 
         spinnerFach.setAdapter(adapter);
 
-        buttonabbrechen = (Button) findViewById(R.id.buttonabbrechen);
+        buttonabbrechen = (Button) findViewById(R.id.cancel_btn);
         buttonabbrechen.setOnClickListener(new View.OnClickListener() {
 
             @Override

@@ -13,12 +13,11 @@ import android.widget.Toast;
 
 import com.example.myapplication.MainActivity;
 import com.example.myapplication.R;
-import com.example.myapplication.activities.CreateNewSubjectTopicCard;
-import com.example.myapplication.activities.CreateSubjectPopUpActivity;
 import com.example.myapplication.activities.HintPopUpActivity;
 import com.example.myapplication.activities.ListviewHelperClass;
 import com.example.myapplication.activities.QuizModeShowCards;
 import com.example.myapplication.activities.StudyModeShowCards;
+import com.example.myapplication.createactivities.CreateSubjectActivity;
 import com.example.myapplication.objectclasses.Flashcard;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -150,8 +149,9 @@ public class ShowSubjectsActivity extends AppCompatActivity {   //später dann d
     }
 
     public void newSubject(View view){
-        Intent entryPopup = new Intent(this, CreateNewSubjectTopicCard.class);
+        Intent entryPopup = new Intent(this, CreateSubjectActivity.class);
         entryPopup.putExtra("Kategorie", "Fach");
+        entryPopup.putExtra("checkedSubjects", checkedSubjects);
         startActivity(entryPopup);
     }
 }

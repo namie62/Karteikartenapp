@@ -13,7 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.myapplication.R;
-import com.example.myapplication.activities.CreateNewSubjectTopicCard;
+import com.example.myapplication.createactivities.CreateNewSubjectTopicCard;
 import com.example.myapplication.activities.HintPopUpActivity;
 import com.example.myapplication.activities.ListviewHelperClass;
 import com.example.myapplication.activities.QuizModeShowCards;

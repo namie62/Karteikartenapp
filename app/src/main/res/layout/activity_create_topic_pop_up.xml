@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.CreateTopicPopUp">
+    tools:context=".createactivities.CreateTopicPopUp">
 
     <TextView
         android:id="@+id/textView"
@@ -27,7 +27,7 @@
         tools:layout_editor_absoluteX="0dp" />
 
     <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/editTexteingabe"
+        android:id="@+id/enterEditText"
         android:layout_width="match_parent"
         android:layout_height="74dp"
         android:layout_marginTop="60dp"
@@ -40,7 +40,7 @@
         android:textStyle="italic" />
 
     <Button
-        android:id="@+id/buttonabbrechen"
+        android:id="@+id/cancel_btn"
         android:layout_width="170dp"
         android:layout_height="wrap_content"
         android:layout_gravity="left"
@@ -54,7 +54,7 @@
         tools:targetApi="s" />
 
     <Button
-        android:id="@+id/buttonFacherstellen"
+        android:id="@+id/create_subject_btn"
         android:layout_width="170dp"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"

@@ -1,4 +1,4 @@
-package com.example.myapplication.activities;
+package com.example.myapplication.createactivities;
 
 import android.os.Bundle;
 import android.util.DisplayMetrics;
@@ -58,7 +58,7 @@ public class CreateTopicPopUpActivity extends AppCompatActivity {
 
         getWindow().setAttributes(params);
         this.hint = getIntent().getExtras().getString("Kategorie");
-        hintTextInputEditText = (TextInputEditText) findViewById(R.id.editTexteingabe);
+        hintTextInputEditText = (TextInputEditText) findViewById(R.id.enterEditText);
         hintTextInputEditText.setHint(hint);
         okBtn = (Button) findViewById(R.id.okBtn);
         okBtn.setOnClickListener(new View.OnClickListener() {
