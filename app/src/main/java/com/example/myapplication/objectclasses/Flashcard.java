@@ -3,7 +3,7 @@ package com.example.myapplication.objectclasses;
 import android.graphics.Bitmap;
 
 public class Flashcard {
-    public int progress = 0;
+    public int progress;
     public String front;
     public String back;
     public String backImg;
@@ -14,6 +14,14 @@ public class Flashcard {
         this.front = front;
         this.back = back;
         this.backImg = backImg;
+        this.progress = 0;
+    }
+
+    public Flashcard(String front, String back, String backImg, int progress) {
+        this.front = front;
+        this.back = back;
+        this.backImg = backImg;
+        this.progress = progress;
     }
 
     public int getProgress() {

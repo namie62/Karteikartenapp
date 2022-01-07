@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.example.myapplication.MainActivity;
 import com.example.myapplication.R;
+import com.example.myapplication.helperclasses.IntentHelper;
 import com.example.myapplication.popups.HintPopUpActivity;
 import com.example.myapplication.helperclasses.ListviewHelperClass;
 import com.example.myapplication.modesofoperation.QuizModeShowCards;
@@ -38,6 +39,7 @@ public class ShowSubjectsActivity extends AppCompatActivity {   //später dann d
     private Context applicationContext;
     private ArrayList<String> showObjects;
     ArrayAdapter<String> adapter;
+    IntentHelper ih;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +50,8 @@ public class ShowSubjectsActivity extends AppCompatActivity {   //später dann d
         this.listView = findViewById(R.id.subjects_listView);
         this.applicationContext = getApplicationContext();
         this.showObjects = new ArrayList<>();
+
+        this.ih = new IntentHelper(this);
 
         this.adapter = new ArrayAdapter<>(applicationContext, android.R.layout.simple_list_item_multiple_choice, showObjects);
         reference.addValueEventListener(new ValueEventListener() {

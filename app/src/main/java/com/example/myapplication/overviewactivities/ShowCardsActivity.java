@@ -113,11 +113,12 @@ public class ShowCardsActivity extends AppCompatActivity {
 
     public void startStudyMode(View view){
         if (checkedCards.size() != 0){
-            Intent lernmodus = new Intent(this, StudyModeShowCards.class);
-            lernmodus.putStringArrayListExtra("Kartenliste", checkedCards);
-            lernmodus.putExtra("Abfrage", "Kartenuebersicht");
+            Intent studyMode = new Intent(this, StudyModeShowCards.class);
+            studyMode.putStringArrayListExtra("checkedSubjects", checkedSubjects);
+            studyMode.putStringArrayListExtra("checkedTopics", checkedTopics);
+            studyMode.putStringArrayListExtra("checkedCards", checkedCards);
 
-            startActivityForResult(lernmodus, REQUESTCODE);
+            startActivityForResult(studyMode, REQUESTCODE);
         }
         else{
             nothingSelectedError();

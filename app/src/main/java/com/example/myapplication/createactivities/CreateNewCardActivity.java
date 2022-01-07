@@ -84,8 +84,6 @@ public class CreateNewCardActivity extends AppCompatActivity {
     public void saveContent(View view){    // setzt die Inhalte in Klasse Karte und sichert damit das Abspeichern
         Flashcard card = new Flashcard(getFrontText(), getBackText(), " ");
         this.reference.child("subjects").child(subject).child("topics").child(topic).child("cards").push().setValue(card);
-
-        this.finish();
     }
 
     public String getFrontText(){    // Getter für speichereInhalt Methode

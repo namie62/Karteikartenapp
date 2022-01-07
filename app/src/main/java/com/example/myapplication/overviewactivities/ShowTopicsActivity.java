@@ -96,8 +96,8 @@ public class ShowTopicsActivity extends AppCompatActivity {
     public void startStudyMode(View view){
         if (checkedTopics.size() != 0){
             Intent studyMode = new Intent(this, StudyModeShowCards.class);
-            studyMode.putExtra("checkedTopics", checkedTopics);
-            studyMode.putExtra("checkedSubjects", checkedSubjects);
+            studyMode.putStringArrayListExtra("checkedTopics", checkedTopics);
+            studyMode.putStringArrayListExtra("checkedSubjects", checkedSubjects);
             startActivityForResult(studyMode, REQUESTCODE);
         }
         else{

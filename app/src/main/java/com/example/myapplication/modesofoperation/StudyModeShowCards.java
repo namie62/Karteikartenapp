@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import com.example.myapplication.KartenClass;
 import com.example.myapplication.R;
+import com.example.myapplication.helperclasses.IntentHelper;
 import com.example.myapplication.objectclasses.Flashcard;
 import com.example.myapplication.overviewactivities.ShowSubjectsActivity;
 import com.example.myapplication.overviewactivities.ShowTopicsActivity;
@@ -34,6 +35,8 @@ public class StudyModeShowCards extends AppCompatActivity {
     ArrayList<String> checkedCards;
     ArrayList<Flashcard> cards = new ArrayList<>();
     ArrayList<Flashcard> allCards = new ArrayList<>();
+    IntentHelper ih = new IntentHelper(this);
+    Bundle b;
     int index;
     int max;
     private FirebaseDatabase flashcardDB;
@@ -46,47 +49,63 @@ public class StudyModeShowCards extends AppCompatActivity {
         this.flashcardDB = FirebaseDatabase.getInstance("https://karteikar-default-rtdb.europe-west1.firebasedatabase.app/");
         this.reference = flashcardDB.getReference("cornelia"); //cornelia mit username ersetzen
 
-        this.checkedSubjects = getIntent().getStringArrayListExtra("checkedSubjects");
-        this.checkedTopics = getIntent().getStringArrayListExtra("checkedTopics");
-        this.checkedCards = getIntent().getStringArrayListExtra("checkedCards");
+        this.b = getIntent().getExtras();
+        this.checkedSubjects = b.getStringArrayList("checkedSubjects");
+        this.checkedTopics = b.getStringArrayList("checkedTopics");
+        this.checkedCards = b.getStringArrayList("checkedCards");
 
         this.index = getIntent().getIntExtra("index", 0);
-        if (checkedTopics == null) {
-            reference.child("subjects").addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    if (snapshot.exists()) {
-                        for (String subject : checkedSubjects) {
-                            for(DataSnapshot subjectSnapshot : snapshot.child(subject).child("topics").getChildren()) {
-                                for(DataSnapshot topicSnapshot : subjectSnapshot.child("cards").getChildren()) {
-                                    String frontFromDB = topicSnapshot.child("front").getValue(String.class);
-                                    String backFromDB = topicSnapshot.child("back").getValue(String.class);
-                                    Integer progressFromDB = topicSnapshot.child("progress").getValue(Integer.class);
-                                    Flashcard newCard = new Flashcard(frontFromDB, backFromDB, " ");
-                                    newCard.setProgress(progressFromDB);
-                                    cards.add(newCard);
+        reference.child("subjects").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()) {
+                    for (String subject : checkedSubjects) {
+                        DataSnapshot subjectSnapshot = snapshot.child(subject).child("topics");
+                        if (checkedTopics != null) {
+                            for (String topic : checkedTopics) {
+                                DataSnapshot topicSnapshot = subjectSnapshot.child(topic).child("cards");
+                                if (checkedCards != null) {
+                                    for (DataSnapshot cardSnapshot : topicSnapshot.getChildren()) {
+                                        for (String card : checkedCards) {
+                                            if (cardSnapshot.child("front").getValue(String.class).equals(card)) {
+                                                fillCardsArray(cardSnapshot);
+                                            }
+                                        }
+//                                        DataSnapshot cardSnapshot = topicSnapshot.child(card);
+//                                        fillCardsArray(cardSnapshot);
+                                    }
+                                } else {
+                                    for (DataSnapshot cardSnapshot : topicSnapshot.getChildren()) {
+                                        fillCardsArray(cardSnapshot);
+                                    }
+                                }
+                            }
+                        } else {
+                            for (DataSnapshot topicSnapshot : subjectSnapshot.getChildren()) {
+                                for (DataSnapshot cardSnapshot : topicSnapshot.child("cards").getChildren()) {
+                                    fillCardsArray(cardSnapshot);
                                 }
                             }
                         }
                     }
-
-                    max = cards.size();
-                    Flashcard card = cards.get(index);
-                    content = card.getFront();
-                    topic = card.getBack();
-                    fillBackTextView();
-                    fillFrontTextView();
                 }
+                max = cards.size();
+                Flashcard card = cards.get(index);
+                content = card.getFront();
+                topic = card.getBack();
+                fillBackTextView();
+                fillFrontTextView();
+            }
 
-                public void onCancelled(@NonNull DatabaseError error) {
-                    Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_LONG).show();
-                }
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_LONG).show();
+            }
 
-            });
-        }
-
-
+        });
     }
+
+
+
 
     public void fillBackTextView(){
         TextView textView = (TextView) findViewById(R.id.back_text_view);
@@ -96,6 +115,14 @@ public class StudyModeShowCards extends AppCompatActivity {
     public void fillFrontTextView(){
         TextView textview = (TextView) findViewById(R.id.front_text_view);
         textview.setText(topic);
+    }
+
+    public void fillCardsArray(DataSnapshot ds) {
+        String frontFromDB = ds.child("front").getValue(String.class);
+        String backFromDB = ds.child("back").getValue(String.class);
+        Integer progressFromDB = ds.child("progress").getValue(Integer.class);
+        Flashcard newCard = new Flashcard(frontFromDB, backFromDB, " ", progressFromDB);
+        cards.add(newCard);
     }
 
     public void nextCard(View view) {
