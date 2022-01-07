@@ -1,5 +1,6 @@
 package com.example.myapplication.createactivities;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
@@ -7,12 +8,17 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.example.myapplication.R;
 import com.example.myapplication.helperclasses.IntentHelper;
+import com.example.myapplication.helperclasses.ListviewHelperClass;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
@@ -44,10 +50,19 @@ public class CreateTopicActivity extends AppCompatActivity {
     public void saveTopic(View view){
         String newTopic = (String) hintTextInputEditText.getText().toString();
         String selectedSubject = (String) subjectSpinner.getSelectedItem().toString();
-        if (newTopic.trim().length() > 0) {
-            this.reference.child("subjects").child(selectedSubject).child("topics").child(newTopic).child("cards").setValue("[]");
-        }
-        ih.goToTopicOverview(checkedSubjects);
+        reference.child("subjects").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (newTopic.trim().length() > 0) {
+                    int sortOrder = (int) snapshot.child(selectedSubject).child("topics").getChildrenCount();
+                    reference.child("subjects").child(selectedSubject).child("topics").child(newTopic).child("sortOrder").setValue(sortOrder);
+                    ih.goToTopicOverview(checkedSubjects);
+                }
+            }
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        });
     }
     public void closeWindow(View view){
         ih.goToTopicOverview(checkedSubjects);

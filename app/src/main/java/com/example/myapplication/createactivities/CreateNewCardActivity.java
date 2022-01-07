@@ -1,4 +1,5 @@
 package com.example.myapplication.createactivities;
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
@@ -10,14 +11,18 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.example.myapplication.R;
 import com.example.myapplication.helperclasses.IntentHelper;
 import com.example.myapplication.popups.CancelNewCardPopupActivity;
 import com.example.myapplication.helperclasses.InsertImgHelperClassActivity;
 import com.example.myapplication.objectclasses.Flashcard;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
@@ -81,8 +86,22 @@ public class CreateNewCardActivity extends AppCompatActivity {
 
     public void saveContent(View view){    // setzt die Inhalte in Klasse Karte und sichert damit das Abspeichern
         Flashcard card = new Flashcard(getFrontText(), getBackText(), uriForDB);
-        this.reference.child("subjects").child(subject).child("topics").child(topic).child("cards").push().setValue(card);
-        ih.goToCardOverview(checkedSubjects, checkedTopics);
+        reference.child("subjects").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()) {
+                    int sortOrder = (int) (snapshot.child(subject).child("topics").child(topic).child("cards").getChildrenCount()) + 1;
+                    card.setSortOrder(sortOrder);
+                    reference.child("subjects").child(subject).child("topics").child(topic).child("cards").push().setValue(card);
+                    ih.goToCardOverview(checkedSubjects, checkedTopics);
+                }
+            }
+
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        });
+
     }
 
     public String getFrontText(){    // Getter für speichereInhalt Methode

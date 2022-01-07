@@ -31,13 +31,6 @@ public class MyFirebaseHelper extends AppCompatActivity {
     public MyFirebaseHelper(String user)  {
         this.flashcardDB = FirebaseDatabase.getInstance("https://karteikar-default-rtdb.europe-west1.firebasedatabase.app/");
         this.reference = flashcardDB.getReference(user);
-        this.selectedCards = new ArrayList<>();
-        this.selectedTopics = new ArrayList<>();
-        this.selectedSubjects = new ArrayList<>();
-    }
-
-    public FirebaseDatabase getFlashcardDB() {
-        return flashcardDB;
     }
 
     // add new instances to database

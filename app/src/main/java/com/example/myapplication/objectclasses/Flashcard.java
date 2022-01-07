@@ -7,6 +7,7 @@ public class Flashcard {
     public String front;
     public String back;
     public String backImg;
+    public int sortOrder;
 
     public Flashcard() {}
 
@@ -22,6 +23,14 @@ public class Flashcard {
         this.back = back;
         this.backImg = backImg;
         this.progress = progress;
+    }
+
+    public int getSortOrder() {
+        return sortOrder;
+    }
+
+    public void setSortOrder(int sortOrder) {
+        this.sortOrder = sortOrder;
     }
 
     public int getProgress() {
