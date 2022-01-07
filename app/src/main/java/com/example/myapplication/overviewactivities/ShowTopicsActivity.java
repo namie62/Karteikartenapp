@@ -12,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.myapplication.R;
+import com.example.myapplication.helperclasses.IntentHelper;
 import com.example.myapplication.popups.HintPopUpActivity;
 import com.example.myapplication.helperclasses.ListviewHelperClass;
 import com.example.myapplication.modesofoperation.QuizModeShowCards;
@@ -23,6 +24,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 
 public class ShowTopicsActivity extends AppCompatActivity {
@@ -35,6 +37,7 @@ public class ShowTopicsActivity extends AppCompatActivity {
     Context applicationContext;
     ArrayList<String> showObjects;
     ArrayAdapter<String> adapter;
+    IntentHelper ih;
 
 
     @Override
@@ -44,6 +47,8 @@ public class ShowTopicsActivity extends AppCompatActivity {
 
         this.flashcardDB = FirebaseDatabase.getInstance("https://karteikar-default-rtdb.europe-west1.firebasedatabase.app/");
         this.reference = flashcardDB.getReference("cornelia"); //cornelia mit username ersetzen
+
+        this.ih = new IntentHelper(this);
 
         this.checkedSubjects = getIntent().getExtras().getStringArrayList("checkedSubjects");
         this.listView = findViewById(R.id.topics_listView);
@@ -77,49 +82,37 @@ public class ShowTopicsActivity extends AppCompatActivity {
 
 
     public void goToPrevious(View view) {
-        Intent i = new Intent(this, ShowSubjectsActivity.class);
-        startActivityForResult(i, REQUESTCODE);
+        ih.goToStartMenu();
     }
 
     public void goToCards(View view) {  //öffnet Kartenerstellung
         if (checkedTopics.size() == 0) {
-            nothingSelectedError();
+            ih.openPopUp(2);
         }
-        else if(checkedTopics.size() > 0 ){
-            Intent i = new Intent(this, ShowCardsActivity.class);
-            i.putExtra("checkedTopics", checkedTopics);
-            i.putExtra("checkedSubjects", checkedSubjects);
-            startActivityForResult(i, REQUESTCODE);
+        else {
+            ih.goToCardOverview(checkedSubjects, checkedTopics);
         }
     }
 
     public void startStudyMode(View view){
-        if (checkedTopics.size() != 0){
-            Intent studyMode = new Intent(this, StudyModeShowCards.class);
-            studyMode.putStringArrayListExtra("checkedTopics", checkedTopics);
-            studyMode.putStringArrayListExtra("checkedSubjects", checkedSubjects);
-            startActivityForResult(studyMode, REQUESTCODE);
+        if (checkedTopics.size() == 0) {
+            ih.openPopUp(2);
         }
-        else{
-            nothingSelectedError();
+        else {
+            ih.startStudyMode(0, checkedSubjects, checkedTopics);
         }
     }
+
     public void startQuiz(View view){
-        if (checkedTopics.size() != 0){
-            Intent quizMode = new Intent(this, QuizModeShowCards.class);
-            quizMode.putExtra("checkedTopics", checkedTopics);
-            quizMode.putExtra("checkedSubjects", checkedSubjects);
-            startActivityForResult(quizMode, REQUESTCODE);
-        }
-        else{
-            nothingSelectedError();
+        if (checkedTopics.size() == 0) {
+            ih.openPopUp(2);
+        } else {
+            ih.startQuizmode(0, checkedSubjects, checkedTopics);
         }
     }
+
     public void createTopic(View view){
-        Intent entryPopup = new Intent(this, CreateTopicActivity.class);
-        entryPopup.putExtra("Kategorie", "Thema");
-        entryPopup.putStringArrayListExtra("checkedSubjects", checkedSubjects);
-        startActivity(entryPopup);
+        ih.newTopic(checkedSubjects);
     }
 
     public void editTopic(View view){

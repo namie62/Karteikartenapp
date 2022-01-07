@@ -82,15 +82,10 @@ public class ShowSubjectsActivity extends AppCompatActivity {   //später dann d
 
     public void goToTopics(View view){
         if (checkedSubjects.size() == 0) {
-            System.out.println(checkedSubjects.toString());
-            Intent popupwindow = new Intent(this, HintPopUpActivity.class);
-            popupwindow.putExtra("InfotextPopUp", "Bitte ein Fach auswählen.");
-            startActivity(popupwindow);
+            ih.openPopUp(1);
         }
-        else if(checkedSubjects.size() >0 ){
-            Intent i = new Intent(this, ShowTopicsActivity.class);
-            i.putExtra("checkedSubjects", checkedSubjects);
-            startActivityForResult(i, REQUESTCODE);
+        else {
+            ih.goToTopicOverview(checkedSubjects);
 
         } /*else if (checkeditems.size() > 1) {
             System.out.println("hadskfhäa");
@@ -102,38 +97,23 @@ public class ShowSubjectsActivity extends AppCompatActivity {   //später dann d
 
     public void startStudyMode(View view){
         if (checkedSubjects.size() != 0){
-            Intent studyMode = new Intent(this, StudyModeShowCards.class);
-            studyMode.putStringArrayListExtra("checkedSubjects", checkedSubjects);
-            studyMode.putExtra("index", 0);
-            startActivityForResult(studyMode, REQUESTCODE);
+            ih.startStudyMode(0, checkedSubjects);
         }
         else{
-            Intent popupWindow = new Intent(this, HintPopUpActivity.class);
-            popupWindow.putExtra("InfotextPoUp", "Bitte mindestens 1 Fach auswählen.");
-            // popupWindow.putExtra("Abfrage", "Fachuebersicht");
-            startActivity(popupWindow);
+            ih.openPopUp(1);
         }
     }
 
     public void startTestMode(View view){
         if (checkedSubjects.size() != 0){
-            Intent testMode = new Intent(this, QuizModeShowCards.class);
-            testMode.putStringArrayListExtra("Faecherliste", checkedSubjects);
-            testMode.putExtra("Abfrage", "Fachuebersicht");
-            startActivityForResult(testMode, REQUESTCODE);
+            ih.startQuizmode(0, checkedSubjects);
     }
         else {
-            Intent popupWindow = new Intent(this, HintPopUpActivity.class);
-            popupWindow.putExtra("InfotextPoUp", "Bitte mindestens 1 Fach auswählen.");
-           // popupWindow.putExtra("Abfrage", "Fachuebersicht");
-            startActivity(popupWindow);
+            ih.openPopUp(0);
         }
     }
 
     public void newSubject(View view){
-        Intent entryPopup = new Intent(this, CreateSubjectActivity.class);
-        entryPopup.putExtra("Kategorie", "Fach");
-        entryPopup.putExtra("checkedSubjects", checkedSubjects);
-        startActivity(entryPopup);
+        ih.newSubject();
     }
 }

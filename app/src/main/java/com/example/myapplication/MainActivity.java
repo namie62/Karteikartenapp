@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
+import com.example.myapplication.helperclasses.IntentHelper;
 import com.example.myapplication.overviewactivities.ShowSubjectsActivity;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -33,10 +34,14 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
     private FirebaseDatabase flashcardDB;
     private DatabaseReference reference;
 
+    IntentHelper ih;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        this.ih = new IntentHelper(this);
 
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestEmail()
@@ -54,8 +59,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
     @Override
     public void onClick(View v) {
         signIn();
-        Intent i = new Intent(this, ShowSubjectsActivity.class);
-        startActivityForResult(i, REQUESTCODE);
+        ih.goToStartMenu();
     }
 
     private void signIn() {
