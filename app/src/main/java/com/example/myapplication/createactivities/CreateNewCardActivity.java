@@ -12,11 +12,14 @@ import android.widget.EditText;
 import android.widget.ImageView;
 
 import com.example.myapplication.R;
+import com.example.myapplication.helperclasses.IntentHelper;
 import com.example.myapplication.popups.CancelNewCardPopupActivity;
 import com.example.myapplication.helperclasses.InsertImgHelperClassActivity;
 import com.example.myapplication.objectclasses.Flashcard;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.ArrayList;
 
 public class CreateNewCardActivity extends AppCompatActivity {
     String topic;
@@ -25,6 +28,10 @@ public class CreateNewCardActivity extends AppCompatActivity {
     Bitmap img;
     private FirebaseDatabase flashcardDB;
     private DatabaseReference reference;
+    ArrayList<String> checkedSubjects;
+    ArrayList<String> checkedTopics;
+    IntentHelper ih;
+    String uriForDB = " ";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,29 +41,19 @@ public class CreateNewCardActivity extends AppCompatActivity {
         this.flashcardDB = FirebaseDatabase.getInstance("https://karteikar-default-rtdb.europe-west1.firebasedatabase.app/");
         this.reference = flashcardDB.getReference("cornelia"); //cornelia mit username ersetzen
 
+        this.ih = new IntentHelper(this);
         topic = getIntent().getExtras().getString("selectedTopic");
         subject = getIntent().getExtras().getString("selectedSubject");
-
-
-        Button cancelBtn = (Button) findViewById(R.id.cancelBtn);
-        cancelBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                openPopUpWindow();
-            }
-        });
+        this.checkedSubjects = getIntent().getStringArrayListExtra("checkedSubjects");
+        this.checkedTopics = getIntent().getStringArrayListExtra("checkedTopics");
     }
 
-    private void openPopUpWindow() {
-        Intent popupWindow = new Intent(CreateNewCardActivity.this, CancelNewCardPopupActivity.class);
-        popupWindow.putExtra("Themenname", topic);
-        startActivity(popupWindow);
+    public void cancelPopUp(View view) {
+        ih.cancelCardPopUp(subject, topic, checkedSubjects, checkedTopics);
     }
 
-    public void onClick(View view) {
-        Intent i = new Intent(this, InsertImgHelperClassActivity.class);
-        startActivityForResult(i, REQUESTCODE);
+    public void insertImg(View view) {
+        ih.insertImg();
     }
 
     @Override
@@ -67,6 +64,7 @@ public class CreateNewCardActivity extends AppCompatActivity {
             if (resultCode == RESULT_OK) {
                 try{
                     Uri uri = data.getParcelableExtra("pic");
+                    uriForDB = uri.toString();
                     if (uri != null){
                     this.img = MediaStore.Images.Media.getBitmap(this.getContentResolver(), uri);
                     imageView.setImageBitmap(this.img);
@@ -82,8 +80,9 @@ public class CreateNewCardActivity extends AppCompatActivity {
     }
 
     public void saveContent(View view){    // setzt die Inhalte in Klasse Karte und sichert damit das Abspeichern
-        Flashcard card = new Flashcard(getFrontText(), getBackText(), " ");
+        Flashcard card = new Flashcard(getFrontText(), getBackText(), uriForDB);
         this.reference.child("subjects").child(subject).child("topics").child(topic).child("cards").push().setValue(card);
+        ih.goToCardOverview(checkedSubjects, checkedTopics);
     }
 
     public String getFrontText(){    // Getter für speichereInhalt Methode

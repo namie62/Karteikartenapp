@@ -13,6 +13,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.myapplication.R;
+import com.example.myapplication.helperclasses.IntentHelper;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -22,8 +23,6 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 
 public class ChooseSubjectAndTopicForNewCardActivity extends AppCompatActivity {
-    Button cancelBtn;
-    Button createCardBtn;
     Spinner subjectSpinner;
     Spinner topicSpinner;
     FirebaseDatabase flashcardDB;
@@ -32,6 +31,7 @@ public class ChooseSubjectAndTopicForNewCardActivity extends AppCompatActivity {
     ArrayList<String> checkedTopics;
     ArrayList<String> topicsFromSelectedSubject = new ArrayList<>();
     String selectedSubject;
+    IntentHelper ih;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,10 +41,10 @@ public class ChooseSubjectAndTopicForNewCardActivity extends AppCompatActivity {
         this.flashcardDB = FirebaseDatabase.getInstance("https://karteikar-default-rtdb.europe-west1.firebasedatabase.app/");
         this.reference = flashcardDB.getReference("cornelia"); //cornelia mit username ersetzen
 
+        this.ih = new IntentHelper(this);
         this.checkedSubjects = getIntent().getStringArrayListExtra("checkedSubjects");
         this.checkedTopics = getIntent().getStringArrayListExtra("checkedTopics");
         ArrayAdapter<String> topicAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, topicsFromSelectedSubject);
-
 
         this.subjectSpinner = findViewById(R.id.select_subject_spinner);
         ArrayAdapter<String> subjectAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, checkedSubjects);
@@ -78,42 +78,19 @@ public class ChooseSubjectAndTopicForNewCardActivity extends AppCompatActivity {
 
             @Override
             public void onNothingSelected(AdapterView<?> parentView) {
-
             }
-
-        });
-
-
-
-        cancelBtn = (Button) findViewById(R.id.cancel_btn);
-        cancelBtn.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                closeWindow();
-            }
-        });
-
-        createCardBtn = (Button) findViewById((R.id.create_card_btn));
-        createCardBtn.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) { createCard(); }
         });
     }
 
-    public void createCard(){
+    public void createCard(View view){
         String selectedTopic = (String) topicSpinner.getSelectedItem();
         if (selectedSubject != null && selectedTopic != null) {
-            Intent card = new Intent(this, CreateNewCardActivity.class);
-            card.putExtra("selectedSubject",  selectedSubject);
-            card.putExtra("selectedTopic",  selectedTopic);
-            startActivity(card);
+            ih.newCard(selectedSubject, selectedTopic, checkedSubjects, checkedTopics);
         }
     }
 
-    public void closeWindow(){
-        this.finish();
+    public void closeWindow(View view){
+        ih.goToCardOverview(checkedSubjects, checkedTopics);
     }
 
 

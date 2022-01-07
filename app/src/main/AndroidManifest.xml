@@ -13,9 +13,6 @@
             android:name=".createactivities.ChooseSubjectAndTopicForNewCardActivity"
             android:exported="true" />
         <activity
-            android:name=".createactivities.CreateNewSubjectTopicCard"
-            android:exported="true" />
-        <activity
             android:name=".createactivities.CreateTopicActivity"
             android:exported="true" />
         <activity

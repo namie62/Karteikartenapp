@@ -7,14 +7,12 @@ import android.view.View;
 import android.widget.Button;
 
 import com.example.myapplication.R;
+import com.example.myapplication.helperclasses.IntentHelper;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class CreateSubjectActivity extends AppCompatActivity {
-
-    Button cancelBtn;
-    Button createSubjectBtn;
     TextInputEditText hintTextInputEditText;
     private FirebaseDatabase flashcardDB;
     private DatabaseReference reference;
@@ -28,26 +26,13 @@ public class CreateSubjectActivity extends AppCompatActivity {
         this.reference = flashcardDB.getReference("cornelia"); //cornelia mit username ersetzen
 
         hintTextInputEditText = (TextInputEditText) findViewById(R.id.enterEditText);
-        cancelBtn = (Button) findViewById(R.id.cancel_btn);
-        cancelBtn.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                closeWindow();
-            }
-        });
-
-        createSubjectBtn = (Button)  findViewById(R.id.create_topic_btn);
-        createSubjectBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {saveSubject();}
-        });
     }
 
-    public void closeWindow(){
+    public void closeWindow(View view){
         this.finish();
     }
-    public void saveSubject(){
+
+    public void saveSubject(View view){
         String newSubject = (String) hintTextInputEditText.getText().toString();
         if (newSubject.trim().length() > 0) {
             this.reference.child("subjects").child(newSubject).child("topics").setValue("[]");

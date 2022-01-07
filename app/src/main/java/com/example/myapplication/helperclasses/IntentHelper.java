@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.example.myapplication.createactivities.ChooseSubjectAndTopicForNewCardActivity;
+import com.example.myapplication.createactivities.CreateNewCardActivity;
 import com.example.myapplication.createactivities.CreateSubjectActivity;
 import com.example.myapplication.createactivities.CreateTopicActivity;
 import com.example.myapplication.modesofoperation.QuizModeShowCards;
@@ -12,6 +13,7 @@ import com.example.myapplication.modesofoperation.StudyModeShowCards;
 import com.example.myapplication.overviewactivities.ShowCardsActivity;
 import com.example.myapplication.overviewactivities.ShowSubjectsActivity;
 import com.example.myapplication.overviewactivities.ShowTopicsActivity;
+import com.example.myapplication.popups.CancelNewCardPopupActivity;
 import com.example.myapplication.popups.HintPopUpActivity;
 
 import java.lang.reflect.Array;
@@ -24,6 +26,7 @@ public class IntentHelper {
     private static final String infoText2 = "Bitte ein Fach auswählen!";
     private static final String infoText3 = "Bitte mindestens 1 Thema auswählen!";
     private static final String infoText4 = "Bitte mindestens 1 Karte auswählen!";
+    private static final String cancelInfoText = "Sicher, dass Sie abbrechen wollen?";
     private static final int REQUESTCODE = 1;
 
     public IntentHelper(Context packageContext) {
@@ -124,14 +127,35 @@ public class IntentHelper {
         putLists(i, checkedSubjects);
     }
 
-    public void newCard(ArrayList<String> checkedSubjects, ArrayList<String> checkedTopics) {
+    public void chooseCategoriesForNewCard(ArrayList<String> checkedSubjects, ArrayList<String> checkedTopics) {
         Intent i = new Intent(this.packageContext, ChooseSubjectAndTopicForNewCardActivity.class);
         putLists(i, checkedSubjects, checkedTopics);
+    }
+
+    public void newCard(String selectedSubject, String selectedTopic, ArrayList<String> checkedSubjects, ArrayList<String> checkedTopics) {
+        Intent i = new Intent(this.packageContext, CreateNewCardActivity.class);
+        Bundle b = addLists(checkedSubjects, checkedTopics);
+        b.putString("selectedSubject", selectedSubject);
+        b.putString("selectedTopic", selectedTopic);
+        start(i, b);
     }
 
     public void openPopUp(int index) {
         Intent i = new Intent(this.packageContext, HintPopUpActivity.class);
         i.putExtra("InfotextPopUp", infoText.get(index));
+        packageContext.startActivity(i);
+    }
+
+    public void cancelCardPopUp(String selectedSubject, String selectedTopic, ArrayList<String> checkedSubjects, ArrayList<String> checkedTopics) {
+        Intent i = new Intent(this.packageContext, CancelNewCardPopupActivity.class);
+        Bundle b = addLists(checkedSubjects, checkedTopics);
+        b.putString("selectedSubject", selectedSubject);
+        b.putString("selectedTopic", selectedTopic);
+        start(i,b);
+    }
+
+    public void insertImg() {
+        Intent i = new Intent(this.packageContext, InsertImgHelperClassActivity.class);
         packageContext.startActivity(i);
     }
 

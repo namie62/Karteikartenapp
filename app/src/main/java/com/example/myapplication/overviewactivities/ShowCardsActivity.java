@@ -13,11 +13,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.myapplication.R;
-import com.example.myapplication.createactivities.ChooseSubjectAndTopicForNewCardActivity;
 import com.example.myapplication.helperclasses.IntentHelper;
-import com.example.myapplication.popups.HintPopUpActivity;
 import com.example.myapplication.helperclasses.ListviewHelperClass;
-import com.example.myapplication.modesofoperation.QuizModeShowCards;
 import com.example.myapplication.modesofoperation.StudyModeShowCards;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -87,7 +84,7 @@ public class ShowCardsActivity extends AppCompatActivity {
     }
 
     public void createCard(View view){
-        ih.newCard(checkedSubjects, checkedTopics);
+        ih.chooseCategoriesForNewCard(checkedSubjects, checkedTopics);
     }
 
     public void vorwaerts(View view) {  //öffnet Kartenerstellung

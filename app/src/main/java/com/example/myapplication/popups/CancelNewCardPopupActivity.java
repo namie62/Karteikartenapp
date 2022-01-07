@@ -11,21 +11,24 @@ import android.view.WindowManager;
 import android.widget.Button;
 
 import com.example.myapplication.R;
+import com.example.myapplication.helperclasses.IntentHelper;
 import com.example.myapplication.overviewactivities.ShowCardsActivity;
+
+import java.util.ArrayList;
 
 public class CancelNewCardPopupActivity extends AppCompatActivity {
     private static final int REQUESTCODE = 1;
-
-    Button yesBtn;
-    Button noBtn;
-    String topic;
+    IntentHelper ih;
+    ArrayList<String> checkedSubjects;
+    ArrayList<String> checkedTopics;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_pop_up_window);
-
-        topic = getIntent().getExtras().getString("Themenname");
+        setContentView(R.layout.activity_cancel_new_card_pop_up);
+        this.ih = new IntentHelper(this);
+        this.checkedSubjects = getIntent().getStringArrayListExtra("checkedSubjects");
+        this.checkedTopics = getIntent().getStringArrayListExtra("checkedTopics");
 
         DisplayMetrics dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);
@@ -41,27 +44,12 @@ public class CancelNewCardPopupActivity extends AppCompatActivity {
         params.y = -10;
 
         getWindow().setAttributes(params);
-
-
-        yesBtn = (Button) findViewById(R.id.yesBtn);
-        yesBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(CancelNewCardPopupActivity.this, ShowCardsActivity.class);
-                i.putExtra("Themenname", topic);
-                startActivityForResult(i, REQUESTCODE);
-            }
-        });
-
-        noBtn = (Button) findViewById(R.id.noBtn);
-        noBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                closeWindow();
-            }
-        });
     }
-    public void closeWindow(){
-        this.finish();
+
+    public void yes(View view) {
+        ih.goToCardOverview(checkedSubjects, checkedTopics);
     }
+
+    public void no(View view) {this.finish();}
+
 }

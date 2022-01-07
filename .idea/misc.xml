@@ -32,7 +32,10 @@
         <entry key="..\:/Users/namie/AndroidStudioProjects/30.11/Karteikartenapp/app/src/main/res/layout/activity_themenuebersicht.xml" value="0.13020833333333334" />
         <entry key="..\:/Users/namie/AndroidStudioProjects/TEst/Karteikartenapp/app/src/main/res/layout/activity_main.xml" value="0.13020833333333334" />
         <entry key="..\:/Users/namie/AndroidStudioProjects/TEst/Karteikartenapp/app/src/main/res/layout/grafikeinfuegen_layout.xml" value="0.264" />
+        <entry key="app/src/main/res/layout/activity_cancel_new_card_pop_up.xml" value="0.1765625" />
         <entry key="app/src/main/res/layout/activity_cards_overview.xml" value="0.24895833333333334" />
+        <entry key="app/src/main/res/layout/activity_choose_subject_and_topic_for_new_card.xml" value="0.1765625" />
+        <entry key="app/src/main/res/layout/activity_create_new_card.xml" value="0.1765625" />
         <entry key="app/src/main/res/layout/activity_create_new_card_step_two.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_create_new_card_to_topicand_subject.xml" value="0.20697463768115942" />
         <entry key="app/src/main/res/layout/activity_create_new_subject_topic_card.xml" value="0.20697463768115942" />
