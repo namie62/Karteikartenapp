@@ -47,11 +47,12 @@ public class ShowSubjectsActivity extends AppCompatActivity {   //später dann d
         setContentView(R.layout.activity_show_subjects);
         this.flashcardDB = FirebaseDatabase.getInstance("https://karteikar-default-rtdb.europe-west1.firebasedatabase.app/");
         this.reference = flashcardDB.getReference("cornelia"); //cornelia mit username ersetzen
+
+        this.ih = new IntentHelper(this);
+
         this.listView = findViewById(R.id.subjects_listView);
         this.applicationContext = getApplicationContext();
         this.showObjects = new ArrayList<>();
-
-        this.ih = new IntentHelper(this);
 
         this.adapter = new ArrayAdapter<>(applicationContext, android.R.layout.simple_list_item_multiple_choice, showObjects);
         reference.addValueEventListener(new ValueEventListener() {

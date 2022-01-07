@@ -49,8 +49,8 @@ public class ShowTopicsActivity extends AppCompatActivity {
         this.reference = flashcardDB.getReference("cornelia"); //cornelia mit username ersetzen
 
         this.ih = new IntentHelper(this);
-
         this.checkedSubjects = getIntent().getExtras().getStringArrayList("checkedSubjects");
+
         this.listView = findViewById(R.id.topics_listView);
         this.applicationContext = getApplicationContext();
         this.showObjects = new ArrayList<>();
@@ -116,8 +116,8 @@ public class ShowTopicsActivity extends AppCompatActivity {
     }
 
     public void editTopic(View view){
-        if (checkedTopics.size() == 0){
-            nothingSelectedError();
+        if (checkedTopics.size() == 0) {
+            ih.openPopUp(2);
         }else if (checkedTopics.size() == 1){
             Intent editTopic = new Intent(this, ShowCardsActivity.class);
             editTopic.putExtra("Thema", checkedTopics.get(0));
@@ -126,12 +126,5 @@ public class ShowTopicsActivity extends AppCompatActivity {
             Intent popupWindow = new Intent(this, HintPopUpActivity.class);
             popupWindow.putExtra("InfotextPoUp", "Bitte nur 1 Thema zur Bearbeitung auswählen.");
         }
-    }
-
-    public void nothingSelectedError() {
-        Intent popupWindow = new Intent(this, HintPopUpActivity.class);
-        popupWindow.putExtra("InfotextPoUp", "Bitte mindestens 1 Thema auswählen.");
-        popupWindow.putStringArrayListExtra("checkedSubjects", checkedSubjects);
-        startActivity(popupWindow);
     }
 }
