@@ -57,6 +57,13 @@ public class IntentHelper {
         packageContext.startActivity(i);
     }
 
+    public void goToStartMenu(String user) {
+        Intent i = new Intent(this.packageContext, ShowSubjectsActivity.class);
+        Bundle b = new Bundle();
+        b.putString("user", user);
+        start(i,b);
+    }
+
     public void goToTopicOverview(ArrayList<String> checkedSubjects, ArrayList<String> checkedTopics, ArrayList<String> checkedCards) {
         Intent i = new Intent(this.packageContext, ShowTopicsActivity.class);
         putLists(i, checkedSubjects, checkedTopics, checkedCards);

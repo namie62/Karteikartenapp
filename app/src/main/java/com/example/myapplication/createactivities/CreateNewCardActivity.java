@@ -86,13 +86,13 @@ public class CreateNewCardActivity extends AppCompatActivity {
 
     public void saveContent(View view){    // setzt die Inhalte in Klasse Karte und sichert damit das Abspeichern
         Flashcard card = new Flashcard(getFrontText(), getBackText(), uriForDB);
-        reference.child("subjects").addValueEventListener(new ValueEventListener() {
+        reference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) {
-                    int sortOrder = (int) (snapshot.child(subject).child("topics").child(topic).child("cards").getChildrenCount()) + 1;
+                    int sortOrder = (int) (snapshot.child(subject).child(topic).getChildrenCount()) + 1;
                     card.setSortOrder(sortOrder);
-                    reference.child("subjects").child(subject).child("topics").child(topic).child("cards").push().setValue(card);
+                    reference.child(subject).child(topic).push().setValue(card);
                     ih.goToCardOverview(checkedSubjects, checkedTopics);
                 }
             }

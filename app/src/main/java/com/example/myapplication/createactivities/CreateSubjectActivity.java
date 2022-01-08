@@ -44,13 +44,13 @@ public class CreateSubjectActivity extends AppCompatActivity {
     public void saveSubject(View view){
         String newSubject = (String) Objects.requireNonNull(hintTextInputEditText.getText()).toString();
 
-        reference.child("subjects").addListenerForSingleValueEvent(new ValueEventListener() {
+        reference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 sortOrder = 0;
                 if (newSubject.trim().length() > 0) {
-                    sortOrder = (int) (snapshot.getChildrenCount());
-                    reference.child("subjects").child(newSubject).child("sortOrder").setValue(sortOrder);
+                    sortOrder = (int) (snapshot.getChildrenCount()) - 1;
+                    reference.child(newSubject).child("sortOrder").setValue(sortOrder);
                 }
             }
 

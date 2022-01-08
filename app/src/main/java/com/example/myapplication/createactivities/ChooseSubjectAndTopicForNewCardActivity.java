@@ -54,7 +54,7 @@ public class ChooseSubjectAndTopicForNewCardActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
                 selectedSubject = (String) subjectSpinner.getSelectedItem();
-                reference.child("subjects").child(selectedSubject).child("topics").addValueEventListener(new ValueEventListener() {
+                reference.child(selectedSubject).addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         if (snapshot.exists()){

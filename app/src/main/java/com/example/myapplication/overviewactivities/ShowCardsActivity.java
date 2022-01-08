@@ -52,16 +52,18 @@ public class ShowCardsActivity extends AppCompatActivity {
         this.applicationContext = getApplicationContext();
         this.showObjects = new ArrayList<>();
         this.adapter = new ArrayAdapter<>(applicationContext, android.R.layout.simple_list_item_multiple_choice, showObjects);
-        reference.child("subjects").addValueEventListener(new ValueEventListener() {
+        reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 showObjects.clear();
                 if (snapshot.exists()) {
                     for (String subject : checkedSubjects) {
                         for (String topic : checkedTopics) {
-                            for (DataSnapshot dataSnapshot : snapshot.child(subject).child("topics").child(topic).child("cards").getChildren()){
-                                String nameFromDB = dataSnapshot.child("front").getValue(String.class);
-                                showObjects.add(nameFromDB);
+                            for (DataSnapshot dataSnapshot : snapshot.child(subject).child(topic).getChildren()){
+                                if (!dataSnapshot.getKey().equals("sortOrder")) {
+                                    String nameFromDB = dataSnapshot.child("front").getValue(String.class);
+                                    showObjects.add(nameFromDB);
+                                }
                             }
                         }
                     }

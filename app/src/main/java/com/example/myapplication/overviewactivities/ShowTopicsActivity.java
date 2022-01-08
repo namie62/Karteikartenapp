@@ -55,15 +55,17 @@ public class ShowTopicsActivity extends AppCompatActivity {
         this.applicationContext = getApplicationContext();
         this.showObjects = new ArrayList<>();
         this.adapter = new ArrayAdapter<>(applicationContext, android.R.layout.simple_list_item_multiple_choice, showObjects);
-        reference.child("subjects").addValueEventListener(new ValueEventListener() {
+        reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 showObjects.clear();
                 if (snapshot.exists()) {
                     for (String subject : checkedSubjects) {
-                        for (DataSnapshot dataSnapshot : snapshot.child(subject).child("topics").getChildren()){
+                        for (DataSnapshot dataSnapshot : snapshot.child(subject).getChildren()){
                             String nameFromDB = dataSnapshot.getKey();
-                            showObjects.add(nameFromDB);
+                            if(!nameFromDB.equals("sortOrder")) {
+                                showObjects.add(nameFromDB);
+                            }
                         }
                     }
                     listView.setAdapter(adapter);

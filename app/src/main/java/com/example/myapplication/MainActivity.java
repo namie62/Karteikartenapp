@@ -34,6 +34,8 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
     private FirebaseDatabase flashcardDB;
     private DatabaseReference reference;
 
+    private String user;
+
     IntentHelper ih;
 
     @Override
@@ -59,7 +61,8 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
     @Override
     public void onClick(View v) {
         signIn();
-        ih.goToStartMenu();
+        user = "cornelia";
+        ih.goToStartMenu(user);
     }
 
     private void signIn() {
@@ -84,6 +87,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
         if (result.isSuccess()) {
             //Signed in successfuly, show authenticated UI.
             GoogleSignInAccount acct = result.getSignInAccount();
+
         } else {
             statusTextView.setText("Sign in unsuccessful");
         }

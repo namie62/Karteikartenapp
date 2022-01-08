@@ -50,12 +50,12 @@ public class CreateTopicActivity extends AppCompatActivity {
     public void saveTopic(View view){
         String newTopic = (String) hintTextInputEditText.getText().toString();
         String selectedSubject = (String) subjectSpinner.getSelectedItem().toString();
-        reference.child("subjects").addValueEventListener(new ValueEventListener() {
+        reference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (newTopic.trim().length() > 0) {
-                    int sortOrder = (int) snapshot.child(selectedSubject).child("topics").getChildrenCount();
-                    reference.child("subjects").child(selectedSubject).child("topics").child(newTopic).child("sortOrder").setValue(sortOrder);
+                    int sortOrder = (int) snapshot.child(selectedSubject).getChildrenCount() - 1;
+                    reference.child(selectedSubject).child(newTopic).child("sortOrder").setValue(sortOrder);
                     ih.goToTopicOverview(checkedSubjects);
                 }
             }

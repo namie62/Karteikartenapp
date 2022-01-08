@@ -40,15 +40,18 @@ public class ShowSubjectsActivity extends AppCompatActivity {   //später dann d
     private ArrayList<String> showObjects;
     ArrayAdapter<String> adapter;
     IntentHelper ih;
+    String user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_subjects);
-        this.flashcardDB = FirebaseDatabase.getInstance("https://karteikar-default-rtdb.europe-west1.firebasedatabase.app/");
-        this.reference = flashcardDB.getReference("cornelia"); //cornelia mit username ersetzen
-
         this.ih = new IntentHelper(this);
+
+        user = getIntent().getExtras().getString("user");
+
+        this.flashcardDB = FirebaseDatabase.getInstance("https://karteikar-default-rtdb.europe-west1.firebasedatabase.app/");
+        this.reference = flashcardDB.getReference(user);
 
         this.listView = findViewById(R.id.subjects_listView);
         this.applicationContext = getApplicationContext();
@@ -60,7 +63,7 @@ public class ShowSubjectsActivity extends AppCompatActivity {   //später dann d
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 showObjects.clear();
                 if (snapshot.exists()) {
-                    for (DataSnapshot dataSnapshot : snapshot.child("subjects").getChildren()) {
+                    for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                         String nameFromDB = dataSnapshot.getKey();
                         showObjects.add(nameFromDB);
                     }
