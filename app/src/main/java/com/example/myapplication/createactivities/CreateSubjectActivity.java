@@ -21,18 +21,19 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.Objects;
 
 public class CreateSubjectActivity extends AppCompatActivity {
-    TextInputEditText hintTextInputEditText;
-    private FirebaseDatabase flashcardDB;
+    private TextInputEditText hintTextInputEditText;
     private DatabaseReference reference;
-    int sortOrder = 0;
+    private int sortOrder = 0;
+    private String user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_subject);
 
-        this.flashcardDB = FirebaseDatabase.getInstance("https://karteikar-default-rtdb.europe-west1.firebasedatabase.app/");
-        this.reference = flashcardDB.getReference("cornelia"); //cornelia mit username ersetzen
+        this.user = getIntent().getExtras().getString("user");
+        FirebaseDatabase flashcardDB = FirebaseDatabase.getInstance("https://karteikar-default-rtdb.europe-west1.firebasedatabase.app/");
+        this.reference = flashcardDB.getReference(user);
 
         hintTextInputEditText = (TextInputEditText) findViewById(R.id.enterEditText);
     }

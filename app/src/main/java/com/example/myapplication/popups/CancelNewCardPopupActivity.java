@@ -47,7 +47,7 @@ public class CancelNewCardPopupActivity extends AppCompatActivity {
     }
 
     public void yes(View view) {
-        ih.goToCardOverview(checkedSubjects, checkedTopics);
+        this.finish();
     }
 
     public void no(View view) {this.finish();}

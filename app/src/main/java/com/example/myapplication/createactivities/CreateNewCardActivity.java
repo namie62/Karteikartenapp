@@ -27,24 +27,24 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 
 public class CreateNewCardActivity extends AppCompatActivity {
-    String topic;
-    String subject;
-    private static final int REQUESTCODE = 1;
-    Bitmap img;
-    private FirebaseDatabase flashcardDB;
+    private String topic;
+    private String subject;
+    private Bitmap img;
     private DatabaseReference reference;
-    ArrayList<String> checkedSubjects;
-    ArrayList<String> checkedTopics;
-    IntentHelper ih;
-    String uriForDB = " ";
+    private ArrayList<String> checkedSubjects;
+    private ArrayList<String> checkedTopics;
+    private IntentHelper ih;
+    private String uriForDB = " ";
+    private String user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_new_card);
 
-        this.flashcardDB = FirebaseDatabase.getInstance("https://karteikar-default-rtdb.europe-west1.firebasedatabase.app/");
-        this.reference = flashcardDB.getReference("cornelia"); //cornelia mit username ersetzen
+        this.user = getIntent().getExtras().getString("user");
+        FirebaseDatabase flashcardDB = FirebaseDatabase.getInstance("https://karteikar-default-rtdb.europe-west1.firebasedatabase.app/");
+        this.reference = flashcardDB.getReference(user);
 
         this.ih = new IntentHelper(this);
         topic = getIntent().getExtras().getString("selectedTopic");
@@ -54,7 +54,7 @@ public class CreateNewCardActivity extends AppCompatActivity {
     }
 
     public void cancelPopUp(View view) {
-        ih.cancelCardPopUp(subject, topic, checkedSubjects, checkedTopics);
+        ih.cancelCardPopUp();
     }
 
     public void insertImg(View view) {
@@ -93,7 +93,7 @@ public class CreateNewCardActivity extends AppCompatActivity {
                     int sortOrder = (int) (snapshot.child(subject).child(topic).getChildrenCount()) + 1;
                     card.setSortOrder(sortOrder);
                     reference.child(subject).child(topic).push().setValue(card);
-                    ih.goToCardOverview(checkedSubjects, checkedTopics);
+                    ih.goToCardOverview(user, checkedSubjects, checkedTopics);
                 }
             }
 

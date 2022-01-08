@@ -25,29 +25,30 @@ import java.util.ArrayList;
 
 public class StudyModeShowCards extends AppCompatActivity {
     private static final int REQUESTCODE = 1;
-    String content ="Inhalt";
-    String topic =  "Themenegebiet";
-    Integer progress;
-    Bitmap img;
-    KartenClass card = new KartenClass();
-    ArrayList<String> checkedSubjects;
-    ArrayList<String> checkedTopics;
-    ArrayList<String> checkedCards;
-    ArrayList<Flashcard> cards = new ArrayList<>();
-    ArrayList<Flashcard> allCards = new ArrayList<>();
-    IntentHelper ih = new IntentHelper(this);
-    Bundle b;
-    int index;
-    int max;
-    private FirebaseDatabase flashcardDB;
-    private DatabaseReference reference;
+    private String content ="Inhalt";
+    private String topic =  "Themenegebiet";
+    private Integer progress;
+    private Bitmap img;
+    private KartenClass card = new KartenClass();
+    private ArrayList<String> checkedSubjects;
+    private ArrayList<String> checkedTopics;
+    private ArrayList<String> checkedCards;
+    private ArrayList<Flashcard> cards = new ArrayList<>();
+    private ArrayList<Flashcard> allCards = new ArrayList<>();
+    private IntentHelper ih = new IntentHelper(this);
+    private Bundle b;
+    private int index;
+    private int max;
+    private String user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_study_mode_show_cards);
-        this.flashcardDB = FirebaseDatabase.getInstance("https://karteikar-default-rtdb.europe-west1.firebasedatabase.app/");
-        this.reference = flashcardDB.getReference("cornelia"); //cornelia mit username ersetzen
+
+        this.user = getIntent().getExtras().getString("user");
+        FirebaseDatabase flashcardDB = FirebaseDatabase.getInstance("https://karteikar-default-rtdb.europe-west1.firebasedatabase.app/");
+        DatabaseReference reference = flashcardDB.getReference(user);
 
         this.b = getIntent().getExtras();
         this.checkedSubjects = b.getStringArrayList("checkedSubjects");

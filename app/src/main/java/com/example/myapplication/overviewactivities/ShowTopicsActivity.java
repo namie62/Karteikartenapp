@@ -28,16 +28,14 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 
 public class ShowTopicsActivity extends AppCompatActivity {
-    private static final int REQUESTCODE = 1;
-    ArrayList<String> checkedSubjects;
-    ArrayList<String> checkedTopics;
-    FirebaseDatabase flashcardDB;
-    DatabaseReference reference;
-    ListView listView;
-    Context applicationContext;
-    ArrayList<String> showObjects;
-    ArrayAdapter<String> adapter;
-    IntentHelper ih;
+    private ArrayList<String> checkedSubjects;
+    private ArrayList<String> checkedTopics;
+    private ListView listView;
+    private Context applicationContext;
+    private ArrayList<String> showObjects;
+    private ArrayAdapter<String> adapter;
+    private IntentHelper ih;
+    private String user;
 
 
     @Override
@@ -45,8 +43,9 @@ public class ShowTopicsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_topics);
 
-        this.flashcardDB = FirebaseDatabase.getInstance("https://karteikar-default-rtdb.europe-west1.firebasedatabase.app/");
-        this.reference = flashcardDB.getReference("cornelia"); //cornelia mit username ersetzen
+        this.user = getIntent().getExtras().getString("user");
+        FirebaseDatabase flashcardDB = FirebaseDatabase.getInstance("https://karteikar-default-rtdb.europe-west1.firebasedatabase.app/");
+        DatabaseReference reference = flashcardDB.getReference(user);
 
         this.ih = new IntentHelper(this);
         this.checkedSubjects = getIntent().getExtras().getStringArrayList("checkedSubjects");
@@ -84,7 +83,7 @@ public class ShowTopicsActivity extends AppCompatActivity {
 
 
     public void goToPrevious(View view) {
-        ih.goToStartMenu();
+        ih.goToStartMenu(user);
     }
 
     public void goToCards(View view) {  //öffnet Kartenerstellung
@@ -92,7 +91,7 @@ public class ShowTopicsActivity extends AppCompatActivity {
             ih.openPopUp(2);
         }
         else {
-            ih.goToCardOverview(checkedSubjects, checkedTopics);
+            ih.goToCardOverview(user, checkedSubjects, checkedTopics);
         }
     }
 
@@ -101,7 +100,7 @@ public class ShowTopicsActivity extends AppCompatActivity {
             ih.openPopUp(2);
         }
         else {
-            ih.startStudyMode(0, checkedSubjects, checkedTopics);
+            ih.startStudyMode(0, user, checkedSubjects, checkedTopics);
         }
     }
 
@@ -109,12 +108,12 @@ public class ShowTopicsActivity extends AppCompatActivity {
         if (checkedTopics.size() == 0) {
             ih.openPopUp(2);
         } else {
-            ih.startQuizmode(0, checkedSubjects, checkedTopics);
+            ih.startQuizmode(0, user, checkedSubjects, checkedTopics);
         }
     }
 
     public void createTopic(View view){
-        ih.newTopic(checkedSubjects);
+        ih.newTopic(user, checkedSubjects);
     }
 
     public void editTopic(View view){

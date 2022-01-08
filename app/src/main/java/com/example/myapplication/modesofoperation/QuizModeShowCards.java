@@ -5,21 +5,34 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.example.myapplication.R;
+import com.example.myapplication.helperclasses.IntentHelper;
 import com.example.myapplication.overviewactivities.ShowSubjectsActivity;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class QuizModeShowCards extends AppCompatActivity {
     private static final int REQUESTCODE = 1;
+    private IntentHelper ih;
+    private String user;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quiz_mode_show_cards);
 
+        this.user = getIntent().getExtras().getString("user");
+        FirebaseDatabase flashcardDB = FirebaseDatabase.getInstance("https://karteikar-default-rtdb.europe-west1.firebasedatabase.app/");
+        DatabaseReference reference = flashcardDB.getReference(user);
+
+        this.ih = new IntentHelper(this);
+
+
+
     }
 
     public void goToPrevious(View view){
-        Intent i = new Intent(this, ShowSubjectsActivity.class);
-        startActivityForResult(i, REQUESTCODE);
+        ih.goToStartMenu(this.user);
     }
 
     public void rightAnswer(View view) {

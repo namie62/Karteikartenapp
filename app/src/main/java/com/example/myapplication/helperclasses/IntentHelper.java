@@ -37,24 +37,19 @@ public class IntentHelper {
         this.infoText.add(infoText4);
     }
 
-    public void goToStartMenu(ArrayList<String> checkedSubjects, ArrayList<String> checkedTopics, ArrayList<String> checkedCards) {
+    public void goToStartMenu(String user, ArrayList<String> checkedSubjects, ArrayList<String> checkedTopics, ArrayList<String> checkedCards) {
         Intent i = new Intent(this.packageContext, ShowSubjectsActivity.class);
-        putLists(i, checkedSubjects, checkedTopics, checkedCards);
+        putLists(i, user, checkedSubjects, checkedTopics, checkedCards);
     }
 
-    public void goToStartMenu(ArrayList<String> checkedSubjects, ArrayList<String> checkedTopics) {
+    public void goToStartMenu(String user, ArrayList<String> checkedSubjects, ArrayList<String> checkedTopics) {
         Intent i = new Intent(this.packageContext, ShowSubjectsActivity.class);
-        putLists(i, checkedSubjects, checkedTopics);
+        putLists(i, user, checkedSubjects, checkedTopics);
     }
 
-    public void goToStartMenu(ArrayList<String> checkedSubjects) {
+    public void goToStartMenu(String user, ArrayList<String> checkedSubjects) {
         Intent i = new Intent(this.packageContext, ShowSubjectsActivity.class);
-        putLists(i, checkedSubjects);
-    }
-
-    public void goToStartMenu() {
-        Intent i = new Intent(this.packageContext, ShowSubjectsActivity.class);
-        packageContext.startActivity(i);
+        putLists(i, user, checkedSubjects);
     }
 
     public void goToStartMenu(String user) {
@@ -64,86 +59,90 @@ public class IntentHelper {
         start(i,b);
     }
 
-    public void goToTopicOverview(ArrayList<String> checkedSubjects, ArrayList<String> checkedTopics, ArrayList<String> checkedCards) {
+    public void goToTopicOverview(String user, ArrayList<String> checkedSubjects, ArrayList<String> checkedTopics, ArrayList<String> checkedCards) {
         Intent i = new Intent(this.packageContext, ShowTopicsActivity.class);
-        putLists(i, checkedSubjects, checkedTopics, checkedCards);
+        putLists(i, user, checkedSubjects, checkedTopics, checkedCards);
     }
 
-    public void goToTopicOverview(ArrayList<String> checkedSubjects, ArrayList<String> checkedTopics) {
+    public void goToTopicOverview(String user, ArrayList<String> checkedSubjects, ArrayList<String> checkedTopics) {
         Intent i = new Intent(this.packageContext, ShowTopicsActivity.class);
-        putLists(i, checkedSubjects, checkedTopics);
+        putLists(i, user, checkedSubjects, checkedTopics);
     }
 
-    public void goToTopicOverview(ArrayList<String> checkedSubjects) {
+    public void goToTopicOverview(String user, ArrayList<String> checkedSubjects) {
         Intent i = new Intent(this.packageContext, ShowTopicsActivity.class);
-        putLists(i, checkedSubjects);
+        putLists(i, user, checkedSubjects);
     }
 
-    public void goToCardOverview(ArrayList<String> checkedSubjects, ArrayList<String> checkedTopics, ArrayList<String> checkedCards) {
+    public void goToCardOverview(String user, ArrayList<String> checkedSubjects, ArrayList<String> checkedTopics, ArrayList<String> checkedCards) {
         Intent i = new Intent(this.packageContext, ShowCardsActivity.class);
-        putLists(i, checkedSubjects, checkedTopics, checkedCards);
+        putLists(i, user, checkedSubjects, checkedTopics, checkedCards);
     }
 
-    public void goToCardOverview(ArrayList<String> checkedSubjects, ArrayList<String> checkedTopics) {
+    public void goToCardOverview(String user, ArrayList<String> checkedSubjects, ArrayList<String> checkedTopics) {
         Intent i = new Intent(this.packageContext, ShowCardsActivity.class);
-        putLists(i, checkedSubjects, checkedTopics);
+        putLists(i, user, checkedSubjects, checkedTopics);
     }
 
-    public void goToCardOverview(ArrayList<String> checkedSubjects) {
+    public void goToCardOverview(String user, ArrayList<String> checkedSubjects) {
         Intent i = new Intent(this.packageContext, ShowCardsActivity.class);
-        putLists(i, checkedSubjects);
+        putLists(i, user, checkedSubjects);
     }
 
-    public void startStudyMode(int index, ArrayList<String> checkedSubjects, ArrayList<String> checkedTopics, ArrayList<String> checkedCards) {
+    public void startStudyMode(int index, String user, ArrayList<String> checkedSubjects, ArrayList<String> checkedTopics, ArrayList<String> checkedCards) {
         Intent i = new Intent(this.packageContext, StudyModeShowCards.class);
-        putLists(i, index, checkedSubjects, checkedTopics, checkedCards);
+        putLists(i, index, user, checkedSubjects, checkedTopics, checkedCards);
     }
 
-    public void startStudyMode(int index, ArrayList<String> checkedSubjects, ArrayList<String> checkedTopics) {
+    public void startStudyMode(int index, String user, ArrayList<String> checkedSubjects, ArrayList<String> checkedTopics) {
         Intent i = new Intent(this.packageContext, StudyModeShowCards.class);
-        putLists(i, index, checkedSubjects, checkedTopics);
+        putLists(i, index, user, checkedSubjects, checkedTopics);
     }
 
-    public void startStudyMode(int index, ArrayList<String> checkedSubjects) {
+    public void startStudyMode(int index, String user, ArrayList<String> checkedSubjects) {
         Intent i = new Intent(this.packageContext, StudyModeShowCards.class);
-        putLists(i, index, checkedSubjects);
+        putLists(i, index, user, checkedSubjects);
     }
 
-    public void startQuizmode(int index, ArrayList<String> checkedSubjects, ArrayList<String> checkedTopics, ArrayList<String> checkedCards) {
+    public void startQuizmode(int index, String user, ArrayList<String> checkedSubjects, ArrayList<String> checkedTopics, ArrayList<String> checkedCards) {
         Intent i = new Intent(this.packageContext, QuizModeShowCards.class);
-        putLists(i, index, checkedSubjects, checkedTopics, checkedCards);
+        putLists(i, index, user, checkedSubjects, checkedTopics, checkedCards);
     }
 
-    public void startQuizmode(int index, ArrayList<String> checkedSubjects, ArrayList<String> checkedTopics) {
+    public void startQuizmode(int index, String user, ArrayList<String> checkedSubjects, ArrayList<String> checkedTopics) {
         Intent i = new Intent(this.packageContext, QuizModeShowCards.class);
-        putLists(i, index, checkedSubjects, checkedTopics);
+        putLists(i, index, user, checkedSubjects, checkedTopics);
     }
 
-    public void startQuizmode(int index, ArrayList<String> checkedSubjects) {
+    public void startQuizmode(int index, String user, ArrayList<String> checkedSubjects) {
         Intent i = new Intent(this.packageContext, QuizModeShowCards.class);
-        putLists(i, index, checkedSubjects);
+        putLists(i, index, user, checkedSubjects);
     }
 
-    public void newSubject() {
+    public void newSubject(String user) {
         Intent i = new Intent(this.packageContext, CreateSubjectActivity.class);
-        packageContext.startActivity(i);
+        Bundle b = new Bundle();
+        b.putString("user", user);
+        i.putExtras(b);
+        start(i, b);
     }
 
-    public void newTopic(ArrayList<String> checkedSubjects) {
+    public void newTopic(String user, ArrayList<String> checkedSubjects) {
         Intent i = new Intent(this.packageContext, CreateTopicActivity.class);
-        putLists(i, checkedSubjects);
+        putLists(i, user, checkedSubjects);
     }
 
-    public void chooseCategoriesForNewCard(ArrayList<String> checkedSubjects, ArrayList<String> checkedTopics) {
+    public void chooseCategoriesForNewCard(String user, ArrayList<String> checkedSubjects, ArrayList<String> checkedTopics) {
         Intent i = new Intent(this.packageContext, ChooseSubjectAndTopicForNewCardActivity.class);
-        putLists(i, checkedSubjects, checkedTopics);
+        putLists(i, user, checkedSubjects, checkedTopics);
     }
 
-    public void newCard(String selectedSubject, String selectedTopic, ArrayList<String> checkedSubjects, ArrayList<String> checkedTopics) {
+    public void newCard(String user, String selectedSubject, String selectedTopic, ArrayList<String> checkedSubjects, ArrayList<String> checkedTopics) {
         Intent i = new Intent(this.packageContext, CreateNewCardActivity.class);
-        Bundle b = addLists(checkedSubjects, checkedTopics);
+        Bundle b = addLists(user, checkedSubjects, checkedTopics);
         b.putString("selectedSubject", selectedSubject);
         b.putString("selectedTopic", selectedTopic);
+        b.putString("user", user);
         start(i, b);
     }
 
@@ -153,12 +152,9 @@ public class IntentHelper {
         packageContext.startActivity(i);
     }
 
-    public void cancelCardPopUp(String selectedSubject, String selectedTopic, ArrayList<String> checkedSubjects, ArrayList<String> checkedTopics) {
+    public void cancelCardPopUp() {
         Intent i = new Intent(this.packageContext, CancelNewCardPopupActivity.class);
-        Bundle b = addLists(checkedSubjects, checkedTopics);
-        b.putString("selectedSubject", selectedSubject);
-        b.putString("selectedTopic", selectedTopic);
-        start(i,b);
+        packageContext.startActivity(i);
     }
 
     public void insertImg() {
@@ -166,56 +162,60 @@ public class IntentHelper {
         packageContext.startActivity(i);
     }
 
-    public void putLists(Intent i,ArrayList<String> checkedSubjects){
-        Bundle b = addLists(checkedSubjects);
+    public void putLists(Intent i, String user, ArrayList<String> checkedSubjects){
+        Bundle b = addLists(user, checkedSubjects);
         start(i, b);
     }
 
-    public void putLists(Intent i,ArrayList<String> checkedSubjects, ArrayList<String> checkedTopics) {
-        Bundle b = addLists(checkedSubjects, checkedTopics);
+    public void putLists(Intent i, String user, ArrayList<String> checkedSubjects, ArrayList<String> checkedTopics) {
+        Bundle b = addLists(user, checkedSubjects, checkedTopics);
         start(i, b);
     }
 
-    public void putLists(Intent i, ArrayList<String> checkedSubjects, ArrayList<String> checkedTopics, ArrayList<String> checkedCards) {
-        Bundle b = addLists(checkedSubjects, checkedTopics, checkedCards);
+    public void putLists(Intent i, String user, ArrayList<String> checkedSubjects, ArrayList<String> checkedTopics, ArrayList<String> checkedCards) {
+        Bundle b = addLists(user, checkedSubjects, checkedTopics, checkedCards);
         start(i, b);
     }
 
-    public void putLists(Intent i, int index, ArrayList<String> checkedSubjects, ArrayList<String> checkedTopics, ArrayList<String> checkedCards) {
-        Bundle b = addLists(checkedSubjects, checkedTopics, checkedCards);
+    public void putLists(Intent i, int index, String user, ArrayList<String> checkedSubjects, ArrayList<String> checkedTopics, ArrayList<String> checkedCards) {
+        Bundle b = addLists(user, checkedSubjects, checkedTopics, checkedCards);
         b.putInt("index", index);
         start(i, b);
     }
 
-    public void putLists(Intent i, int index, ArrayList<String> checkedSubjects, ArrayList<String> checkedTopics) {
-        Bundle b = addLists(checkedSubjects, checkedTopics);
+    public void putLists(Intent i, int index, String user, ArrayList<String> checkedSubjects, ArrayList<String> checkedTopics) {
+        Bundle b = addLists(user, checkedSubjects, checkedTopics);
         b.putInt("index", index);
         start(i, b);
     }
 
-    public void putLists(Intent i, int index, ArrayList<String> checkedSubjects) {
-        Bundle b = addLists((checkedSubjects));
+    public void putLists(Intent i, int index, String user, ArrayList<String> checkedSubjects) {
+        Bundle b = addLists(user, checkedSubjects);
         b.putInt("index", index);
+        b.putString("user", user);
         start(i, b);
     }
 
-    public Bundle addLists(ArrayList<String> checkedSubjects, ArrayList<String> checkedTopics, ArrayList<String> checkedCards) {
+    public Bundle addLists(String user, ArrayList<String> checkedSubjects, ArrayList<String> checkedTopics, ArrayList<String> checkedCards) {
         Bundle b = new Bundle();
         b.putStringArrayList("checkedSubjects", checkedSubjects);
         b.putStringArrayList("checkedTopics", checkedTopics);
         b.putStringArrayList("checkedCards", checkedCards);
+        b.putString("user", user);
         return b;
     }
 
-    public Bundle addLists(ArrayList<String> checkedSubjects, ArrayList<String> checkedTopics) {
+    public Bundle addLists(String user, ArrayList<String> checkedSubjects, ArrayList<String> checkedTopics) {
         Bundle b = new Bundle();
         b.putStringArrayList("checkedSubjects", checkedSubjects);
         b.putStringArrayList("checkedTopics", checkedTopics);
+        b.putString("user", user);
         return b;
     }
-    public Bundle addLists(ArrayList<String> checkedSubjects) {
+    public Bundle addLists(String user, ArrayList<String> checkedSubjects) {
         Bundle b = new Bundle();
         b.putStringArrayList("checkedSubjects", checkedSubjects);
+        b.putString("user", user);
         return b;
     }
 

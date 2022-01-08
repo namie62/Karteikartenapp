@@ -26,23 +26,24 @@ import java.util.ArrayList;
 
 public class ShowCardsActivity extends AppCompatActivity {
     private static final int REQUESTCODE = 1;
-    ArrayList<String> checkedCards = new ArrayList<>();
-    ArrayList<String> checkedSubjects;
-    ArrayList<String> checkedTopics;
-    FirebaseDatabase flashcardDB;
-    DatabaseReference reference;
-    ListView listView;
-    Context applicationContext;
-    ArrayList<String> showObjects;
-    ArrayAdapter<String> adapter;
-    IntentHelper ih;
+    private ArrayList<String> checkedCards = new ArrayList<>();
+    private ArrayList<String> checkedSubjects;
+    private ArrayList<String> checkedTopics;
+    private ListView listView;
+    private Context applicationContext;
+    private ArrayList<String> showObjects;
+    private ArrayAdapter<String> adapter;
+    private IntentHelper ih;
+    private String user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_cards);
-        this.flashcardDB = FirebaseDatabase.getInstance("https://karteikar-default-rtdb.europe-west1.firebasedatabase.app/");
-        this.reference = flashcardDB.getReference("cornelia"); //cornelia mit username ersetzen
+
+        this.user = getIntent().getExtras().getString("user");
+        FirebaseDatabase flashcardDB = FirebaseDatabase.getInstance("https://karteikar-default-rtdb.europe-west1.firebasedatabase.app/");
+        DatabaseReference reference = flashcardDB.getReference(user);
 
         this.ih = new IntentHelper(this);
         this.checkedSubjects = getIntent().getExtras().getStringArrayList("checkedSubjects");
@@ -60,7 +61,7 @@ public class ShowCardsActivity extends AppCompatActivity {
                     for (String subject : checkedSubjects) {
                         for (String topic : checkedTopics) {
                             for (DataSnapshot dataSnapshot : snapshot.child(subject).child(topic).getChildren()){
-                                if (!dataSnapshot.getKey().equals("sortOrder")) {
+                                if (dataSnapshot.exists() && !dataSnapshot.getKey().equals("sortOrder")) {
                                     String nameFromDB = dataSnapshot.child("front").getValue(String.class);
                                     showObjects.add(nameFromDB);
                                 }
@@ -82,11 +83,11 @@ public class ShowCardsActivity extends AppCompatActivity {
     }
 
     public void goToPrevious(View view) {
-        ih.goToTopicOverview(checkedSubjects);
+        ih.goToTopicOverview(user, checkedSubjects);
     }
 
     public void createCard(View view){
-        ih.chooseCategoriesForNewCard(checkedSubjects, checkedTopics);
+        ih.chooseCategoriesForNewCard(user, checkedSubjects, checkedTopics);
     }
 
     public void vorwaerts(View view) {  //öffnet Kartenerstellung
@@ -114,14 +115,14 @@ public class ShowCardsActivity extends AppCompatActivity {
         if (checkedCards.size() == 0) {
             ih.openPopUp(3);
         } else {
-            ih.startStudyMode(0, checkedSubjects, checkedTopics, checkedCards);
+            ih.startStudyMode(0, user, checkedSubjects, checkedTopics, checkedCards);
         }
     }
     public void startQuizMode(View view){
         if (checkedCards.size() == 0) {
             ih.openPopUp(3);
         } else {
-            ih.startQuizmode(0, checkedSubjects, checkedTopics, checkedCards);
+            ih.startQuizmode(0, user, checkedSubjects, checkedTopics, checkedCards);
         }
     }
 }

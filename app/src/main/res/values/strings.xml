@@ -9,6 +9,7 @@
     <string name="Fächer">Fächer</string>
     <string name="Themen">Themen</string>
     <string name="Karten">Karten</string>
+    <string name="server_client_id">659724553025-kbt3c7ev8r7740t7d1dg7kskecdtbeob.apps.googleusercontent.com</string>
 
     <string-array name="Fachauswählen">
         <item>Mathe</item>

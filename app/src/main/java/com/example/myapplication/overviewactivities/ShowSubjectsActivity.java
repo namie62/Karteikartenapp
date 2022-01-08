@@ -28,19 +28,14 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-public class ShowSubjectsActivity extends AppCompatActivity {   //später dann durch DB iterieren um Fächer zu holen
-
-    private static final int REQUESTCODE = 1;
-    ArrayList<String> checkedSubjects = new ArrayList<>();
-    ArrayList<Flashcard> cardsFromSelectedSubjects = new ArrayList<>();
-    private FirebaseDatabase flashcardDB;
-    private DatabaseReference reference;
+public class ShowSubjectsActivity extends AppCompatActivity {   //später dann durch DB iterieren um Fächer zu holen private static final int REQUESTCODE = 1;
+    private ArrayList<String> checkedSubjects = new ArrayList<>();
     private ListView listView;
     private Context applicationContext;
     private ArrayList<String> showObjects;
-    ArrayAdapter<String> adapter;
-    IntentHelper ih;
-    String user;
+    private ArrayAdapter<String> adapter;
+    private IntentHelper ih;
+    private String user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,10 +43,9 @@ public class ShowSubjectsActivity extends AppCompatActivity {   //später dann d
         setContentView(R.layout.activity_show_subjects);
         this.ih = new IntentHelper(this);
 
-        user = getIntent().getExtras().getString("user");
-
-        this.flashcardDB = FirebaseDatabase.getInstance("https://karteikar-default-rtdb.europe-west1.firebasedatabase.app/");
-        this.reference = flashcardDB.getReference(user);
+        this.user = getIntent().getExtras().getString("user");
+        FirebaseDatabase flashcardDB = FirebaseDatabase.getInstance("https://karteikar-default-rtdb.europe-west1.firebasedatabase.app/");
+        DatabaseReference reference = flashcardDB.getReference(user);
 
         this.listView = findViewById(R.id.subjects_listView);
         this.applicationContext = getApplicationContext();
@@ -81,7 +75,7 @@ public class ShowSubjectsActivity extends AppCompatActivity {   //später dann d
 
     public void goToPrevious(View view){
         Intent i = new Intent(this, MainActivity.class);
-        startActivityForResult(i, REQUESTCODE);
+        startActivity(i);
     }
 
     public void goToTopics(View view){
@@ -89,7 +83,7 @@ public class ShowSubjectsActivity extends AppCompatActivity {   //später dann d
             ih.openPopUp(1);
         }
         else {
-            ih.goToTopicOverview(checkedSubjects);
+            ih.goToTopicOverview(user, checkedSubjects);
 
         } /*else if (checkeditems.size() > 1) {
             System.out.println("hadskfhäa");
@@ -101,7 +95,7 @@ public class ShowSubjectsActivity extends AppCompatActivity {   //später dann d
 
     public void startStudyMode(View view){
         if (checkedSubjects.size() != 0){
-            ih.startStudyMode(0, checkedSubjects);
+            ih.startStudyMode(0, user, checkedSubjects);
         }
         else{
             ih.openPopUp(1);
@@ -110,7 +104,7 @@ public class ShowSubjectsActivity extends AppCompatActivity {   //später dann d
 
     public void startTestMode(View view){
         if (checkedSubjects.size() != 0){
-            ih.startQuizmode(0, checkedSubjects);
+            ih.startQuizmode(0, user, checkedSubjects);
     }
         else {
             ih.openPopUp(0);
@@ -118,6 +112,6 @@ public class ShowSubjectsActivity extends AppCompatActivity {   //später dann d
     }
 
     public void newSubject(View view){
-        ih.newSubject();
+        ih.newSubject(user);
     }
 }

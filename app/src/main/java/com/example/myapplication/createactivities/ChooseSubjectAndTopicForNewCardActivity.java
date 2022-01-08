@@ -23,23 +23,26 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 
 public class ChooseSubjectAndTopicForNewCardActivity extends AppCompatActivity {
-    Spinner subjectSpinner;
-    Spinner topicSpinner;
-    FirebaseDatabase flashcardDB;
-    DatabaseReference reference;
-    ArrayList<String> checkedSubjects;
-    ArrayList<String> checkedTopics;
-    ArrayList<String> topicsFromSelectedSubject = new ArrayList<>();
-    String selectedSubject;
-    IntentHelper ih;
+    private Spinner subjectSpinner;
+    private Spinner topicSpinner;
+    private FirebaseDatabase flashcardDB;
+    private DatabaseReference reference;
+    private ArrayList<String> checkedSubjects;
+    private ArrayList<String> checkedTopics;
+    private String selectedSubject;
+    private IntentHelper ih;
+    private String user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_choose_subject_and_topic_for_new_card);
 
-        this.flashcardDB = FirebaseDatabase.getInstance("https://karteikar-default-rtdb.europe-west1.firebasedatabase.app/");
-        this.reference = flashcardDB.getReference("cornelia"); //cornelia mit username ersetzen
+        this.user = getIntent().getExtras().getString("user");
+        FirebaseDatabase flashcardDB = FirebaseDatabase.getInstance("https://karteikar-default-rtdb.europe-west1.firebasedatabase.app/");
+        this.reference = flashcardDB.getReference(user);
+
+        ArrayList<String> topicsFromSelectedSubject = new ArrayList<>();
 
         this.ih = new IntentHelper(this);
         this.checkedSubjects = getIntent().getStringArrayListExtra("checkedSubjects");
@@ -85,12 +88,12 @@ public class ChooseSubjectAndTopicForNewCardActivity extends AppCompatActivity {
     public void createCard(View view){
         String selectedTopic = (String) topicSpinner.getSelectedItem();
         if (selectedSubject != null && selectedTopic != null) {
-            ih.newCard(selectedSubject, selectedTopic, checkedSubjects, checkedTopics);
+            ih.newCard(user, selectedSubject, selectedTopic, checkedSubjects, checkedTopics);
         }
     }
 
     public void closeWindow(View view){
-        ih.goToCardOverview(checkedSubjects, checkedTopics);
+        ih.goToCardOverview(user, checkedSubjects, checkedTopics);
     }
 
 

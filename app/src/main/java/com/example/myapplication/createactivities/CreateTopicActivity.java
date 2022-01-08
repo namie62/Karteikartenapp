@@ -23,20 +23,21 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 
 public class CreateTopicActivity extends AppCompatActivity {
-    TextInputEditText hintTextInputEditText;
-    private FirebaseDatabase flashcardDB;
+    private TextInputEditText hintTextInputEditText;
     private DatabaseReference reference;
-    ArrayList<String> checkedSubjects;
-    Spinner subjectSpinner;
-    IntentHelper ih;
+    private ArrayList<String> checkedSubjects;
+    private Spinner subjectSpinner;
+    private IntentHelper ih;
+    private String user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_topic);
 
-        this.flashcardDB = FirebaseDatabase.getInstance("https://karteikar-default-rtdb.europe-west1.firebasedatabase.app/");
-        this.reference = flashcardDB.getReference("cornelia"); //cornelia mit username ersetzen
+        this.user = getIntent().getExtras().getString("user");
+        FirebaseDatabase flashcardDB = FirebaseDatabase.getInstance("https://karteikar-default-rtdb.europe-west1.firebasedatabase.app/");
+        this.reference = flashcardDB.getReference(user);
 
         this.ih = new IntentHelper(this);
         this.checkedSubjects = getIntent().getStringArrayListExtra("checkedSubjects");
@@ -56,7 +57,7 @@ public class CreateTopicActivity extends AppCompatActivity {
                 if (newTopic.trim().length() > 0) {
                     int sortOrder = (int) snapshot.child(selectedSubject).getChildrenCount() - 1;
                     reference.child(selectedSubject).child(newTopic).child("sortOrder").setValue(sortOrder);
-                    ih.goToTopicOverview(checkedSubjects);
+                    ih.goToTopicOverview(user, checkedSubjects);
                 }
             }
             public void onCancelled(@NonNull DatabaseError error) {
@@ -65,6 +66,6 @@ public class CreateTopicActivity extends AppCompatActivity {
         });
     }
     public void closeWindow(View view){
-        ih.goToTopicOverview(checkedSubjects);
+        ih.goToTopicOverview(user, checkedSubjects);
     }
 }
