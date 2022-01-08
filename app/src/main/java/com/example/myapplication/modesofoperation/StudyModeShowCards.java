@@ -24,10 +24,8 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 
 public class StudyModeShowCards extends AppCompatActivity {
-    private String content ="Inhalt";
-    private String topic =  "Themengebiet";
-    private Integer progress;
-    private Bitmap img;
+    private String content;
+    private String topic;
     private KartenClass card = new KartenClass();
     private ArrayList<String> checkedSubjects;
     private ArrayList<String> checkedTopics;
@@ -35,23 +33,21 @@ public class StudyModeShowCards extends AppCompatActivity {
     private ArrayList<Flashcard> cards = new ArrayList<>();
     private ArrayList<Flashcard> allCards = new ArrayList<>();
     private IntentHelper ih;
-    private Bundle b;
     private int index;
     private int max;
-    private String user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_study_mode_show_cards);
 
-        this.user = getIntent().getExtras().getString("user");
+        String user = getIntent().getExtras().getString("user");
         FirebaseDatabase flashcardDB = FirebaseDatabase.getInstance("https://karteikar-default-rtdb.europe-west1.firebasedatabase.app/");
-        DatabaseReference reference = flashcardDB.getReference(this.user);
+        DatabaseReference reference = flashcardDB.getReference(user);
 
         this.ih = new IntentHelper(this, user);
 
-        this.b = getIntent().getExtras();
+        Bundle b = getIntent().getExtras();
         this.checkedSubjects = b.getStringArrayList("checkedSubjects");
         this.checkedTopics = b.getStringArrayList("checkedTopics");
         this.checkedCards = b.getStringArrayList("checkedCards");
