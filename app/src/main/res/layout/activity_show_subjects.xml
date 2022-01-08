@@ -29,6 +29,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/Abfrageknopf"
+        android:onClick="startTestMode"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/study_mode_subject_btn" />
 
@@ -37,6 +38,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/Lernmodusknopf"
+        android:onClick="startStudyMode"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -54,6 +56,7 @@
         android:id="@+id/go_to_subject_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:onClick="goToTopics"
         android:text="@string/Vorwärtsknopf"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/quiz_subject_btn" />

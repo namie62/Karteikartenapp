@@ -45,7 +45,7 @@ public class ShowCardsActivity extends AppCompatActivity {
         FirebaseDatabase flashcardDB = FirebaseDatabase.getInstance("https://karteikar-default-rtdb.europe-west1.firebasedatabase.app/");
         DatabaseReference reference = flashcardDB.getReference(user);
 
-        this.ih = new IntentHelper(this);
+        this.ih = new IntentHelper(this, user);
         this.checkedSubjects = getIntent().getExtras().getStringArrayList("checkedSubjects");
         this.checkedTopics = getIntent().getExtras().getStringArrayList("checkedTopics");
 
@@ -83,11 +83,11 @@ public class ShowCardsActivity extends AppCompatActivity {
     }
 
     public void goToPrevious(View view) {
-        ih.goToTopicOverview(user, checkedSubjects);
+        ih.goToTopicOverview(checkedSubjects);
     }
 
     public void createCard(View view){
-        ih.chooseCategoriesForNewCard(user, checkedSubjects, checkedTopics);
+        ih.chooseCategoriesForNewCard(checkedSubjects, checkedTopics);
     }
 
     public void vorwaerts(View view) {  //öffnet Kartenerstellung
@@ -115,14 +115,14 @@ public class ShowCardsActivity extends AppCompatActivity {
         if (checkedCards.size() == 0) {
             ih.openPopUp(3);
         } else {
-            ih.startStudyMode(0, user, checkedSubjects, checkedTopics, checkedCards);
+            ih.startStudyMode(0, checkedSubjects, checkedTopics, checkedCards);
         }
     }
     public void startQuizMode(View view){
         if (checkedCards.size() == 0) {
             ih.openPopUp(3);
         } else {
-            ih.startQuizmode(0, user, checkedSubjects, checkedTopics, checkedCards);
+            ih.startQuizmode(0, checkedSubjects, checkedTopics, checkedCards);
         }
     }
 }

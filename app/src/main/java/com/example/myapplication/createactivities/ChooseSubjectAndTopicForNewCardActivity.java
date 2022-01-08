@@ -44,7 +44,7 @@ public class ChooseSubjectAndTopicForNewCardActivity extends AppCompatActivity {
 
         ArrayList<String> topicsFromSelectedSubject = new ArrayList<>();
 
-        this.ih = new IntentHelper(this);
+        this.ih = new IntentHelper(this, user);
         this.checkedSubjects = getIntent().getStringArrayListExtra("checkedSubjects");
         this.checkedTopics = getIntent().getStringArrayListExtra("checkedTopics");
         ArrayAdapter<String> topicAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, topicsFromSelectedSubject);
@@ -88,12 +88,12 @@ public class ChooseSubjectAndTopicForNewCardActivity extends AppCompatActivity {
     public void createCard(View view){
         String selectedTopic = (String) topicSpinner.getSelectedItem();
         if (selectedSubject != null && selectedTopic != null) {
-            ih.newCard(user, selectedSubject, selectedTopic, checkedSubjects, checkedTopics);
+            ih.newCard(selectedSubject, selectedTopic, checkedSubjects, checkedTopics);
         }
     }
 
     public void closeWindow(View view){
-        ih.goToCardOverview(user, checkedSubjects, checkedTopics);
+        ih.goToCardOverview(checkedSubjects, checkedTopics);
     }
 
 

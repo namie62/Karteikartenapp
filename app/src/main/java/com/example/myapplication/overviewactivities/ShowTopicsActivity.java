@@ -47,7 +47,7 @@ public class ShowTopicsActivity extends AppCompatActivity {
         FirebaseDatabase flashcardDB = FirebaseDatabase.getInstance("https://karteikar-default-rtdb.europe-west1.firebasedatabase.app/");
         DatabaseReference reference = flashcardDB.getReference(user);
 
-        this.ih = new IntentHelper(this);
+        this.ih = new IntentHelper(this, user);
         this.checkedSubjects = getIntent().getExtras().getStringArrayList("checkedSubjects");
 
         this.listView = findViewById(R.id.topics_listView);
@@ -91,7 +91,7 @@ public class ShowTopicsActivity extends AppCompatActivity {
             ih.openPopUp(2);
         }
         else {
-            ih.goToCardOverview(user, checkedSubjects, checkedTopics);
+            ih.goToCardOverview(checkedSubjects, checkedTopics);
         }
     }
 
@@ -100,7 +100,7 @@ public class ShowTopicsActivity extends AppCompatActivity {
             ih.openPopUp(2);
         }
         else {
-            ih.startStudyMode(0, user, checkedSubjects, checkedTopics);
+            ih.startStudyMode(0, checkedSubjects, checkedTopics);
         }
     }
 
@@ -108,12 +108,12 @@ public class ShowTopicsActivity extends AppCompatActivity {
         if (checkedTopics.size() == 0) {
             ih.openPopUp(2);
         } else {
-            ih.startQuizmode(0, user, checkedSubjects, checkedTopics);
+            ih.startQuizmode(0, checkedSubjects, checkedTopics);
         }
     }
 
     public void createTopic(View view){
-        ih.newTopic(user, checkedSubjects);
+        ih.newTopic(checkedSubjects);
     }
 
     public void editTopic(View view){

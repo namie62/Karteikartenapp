@@ -17,16 +17,17 @@ import com.example.myapplication.overviewactivities.ShowCardsActivity;
 import java.util.ArrayList;
 
 public class CancelNewCardPopupActivity extends AppCompatActivity {
-    private static final int REQUESTCODE = 1;
-    IntentHelper ih;
-    ArrayList<String> checkedSubjects;
-    ArrayList<String> checkedTopics;
+    private IntentHelper ih;
+    private ArrayList<String> checkedSubjects;
+    private ArrayList<String> checkedTopics;
+    private String user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cancel_new_card_pop_up);
-        this.ih = new IntentHelper(this);
+        this.ih = new IntentHelper(this, user);
+        this.user = getIntent().getExtras().getString("user");
         this.checkedSubjects = getIntent().getStringArrayListExtra("checkedSubjects");
         this.checkedTopics = getIntent().getStringArrayListExtra("checkedTopics");
 
@@ -47,7 +48,7 @@ public class CancelNewCardPopupActivity extends AppCompatActivity {
     }
 
     public void yes(View view) {
-        this.finish();
+        ih.goToCardOverview(checkedSubjects, checkedTopics);
     }
 
     public void no(View view) {this.finish();}

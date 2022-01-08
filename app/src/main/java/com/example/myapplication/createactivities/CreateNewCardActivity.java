@@ -46,7 +46,7 @@ public class CreateNewCardActivity extends AppCompatActivity {
         FirebaseDatabase flashcardDB = FirebaseDatabase.getInstance("https://karteikar-default-rtdb.europe-west1.firebasedatabase.app/");
         this.reference = flashcardDB.getReference(user);
 
-        this.ih = new IntentHelper(this);
+        this.ih = new IntentHelper(this, user);
         topic = getIntent().getExtras().getString("selectedTopic");
         subject = getIntent().getExtras().getString("selectedSubject");
         this.checkedSubjects = getIntent().getStringArrayListExtra("checkedSubjects");
@@ -54,7 +54,7 @@ public class CreateNewCardActivity extends AppCompatActivity {
     }
 
     public void cancelPopUp(View view) {
-        ih.cancelCardPopUp();
+        ih.cancelCardPopUp(checkedSubjects, checkedTopics);
     }
 
     public void insertImg(View view) {
@@ -90,10 +90,10 @@ public class CreateNewCardActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) {
-                    int sortOrder = (int) (snapshot.child(subject).child(topic).getChildrenCount()) + 1;
+                    int sortOrder = (int) (snapshot.child(subject).child(topic).getChildrenCount()) - 1;
                     card.setSortOrder(sortOrder);
                     reference.child(subject).child(topic).push().setValue(card);
-                    ih.goToCardOverview(user, checkedSubjects, checkedTopics);
+                    ih.goToCardOverview(checkedSubjects, checkedTopics);
                 }
             }
 

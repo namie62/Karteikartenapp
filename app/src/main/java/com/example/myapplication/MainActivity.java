@@ -40,7 +40,6 @@ public class MainActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        this.ih = new IntentHelper(this);
         statusTextView = findViewById(R.id.textView2);
 
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -57,9 +56,10 @@ public class MainActivity extends AppCompatActivity{
         super.onStart();
         GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
         assert account != null;
-        String idToken = account.getDisplayName();
-        ih.goToStartMenu(idToken);
-//        statusTextView.setText(idToken);
+        String user = account.getDisplayName();
+        this.ih = new IntentHelper(this, user);
+        ih.goToStartMenu(user);
+//        statusTextView.setText(user);
     }
 
     public void onClick(View v) {

@@ -41,9 +41,10 @@ public class ShowSubjectsActivity extends AppCompatActivity {   //später dann d
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_subjects);
-        this.ih = new IntentHelper(this);
 
         this.user = getIntent().getExtras().getString("user");
+        this.ih = new IntentHelper(this, user);
+
         FirebaseDatabase flashcardDB = FirebaseDatabase.getInstance("https://karteikar-default-rtdb.europe-west1.firebasedatabase.app/");
         DatabaseReference reference = flashcardDB.getReference(user);
 
@@ -78,33 +79,26 @@ public class ShowSubjectsActivity extends AppCompatActivity {   //später dann d
         startActivity(i);
     }
 
-    public void goToTopics(View view){
+    public void goToTopics(View view) {
         if (checkedSubjects.size() == 0) {
             ih.openPopUp(1);
+        } else {
+            ih.goToTopicOverview(checkedSubjects);
         }
-        else {
-            ih.goToTopicOverview(user, checkedSubjects);
-
-        } /*else if (checkeditems.size() > 1) {
-            System.out.println("hadskfhäa");
-            Intent popupwindow = new Intent(this, HintPopUpActivity.class);
-            popupwindow.putExtra("InfotextPoUp", "Bitte nur 1 Fach auswählen.");
-            startActivity(popupwindow);
-        }*/
     }
 
     public void startStudyMode(View view){
         if (checkedSubjects.size() != 0){
-            ih.startStudyMode(0, user, checkedSubjects);
+            ih.startStudyMode(0, checkedSubjects);
         }
         else{
             ih.openPopUp(1);
         }
     }
 
-    public void startTestMode(View view){
+    public void startTestMode(View view) {
         if (checkedSubjects.size() != 0){
-            ih.startQuizmode(0, user, checkedSubjects);
+            ih.startQuizmode(0, checkedSubjects);
     }
         else {
             ih.openPopUp(0);

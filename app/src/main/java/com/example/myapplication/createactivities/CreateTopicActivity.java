@@ -39,7 +39,7 @@ public class CreateTopicActivity extends AppCompatActivity {
         FirebaseDatabase flashcardDB = FirebaseDatabase.getInstance("https://karteikar-default-rtdb.europe-west1.firebasedatabase.app/");
         this.reference = flashcardDB.getReference(user);
 
-        this.ih = new IntentHelper(this);
+        this.ih = new IntentHelper(this, user);
         this.checkedSubjects = getIntent().getStringArrayListExtra("checkedSubjects");
 
         this.subjectSpinner = findViewById(R.id.select_subject_spinner);
@@ -57,7 +57,7 @@ public class CreateTopicActivity extends AppCompatActivity {
                 if (newTopic.trim().length() > 0) {
                     int sortOrder = (int) snapshot.child(selectedSubject).getChildrenCount() - 1;
                     reference.child(selectedSubject).child(newTopic).child("sortOrder").setValue(sortOrder);
-                    ih.goToTopicOverview(user, checkedSubjects);
+                    ih.goToTopicOverview(checkedSubjects);
                 }
             }
             public void onCancelled(@NonNull DatabaseError error) {
@@ -66,6 +66,6 @@ public class CreateTopicActivity extends AppCompatActivity {
         });
     }
     public void closeWindow(View view){
-        ih.goToTopicOverview(user, checkedSubjects);
+        ih.goToTopicOverview(checkedSubjects);
     }
 }

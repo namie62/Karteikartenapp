@@ -25,7 +25,7 @@ public class QuizModeShowCards extends AppCompatActivity {
         FirebaseDatabase flashcardDB = FirebaseDatabase.getInstance("https://karteikar-default-rtdb.europe-west1.firebasedatabase.app/");
         DatabaseReference reference = flashcardDB.getReference(user);
 
-        this.ih = new IntentHelper(this);
+        this.ih = new IntentHelper(this, user);
 
 
 

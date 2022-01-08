@@ -24,9 +24,8 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 
 public class StudyModeShowCards extends AppCompatActivity {
-    private static final int REQUESTCODE = 1;
     private String content ="Inhalt";
-    private String topic =  "Themenegebiet";
+    private String topic =  "Themengebiet";
     private Integer progress;
     private Bitmap img;
     private KartenClass card = new KartenClass();
@@ -35,7 +34,7 @@ public class StudyModeShowCards extends AppCompatActivity {
     private ArrayList<String> checkedCards;
     private ArrayList<Flashcard> cards = new ArrayList<>();
     private ArrayList<Flashcard> allCards = new ArrayList<>();
-    private IntentHelper ih = new IntentHelper(this);
+    private IntentHelper ih;
     private Bundle b;
     private int index;
     private int max;
@@ -48,28 +47,33 @@ public class StudyModeShowCards extends AppCompatActivity {
 
         this.user = getIntent().getExtras().getString("user");
         FirebaseDatabase flashcardDB = FirebaseDatabase.getInstance("https://karteikar-default-rtdb.europe-west1.firebasedatabase.app/");
-        DatabaseReference reference = flashcardDB.getReference(user);
+        DatabaseReference reference = flashcardDB.getReference(this.user);
+
+        this.ih = new IntentHelper(this, user);
 
         this.b = getIntent().getExtras();
         this.checkedSubjects = b.getStringArrayList("checkedSubjects");
         this.checkedTopics = b.getStringArrayList("checkedTopics");
         this.checkedCards = b.getStringArrayList("checkedCards");
-
         this.index = getIntent().getIntExtra("index", 0);
-        reference.child("subjects").addValueEventListener(new ValueEventListener() {
+
+        reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) {
                     for (String subject : checkedSubjects) {
-                        DataSnapshot subjectSnapshot = snapshot.child(subject).child("topics");
-                        if (checkedTopics != null) {
+                        DataSnapshot subjectSnapshot = snapshot.child(subject);
+                        if (subjectSnapshot.exists() && checkedTopics != null) {
                             for (String topic : checkedTopics) {
-                                DataSnapshot topicSnapshot = subjectSnapshot.child(topic).child("cards");
-                                if (checkedCards != null) {
+                                DataSnapshot topicSnapshot = subjectSnapshot.child(topic);
+                                if (topicSnapshot.exists() && checkedCards != null) {
                                     for (DataSnapshot cardSnapshot : topicSnapshot.getChildren()) {
                                         for (String card : checkedCards) {
-                                            if (cardSnapshot.child("front").getValue(String.class).equals(card)) {
-                                                fillCardsArray(cardSnapshot);
+                                            if (cardSnapshot.exists()
+                                                    && cardSnapshot.child("front").exists()) {
+                                                if (cardSnapshot.child("front").getValue(String.class).equals(card)) {
+                                                    fillCardsArray(cardSnapshot);
+                                                }
                                             }
                                         }
 //                                        DataSnapshot cardSnapshot = topicSnapshot.child(card);
@@ -77,14 +81,18 @@ public class StudyModeShowCards extends AppCompatActivity {
                                     }
                                 } else {
                                     for (DataSnapshot cardSnapshot : topicSnapshot.getChildren()) {
-                                        fillCardsArray(cardSnapshot);
+                                        if (cardSnapshot.child("front").exists()){
+                                            fillCardsArray(cardSnapshot);
+                                        }
                                     }
                                 }
                             }
                         } else {
                             for (DataSnapshot topicSnapshot : subjectSnapshot.getChildren()) {
-                                for (DataSnapshot cardSnapshot : topicSnapshot.child("cards").getChildren()) {
-                                    fillCardsArray(cardSnapshot);
+                                for (DataSnapshot cardSnapshot : topicSnapshot.getChildren()) {
+                                    if (cardSnapshot.child("front").exists()){
+                                        fillCardsArray(cardSnapshot);
+                                    }
                                 }
                             }
                         }
@@ -121,39 +129,43 @@ public class StudyModeShowCards extends AppCompatActivity {
     public void fillCardsArray(DataSnapshot ds) {
         String frontFromDB = ds.child("front").getValue(String.class);
         String backFromDB = ds.child("back").getValue(String.class);
+        String backImgFromDB = ds.child("backImg").getValue(String.class);
         Integer progressFromDB = ds.child("progress").getValue(Integer.class);
-        Flashcard newCard = new Flashcard(frontFromDB, backFromDB, " ", progressFromDB);
+        Integer sortOrderFromDB = ds.child("sortOrder").getValue(Integer.class);
+        if (progressFromDB == null) {
+            progressFromDB = 0;
+        }
+        if (sortOrderFromDB == null) {
+            sortOrderFromDB = 0;
+        }
+        Flashcard newCard = new Flashcard(frontFromDB, backFromDB, backImgFromDB, progressFromDB);
+        newCard.setSortOrder(sortOrderFromDB);
         cards.add(newCard);
+
     }
 
     public void nextCard(View view) {
         if (index < max-1) {
-            Intent i = new Intent(this, StudyModeShowCards.class);
-            i.putExtra("index", index + 1);
-            i.putStringArrayListExtra("checkedSubjects", checkedSubjects);
-            startActivityForResult(i, REQUESTCODE);
+            ih.nextCardStudyMode(index+1, this.checkedSubjects, this.checkedTopics, this.checkedCards);
         } else {
-            Intent i = new Intent(this, ShowSubjectsActivity.class);
-            startActivityForResult(i, REQUESTCODE);
+            ih.goToStartMenu();
         }
     }
 
     public void previousCard(View view) {
-        // Cornelia muss hier Karte in Lernstufe 0 schieben
-        Intent i = new Intent(this, StudyModeShowCards.class);
-        i.putExtra("index", index-1);
-        i.putStringArrayListExtra("checkedSubjects", checkedSubjects);
-        startActivityForResult(i, REQUESTCODE);
+        if (index > 0) {
+            ih.nextCardStudyMode(index-1, this.checkedSubjects, this.checkedTopics, this.checkedCards);
+        } else {
+            ih.goToStartMenu();
+        }
     }
 
     public void previous(View view) {
-        Intent i = new Intent(this, ShowSubjectsActivity.class);
-        startActivityForResult(i, REQUESTCODE);
+        ih.goToStartMenu();
     }
 
     public void goToStart() {
-        Intent i = new Intent(this, ShowSubjectsActivity.class);
-        startActivityForResult(i, REQUESTCODE);
+        ih.goToStartMenu();
     }
 
 }
