@@ -101,4 +101,16 @@
         android:onClick="insertImg"
         app:srcCompat="@android:drawable/ic_menu_gallery" />
 
+    <Button
+        android:id="@+id/share_btn"
+        android:layout_width="55dp"
+        android:layout_height="45dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="7dp"
+        android:layout_marginEnd="3dp"
+        android:layout_marginBottom="2dp"
+        android:layout_toStartOf="@+id/buttonspeichern"
+        android:layout_toEndOf="@+id/cancelBtn"
+        app:icon="?attr/actionModeShareDrawable" />
+
 </RelativeLayout>

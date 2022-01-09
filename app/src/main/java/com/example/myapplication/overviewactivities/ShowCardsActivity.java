@@ -84,6 +84,8 @@ public class ShowCardsActivity extends AppCompatActivity {
         textView.setText(checkedTopics.toString());
     }
 
+
+
     public void goToPrevious(View view) {
         ih.goToTopicOverview(checkedSubjects);
     }
