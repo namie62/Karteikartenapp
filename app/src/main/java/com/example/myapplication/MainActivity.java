@@ -15,6 +15,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.FirebaseApp;
 
 public class MainActivity extends AppCompatActivity{
     private TextView statusTextView;
@@ -35,7 +36,6 @@ public class MainActivity extends AppCompatActivity{
                 .requestEmail()
                 .requestIdToken(getString(R.string.server_client_id))
                 .build();
-
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
     }
 
@@ -43,11 +43,11 @@ public class MainActivity extends AppCompatActivity{
     @Override
     public void onStart() {
         super.onStart();
-        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
-        assert account != null;
-        String user = account.getDisplayName();
-        this.ih = new IntentHelper(this, user);
-        ih.goToStartMenu(user);
+        //GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
+        //assert account != null;
+        //String user = account.getDisplayName();
+        this.ih = new IntentHelper(this, "cornelia");
+        ih.goToStartMenu("cornelia");
 //        statusTextView.setText(user);
     }
 
