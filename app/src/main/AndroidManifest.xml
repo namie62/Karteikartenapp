@@ -2,6 +2,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.myapplication">
 
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -10,7 +15,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication">
         <activity
-            android:name=".exportactivities.EmailExportActivity"
+            android:name=".EmailExportActivity_02"
             android:exported="false" />
         <activity
             android:name=".createactivities.ChooseSubjectAndTopicForNewCardActivity"
@@ -53,6 +58,16 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
+            <intent-filter>
+                <action
+                    android:name="android.intent.action.SENDTO"/>
+                <data
+                    android:scheme="mailto"/>
+                <category
+                    android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+
         </activity>
         <activity android:name=".helperclasses.InsertImgHelperClassActivity" />
 

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.example.myapplication.EmailExportActivity_02;
 import com.example.myapplication.createactivities.ChooseSubjectAndTopicForNewCardActivity;
 import com.example.myapplication.createactivities.CreateNewCardActivity;
 import com.example.myapplication.createactivities.CreateSubjectActivity;
@@ -167,6 +168,15 @@ public class IntentHelper {
     public void newCard(ArrayList<String> checkedSubjects, ArrayList<String> checkedTopics, ArrayList<String> checkedCards) {
         Intent i = new Intent(this.packageContext, CreateNewCardActivity.class);
         putLists(i, checkedSubjects, checkedTopics, checkedCards);
+    }
+
+    public void shareCard(String front, String back, String img) {
+        Intent i = new Intent(this.packageContext, EmailExportActivity_02.class);
+        Bundle b = new Bundle();
+        b.putString("front", front);
+        b.putString("back", back);
+        b.putString("img", img);
+        start(i,b);
     }
     
     public void nextCardStudyMode(int index, ArrayList<String> checkedSubjects, ArrayList<String> checkedTopics, ArrayList<String> checkedCards) {

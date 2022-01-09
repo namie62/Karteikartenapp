@@ -4,9 +4,11 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/namie/AndroidStudioProjects/TEst/Karteikartenapp/app/src/main/res/layout/activity_main.xml" value="0.13020833333333334" />
+        <entry key="app/src/main/res/drawable/bg_round.xml" value="0.26510416666666664" />
         <entry key="app/src/main/res/layout/activity_create_new_card.xml" value="0.165" />
         <entry key="app/src/main/res/layout/activity_create_topic.xml" value="0.12107396149949341" />
         <entry key="app/src/main/res/layout/activity_email_export.xml" value="0.22916666666666666" />
+        <entry key="app/src/main/res/layout/activity_email_export02.xml" value="0.22916666666666666" />
         <entry key="app/src/main/res/layout/activity_show_cards.xml" value="0.24895833333333334" />
         <entry key="app/src/main/res/layout/activity_show_subjects.xml" value="0.24895833333333334" />
       </map>

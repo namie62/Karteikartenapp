@@ -111,6 +111,7 @@
         android:layout_marginBottom="2dp"
         android:layout_toStartOf="@+id/buttonspeichern"
         android:layout_toEndOf="@+id/cancelBtn"
+        android:onClick="share"
         app:icon="?attr/actionModeShareDrawable" />
 
 </RelativeLayout>

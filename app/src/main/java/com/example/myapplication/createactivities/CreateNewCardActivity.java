@@ -155,6 +155,10 @@ public class CreateNewCardActivity extends AppCompatActivity {
 
     }
 
+    public void share(View view) {
+        ih.shareCard(getFrontText(), getBackText(), uriForDB);
+    }
+
     public String getFrontText(){    // Getter für speichereInhalt Methode
         EditText topicEditText = (EditText) findViewById(R.id.front_edit_text);
         String front = topicEditText.getText().toString();

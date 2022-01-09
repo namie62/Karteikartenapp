@@ -26,8 +26,9 @@ public class CancelNewCardPopupActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cancel_new_card_pop_up);
-        this.ih = new IntentHelper(this, user);
+
         this.user = getIntent().getExtras().getString("user");
+        this.ih = new IntentHelper(this, user);
         this.checkedSubjects = getIntent().getStringArrayListExtra("checkedSubjects");
         this.checkedTopics = getIntent().getStringArrayListExtra("checkedTopics");
 
