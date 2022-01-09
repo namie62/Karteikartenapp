@@ -4,7 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.example.myapplication.EmailExportActivity_02;
+import com.example.myapplication.exportactivities.EmailExportActivity;
 import com.example.myapplication.createactivities.ChooseSubjectAndTopicForNewCardActivity;
 import com.example.myapplication.createactivities.CreateNewCardActivity;
 import com.example.myapplication.createactivities.CreateSubjectActivity;
@@ -171,7 +171,7 @@ public class IntentHelper {
     }
 
     public void shareCard(String front, String back, String img) {
-        Intent i = new Intent(this.packageContext, EmailExportActivity_02.class);
+        Intent i = new Intent(this.packageContext, EmailExportActivity.class);
         Bundle b = new Bundle();
         b.putString("front", front);
         b.putString("back", back);

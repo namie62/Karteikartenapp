@@ -1,4 +1,4 @@
-package com.example.myapplication;
+package com.example.myapplication.exportactivities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -9,11 +9,12 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.example.myapplication.R;
 import com.example.myapplication.helperclasses.IntentHelper;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-public class EmailExportActivity_02 extends AppCompatActivity {
+public class EmailExportActivity extends AppCompatActivity {
     private EditText recipientEditText, subjectEditText, msgEditText;
     private String front;
     private String back;
@@ -21,7 +22,7 @@ public class EmailExportActivity_02 extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_email_export02);
+        setContentView(R.layout.activity_email_export);
 
         String user = getIntent().getExtras().getString("user");
         FirebaseDatabase flashcardDB = FirebaseDatabase.getInstance("https://karteikar-default-rtdb.europe-west1.firebasedatabase.app/");

@@ -15,7 +15,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication">
         <activity
-            android:name=".EmailExportActivity_02"
+            android:name=".exportactivities.EmailExportActivity"
             android:exported="false" />
         <activity
             android:name=".createactivities.ChooseSubjectAndTopicForNewCardActivity"
