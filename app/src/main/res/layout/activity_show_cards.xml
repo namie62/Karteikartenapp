@@ -82,13 +82,5 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/back_to_start_btn" />
 
-    <Button
-        android:id="@+id/KArtebearbeitenButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Karte bearbeiten"
-        android:textSize="12dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/create_card_btn" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
