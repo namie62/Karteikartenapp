@@ -22,11 +22,13 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+
 import java.util.ArrayList;
 
 public class ShowCardsActivity extends AppCompatActivity {
     private static final int REQUESTCODE = 1;
     private ArrayList<String> checkedCards = new ArrayList<>();
+    private DatabaseReference reference;
     private ArrayList<String> checkedSubjects;
     private ArrayList<String> checkedTopics;
     private ListView listView;
@@ -43,7 +45,7 @@ public class ShowCardsActivity extends AppCompatActivity {
 
         this.user = getIntent().getExtras().getString("user");
         FirebaseDatabase flashcardDB = FirebaseDatabase.getInstance("https://karteikar-default-rtdb.europe-west1.firebasedatabase.app/");
-        DatabaseReference reference = flashcardDB.getReference(user);
+        this.reference = flashcardDB.getReference(user);
 
         this.ih = new IntentHelper(this, user);
         this.checkedSubjects = getIntent().getExtras().getStringArrayList("checkedSubjects");
@@ -90,25 +92,12 @@ public class ShowCardsActivity extends AppCompatActivity {
         ih.chooseCategoriesForNewCard(checkedSubjects, checkedTopics);
     }
 
-    public void vorwaerts(View view) {  //öffnet Kartenerstellung
-        if (checkedCards.size() == 0) {
-            ih.openPopUp(3);
+    public void editCard(View view) {  //öffnet Kartenerstellung
+        if (checkedCards.size() != 1) {
+            ih.openPopUp(4);
         } else {
-
-
-            //KartensammlerfürAnzeigeClass lernmodus = new KartensammlerfürAnzeigeClass();
-            //lernmodus.starteLernmodus("Fachuebersicht", checkeditems, themen, karten);
-            Intent lernmodus = new Intent(this, StudyModeActivity.class);
-            lernmodus.putStringArrayListExtra("checkedCards", checkedCards);
-            lernmodus.putStringArrayListExtra("checkedTopics", checkedTopics);
-            lernmodus.putStringArrayListExtra("checkedSubjects", checkedSubjects);
-            startActivityForResult(lernmodus, REQUESTCODE);
-            } /*
-        else{
-            Intent popupwindow = new Intent(this, HintPopUpActivity.class);
-            popupwindow.putExtra("InfotextPoUp", "Bitte nur eine Karte auswählen.");
-            startActivity(popupwindow);
-        }*/
+            ih.newCard(checkedSubjects, checkedTopics, checkedCards);
+            }
     }
 
     public void startStudyMode(View view){

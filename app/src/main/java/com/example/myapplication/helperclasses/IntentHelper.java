@@ -26,6 +26,7 @@ public class IntentHelper {
     private static final String infoText2 = "Bitte ein Fach auswählen!";
     private static final String infoText3 = "Bitte mindestens 1 Thema auswählen!";
     private static final String infoText4 = "Bitte mindestens 1 Karte auswählen!";
+    private static final String infoText5 = "Bitte exakt 1 Karte auswählen!";
     private static final String cancelInfoText = "Sicher, dass Sie abbrechen wollen?";
     
     
@@ -36,6 +37,7 @@ public class IntentHelper {
         this.infoText.add(infoText2);
         this.infoText.add(infoText3);
         this.infoText.add(infoText4);
+        this.infoText.add(infoText5);
     }
 
     public IntentHelper(Context packageContext) {
@@ -160,6 +162,11 @@ public class IntentHelper {
         b.putString("selectedSubject", selectedSubject);
         b.putString("selectedTopic", selectedTopic);
         start(i, b);
+    }
+
+    public void newCard(ArrayList<String> checkedSubjects, ArrayList<String> checkedTopics, ArrayList<String> checkedCards) {
+        Intent i = new Intent(this.packageContext, CreateNewCardActivity.class);
+        putLists(i, checkedSubjects, checkedTopics, checkedCards);
     }
     
     public void nextCardStudyMode(int index, ArrayList<String> checkedSubjects, ArrayList<String> checkedTopics, ArrayList<String> checkedCards) {
