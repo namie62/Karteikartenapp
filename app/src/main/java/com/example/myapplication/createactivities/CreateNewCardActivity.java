@@ -134,8 +134,8 @@ public class CreateNewCardActivity extends AppCompatActivity {
                 if (snapshot.exists()) {
                     int sortOrder = (int) (snapshot.child(selectedSubject).child(selectedTopic).getChildrenCount());
                     if (selectedCardFront == null) {
-                        reference.child(selectedSubject).child(selectedTopic).push().setValue(card);
                         card.setSortOrder(sortOrder);
+                        reference.child(selectedSubject).child(selectedTopic).push().setValue(card);
                     } else {
                         for (DataSnapshot dataSnapshot : snapshot.child(selectedSubject).child(selectedTopic).getChildren()) {
                             if (dataSnapshot.child("front").exists() && dataSnapshot.child("front").getValue(String.class).equals(selectedCardFront)){

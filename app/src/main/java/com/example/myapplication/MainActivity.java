@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity{
     private GoogleSignInClient mGoogleSignInClient;
     private static final String TAG = "SignInActivity";
     private static final int RC_SIGN_IN = 9001;
-
+    private String user;
     IntentHelper ih;
 
     @Override
@@ -45,9 +45,9 @@ public class MainActivity extends AppCompatActivity{
         super.onStart();
         GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
         assert account != null;
-        String user = account.getDisplayName();
-        this.ih = new IntentHelper(this, "cornelia");
-        ih.goToStartMenu("cornelia");
+        user = account.getDisplayName();
+        this.ih = new IntentHelper(this, user);
+        ih.goToStartMenu();
         statusTextView.setText(user);
     }
 

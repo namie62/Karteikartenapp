@@ -48,13 +48,16 @@ public class ShowSubjectsActivity extends AppCompatActivity {   //später dann d
         this.showObjects = new ArrayList<>();
 
         this.adapter = new ArrayAdapter<>(applicationContext, android.R.layout.simple_list_item_multiple_choice, showObjects);
-        reference.addValueEventListener(new ValueEventListener() {
+
+
+        reference.child("subject_sorting").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 showObjects.clear();
                 if (snapshot.exists()) {
-                    for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                        String nameFromDB = dataSnapshot.getKey();
+                    int max = (int) snapshot.getChildrenCount();
+                    for (int i=0; i<max; i++) {
+                        String nameFromDB = snapshot.child(String.valueOf(i)).getValue(String.class);
                         showObjects.add(nameFromDB);
                     }
                     listView.setAdapter(adapter);

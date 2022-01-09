@@ -11,6 +11,7 @@ import android.widget.Toast;
 import com.example.myapplication.R;
 import com.example.myapplication.helperclasses.IntentHelper;
 import com.example.myapplication.helperclasses.ListviewHelperClass;
+import com.example.myapplication.objectclasses.Subject;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -24,14 +25,13 @@ public class CreateSubjectActivity extends AppCompatActivity {
     private TextInputEditText hintTextInputEditText;
     private DatabaseReference reference;
     private int sortOrder = 0;
-    private String user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_subject);
 
-        this.user = getIntent().getExtras().getString("user");
+        String user = getIntent().getExtras().getString("user");
         FirebaseDatabase flashcardDB = FirebaseDatabase.getInstance("https://karteikar-default-rtdb.europe-west1.firebasedatabase.app/");
         this.reference = flashcardDB.getReference(user);
 
@@ -49,8 +49,8 @@ public class CreateSubjectActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (newSubject.trim().length() > 0) {
-                    sortOrder = (int) (snapshot.getChildrenCount());
-                    reference.child("subject_sorting").child(newSubject).setValue(sortOrder+1);
+                    sortOrder = (int) (snapshot.child("subject_sorting").getChildrenCount());
+                    reference.child("subject_sorting").child(String.valueOf(sortOrder)).setValue(newSubject);
                 }
             }
 

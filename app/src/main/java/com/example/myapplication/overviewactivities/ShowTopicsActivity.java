@@ -56,11 +56,10 @@ public class ShowTopicsActivity extends AppCompatActivity {
                 showObjects.clear();
                 if (snapshot.exists()) {
                     for (String subject : checkedSubjects) {
-                        for (DataSnapshot dataSnapshot : snapshot.child(subject).getChildren()){
-                            String nameFromDB = dataSnapshot.getKey();
-                            if(!nameFromDB.equals("sortOrder")) {
-                                showObjects.add(nameFromDB);
-                            }
+                        int max = (int) snapshot.child(subject).getChildrenCount();
+                        for (int i=0; i<max; i++) {
+                            String nameFromDB = snapshot.child(subject).child(String.valueOf(i)).getValue(String.class);
+                            showObjects.add(nameFromDB);
                         }
                     }
                     listView.setAdapter(adapter);

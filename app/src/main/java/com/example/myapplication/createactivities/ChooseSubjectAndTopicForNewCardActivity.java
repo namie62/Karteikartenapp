@@ -63,8 +63,8 @@ public class ChooseSubjectAndTopicForNewCardActivity extends AppCompatActivity {
                         if (snapshot.exists()){
                             topicsFromSelectedSubject.clear();
                             for (DataSnapshot dataSnapshot : snapshot.getChildren()){
-                                if (checkedTopics.contains(dataSnapshot.getKey())){
-                                    topicsFromSelectedSubject.add(dataSnapshot.getKey());
+                                if (checkedTopics.contains(dataSnapshot.getValue(String.class))){
+                                    topicsFromSelectedSubject.add(dataSnapshot.getValue(String.class));
                                 }
                             }
                         }

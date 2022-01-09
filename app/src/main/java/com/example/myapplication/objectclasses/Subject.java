@@ -6,14 +6,11 @@ import java.util.List;
 public class Subject {
     private int sortOrder;
     private String name;
-    private List<Topic> topics;
 
-    public Subject() {}
 
     public Subject(int sortOrder, String name) {
         this.sortOrder = sortOrder;
         this.name = name;
-        this.topics = new ArrayList<>();
     }
 
     @Override
@@ -38,13 +35,5 @@ public class Subject {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public List<Topic> getTopics() {
-        return topics;
-    }
-
-    public void addTopic(Topic topic) {
-        this.topics.add(topic);
     }
 }
