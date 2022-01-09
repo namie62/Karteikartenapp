@@ -22,10 +22,10 @@
             android:name=".popups.HintPopUpActivity"
             android:exported="true" />
         <activity
-            android:name=".modesofoperation.QuizModeShowCards"
+            android:name=".modesofoperation.QuizModeActivity"
             android:exported="true" />
         <activity
-            android:name=".modesofoperation.StudyModeShowCards"
+            android:name=".modesofoperation.StudyModeActivity"
             android:exported="true" />
         <activity
             android:name=".popups.CancelNewCardPopupActivity"

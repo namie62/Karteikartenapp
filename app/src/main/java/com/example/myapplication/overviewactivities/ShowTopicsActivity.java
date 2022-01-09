@@ -15,16 +15,12 @@ import com.example.myapplication.R;
 import com.example.myapplication.helperclasses.IntentHelper;
 import com.example.myapplication.popups.HintPopUpActivity;
 import com.example.myapplication.helperclasses.ListviewHelperClass;
-import com.example.myapplication.modesofoperation.QuizModeShowCards;
-import com.example.myapplication.modesofoperation.StudyModeShowCards;
-import com.example.myapplication.createactivities.CreateTopicActivity;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.lang.reflect.Method;
 import java.util.ArrayList;
 
 public class ShowTopicsActivity extends AppCompatActivity {

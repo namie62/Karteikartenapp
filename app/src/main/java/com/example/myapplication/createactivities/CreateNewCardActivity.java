@@ -90,7 +90,7 @@ public class CreateNewCardActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) {
-                    int sortOrder = (int) (snapshot.child(subject).child(topic).getChildrenCount()) - 1;
+                    int sortOrder = (int) (snapshot.child(subject).child(topic).getChildrenCount());
                     card.setSortOrder(sortOrder);
                     reference.child(subject).child(topic).push().setValue(card);
                     ih.goToCardOverview(checkedSubjects, checkedTopics);

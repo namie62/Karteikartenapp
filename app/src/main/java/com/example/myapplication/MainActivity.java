@@ -26,8 +26,6 @@ import com.google.firebase.database.FirebaseDatabase;
 public class MainActivity extends AppCompatActivity{
     private TextView statusTextView;
     private GoogleSignInClient mGoogleSignInClient;
-
-    private GoogleApiClient mGoogleApiClient;
     private static final String TAG = "SignInActivity";
     private static final int RC_SIGN_IN = 9001;
 
@@ -65,9 +63,9 @@ public class MainActivity extends AppCompatActivity{
             case R.id.sign_in_button:
                 signIn();
                 break;
-            case R.id.sign_out_button:
-                signOut();
-                break;
+//            case R.id.sign_out_button:
+////                signOut();
+//                break;
         }
     }
 
@@ -102,12 +100,12 @@ public class MainActivity extends AppCompatActivity{
     }
 
 
-    private void signOut(){
-        Auth.GoogleSignInApi.signOut(mGoogleApiClient).setResultCallback(new ResultCallback<Status>() {
-            @Override
-            public void onResult(@NonNull Status status) {
-                statusTextView.setText("Signed Out");
-            }
-        });
-    }
+//    private void signOut(){
+//        Auth.GoogleSignInApi.signOut(mGoogleApiClient).setResultCallback(new ResultCallback<Status>() {
+//            @Override
+//            public void onResult(@NonNull Status status) {
+//                statusTextView.setText("Signed Out");
+//            }
+//        });
+//    }
 }

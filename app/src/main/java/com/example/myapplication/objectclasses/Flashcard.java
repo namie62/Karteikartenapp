@@ -15,7 +15,7 @@ public class Flashcard {
         this.front = front;
         this.back = back;
         this.backImg = backImg;
-        this.progress = 0;
+        this.progress = 1;
     }
 
     public Flashcard(String front, String back, String backImg, int progress) {

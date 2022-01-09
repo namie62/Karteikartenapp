@@ -8,15 +8,14 @@ import com.example.myapplication.createactivities.ChooseSubjectAndTopicForNewCar
 import com.example.myapplication.createactivities.CreateNewCardActivity;
 import com.example.myapplication.createactivities.CreateSubjectActivity;
 import com.example.myapplication.createactivities.CreateTopicActivity;
-import com.example.myapplication.modesofoperation.QuizModeShowCards;
-import com.example.myapplication.modesofoperation.StudyModeShowCards;
+import com.example.myapplication.modesofoperation.QuizModeActivity;
+import com.example.myapplication.modesofoperation.StudyModeActivity;
 import com.example.myapplication.overviewactivities.ShowCardsActivity;
 import com.example.myapplication.overviewactivities.ShowSubjectsActivity;
 import com.example.myapplication.overviewactivities.ShowTopicsActivity;
 import com.example.myapplication.popups.CancelNewCardPopupActivity;
 import com.example.myapplication.popups.HintPopUpActivity;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class IntentHelper {
@@ -109,32 +108,32 @@ public class IntentHelper {
     }
 
     public void startStudyMode(int index, ArrayList<String> checkedSubjects, ArrayList<String> checkedTopics, ArrayList<String> checkedCards) {
-        Intent i = new Intent(this.packageContext, StudyModeShowCards.class);
+        Intent i = new Intent(this.packageContext, StudyModeActivity.class);
         putLists(i, index, checkedSubjects, checkedTopics, checkedCards);
     }
 
     public void startStudyMode(int index, ArrayList<String> checkedSubjects, ArrayList<String> checkedTopics) {
-        Intent i = new Intent(this.packageContext, StudyModeShowCards.class);
+        Intent i = new Intent(this.packageContext, StudyModeActivity.class);
         putLists(i, index, checkedSubjects, checkedTopics);
     }
 
     public void startStudyMode(int index, ArrayList<String> checkedSubjects) {
-        Intent i = new Intent(this.packageContext, StudyModeShowCards.class);
+        Intent i = new Intent(this.packageContext, StudyModeActivity.class);
         putLists(i, index, checkedSubjects);
     }
 
     public void startQuizmode(int index, ArrayList<String> checkedSubjects, ArrayList<String> checkedTopics, ArrayList<String> checkedCards) {
-        Intent i = new Intent(this.packageContext, QuizModeShowCards.class);
+        Intent i = new Intent(this.packageContext, QuizModeActivity.class);
         putLists(i, index, checkedSubjects, checkedTopics, checkedCards);
     }
 
     public void startQuizmode(int index, ArrayList<String> checkedSubjects, ArrayList<String> checkedTopics) {
-        Intent i = new Intent(this.packageContext, QuizModeShowCards.class);
+        Intent i = new Intent(this.packageContext, QuizModeActivity.class);
         putLists(i, index, checkedSubjects, checkedTopics);
     }
 
     public void startQuizmode(int index, ArrayList<String> checkedSubjects) {
-        Intent i = new Intent(this.packageContext, QuizModeShowCards.class);
+        Intent i = new Intent(this.packageContext, QuizModeActivity.class);
         putLists(i, index, checkedSubjects);
     }
 
@@ -164,17 +163,17 @@ public class IntentHelper {
     }
     
     public void nextCardStudyMode(int index, ArrayList<String> checkedSubjects, ArrayList<String> checkedTopics, ArrayList<String> checkedCards) {
-        Intent i = new Intent(this.packageContext, StudyModeShowCards.class);
+        Intent i = new Intent(this.packageContext, StudyModeActivity.class);
         putLists(i, index, checkedSubjects, checkedTopics, checkedCards);
     }
 
     public void nextCardStudyMode(int index, ArrayList<String> checkedSubjects, ArrayList<String> checkedTopics) {
-        Intent i = new Intent(this.packageContext, StudyModeShowCards.class);
+        Intent i = new Intent(this.packageContext, StudyModeActivity.class);
         putLists(i, index, checkedSubjects, checkedTopics);
     }
 
     public void nextCardStudyMode(int index, ArrayList<String> checkedSubjects) {
-        Intent i = new Intent(this.packageContext, StudyModeShowCards.class);
+        Intent i = new Intent(this.packageContext, StudyModeActivity.class);
         putLists(i, index, checkedSubjects);
     }
 

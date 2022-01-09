@@ -10,7 +10,7 @@ import com.example.myapplication.overviewactivities.ShowSubjectsActivity;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-public class QuizModeShowCards extends AppCompatActivity {
+public class QuizModeActivity extends AppCompatActivity {
     private static final int REQUESTCODE = 1;
     private IntentHelper ih;
     private String user;

@@ -23,7 +23,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-public class StudyModeShowCards extends AppCompatActivity {
+public class StudyModeActivity extends AppCompatActivity {
     private String content;
     private String topic;
     private KartenClass card = new KartenClass();
@@ -60,6 +60,7 @@ public class StudyModeShowCards extends AppCompatActivity {
                     for (String subject : checkedSubjects) {
                         DataSnapshot subjectSnapshot = snapshot.child(subject);
                         if (subjectSnapshot.exists() && checkedTopics != null) {
+//                            int subjectSortOrder = Integer.parseInt(subjectSnapshot.child("sortOrder").getValue(String.class));
                             for (String topic : checkedTopics) {
                                 DataSnapshot topicSnapshot = subjectSnapshot.child(topic);
                                 if (topicSnapshot.exists() && checkedCards != null) {

@@ -55,7 +55,7 @@ public class CreateTopicActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (newTopic.trim().length() > 0) {
-                    int sortOrder = (int) snapshot.child(selectedSubject).getChildrenCount() - 1;
+                    int sortOrder = (int) snapshot.child(selectedSubject).getChildrenCount();
                     reference.child(selectedSubject).child(newTopic).child("sortOrder").setValue(sortOrder);
                     ih.goToTopicOverview(checkedSubjects);
                 }

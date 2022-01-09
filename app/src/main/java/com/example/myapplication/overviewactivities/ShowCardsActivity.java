@@ -15,7 +15,7 @@ import android.widget.Toast;
 import com.example.myapplication.R;
 import com.example.myapplication.helperclasses.IntentHelper;
 import com.example.myapplication.helperclasses.ListviewHelperClass;
-import com.example.myapplication.modesofoperation.StudyModeShowCards;
+import com.example.myapplication.modesofoperation.StudyModeActivity;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -98,7 +98,7 @@ public class ShowCardsActivity extends AppCompatActivity {
 
             //KartensammlerfürAnzeigeClass lernmodus = new KartensammlerfürAnzeigeClass();
             //lernmodus.starteLernmodus("Fachuebersicht", checkeditems, themen, karten);
-            Intent lernmodus = new Intent(this, StudyModeShowCards.class);
+            Intent lernmodus = new Intent(this, StudyModeActivity.class);
             lernmodus.putStringArrayListExtra("checkedCards", checkedCards);
             lernmodus.putStringArrayListExtra("checkedTopics", checkedTopics);
             lernmodus.putStringArrayListExtra("checkedSubjects", checkedSubjects);

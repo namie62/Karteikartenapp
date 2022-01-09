@@ -48,10 +48,9 @@ public class CreateSubjectActivity extends AppCompatActivity {
         reference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                sortOrder = 0;
                 if (newSubject.trim().length() > 0) {
-                    sortOrder = (int) (snapshot.getChildrenCount()) - 1;
-                    reference.child(newSubject).child("sortOrder").setValue(sortOrder);
+                    sortOrder = (int) (snapshot.getChildrenCount());
+                    reference.child(newSubject).child("sortOrder").setValue(sortOrder+1);
                 }
             }
 
