@@ -50,7 +50,7 @@ public class CreateSubjectActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (newSubject.trim().length() > 0) {
                     sortOrder = (int) (snapshot.getChildrenCount());
-                    reference.child(newSubject).child("sortOrder").setValue(sortOrder+1);
+                    reference.child("subject_sorting").child(newSubject).setValue(sortOrder+1);
                 }
             }
 

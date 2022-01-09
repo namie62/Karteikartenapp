@@ -43,12 +43,12 @@ public class MainActivity extends AppCompatActivity{
     @Override
     public void onStart() {
         super.onStart();
-        //GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
-        //assert account != null;
-        //String user = account.getDisplayName();
+        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
+        assert account != null;
+        String user = account.getDisplayName();
         this.ih = new IntentHelper(this, "cornelia");
         ih.goToStartMenu("cornelia");
-//        statusTextView.setText(user);
+        statusTextView.setText(user);
     }
 
     public void onClick(View v) {
