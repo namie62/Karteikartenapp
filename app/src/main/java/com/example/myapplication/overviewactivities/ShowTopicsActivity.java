@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.example.myapplication.R;
 import com.example.myapplication.helperclasses.IntentHelper;
+import com.example.myapplication.helperclasses.PDFExport;
 import com.example.myapplication.popups.HintPopUpActivity;
 import com.example.myapplication.helperclasses.ListviewHelperClass;
 import com.google.firebase.database.DataSnapshot;
@@ -122,5 +123,11 @@ public class ShowTopicsActivity extends AppCompatActivity {
             Intent popupWindow = new Intent(this, HintPopUpActivity.class);
             popupWindow.putExtra("InfotextPoUp", "Bitte nur 1 Thema zur Bearbeitung auswählen.");
         }
+    }
+
+    public void pdfexport(View view){
+        PDFExport pdfexport = new PDFExport();
+        pdfexport.PDFExport(this, this.user, this.checkedSubjects, checkedTopics);
+        Toast.makeText(this,"PDF created", Toast.LENGTH_LONG).show();
     }
 }
