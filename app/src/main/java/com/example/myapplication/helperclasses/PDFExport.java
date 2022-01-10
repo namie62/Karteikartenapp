@@ -75,8 +75,6 @@ public class PDFExport {
         });
     }
 
-
-
     private Table createTable(){
         float[] width = {100f, 100f};
         Table table = new Table(width);
