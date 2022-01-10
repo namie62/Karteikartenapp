@@ -57,7 +57,7 @@ public class ChooseSubjectAndTopicForNewCardActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
                 selectedSubject = (String) subjectSpinner.getSelectedItem();
-                reference.child(selectedSubject).addValueEventListener(new ValueEventListener() {
+                reference.child(selectedSubject).child("sorting").addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         if (snapshot.exists()){

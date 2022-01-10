@@ -56,9 +56,9 @@ public class ShowTopicsActivity extends AppCompatActivity {
                 showObjects.clear();
                 if (snapshot.exists()) {
                     for (String subject : checkedSubjects) {
-                        int max = (int) snapshot.child(subject).getChildrenCount();
+                        int max = (int) snapshot.child(subject).child("sorting").getChildrenCount();
                         for (int i=0; i<max; i++) {
-                            String nameFromDB = snapshot.child(subject).child(String.valueOf(i)).getValue(String.class);
+                            String nameFromDB = snapshot.child(subject).child("sorting").child(String.valueOf(i)).getValue(String.class);
                             showObjects.add(nameFromDB);
                         }
                     }

@@ -21,20 +21,16 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class StudyModeActivity extends AppCompatActivity {
-    private String content;
-    private String topic;
     private KartenClass card = new KartenClass();
-    private ArrayList<String> checkedSubjects;
-    private ArrayList<String> checkedTopics;
-    private ArrayList<String> checkedCards;
+    private ArrayList<String> checkedSubjects, sortedSubjects, checkedTopics, sortedTopics, checkedCards, sortedCards, uniqueKeys;
     private ArrayList<Flashcard> cards = new ArrayList<>();
     private ArrayList<Flashcard> allCards = new ArrayList<>();
     private IntentHelper ih;
-    private int index;
-    private int max;
+    private int index = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,56 +47,52 @@ public class StudyModeActivity extends AppCompatActivity {
         this.checkedSubjects = b.getStringArrayList("checkedSubjects");
         this.checkedTopics = b.getStringArrayList("checkedTopics");
         this.checkedCards = b.getStringArrayList("checkedCards");
+        sortedSubjects = new ArrayList<>();
+        sortedTopics = new ArrayList<>();
+        sortedCards = new ArrayList<>();
         this.index = getIntent().getIntExtra("index", 0);
 
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) {
-                    for (String subject : checkedSubjects) {
-                        DataSnapshot subjectSnapshot = snapshot.child(subject);
-                        if (subjectSnapshot.exists() && checkedTopics != null) {
-//                            int subjectSortOrder = Integer.parseInt(subjectSnapshot.child("sortOrder").getValue(String.class));
-                            for (String topic : checkedTopics) {
-                                DataSnapshot topicSnapshot = subjectSnapshot.child(topic);
-                                if (topicSnapshot.exists() && checkedCards != null) {
-                                    for (DataSnapshot cardSnapshot : topicSnapshot.getChildren()) {
-                                        for (String card : checkedCards) {
-                                            if (cardSnapshot.exists()
-                                                    && cardSnapshot.child("front").exists()) {
-                                                if (cardSnapshot.child("front").getValue(String.class).equals(card)) {
-                                                    fillCardsArray(cardSnapshot);
-                                                }
-                                            }
-                                        }
-//                                        DataSnapshot cardSnapshot = topicSnapshot.child(card);
-//                                        fillCardsArray(cardSnapshot);
-                                    }
-                                } else {
-                                    for (DataSnapshot cardSnapshot : topicSnapshot.getChildren()) {
-                                        if (cardSnapshot.child("front").exists()){
-                                            fillCardsArray(cardSnapshot);
-                                        }
-                                    }
-                                }
+                    int numberOfSubjects = (int) snapshot.child("subject_sorting").getChildrenCount();
+                    for (int i = 0; i < numberOfSubjects; i++) {
+                        String s = snapshot.child("subject_sorting").child(String.valueOf(i)).getValue(String.class);
+                        if (checkedSubjects.contains(s)) {
+                            sortedSubjects.add(s);
+                        }
+                    }
+                    for (String subject : sortedSubjects) {
+                        int numberOfTopics = (int) snapshot.child(subject).child("sorting").getChildrenCount();
+                        for (int i = 0; i < numberOfTopics; i++) {
+                            String s = snapshot.child(subject).child("sorting").child(String.valueOf(i)).getValue(String.class);
+                            if (checkedTopics == null) {
+                                sortedTopics.add(s);
+                            } else if (checkedTopics.contains(s)) {
+                                sortedTopics.add(s);
                             }
-                        } else {
-                            for (DataSnapshot topicSnapshot : subjectSnapshot.getChildren()) {
-                                for (DataSnapshot cardSnapshot : topicSnapshot.getChildren()) {
-                                    if (cardSnapshot.child("front").exists()){
-                                        fillCardsArray(cardSnapshot);
-                                    }
+                        }
+                        for (String topic : sortedTopics) {
+                            int numberOfCards = (int) snapshot.child(subject).child(topic).getChildrenCount();
+                            for (int i = 0; i < numberOfCards; i++) {
+                                String s = snapshot.child(subject).child(topic).child(String.valueOf(i)).getValue(String.class);
+                                if (checkedCards == null) {
+                                    sortedCards.add(s);
+                                } else if (checkedCards.contains(s)) {
+                                    sortedCards.add(s);
                                 }
                             }
                         }
                     }
+
+                    for (String key : sortedCards) {
+                        cards.add(snapshot.child(key).getValue(Flashcard.class));
+                    }
                 }
-                max = cards.size();
                 Flashcard card = cards.get(index);
-                content = card.getFront();
-                topic = card.getBack();
-                fillBackTextView();
-                fillFrontTextView();
+                fillFrontTextView(card.getFront());
+                fillBackTextView(card.getBack());
             }
 
             public void onCancelled(@NonNull DatabaseError error) {
@@ -110,40 +102,23 @@ public class StudyModeActivity extends AppCompatActivity {
         });
     }
 
-
-
-
-    public void fillBackTextView(){
+    public void fillBackTextView(String back){
         TextView textView = (TextView) findViewById(R.id.back_text_view);
-        textView.setText(content);
+        textView.setText(back);
     }
 
-    public void fillFrontTextView(){
+    public void fillFrontTextView(String front){
         TextView textview = (TextView) findViewById(R.id.front_text_view);
-        textview.setText(topic);
-    }
-
-    public void fillCardsArray(DataSnapshot ds) {
-        String frontFromDB = ds.child("front").getValue(String.class);
-        String backFromDB = ds.child("back").getValue(String.class);
-        String backImgFromDB = ds.child("backImg").getValue(String.class);
-        Integer progressFromDB = ds.child("progress").getValue(Integer.class);
-        Integer sortOrderFromDB = ds.child("sortOrder").getValue(Integer.class);
-        if (progressFromDB == null) {
-            progressFromDB = 0;
-        }
-        if (sortOrderFromDB == null) {
-            sortOrderFromDB = 0;
-        }
-        Flashcard newCard = new Flashcard(frontFromDB, backFromDB, backImgFromDB, progressFromDB);
-        newCard.setSortOrder(sortOrderFromDB);
-        cards.add(newCard);
-
+        textview.setText(front);
     }
 
     public void nextCard(View view) {
+        int max = cards.size();
         if (index < max-1) {
-            ih.nextCardStudyMode(index+1, this.checkedSubjects, this.checkedTopics, this.checkedCards);
+            index += 1;
+            Flashcard card = cards.get(index);
+            fillFrontTextView(card.getFront());
+            fillBackTextView(card.getBack());
         } else {
             ih.goToStartMenu();
         }
@@ -151,7 +126,10 @@ public class StudyModeActivity extends AppCompatActivity {
 
     public void previousCard(View view) {
         if (index > 0) {
-            ih.nextCardStudyMode(index-1, this.checkedSubjects, this.checkedTopics, this.checkedCards);
+            index -= 1;
+            Flashcard card = cards.get(index);
+            fillFrontTextView(card.getFront());
+            fillBackTextView(card.getBack());
         } else {
             ih.goToStartMenu();
         }
@@ -160,9 +138,4 @@ public class StudyModeActivity extends AppCompatActivity {
     public void previous(View view) {
         ih.goToStartMenu();
     }
-
-    public void goToStart() {
-        ih.goToStartMenu();
-    }
-
 }

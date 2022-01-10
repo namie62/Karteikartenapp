@@ -132,10 +132,12 @@ public class CreateNewCardActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) {
-                    int sortOrder = (int) (snapshot.child(selectedSubject).child(selectedTopic).getChildrenCount());
                     if (selectedCardFront == null) {
                         card.setSortOrder(sortOrder);
-                        reference.child(selectedSubject).child(selectedTopic).push().setValue(card);
+                        String newUniqueKey = reference.push().getKey();
+                        reference.child(newUniqueKey).setValue(card);
+                        int sortOrder = (int) snapshot.child(selectedSubject).child(selectedTopic).getChildrenCount();
+                        reference.child(selectedSubject).child(selectedTopic).child(String.valueOf(sortOrder)).setValue(newUniqueKey);
                     } else {
                         for (DataSnapshot dataSnapshot : snapshot.child(selectedSubject).child(selectedTopic).getChildren()) {
                             if (dataSnapshot.child("front").exists() && dataSnapshot.child("front").getValue(String.class).equals(selectedCardFront)){

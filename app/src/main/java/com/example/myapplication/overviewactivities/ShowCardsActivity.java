@@ -62,11 +62,10 @@ public class ShowCardsActivity extends AppCompatActivity {
                 if (snapshot.exists()) {
                     for (String subject : checkedSubjects) {
                         for (String topic : checkedTopics) {
-                            for (DataSnapshot dataSnapshot : snapshot.child(subject).child(topic).getChildren()){
-                                if (dataSnapshot.exists() && !dataSnapshot.getKey().equals("sortOrder")) {
-                                    String nameFromDB = dataSnapshot.child("front").getValue(String.class);
-                                    showObjects.add(nameFromDB);
-                                }
+                            int max = (int) snapshot.child(subject).child(topic).getChildrenCount();
+                            for (int i=0; i<max; i++) {
+                                String cardpath = snapshot.child(subject).child(topic).child(String.valueOf(i)).getValue(String.class);
+                                showObjects.add(snapshot.child(cardpath).child("front").getValue(String.class));
                             }
                         }
                     }
