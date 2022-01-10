@@ -12,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.myapplication.R;
+import com.example.myapplication.helperclasses.DeleteStuff;
 import com.example.myapplication.helperclasses.IntentHelper;
 import com.example.myapplication.helperclasses.PDFExport;
 import com.example.myapplication.popups.HintPopUpActivity;
@@ -33,6 +34,7 @@ public class ShowTopicsActivity extends AppCompatActivity {
     private ArrayAdapter<String> adapter;
     private IntentHelper ih;
     private String user;
+    DatabaseReference reference;
 
 
     @Override
@@ -42,7 +44,7 @@ public class ShowTopicsActivity extends AppCompatActivity {
 
         this.user = getIntent().getExtras().getString("user");
         FirebaseDatabase flashcardDB = FirebaseDatabase.getInstance("https://karteikar-default-rtdb.europe-west1.firebasedatabase.app/");
-        DatabaseReference reference = flashcardDB.getReference(user);
+        this.reference = flashcardDB.getReference(user);
 
         this.ih = new IntentHelper(this, user);
         this.checkedSubjects = getIntent().getExtras().getStringArrayList("checkedSubjects");
@@ -129,5 +131,10 @@ public class ShowTopicsActivity extends AppCompatActivity {
         PDFExport pdfexport = new PDFExport();
         pdfexport.PDFExport(this, this.user, this.checkedSubjects, checkedTopics);
         Toast.makeText(this,"PDF created", Toast.LENGTH_LONG).show();
+    }
+
+    public void deleteTopic(View view) {
+        DeleteStuff ds = new DeleteStuff(getApplicationContext(), reference, checkedSubjects, checkedTopics);
+        ds.deleteeee();
     }
 }

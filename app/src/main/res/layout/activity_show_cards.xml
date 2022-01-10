@@ -25,11 +25,11 @@
         app:layout_constraintTop_toBottomOf="@+id/create_card_btn" />
 
     <Button
-        android:id="@+id/abfragekarte"
+        android:id="@+id/quiz_mode_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/Abfrageknopf"
-        android:onClick = "startTestMode"
+        android:onClick = "startQuizMode"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/study_mode_subject_btn" />
 
@@ -59,10 +59,10 @@
         android:onClick="editCard"
         android:text="@string/IndieKarte"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/abfragekarte" />
+        app:layout_constraintStart_toEndOf="@+id/quiz_mode_btn" />
 
     <TextView
-        android:id="@+id/topicsTextView"
+        android:id="@+id/topics_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -74,13 +74,23 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/ReihenfolgeändernButton"
+        android:id="@+id/change_sort_order_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Reihenfolge ändern"
         android:textSize="12dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/back_to_start_btn" />
+
+    <Button
+        android:id="@+id/delete_subjects_btn"
+        android:layout_width="51dp"
+        android:layout_height="45dp"
+        android:layout_marginEnd="16dp"
+        android:onClick="deleteCard"
+        app:icon="@android:drawable/ic_menu_delete"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/create_card_btn" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

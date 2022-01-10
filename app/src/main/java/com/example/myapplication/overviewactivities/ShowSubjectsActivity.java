@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.example.myapplication.MainActivity;
 import com.example.myapplication.R;
+import com.example.myapplication.helperclasses.DeleteStuff;
 import com.example.myapplication.helperclasses.IntentHelper;
 import com.example.myapplication.helperclasses.ListviewHelperClass;
 import com.google.firebase.database.DataSnapshot;
@@ -31,6 +32,10 @@ public class ShowSubjectsActivity extends AppCompatActivity {   //später dann d
     private ArrayAdapter<String> adapter;
     private IntentHelper ih;
     private String user;
+    DatabaseReference reference;
+    private ArrayList<String> sortedSubjects, sortedTopics, checkedCards, sortedCards, uniqueKeys;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +46,7 @@ public class ShowSubjectsActivity extends AppCompatActivity {   //später dann d
         this.ih = new IntentHelper(this, user);
 
         FirebaseDatabase flashcardDB = FirebaseDatabase.getInstance("https://karteikar-default-rtdb.europe-west1.firebasedatabase.app/");
-        DatabaseReference reference = flashcardDB.getReference(user);
+        this.reference = flashcardDB.getReference(user);
 
         this.listView = findViewById(R.id.subjects_listView);
         this.applicationContext = getApplicationContext();
@@ -105,5 +110,10 @@ public class ShowSubjectsActivity extends AppCompatActivity {   //später dann d
 
     public void newSubject(View view){
         ih.newSubject(user);
+    }
+
+    public void deleteSubject(View view) {
+        DeleteStuff ds = new DeleteStuff(getApplicationContext(), reference, checkedSubjects);
+        ds.deleteeee();
     }
 }

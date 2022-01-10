@@ -4,7 +4,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -13,9 +12,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.myapplication.R;
+import com.example.myapplication.helperclasses.DeleteStuff;
 import com.example.myapplication.helperclasses.IntentHelper;
 import com.example.myapplication.helperclasses.ListviewHelperClass;
-import com.example.myapplication.modesofoperation.StudyModeActivity;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -26,7 +25,6 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 
 public class ShowCardsActivity extends AppCompatActivity {
-    private static final int REQUESTCODE = 1;
     private ArrayList<String> checkedCards = new ArrayList<>();
     private DatabaseReference reference;
     private ArrayList<String> checkedSubjects;
@@ -79,7 +77,7 @@ public class ShowCardsActivity extends AppCompatActivity {
                 Toast.makeText(applicationContext, error.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
-        TextView textView = (TextView) findViewById(R.id.topicsTextView);
+        TextView textView = (TextView) findViewById(R.id.topics_text_view);
         textView.setText(checkedTopics.toString());
     }
 
@@ -114,5 +112,10 @@ public class ShowCardsActivity extends AppCompatActivity {
         } else {
             ih.startQuizmode(0, checkedSubjects, checkedTopics, checkedCards);
         }
+    }
+
+    public void deleteCard(View view) {
+        DeleteStuff ds = new DeleteStuff(getApplicationContext(), reference, checkedSubjects, checkedTopics, checkedCards);
+        ds.deleteeee();
     }
 }

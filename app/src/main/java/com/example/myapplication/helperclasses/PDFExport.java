@@ -28,14 +28,13 @@ import java.io.OutputStream;
 import java.util.ArrayList;
 
 public class PDFExport {
-    private Context applicationContext;
-    private DatabaseReference reference;
 
     private Document document;
 
     public void PDFExport(Context c, String user, ArrayList<String> checkedSubjects, ArrayList<String> checkedTopics) {
+
         FirebaseDatabase flashcardDB = FirebaseDatabase.getInstance("https://karteikar-default-rtdb.europe-west1.firebasedatabase.app/");
-        this.reference = flashcardDB.getReference(user);
+        DatabaseReference reference = flashcardDB.getReference(user);
 
 
         try {    //versuchen Dokument zu erstellen und abzuspeichern
