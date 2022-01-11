@@ -3,11 +3,10 @@ package com.example.myapplication.objectclasses;
 import android.graphics.Bitmap;
 
 public class Flashcard {
-    public int progress;
     public String front;
     public String back;
-    public String backImg;
-    public int sortOrder;
+    public String backImg, key;
+    public int progress, sortOrder;
 
     public Flashcard() {}
 
@@ -18,11 +17,12 @@ public class Flashcard {
         this.progress = 1;
     }
 
-    public Flashcard(String front, String back, String backImg, int progress) {
+    public Flashcard(String front, String back, String backImg, int progress, String key) {
         this.front = front;
         this.back = back;
         this.backImg = backImg;
         this.progress = progress;
+        this.key = key;
     }
 
     public int getSortOrder() {
@@ -68,5 +68,13 @@ public class Flashcard {
     @Override
     public String toString() {
         return("front = " + front + "\nback = " + back + "\nprogress = " + progress);
+    }
+
+    public String getKey() {
+        return key;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
     }
 }

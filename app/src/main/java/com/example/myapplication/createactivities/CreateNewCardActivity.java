@@ -103,18 +103,12 @@ public class CreateNewCardActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) {
-                    for (String subject : checkedSubjects) {
-                        for (String topic : checkedTopics) {
-                            for (DataSnapshot dataSnapshot : snapshot.child(subject).child(topic).getChildren()){
-                                if (dataSnapshot.child("front").exists() && dataSnapshot.child("front").getValue(String.class).equals(selectedCardFront)) {
-                                    String backFromDB = dataSnapshot.child("back").getValue(String.class);
-                                    backImgFromDB = dataSnapshot.child("backImg").getValue(String.class);
-                                    selectedSubject = subject;
-                                    selectedTopic = topic;
-                                    frontEditText.setText(selectedCardFront);
-                                    backEditText.setText(backFromDB);
-                                }
-                            }
+                    for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                        if (dataSnapshot.exists() && dataSnapshot.child("front").getValue(String.class).equals(selectedCardFront)){
+                            String backFromDB = dataSnapshot.child("back").getValue(String.class);
+                            backImgFromDB = dataSnapshot.child("backImg").getValue(String.class);
+                            frontEditText.setText(selectedCardFront);
+                            backEditText.setText(backFromDB);
                         }
                     }
                 }
@@ -139,11 +133,11 @@ public class CreateNewCardActivity extends AppCompatActivity {
                         int sortOrder = (int) snapshot.child(selectedSubject).child(selectedTopic).getChildrenCount();
                         reference.child(selectedSubject).child(selectedTopic).child(String.valueOf(sortOrder)).setValue(newUniqueKey);
                     } else {
-                        for (DataSnapshot dataSnapshot : snapshot.child(selectedSubject).child(selectedTopic).getChildren()) {
+                        for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                             if (dataSnapshot.child("front").exists() && dataSnapshot.child("front").getValue(String.class).equals(selectedCardFront)){
-                                String cardName = dataSnapshot.getKey();
-                                reference.child(selectedSubject).child(selectedTopic).child(cardName).child("front").setValue(getFrontText());
-                                reference.child(selectedSubject).child(selectedTopic).child(cardName).child("back").setValue(getBackText());
+                                String key = snapshot.getKey();
+                                reference.child(key).child("front").setValue(getFrontText());
+                                reference.child(key).child("back").setValue(getBackText());
                             }
                         }
                     }
