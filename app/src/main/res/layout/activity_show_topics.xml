@@ -96,7 +96,7 @@
         app:layout_constraintTop_toBottomOf="@+id/create_topic_btn" />
 
     <Button
-        android:id="@+id/delete_subjects_btn"
+        android:id="@+id/delete_topics_btn"
         android:layout_width="51dp"
         android:layout_height="45dp"
         android:layout_marginTop="4dp"

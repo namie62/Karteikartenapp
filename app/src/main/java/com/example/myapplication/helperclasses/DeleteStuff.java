@@ -89,8 +89,7 @@ public class DeleteStuff {
                             reference.child(subject).child(topic).removeValue();
                             for (int j=0; j<remainingCards.size(); j++) {
                                 String key = remainingCards.get(j);
-                                String s = snapshot.child(key).child("front").getValue(String.class);
-                                reference.child(subject).child(topic).child(String.valueOf(j)).setValue(s);
+                                reference.child(subject).child(topic).child(String.valueOf(j)).setValue(key);
                             }
                         }
                     }
@@ -100,7 +99,7 @@ public class DeleteStuff {
                     reference.child(card).removeValue();
                 }
 
-                if (sortedCards.isEmpty()) {
+                if (checkedCards == null) {
                     for(String oldSubject : sortedSubjects){
                         for(String oldTopic : sortedTopics) {
                             reference.child(oldSubject).child(oldTopic).removeValue();
@@ -110,23 +109,22 @@ public class DeleteStuff {
                                     remainingTopics.add(dataSnapshot.getValue(String.class));
                                 }
                                 reference.child(oldSubject).child("sorting").removeValue();
-                                for (String newTopic : remainingTopics) {
-                                    int sortOrder = (int) (snapshot.child(oldSubject).child("sorting").getChildrenCount());
-                                    reference.child(oldSubject).child("sorting").child(String.valueOf(sortOrder)).setValue(newTopic);
+                                if (!remainingTopics.isEmpty()) {
+                                    for (int i=0; i<remainingTopics.size(); i++) {
+                                        reference.child(oldSubject).child("sorting").child(String.valueOf(i)).setValue(remainingTopics.get(i));
+                                    }
                                 }
                             }
                         }
-                        if (sortedTopics.isEmpty()) {
+                        if (checkedTopics == null) {
                             reference.child(oldSubject).removeValue();
                             for (DataSnapshot dataSnapshot : snapshot.child("subject_sorting").getChildren()) {
-                                if (dataSnapshot.exists() && !dataSnapshot.getValue(String.class).equals(oldSubject)) {
+                                if (dataSnapshot.exists() && !dataSnapshot.getValue(String.class).equals(oldSubject) && !remainingSubjects.contains(dataSnapshot.getValue(String.class))) {
                                     remainingSubjects.add(dataSnapshot.getValue(String.class));
                                 }
                             }
                         }
                     }
-                } else {
-
                 }
                 if (!remainingSubjects.isEmpty()) {
                     reference.child("subject_sorting").removeValue();
