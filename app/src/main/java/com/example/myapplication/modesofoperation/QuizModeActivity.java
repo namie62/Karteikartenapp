@@ -94,8 +94,9 @@ public class QuizModeActivity extends AppCompatActivity {
                 Collections.shuffle(cards);
                 Flashcard card = cards.get(index);
                 if (card.getProgress() < 5) {
-                    fillFrontTextView(card.getFront());
-                    fillBackTextView(card.getBack());
+                    setFrontTextView(card.getFront());
+                    setBackTextView(card.getBack());
+                    setProgressTextView(card.getProgress());
                 } else {
                     nextCard();
                 }
@@ -110,14 +111,19 @@ public class QuizModeActivity extends AppCompatActivity {
 
     }
 
-    public void fillBackTextView(String back){
-        TextView textView = (TextView) findViewById(R.id.card_front);
+    public void setBackTextView(String back){
+        TextView textView = findViewById(R.id.card_front);
         textView.setText(back);
     }
 
-    public void fillFrontTextView(String front){
-        TextView textview = (TextView) findViewById(R.id.card_back);
+    public void setFrontTextView(String front){
+        TextView textview = findViewById(R.id.card_back);
         textview.setText(front);
+    }
+
+    public void setProgressTextView(int progress) {
+        TextView textView = findViewById(R.id.progress_textView);
+        textView.setText(String.valueOf(progress));
     }
 
     public void nextCard() {
@@ -125,8 +131,8 @@ public class QuizModeActivity extends AppCompatActivity {
         if (index < max-1) {
             index += 1;
             Flashcard card = cards.get(index);
-            fillFrontTextView(card.getFront());
-            fillBackTextView(card.getBack());
+            setFrontTextView(card.getFront());
+            setBackTextView(card.getBack());
         } else {
             ih.goToStartMenu();
         }

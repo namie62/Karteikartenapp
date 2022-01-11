@@ -2,8 +2,6 @@ package com.example.myapplication.modesofoperation;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -13,15 +11,12 @@ import com.example.myapplication.KartenClass;
 import com.example.myapplication.R;
 import com.example.myapplication.helperclasses.IntentHelper;
 import com.example.myapplication.objectclasses.Flashcard;
-import com.example.myapplication.overviewactivities.ShowSubjectsActivity;
-import com.example.myapplication.overviewactivities.ShowTopicsActivity;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class StudyModeActivity extends AppCompatActivity {
@@ -35,7 +30,7 @@ public class StudyModeActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_study_mode_show_cards);
+        setContentView(R.layout.activity_study_mode);
 
         String user = getIntent().getExtras().getString("user");
         FirebaseDatabase flashcardDB = FirebaseDatabase.getInstance("https://karteikar-default-rtdb.europe-west1.firebasedatabase.app/");
@@ -87,12 +82,14 @@ public class StudyModeActivity extends AppCompatActivity {
                     }
 
                     for (String key : sortedCards) {
-                        cards.add(snapshot.child(key).getValue(Flashcard.class));
+                        Flashcard c = snapshot.child(key).getValue(Flashcard.class);
+                        cards.add(c);
                     }
                 }
                 Flashcard card = cards.get(index);
                 fillFrontTextView(card.getFront());
                 fillBackTextView(card.getBack());
+                setProgressTextView(card.getProgress());
             }
 
             public void onCancelled(@NonNull DatabaseError error) {
@@ -110,6 +107,11 @@ public class StudyModeActivity extends AppCompatActivity {
     public void fillFrontTextView(String front){
         TextView textview = (TextView) findViewById(R.id.front_text_view);
         textview.setText(front);
+    }
+
+    public void setProgressTextView(int progress) {
+        TextView textView = findViewById(R.id.progress_study_textView);
+        textView.setText(String.valueOf(progress));
     }
 
     public void nextCard(View view) {
