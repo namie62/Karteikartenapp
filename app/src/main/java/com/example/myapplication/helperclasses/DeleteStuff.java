@@ -53,83 +53,65 @@ public class DeleteStuff {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) {
-                    int numberOfSubjects = (int) snapshot.child("subject_sorting").getChildrenCount();
-                    for (int i = 0; i < numberOfSubjects; i++) {
-                        String s = snapshot.child("subject_sorting").child(String.valueOf(i)).getValue(String.class);
-                        if (checkedSubjects.contains(s)) {
-                            sortedSubjects.add(s);
-                        }
-                    }
-                    for (String subject : sortedSubjects) {
-                        int numberOfTopics = (int) snapshot.child(subject).child("sorting").getChildrenCount();
-                        for (int i = 0; i < numberOfTopics; i++) {
-                            String s = snapshot.child(subject).child("sorting").child(String.valueOf(i)).getValue(String.class);
-                            if (checkedTopics == null) {
-                                sortedTopics.add(s);
-                            } else if (checkedTopics.contains(s)) {
-                                sortedTopics.add(s);
-                            }
-                        }
-                        for (String topic : sortedTopics) {
-                            int numberOfCards = (int) snapshot.child(subject).child(topic).getChildrenCount();
-                            for (int i = 0; i < numberOfCards; i++) {
-                                String key = snapshot.child(subject).child(topic).child(String.valueOf(i)).getValue(String.class);
-                                String s = snapshot.child(key).child("front").getValue(String.class);
-                                if (checkedCards == null) {
-                                    sortedCards.add(s);
-                                } else if (checkedCards.contains(s)) {
-                                    sortedCards.add(key);
+                    if (checkedCards == null && checkedTopics == null) {
+                        for (String subject : checkedSubjects) {
+                            ArrayList<String> cardsToDelete = new ArrayList<>();
+                            for (DataSnapshot dataSnapshot : snapshot.child(subject).getChildren()){
+                                int numberOfCardsInTopic = (int) dataSnapshot.getChildrenCount();
+                                for (int i=0; i<numberOfCardsInTopic; i++) {
+                                    cardsToDelete.add(dataSnapshot.child(String.valueOf(i)).getValue(String.class));
                                 }
                             }
-                            for (DataSnapshot dataSnapshot : snapshot.child(subject).child(topic).getChildren()) {
-                                if (!sortedCards.contains(dataSnapshot.getValue(String.class))) {
-                                    remainingCards.add(dataSnapshot.getValue(String.class));
-                                }
+                            for (String card : cardsToDelete) {
+                                reference.child(card).removeValue();
                             }
-                            reference.child(subject).child(topic).removeValue();
-                            for (int j=0; j<remainingCards.size(); j++) {
-                                String key = remainingCards.get(j);
-                                reference.child(subject).child(topic).child(String.valueOf(j)).setValue(key);
+                            reference.child(subject).removeValue();
+                        }
+                        ArrayList<String> remainingSubjects = new ArrayList<>();
+                        for (int i=0; i< (int) snapshot.child("subject_sorting").getChildrenCount(); i++) {
+                            if (!checkedSubjects.contains(snapshot.child("subject_sorting").child(String.valueOf(i)).getValue(String.class))){
+                                remainingSubjects.add(snapshot.child("subject_sorting").child(String.valueOf(i)).getValue(String.class));
                             }
                         }
-                    }
-                }
-
-                for (String card : sortedCards) {
-                    reference.child(card).removeValue();
-                }
-
-                if (checkedCards == null) {
-                    for(String oldSubject : sortedSubjects){
-                        for(String oldTopic : sortedTopics) {
-                            reference.child(oldSubject).child(oldTopic).removeValue();
+                        reference.child("subject_sorting").setValue(remainingSubjects);
+                    } else if (checkedCards == null){
+                        for (String subject : checkedSubjects) {
+                            for (String topic : checkedTopics) {
+                                ArrayList<String> cardsToDelete = new ArrayList<>();
+                                int numberOfCardsInTopic = (int) snapshot.child(subject).child(topic).getChildrenCount();
+                                for (int i=0; i<numberOfCardsInTopic; i++) {
+                                    cardsToDelete.add(snapshot.child(subject).child(topic).getValue(String.class));
+                                }
+                                for (String card : cardsToDelete) {
+                                    reference.child(card).removeValue();
+                                }
+                                reference.child(subject).child(topic).removeValue();
+                            }
                             ArrayList<String> remainingTopics = new ArrayList<>();
-                            for (DataSnapshot dataSnapshot : snapshot.child(oldSubject).child("sorting").getChildren()){
-                                if (dataSnapshot.exists() && !dataSnapshot.getValue(String.class).equals(oldTopic)) {
-                                    remainingTopics.add(dataSnapshot.getValue(String.class));
+                            for (int i=0; i< (int) snapshot.child(subject).child("sorting").getChildrenCount(); i++){
+                                if (!checkedTopics.contains(snapshot.child("sorting").child(String.valueOf(i)).getValue(String.class))) {
+                                    remainingTopics.add(snapshot.child("sorting").child(String.valueOf(i)).getValue(String.class));
                                 }
-                                reference.child(oldSubject).child("sorting").removeValue();
-                                if (!remainingTopics.isEmpty()) {
-                                    for (int i=0; i<remainingTopics.size(); i++) {
-                                        reference.child(oldSubject).child("sorting").child(String.valueOf(i)).setValue(remainingTopics.get(i));
+                            }
+                            reference.child("sorting").setValue(remainingTopics);
+                        }
+                    } else {
+                        for (String subject : checkedSubjects){
+                            for (String topic : checkedTopics) {
+                                for (String card : checkedCards) {
+                                    reference.child(card).removeValue();
+                                }
+
+                                ArrayList<String> remainingCards = new ArrayList<>();
+                                int numberOfCardsInTopic = (int) snapshot.child(subject).child(topic).getChildrenCount();
+                                for (int i=0; i<numberOfCardsInTopic; i++) {
+                                    if (!checkedCards.contains(snapshot.child(subject).child(topic).child(String.valueOf(i)).getValue(String.class))){
+                                        remainingCards.add(snapshot.child(subject).child(topic).child(String.valueOf(i)).getValue(String.class));
                                     }
                                 }
+                                reference.child(subject).child(topic).setValue(remainingCards);
                             }
                         }
-                        if (checkedTopics == null) {
-                            reference.child(oldSubject).removeValue();
-                            for (DataSnapshot dataSnapshot : snapshot.child("subject_sorting").getChildren()) {
-                                if (dataSnapshot.exists() && !dataSnapshot.getValue(String.class).equals(oldSubject) && !remainingSubjects.contains(dataSnapshot.getValue(String.class))) {
-                                    remainingSubjects.add(dataSnapshot.getValue(String.class));
-                                }
-                            }
-                        }
-                    }
-                }
-                if (!remainingSubjects.isEmpty()) {
-                    reference.child("subject_sorting").removeValue();
-                    for (int i=0; i<remainingSubjects.size(); i++) {
-                        reference.child("subject_sorting").child(String.valueOf(i)).setValue(remainingSubjects.get(i));
                     }
                 }
             }
