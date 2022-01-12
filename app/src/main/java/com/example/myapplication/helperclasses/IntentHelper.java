@@ -157,7 +157,7 @@ public class IntentHelper {
         putLists(i, checkedSubjects, checkedTopics);
     }
 
-    public void newCard(String selectedSubject, String selectedTopic, ArrayList<String> checkedSubjects, ArrayList<String> checkedTopics) {
+    public void editCard(String selectedSubject, String selectedTopic, ArrayList<String> checkedSubjects, ArrayList<String> checkedTopics) {
         Intent i = new Intent(this.packageContext, CreateNewCardActivity.class);
         Bundle b = addLists(checkedSubjects, checkedTopics);
         b.putString("selectedSubject", selectedSubject);
@@ -165,9 +165,9 @@ public class IntentHelper {
         start(i, b);
     }
 
-    public void newCard(ArrayList<String> checkedSubjects, ArrayList<String> checkedTopics, ArrayList<String> checkedCards) {
+    public void editCard(ArrayList<String> checkedSubjects, ArrayList<String> checkedTopics, ArrayList<String> checkedKeys) {
         Intent i = new Intent(this.packageContext, CreateNewCardActivity.class);
-        putLists(i, checkedSubjects, checkedTopics, checkedCards);
+        putLists(i, checkedSubjects, checkedTopics, checkedKeys);
     }
 
     public void shareCard(String front, String back, String img) {

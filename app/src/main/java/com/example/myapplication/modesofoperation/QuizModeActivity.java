@@ -7,7 +7,6 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.myapplication.KartenClass;
 import com.example.myapplication.R;
 import com.example.myapplication.helperclasses.IntentHelper;
 import com.example.myapplication.objectclasses.Flashcard;
@@ -23,7 +22,6 @@ import java.util.Collections;
 public class QuizModeActivity extends AppCompatActivity {
     private IntentHelper ih;
     private String user;
-    private KartenClass card = new KartenClass();
     private ArrayList<String> checkedSubjects, sortedSubjects, checkedTopics, sortedTopics, checkedCards, sortedCards, uniqueKeys;
     private ArrayList<Flashcard> cards = new ArrayList<>();
     private ArrayList<Flashcard> allCards = new ArrayList<>();

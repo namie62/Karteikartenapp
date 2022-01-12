@@ -3,12 +3,10 @@ package com.example.myapplication.createactivities;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -88,7 +86,7 @@ public class ChooseSubjectAndTopicForNewCardActivity extends AppCompatActivity {
     public void createCard(View view){
         String selectedTopic = (String) topicSpinner.getSelectedItem();
         if (selectedSubject != null && selectedTopic != null) {
-            ih.newCard(selectedSubject, selectedTopic, checkedSubjects, checkedTopics);
+            ih.editCard(selectedSubject, selectedTopic, checkedSubjects, checkedTopics);
         }
     }
 

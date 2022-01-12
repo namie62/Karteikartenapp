@@ -27,11 +27,9 @@ import java.util.ArrayList;
 public class ShowCardsActivity extends AppCompatActivity {
     private ArrayList<String> checkedCards = new ArrayList<>();
     private DatabaseReference reference;
-    private ArrayList<String> checkedSubjects;
-    private ArrayList<String> checkedTopics;
+    private ArrayList<String> checkedSubjects, checkedTopics, showObjects, keyList;
     private ListView listView;
     private Context applicationContext;
-    private ArrayList<String> showObjects;
     private ArrayAdapter<String> adapter;
     private IntentHelper ih;
     private String user;
@@ -52,6 +50,7 @@ public class ShowCardsActivity extends AppCompatActivity {
         this.listView = findViewById(R.id.cards_listView);
         this.applicationContext = getApplicationContext();
         this.showObjects = new ArrayList<>();
+        this.keyList = new ArrayList<>();
         this.adapter = new ArrayAdapter<>(applicationContext, android.R.layout.simple_list_item_multiple_choice, showObjects);
         reference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -64,12 +63,14 @@ public class ShowCardsActivity extends AppCompatActivity {
                             for (int i=0; i<max; i++) {
                                 String cardpath = snapshot.child(subject).child(topic).child(String.valueOf(i)).getValue(String.class);
                                 showObjects.add(snapshot.child(cardpath).child("front").getValue(String.class));
+                                keyList.add(cardpath);
                             }
                         }
                     }
                     listView.setAdapter(adapter);
-                    ListviewHelperClass cardView = new ListviewHelperClass(listView, showObjects);
+                    ListviewHelperClass cardView = new ListviewHelperClass(listView, keyList);
                     checkedCards = cardView.getCheckeditems();
+
                 }
             }
 
@@ -95,7 +96,7 @@ public class ShowCardsActivity extends AppCompatActivity {
         if (checkedCards.size() != 1) {
             ih.openPopUp(4);
         } else {
-            ih.newCard(checkedSubjects, checkedTopics, checkedCards);
+            ih.editCard(checkedSubjects, checkedTopics, checkedCards);
             }
     }
 

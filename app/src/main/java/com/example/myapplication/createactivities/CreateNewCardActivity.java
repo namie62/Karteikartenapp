@@ -30,13 +30,11 @@ public class CreateNewCardActivity extends AppCompatActivity {
     private String selectedSubject;
     private Bitmap img;
     private DatabaseReference reference;
-    private ArrayList<String> checkedSubjects;
-    private ArrayList<String> checkedTopics;
-    private ArrayList<String> checkedCards;
+    private ArrayList<String> checkedSubjects, checkedTopics, checkedKeys;
     private IntentHelper ih;
     private String uriForDB = " ";
     private String user;
-    private String selectedCardFront;
+    private String selectedCard;
     private String backImgFromDB;
     private int sortOrder;
     private int progress;
@@ -60,9 +58,9 @@ public class CreateNewCardActivity extends AppCompatActivity {
         this.selectedSubject = getIntent().getExtras().getString("selectedSubject");
         this.checkedSubjects = getIntent().getStringArrayListExtra("checkedSubjects");
         this.checkedTopics = getIntent().getStringArrayListExtra("checkedTopics");
-        this.checkedCards = getIntent().getStringArrayListExtra("checkedCards");
-        if (checkedCards != null) {
-            this.selectedCardFront = checkedCards.get(0);
+        this.checkedKeys = getIntent().getStringArrayListExtra("checkedCards");
+        if (checkedKeys != null) {
+            this.selectedCard = checkedKeys.get(0);
             showContent();
         }
     }
@@ -103,14 +101,8 @@ public class CreateNewCardActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) {
-                    for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                        if (dataSnapshot.exists() && dataSnapshot.child("front").getValue(String.class).equals(selectedCardFront)){
-                            String backFromDB = dataSnapshot.child("back").getValue(String.class);
-                            backImgFromDB = dataSnapshot.child("backImg").getValue(String.class);
-                            frontEditText.setText(selectedCardFront);
-                            backEditText.setText(backFromDB);
-                        }
-                    }
+                    frontEditText.setText(snapshot.child(selectedCard).child("front").getValue(String.class));
+                    backEditText.setText(snapshot.child(selectedCard).child("back").getValue(String.class));
                 }
             }
 
@@ -126,20 +118,15 @@ public class CreateNewCardActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) {
-                    if (selectedCardFront == null) {
+                    if (selectedCard == null) {
                         card.setSortOrder(sortOrder);
                         String newUniqueKey = reference.push().getKey();
                         reference.child(newUniqueKey).setValue(card);
                         int sortOrder = (int) snapshot.child(selectedSubject).child(selectedTopic).getChildrenCount();
                         reference.child(selectedSubject).child(selectedTopic).child(String.valueOf(sortOrder)).setValue(newUniqueKey);
                     } else {
-                        for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                            if (dataSnapshot.child("front").exists() && dataSnapshot.child("front").getValue(String.class).equals(selectedCardFront)){
-                                String key = snapshot.getKey();
-                                reference.child(key).child("front").setValue(getFrontText());
-                                reference.child(key).child("back").setValue(getBackText());
-                            }
-                        }
+                        reference.child(selectedCard).child("front").setValue(getFrontText());
+                        reference.child(selectedCard).child("back").setValue(getBackText());
                     }
 
                     ih.goToCardOverview(checkedSubjects, checkedTopics);
