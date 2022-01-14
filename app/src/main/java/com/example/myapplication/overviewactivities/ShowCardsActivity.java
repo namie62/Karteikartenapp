@@ -25,9 +25,8 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 
 public class ShowCardsActivity extends AppCompatActivity {
-    private ArrayList<String> checkedCards;
     private DatabaseReference reference;
-    private ArrayList<String> checkedSubjects, checkedTopics, showObjects, keyList;
+    private ArrayList<String> checkedSubjects, checkedTopics,checkedCards, showObjects, keyList;
     private ListView listView;
     private Context applicationContext;
     private ArrayAdapter<String> adapter;
@@ -118,6 +117,6 @@ public class ShowCardsActivity extends AppCompatActivity {
 
     public void deleteCard(View view) {
         DeleteStuff ds = new DeleteStuff(getApplicationContext(), reference, checkedSubjects, checkedTopics, checkedCards);
-        ds.deleteeee();
+        ds.deleteCards();
     }
 }

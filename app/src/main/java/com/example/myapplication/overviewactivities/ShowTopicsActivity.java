@@ -134,6 +134,6 @@ public class ShowTopicsActivity extends AppCompatActivity {
 
     public void deleteTopic(View view) {
         DeleteStuff ds = new DeleteStuff(getApplicationContext(), reference, checkedSubjects, checkedTopics);
-        ds.deleteTopic();
+        ds.deleteTopics();
     }
 }

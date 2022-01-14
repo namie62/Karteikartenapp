@@ -22,9 +22,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Objects;
 
 public class ShowSubjectsActivity extends AppCompatActivity {   //später dann durch DB iterieren um Fächer zu holen private static final int REQUESTCODE = 1;
     private ArrayList<String> checkedSubjects = new ArrayList<>();
@@ -119,6 +117,6 @@ public class ShowSubjectsActivity extends AppCompatActivity {   //später dann d
 
     public void deleteSubject(View view) {
         this.ds = new DeleteStuff(getApplicationContext(), reference, checkedSubjects);
-        ds.deleteSubject();
+        ds.deleteSubjects();
     }
 }
