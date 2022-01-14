@@ -46,9 +46,6 @@ public class DeleteStuff {
     }
 
     public void deleteeee() {
-        ArrayList<String> sortedSubjects = new ArrayList<>();
-        ArrayList<String> sortedTopics = new ArrayList<>();
-        ArrayList<String> sortedCards = new ArrayList<>();
         reference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -74,7 +71,7 @@ public class DeleteStuff {
                             }
                         }
                         reference.child("subject_sorting").setValue(remainingSubjects);
-                    } else if (checkedCards == null){
+                    } else if (checkedCards == null && checkedTopics != null){
                         for (String subject : checkedSubjects) {
                             for (String topic : checkedTopics) {
                                 ArrayList<String> cardsToDelete = new ArrayList<>();
@@ -88,12 +85,14 @@ public class DeleteStuff {
                                 reference.child(subject).child(topic).removeValue();
                             }
                             ArrayList<String> remainingTopics = new ArrayList<>();
-                            for (int i=0; i< (int) snapshot.child(subject).child("sorting").getChildrenCount(); i++){
-                                if (!checkedTopics.contains(snapshot.child("sorting").child(String.valueOf(i)).getValue(String.class))) {
-                                    remainingTopics.add(snapshot.child("sorting").child(String.valueOf(i)).getValue(String.class));
+                            for (DataSnapshot dataSnapshot : snapshot.child(subject).child("sorting").getChildren()) {
+                                if (!checkedTopics.contains(dataSnapshot.getValue(String.class))){
+                                    remainingTopics.add(dataSnapshot.getValue(String.class));
                                 }
                             }
-                            reference.child("sorting").setValue(remainingTopics);
+                               for (int i=0; i<remainingTopics.size(); i++) {
+                                reference.child(subject).child("sorting").child(String.valueOf(i)).setValue(remainingTopics.get(i));
+                            }
                         }
                     } else {
                         for (String subject : checkedSubjects){

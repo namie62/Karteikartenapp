@@ -26,11 +26,9 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 
 public class ShowTopicsActivity extends AppCompatActivity {
-    private ArrayList<String> checkedSubjects;
-    private ArrayList<String> checkedTopics;
+    private ArrayList<String> checkedSubjects, checkedTopics, showObjects;
     private ListView listView;
     private Context applicationContext;
-    private ArrayList<String> showObjects;
     private ArrayAdapter<String> adapter;
     private IntentHelper ih;
     private String user;
@@ -56,6 +54,7 @@ public class ShowTopicsActivity extends AppCompatActivity {
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                checkedTopics = new ArrayList<>();
                 showObjects.clear();
                 if (snapshot.exists()) {
                     for (String subject : checkedSubjects) {
