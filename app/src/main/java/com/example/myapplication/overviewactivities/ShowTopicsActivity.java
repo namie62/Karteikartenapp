@@ -33,6 +33,7 @@ public class ShowTopicsActivity extends AppCompatActivity {
     private IntentHelper ih;
     private String user;
     DatabaseReference reference;
+    private final Context c = this;
 
 
     @Override
@@ -74,7 +75,7 @@ public class ShowTopicsActivity extends AppCompatActivity {
                 Toast.makeText(applicationContext, error.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
-        TextView textView = (TextView) findViewById(R.id.subject_name_textView);
+        TextView textView = findViewById(R.id.subject_name_textView);
         textView.setText(checkedSubjects.toString()); //vlt noch hübscher machen
     }
 
@@ -93,20 +94,55 @@ public class ShowTopicsActivity extends AppCompatActivity {
     }
 
     public void startStudyMode(View view){
-        if (checkedTopics.size() == 0) {
-            ih.openPopUp(2);
-        }
-        else {
-            ih.startStudyMode(0, checkedSubjects, checkedTopics);
-        }
+        reference.child("subject_sorting").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                ArrayList<String> cardsInTopics = new ArrayList<>();
+                for (String subject : checkedSubjects) {
+                    for (String topic : checkedTopics) {
+                        for (DataSnapshot cardSnapshot : snapshot.child(subject).child(topic).getChildren()) {
+                            cardsInTopics.add(cardSnapshot.getValue(String.class));
+                        }
+                    }
+                }
+                if (cardsInTopics.isEmpty()) {
+                    Toast.makeText(c, "Keine Karten in ausgewählten Themen gefunden!", Toast.LENGTH_SHORT).show();
+                } else if (checkedTopics.size() != 0) {
+                    ih.startStudyMode(0, checkedSubjects, checkedTopics);
+                } else {
+                    Toast.makeText(c, "Bitte ein Thema auswählen!", Toast.LENGTH_SHORT).show();
+                }
+            }
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(applicationContext, error.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        });
     }
 
     public void startQuiz(View view){
-        if (checkedTopics.size() == 0) {
-            ih.openPopUp(2);
-        } else {
-            ih.startQuizmode(0, checkedSubjects, checkedTopics);
-        }
+        reference.child("subject_sorting").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                ArrayList<String> cardsInTopics = new ArrayList<>();
+                for (String subject : checkedSubjects) {
+                    for (String topic : checkedTopics) {
+                        for (DataSnapshot cardSnapshot : snapshot.child(subject).child(topic).getChildren()) {
+                            cardsInTopics.add(cardSnapshot.getValue(String.class));
+                        }
+                    }
+                }
+                if (cardsInTopics.isEmpty()) {
+                    Toast.makeText(c, "Keine Karten in ausgewählten Themen gefunden!", Toast.LENGTH_SHORT).show();
+                } else if (checkedTopics.size() != 0) {
+                    ih.startQuizmode(0, checkedSubjects, checkedTopics);
+                } else {
+                    Toast.makeText(c, "Bitte ein Thema auswählen!", Toast.LENGTH_SHORT).show();
+                }
+            }
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(applicationContext, error.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        });
     }
 
     public void createTopic(View view){
