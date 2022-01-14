@@ -13,10 +13,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="80dp"
-        android:text="Registrierung"
-        android:textSize="25dp"
-        android:fontFamily="@font/roboto_regular"
-        android:layout_marginBottom="50dp"
+        android:text="Registrierung Karteikartenapp"
+        android:textSize="40sp"
+        android:fontFamily="@font/indigo_daisy"
         android:textStyle="bold"
         android:layout_gravity="center"/>
 
@@ -27,11 +26,12 @@
         android:hint="@string/your_name"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:layout_marginBottom="10dp"
+        android:layout_marginTop="30dp"
         android:padding="15dp"
         android:inputType="textPersonName"
         android:fontFamily="@font/roboto_regular"
         android:background="@drawable/et_custom"
+        android:layout_above="@id/txtEmail"
         android:textSize="15sp" />
 
     <EditText
@@ -41,11 +41,12 @@
         android:hint="@string/username"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:layout_marginBottom="10dp"
+        android:layout_marginTop="20dp"
         android:padding="15dp"
         android:fontFamily="@font/roboto_regular"
         android:inputType="textEmailAddress"
         android:background="@drawable/et_custom"
+        android:layout_above="@id/txtPwd"
         android:textSize="15sp" />
 
     <EditText
@@ -55,7 +56,7 @@
         android:hint="@string/password"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:layout_marginBottom="10dp"
+        android:layout_marginTop="20dp"
         android:padding="15dp"
         android:fontFamily="@font/roboto_regular"
         android:inputType="textPassword"
@@ -84,7 +85,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
-            android:text="Already Registered? Login here"
+            android:text="Bereits registriert? Hier zum Login"
             android:gravity="center"
             android:layout_gravity="center"
             android:textSize="20dp"
