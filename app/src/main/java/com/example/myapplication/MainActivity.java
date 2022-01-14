@@ -1,27 +1,43 @@
 package com.example.myapplication;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.text.method.LinkMovementMethod;
+import android.view.View;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.myapplication.helperclasses.IntentHelper;
-import com.google.firebase.database.FirebaseDatabase;
+import com.example.myapplication.loginactivities.Registration;
+import com.google.firebase.database.DatabaseReference;
 
 public class MainActivity extends AppCompatActivity {
-    FirebaseDatabase flashcardDB;
-    IntentHelper ih;
+
+    private IntentHelper ih;
+    private String user;
+    private DatabaseReference reference;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        this.flashcardDB = FirebaseDatabase.getInstance("https://karteikar-default-rtdb.europe-west1.firebasedatabase.app/");
-        this.ih = new IntentHelper(this, "Princess Rainbowfart");
+
+        TextView register = (TextView)findViewById(R.id.lnkRegister);
+        register.setMovementMethod(LinkMovementMethod.getInstance());
+        register.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, Registration.class);
+                startActivity(intent);
+            }
+        });
+    }
+
+    public void login(View view){
+        IntentHelper ih = new IntentHelper(this, "Princess Rainbowfart");
         ih.goToStartMenu();
     }
 }
-
-
-
-
