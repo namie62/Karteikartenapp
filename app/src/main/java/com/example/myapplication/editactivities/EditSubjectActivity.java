@@ -91,5 +91,9 @@ public class EditSubjectActivity extends AppCompatActivity {
         this.finish();
     }
 
+    public void cancel(View view) {
+        this.finish();
+    }
+
 
 }
