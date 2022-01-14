@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.example.myapplication.MainActivity;
 import com.example.myapplication.exportactivities.EmailExportActivity;
 import com.example.myapplication.createactivities.ChooseSubjectAndTopicForNewCardActivity;
 import com.example.myapplication.createactivities.CreateNewCardActivity;
@@ -23,22 +24,27 @@ public class IntentHelper {
     private Context packageContext;
     private ArrayList<String> infoText = new ArrayList<>();
     private String user; 
-    private static final String infoText1 = "Bitte mindestens 1 Fach auswählen!";
-    private static final String infoText2 = "Bitte ein Fach auswählen!";
-    private static final String infoText3 = "Bitte mindestens 1 Thema auswählen!";
-    private static final String infoText4 = "Bitte mindestens 1 Karte auswählen!";
-    private static final String infoText5 = "Bitte exakt 1 Karte auswählen!";
-    private static final String cancelInfoText = "Sicher, dass Sie abbrechen wollen?";
-    
+    private static final String infoText0 = "Bitte mindestens 1 Fach auswählen!";
+    private static final String infoText1 = "Bitte ein Fach auswählen!";
+    private static final String infoText2 = "Bitte mindestens 1 Thema auswählen!";
+    private static final String infoText3 = "Bitte mindestens 1 Karte auswählen!";
+    private static final String infoText4 = "Bitte exakt 1 Karte auswählen!";
+    private static final String infoText5 = "Sicher, dass Sie abbrechen wollen?";
+    private static final String infoText6 = "Username leider schon vergeben!";
+    private static final String infoText7 = "Bitte Benutzername und Passwort eingeben!";
+
     
     public IntentHelper(Context packageContext, String user) {
         this.packageContext = packageContext;
         this.user = user;
+        this.infoText.add(infoText0);
         this.infoText.add(infoText1);
         this.infoText.add(infoText2);
         this.infoText.add(infoText3);
         this.infoText.add(infoText4);
         this.infoText.add(infoText5);
+        this.infoText.add(infoText6);
+        this.infoText.add(infoText7);
     }
 
     public IntentHelper(Context packageContext) {
@@ -51,6 +57,11 @@ public class IntentHelper {
 
     public void setUser(String user) {
         this.user = user;
+    }
+
+    public void goToLogin() {
+        Intent i = new Intent(this.packageContext, MainActivity.class);
+        packageContext.startActivity(i);
     }
 
     public void goToStartMenu(ArrayList<String> checkedSubjects, ArrayList<String> checkedTopics, ArrayList<String> checkedCards) {
@@ -197,6 +208,12 @@ public class IntentHelper {
     public void openPopUp(int index) {
         Intent i = new Intent(this.packageContext, HintPopUpActivity.class);
         i.putExtra("InfotextPopUp", infoText.get(index));
+        packageContext.startActivity(i);
+    }
+
+    public void openPopUp(String infotext) {
+        Intent i = new Intent(this.packageContext, HintPopUpActivity.class);
+        i.putExtra("InfotextPopUp", infotext);
         packageContext.startActivity(i);
     }
 

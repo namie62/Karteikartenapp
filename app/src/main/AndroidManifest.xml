@@ -15,7 +15,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication">
         <activity
-            android:name=".loginactivities.Registration"
+            android:name=".loginactivities.RegistrationActivity"
             android:label="Registration"
             android:exported="false" />
         <activity

@@ -9,7 +9,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.myapplication.helperclasses.IntentHelper;
-import com.example.myapplication.loginactivities.Registration;
+import com.example.myapplication.loginactivities.RegistrationActivity;
 import com.google.firebase.database.DatabaseReference;
 
 public class MainActivity extends AppCompatActivity {
@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, Registration.class);
+                Intent intent = new Intent(MainActivity.this, RegistrationActivity.class);
                 startActivity(intent);
             }
         });
