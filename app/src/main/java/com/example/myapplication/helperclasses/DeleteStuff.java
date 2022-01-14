@@ -19,7 +19,6 @@ public class DeleteStuff {
 
     private ArrayList<String> checkedSubjects, checkedTopics, checkedCards;
     private DatabaseReference reference;
-    private String user;
     private Context applicationContext;
 
     public DeleteStuff(Context applicationContext, DatabaseReference reference, ArrayList<String> checkedSubjects, ArrayList<String> checkedTopics, ArrayList<String> checkedCards) {
@@ -131,82 +130,6 @@ public class DeleteStuff {
                 }
                 for (String card : checkedCards) {
                     reference.child("cards").child(card).removeValue();
-                }
-            }
-
-            public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(applicationContext, error.getMessage(), Toast.LENGTH_LONG).show();
-            }
-        });
-    }
-
-    public void deleteeee() {
-        reference.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (snapshot.exists()) {
-                    if (checkedCards == null && checkedTopics == null) {
-                        for (String subject : checkedSubjects) {
-                            ArrayList<String> cardsToDelete = new ArrayList<>();
-                            for (DataSnapshot dataSnapshot : snapshot.child(subject).getChildren()){
-                                int numberOfCardsInTopic = (int) dataSnapshot.getChildrenCount();
-                                for (int i=0; i<numberOfCardsInTopic; i++) {
-                                    cardsToDelete.add(dataSnapshot.child(String.valueOf(i)).getValue(String.class));
-                                }
-                            }
-                            for (String card : cardsToDelete) {
-                                reference.child(card).removeValue();
-                            }
-                            reference.child(subject).removeValue();
-                        }
-                        ArrayList<String> remainingSubjects = new ArrayList<>();
-                        for (int i=0; i< (int) snapshot.child("subject_sorting").getChildrenCount(); i++) {
-                            if (!checkedSubjects.contains(snapshot.child("subject_sorting").child(String.valueOf(i)).getValue(String.class))){
-                                remainingSubjects.add(snapshot.child("subject_sorting").child(String.valueOf(i)).getValue(String.class));
-                            }
-                        }
-                        reference.child("subject_sorting").setValue(remainingSubjects);
-                    } else if (checkedCards == null && checkedTopics != null){
-                        for (String subject : checkedSubjects) {
-                            for (String topic : checkedTopics) {
-                                ArrayList<String> cardsToDelete = new ArrayList<>();
-                                int numberOfCardsInTopic = (int) snapshot.child(subject).child(topic).getChildrenCount();
-                                for (int i=0; i<numberOfCardsInTopic; i++) {
-                                    cardsToDelete.add(snapshot.child(subject).child(topic).getValue(String.class));
-                                }
-                                for (String card : cardsToDelete) {
-                                    reference.child(card).removeValue();
-                                }
-                                reference.child(subject).child(topic).removeValue();
-                            }
-                            ArrayList<String> remainingTopics = new ArrayList<>();
-                            for (DataSnapshot dataSnapshot : snapshot.child(subject).child("sorting").getChildren()) {
-                                if (!checkedTopics.contains(dataSnapshot.getValue(String.class))){
-                                    remainingTopics.add(dataSnapshot.getValue(String.class));
-                                }
-                            }
-                               for (int i=0; i<remainingTopics.size(); i++) {
-                                reference.child(subject).child("sorting").child(String.valueOf(i)).setValue(remainingTopics.get(i));
-                            }
-                        }
-                    } else {
-                        for (String subject : checkedSubjects){
-                            for (String topic : checkedTopics) {
-                                for (String card : checkedCards) {
-                                    reference.child(card).removeValue();
-                                }
-
-                                ArrayList<String> remainingCards = new ArrayList<>();
-                                int numberOfCardsInTopic = (int) snapshot.child(subject).child(topic).getChildrenCount();
-                                for (int i=0; i<numberOfCardsInTopic; i++) {
-                                    if (!checkedCards.contains(snapshot.child(subject).child(topic).child(String.valueOf(i)).getValue(String.class))){
-                                        remainingCards.add(snapshot.child(subject).child(topic).child(String.valueOf(i)).getValue(String.class));
-                                    }
-                                }
-                                reference.child(subject).child(topic).setValue(remainingCards);
-                            }
-                        }
-                    }
                 }
             }
 

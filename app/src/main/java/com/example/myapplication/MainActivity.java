@@ -24,11 +24,11 @@ import java.util.Arrays;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-    FirebaseDatabase flashcardDB;
-    IntentHelper ih = new IntentHelper(this);
-    EditText usernameEditText;
-    EditText passwordEditText;
-    Context c = this;
+    private FirebaseDatabase flashcardDB;
+    private IntentHelper ih = new IntentHelper(this);
+    private EditText usernameEditText;
+    private EditText passwordEditText;
+    private Context c = this;
 
 
     @Override
