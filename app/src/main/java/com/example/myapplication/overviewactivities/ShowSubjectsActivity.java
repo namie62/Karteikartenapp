@@ -119,13 +119,30 @@ public class ShowSubjectsActivity extends AppCompatActivity {
     }
 
 
-    public void startTestMode(View view) {
-        if (checkedSubjects.size() != 0){
-            ih.startQuizmode(0, checkedSubjects);
-    }
-        else {
-            ih.openPopUp(0);
-        }
+    public void startQuizMode(View view) {
+        reference.child("subject_sorting").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                ArrayList<String> cardsInSubjects = new ArrayList<>();
+                for (String subject : checkedSubjects) {
+                    for (DataSnapshot topicSnapshot : snapshot.child(subject).getChildren()) {
+                        for (DataSnapshot cardSnapshot : topicSnapshot.getChildren()) {
+                            cardsInSubjects.add(cardSnapshot.getValue(String.class));
+                        }
+                    }
+                }
+                if (cardsInSubjects.isEmpty()) {
+                    Toast.makeText(c, "Keine Karten in ausgewählten Fächern gefunden!", Toast.LENGTH_SHORT).show();
+                } else if (checkedSubjects.size() != 0) {
+                        ih.startQuizmode(0, checkedSubjects);
+                } else {
+                    Toast.makeText(c, "Bitte ein Fach auswählen!", Toast.LENGTH_SHORT).show();
+                }
+            }
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(applicationContext, error.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        });
     }
 
     public void newSubject(View view){
