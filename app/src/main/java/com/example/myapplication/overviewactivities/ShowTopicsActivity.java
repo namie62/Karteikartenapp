@@ -119,7 +119,7 @@ public class ShowTopicsActivity extends AppCompatActivity {
         });
     }
 
-    public void startQuiz(View view){
+    public void startQuizMode(View view){
         reference.child("subject_sorting").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -150,15 +150,10 @@ public class ShowTopicsActivity extends AppCompatActivity {
     }
 
     public void editTopic(View view){
-        if (checkedTopics.size() == 0) {
-            Toast.makeText(c, "Bitte mindestens ein Thema auswählen!", Toast.LENGTH_SHORT).show();;
-        } else if (checkedTopics.size() == 1){
-            Intent editTopic = new Intent(this, ShowCardsActivity.class);
-            editTopic.putExtra("Thema", checkedTopics.get(0));
-            startActivity(editTopic);
+        if(checkedSubjects.size() == 1 && checkedTopics.size() ==1) {
+            ih.editTopic(showObjects, checkedSubjects.get(0), checkedTopics.get(0));
         } else {
-            Intent popupWindow = new Intent(this, HintPopUpActivity.class);
-            popupWindow.putExtra("InfotextPoUp", "Bitte nur 1 Thema zur Bearbeitung auswählen.");
+            Toast.makeText(c, "Bitte exakt 1 Fach und exakt 1 Thema auswählen!", Toast.LENGTH_SHORT).show();
         }
     }
 

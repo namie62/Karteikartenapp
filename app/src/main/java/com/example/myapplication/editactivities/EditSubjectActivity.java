@@ -21,40 +21,33 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 
 public class EditSubjectActivity extends AppCompatActivity {
-
     private DatabaseReference reference;
     private String selectedSubject;
-    private ListView listView;
-    private IntentHelper ih;
-    private String user;
     private EditText subjectNameEditText, subjectNewPositionEditText;
-    private TextView subjectOldPositionTextView;
     private ArrayList<String> allSubjects;
-    private int oldIndex;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_subject);
 
-        this.user = getIntent().getExtras().getString("user");
+        String user = getIntent().getExtras().getString("user");
         this.selectedSubject = getIntent().getExtras().getString("selectedSubject");
         this.allSubjects = getIntent().getExtras().getStringArrayList("checkedSubjects");
-        this.ih = new IntentHelper(this, user);
+        IntentHelper ih = new IntentHelper(this, user);
 
         FirebaseDatabase flashcardDB = FirebaseDatabase.getInstance("https://karteikar-default-rtdb.europe-west1.firebasedatabase.app/");
         this.reference = flashcardDB.getReference(user);
-        this.listView = findViewById(R.id.subjects_listView);
-        this.oldIndex = allSubjects.indexOf(selectedSubject);
+        int oldIndex = allSubjects.indexOf(selectedSubject);
 
         subjectNameEditText = findViewById(R.id.subject_name_editText);
         subjectNameEditText.setText(selectedSubject);
 
-        subjectOldPositionTextView = findViewById(R.id.subject_old_position_textView);
-        subjectOldPositionTextView.setText(String.valueOf(oldIndex+1));
+        TextView subjectOldPositionTextView = findViewById(R.id.subject_old_position_textView);
+        subjectOldPositionTextView.setText(String.valueOf(oldIndex +1));
 
         subjectNewPositionEditText = findViewById(R.id.subject_new_position_editTextNumber);
-        subjectNewPositionEditText.setText(String.valueOf(oldIndex+1));
+        subjectNewPositionEditText.setText(String.valueOf(oldIndex +1));
     }
 
     public void saveChanges(View view) {
@@ -66,18 +59,10 @@ public class EditSubjectActivity extends AppCompatActivity {
                 if (newIndex >= allSubjects.size()) {
                     newIndex = allSubjects.size() -1;
                 }
-                if (newSubjectName.equals(selectedSubject)) {
-                    allSubjects.remove(selectedSubject);
-                    allSubjects.add(newIndex, selectedSubject);
-                    for (int i=0; i<allSubjects.size(); i++) {
-                        reference.child("subject_sorting").child(String.valueOf(i)).setValue(allSubjects.get(i));
-                    }
-                } else {
-                    reference.child(newSubjectName).setValue(snapshot.child(selectedSubject).getValue());
-                    reference.child(selectedSubject).removeValue();
-                    allSubjects.remove(selectedSubject);
-                    allSubjects.add(newIndex, newSubjectName);
-                }
+                reference.child(newSubjectName).setValue(snapshot.child(selectedSubject).getValue());
+                reference.child(selectedSubject).removeValue();
+                allSubjects.remove(selectedSubject);
+                allSubjects.add(newIndex, newSubjectName);
                 for (int i=0; i<allSubjects.size(); i++) {
                     reference.child("subject_sorting").child(String.valueOf(i)).setValue(allSubjects.get(i));
                 }

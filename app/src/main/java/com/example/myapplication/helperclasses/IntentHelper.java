@@ -7,6 +7,7 @@ import android.os.Bundle;
 
 import com.example.myapplication.MainActivity;
 import com.example.myapplication.editactivities.EditSubjectActivity;
+import com.example.myapplication.editactivities.EditTopicActivity;
 import com.example.myapplication.exportactivities.EmailExportActivity;
 import com.example.myapplication.createactivities.ChooseSubjectAndTopicForNewCardActivity;
 import com.example.myapplication.createactivities.CreateNewCardActivity;
@@ -105,6 +106,15 @@ public class IntentHelper {
     public void newTopic(ArrayList<String> checkedSubjects) {
         Intent i = new Intent(this.packageContext, CreateTopicActivity.class);
         putLists(i, checkedSubjects);
+    }
+
+    public void editTopic(ArrayList<String> allTopics, String selectedSubject, String selectedTopic) {
+        Intent i = new Intent(this.packageContext, EditTopicActivity.class);
+        Bundle b = new Bundle();
+        b.putStringArrayList("allTopics", allTopics);
+        b.putString("selectedSubject", selectedSubject);
+        b.putString("selectedTopic", selectedTopic);
+        start(i,b);
     }
 
     public void chooseCategoriesForNewCard(ArrayList<String> checkedSubjects, ArrayList<String> checkedTopics) {
