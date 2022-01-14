@@ -21,7 +21,6 @@ import java.util.Collections;
 
 public class QuizModeActivity extends AppCompatActivity {
     private IntentHelper ih;
-    private String user;
     private ArrayList<String> checkedSubjects, sortedSubjects, checkedTopics, sortedTopics, checkedCards, sortedCards, uniqueKeys;
     private ArrayList<Flashcard> cards = new ArrayList<>();
     private ArrayList<Flashcard> allCards = new ArrayList<>();
@@ -34,7 +33,7 @@ public class QuizModeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quiz_mode);
 
-        this.user = getIntent().getExtras().getString("user");
+        String user = getIntent().getExtras().getString("user");
         FirebaseDatabase flashcardDB = FirebaseDatabase.getInstance("https://karteikar-default-rtdb.europe-west1.firebasedatabase.app/");
         this.reference = flashcardDB.getReference(user);
 
@@ -137,7 +136,7 @@ public class QuizModeActivity extends AppCompatActivity {
     }
 
     public void goToPrevious(View view){
-        ih.goToStartMenu(this.user);
+        ih.goToStartMenu();
     }
 
     public void rightAnswer(View view) {

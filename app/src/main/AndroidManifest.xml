@@ -3,9 +3,9 @@
     package="com.example.myapplication">
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:allowBackup="true"
@@ -15,9 +15,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication">
         <activity
-            android:name=".loginactivities.RegistrationActivity"
-            android:label="Registration"
+            android:name=".editactivities.EditSubjectActivity"
             android:exported="false" />
+        <activity
+            android:name=".loginactivities.RegistrationActivity"
+            android:exported="false"
+            android:label="Registration" />
         <activity
             android:name=".exportactivities.EmailExportActivity"
             android:exported="false" />
@@ -63,16 +66,13 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
             <intent-filter>
-                <action
-                    android:name="android.intent.action.SENDTO"/>
-                <data
-                    android:scheme="mailto"/>
-                <category
-                    android:name="android.intent.category.DEFAULT"/>
-            </intent-filter>
+                <action android:name="android.intent.action.SENDTO" />
 
+                <data android:scheme="mailto" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
         </activity>
         <activity android:name=".helperclasses.InsertImgHelperClassActivity" />
 

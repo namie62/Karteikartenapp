@@ -94,7 +94,7 @@ public class ShowCardsActivity extends AppCompatActivity {
 
     public void editCard(View view) {  //öffnet Kartenerstellung
         if (checkedCards.size() != 1) {
-            ih.openPopUp(4);
+            Toast.makeText(this, "Bitte exakt 1 Karte auswählen!", Toast.LENGTH_SHORT).show();
         } else {
             ih.editCard(checkedSubjects, checkedTopics, checkedCards);
             }
@@ -102,16 +102,16 @@ public class ShowCardsActivity extends AppCompatActivity {
 
     public void startStudyMode(View view){
         if (checkedCards.size() == 0) {
-            ih.openPopUp(3);
+            Toast.makeText(this, "Bitte mindestens 1 Karte auswählen!", Toast.LENGTH_SHORT).show();
         } else {
-            ih.startStudyMode(0, checkedSubjects, checkedTopics, checkedCards);
+            ih.startStudyMode(checkedSubjects, checkedTopics, checkedCards);
         }
     }
     public void startQuizMode(View view){
         if (checkedCards.size() == 0) {
-            ih.openPopUp(3);
+            Toast.makeText(this, "Bitte mindestens 1 Karte auswählen!", Toast.LENGTH_SHORT).show();
         } else {
-            ih.startQuizmode(0, checkedSubjects, checkedTopics, checkedCards);
+            ih.startQuizmode(checkedSubjects, checkedTopics, checkedCards);
         }
     }
 

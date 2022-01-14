@@ -81,12 +81,12 @@ public class ShowTopicsActivity extends AppCompatActivity {
 
 
     public void goToPrevious(View view) {
-        ih.goToStartMenu(user);
+        ih.goToStartMenu();
     }
 
     public void goToCards(View view) {  //öffnet Kartenerstellung
         if (checkedTopics.size() == 0) {
-            ih.openPopUp(2);
+            Toast.makeText(this, "Bitte mindestens 1 Thema auswählen!", Toast.LENGTH_SHORT).show();
         }
         else {
             ih.goToCardOverview(checkedSubjects, checkedTopics);
@@ -108,7 +108,7 @@ public class ShowTopicsActivity extends AppCompatActivity {
                 if (cardsInTopics.isEmpty()) {
                     Toast.makeText(c, "Keine Karten in ausgewählten Themen gefunden!", Toast.LENGTH_SHORT).show();
                 } else if (checkedTopics.size() != 0) {
-                    ih.startStudyMode(0, checkedSubjects, checkedTopics);
+                    ih.startStudyMode(checkedSubjects, checkedTopics);
                 } else {
                     Toast.makeText(c, "Bitte ein Thema auswählen!", Toast.LENGTH_SHORT).show();
                 }
@@ -134,7 +134,7 @@ public class ShowTopicsActivity extends AppCompatActivity {
                 if (cardsInTopics.isEmpty()) {
                     Toast.makeText(c, "Keine Karten in ausgewählten Themen gefunden!", Toast.LENGTH_SHORT).show();
                 } else if (checkedTopics.size() != 0) {
-                    ih.startQuizmode(0, checkedSubjects, checkedTopics);
+                    ih.startQuizmode(checkedSubjects, checkedTopics);
                 } else {
                     Toast.makeText(c, "Bitte ein Thema auswählen!", Toast.LENGTH_SHORT).show();
                 }
@@ -151,12 +151,12 @@ public class ShowTopicsActivity extends AppCompatActivity {
 
     public void editTopic(View view){
         if (checkedTopics.size() == 0) {
-            ih.openPopUp(2);
-        }else if (checkedTopics.size() == 1){
+            Toast.makeText(c, "Bitte mindestens ein Thema auswählen!", Toast.LENGTH_SHORT).show();;
+        } else if (checkedTopics.size() == 1){
             Intent editTopic = new Intent(this, ShowCardsActivity.class);
             editTopic.putExtra("Thema", checkedTopics.get(0));
             startActivity(editTopic);
-        }else {
+        } else {
             Intent popupWindow = new Intent(this, HintPopUpActivity.class);
             popupWindow.putExtra("InfotextPoUp", "Bitte nur 1 Thema zur Bearbeitung auswählen.");
         }

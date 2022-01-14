@@ -86,7 +86,7 @@ public class ShowSubjectsActivity extends AppCompatActivity {
 
     public void goToTopics(View view) {
         if (checkedSubjects.size() == 0) {
-            ih.openPopUp(1);
+            Toast.makeText(c, "Bitte ein Fach auswählen!", Toast.LENGTH_SHORT).show();
         } else {
             ih.goToTopicOverview(checkedSubjects);
         }
@@ -107,7 +107,7 @@ public class ShowSubjectsActivity extends AppCompatActivity {
                 if (cardsInSubjects.isEmpty()) {
                     Toast.makeText(c, "Keine Karten in ausgewählten Fächern gefunden!", Toast.LENGTH_SHORT).show();
                 } else if (checkedSubjects.size() != 0) {
-                    ih.startStudyMode(0, checkedSubjects);
+                    ih.startStudyMode(checkedSubjects);
                 } else {
                     Toast.makeText(c, "Bitte ein Fach auswählen!", Toast.LENGTH_SHORT).show();
                 }
@@ -134,7 +134,7 @@ public class ShowSubjectsActivity extends AppCompatActivity {
                 if (cardsInSubjects.isEmpty()) {
                     Toast.makeText(c, "Keine Karten in ausgewählten Fächern gefunden!", Toast.LENGTH_SHORT).show();
                 } else if (checkedSubjects.size() != 0) {
-                        ih.startQuizmode(0, checkedSubjects);
+                        ih.startQuizmode(checkedSubjects);
                 } else {
                     Toast.makeText(c, "Bitte ein Fach auswählen!", Toast.LENGTH_SHORT).show();
                 }
@@ -146,7 +146,15 @@ public class ShowSubjectsActivity extends AppCompatActivity {
     }
 
     public void newSubject(View view){
-        ih.newSubject(user);
+        ih.newSubject();
+    }
+
+    public void editSubject(View view) {
+        if (checkedSubjects.size() == 1) {
+            ih.editSubject(showObjects, checkedSubjects.get(0));
+        } else {
+            Toast.makeText(c, "Bitte exakt 1 Fach auswählen!", Toast.LENGTH_SHORT).show();
+        }
     }
 
     public void deleteSubject(View view) {
