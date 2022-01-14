@@ -1,96 +1,143 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".overviewactivities.ShowCardsActivity">
 
-    <Button
-        android:id="@+id/create_card_btn"
-        android:layout_width="51dp"
-        android:layout_height="51dp"
-        android:layout_marginEnd="16dp"
-        android:onClick = "createCard"
-        app:icon="@android:drawable/ic_input_add"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <TextView
+        android:id="@+id/topics_text_view"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="10dp"
+        android:background="@android:color/darker_gray"
+        android:fontFamily="@font/roboto_regular"
+        android:gravity="center"
+        android:text="@string/Karten"
+        android:textSize="25sp"
+        android:textStyle="bold" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp"
+        android:layout_below="@id/topics_text_view" >
+
+        <Button
+            android:id="@+id/back_to_start_btn"
+            android:layout_width="65dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:background="@drawable/btn_custom"
+            android:gravity="center"
+            android:onClick="goToPrevious"
+            app:icon="@android:drawable/ic_menu_revert" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <Button
+            android:id="@+id/delete_cards_btn"
+            android:layout_width="65dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:background="@drawable/btn_custom"
+            android:gravity="center"
+            android:onClick="deleteCard"
+            app:icon="@android:drawable/ic_menu_delete" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <Button
+            android:id="@+id/change_sort_order_btn"
+            android:layout_width="65dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/btn_custom"
+            android:gravity="center"
+            app:icon="@android:drawable/ic_menu_edit" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <Button
+            android:id="@+id/create_card_btn"
+            android:layout_width="65dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/btn_custom"
+            android:layout_gravity="right"
+            android:gravity="center"
+            android:onClick = "createCard"
+            app:icon="@android:drawable/ic_menu_add" />
+
+    </LinearLayout>
 
     <ListView
         android:id="@+id/cards_listView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="48dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/create_card_btn" />
+        android:layout_marginTop="20dp"
+        android:layout_below="@+id/back_to_start_btn" />
 
-    <Button
-        android:id="@+id/quiz_mode_btn"
-        android:layout_width="wrap_content"
+    <View
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/Abfrageknopf"
-        android:onClick = "startQuizMode"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/study_mode_subject_btn" />
+        android:orientation="horizontal"
+        android:layout_marginTop="20dp"
+        android:layout_gravity="bottom" >
 
-    <Button
-        android:id="@+id/study_mode_subject_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/Lernmodusknopf"
-        android:onClick="startStudyMode"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        <Button
+            android:id="@+id/quiz_mode_btn"
+            android:layout_width="135dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/cards_listView"
+            android:text="@string/Abfrageknopf"
+            android:onClick = "startQuizMode"
+            android:gravity="center"/>
 
-    <Button
-        android:id="@+id/back_to_start_btn"
-        style="@style/Widget.AppCompat.Button"
-        android:layout_width="51dp"
-        android:layout_height="51dp"
-        android:onClick="goToPrevious"
-        app:icon="?attr/homeAsUpIndicator"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
 
-    <Button
-        android:id="@+id/go_to_subject_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="editCard"
-        android:text="@string/IndieKarte"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/quiz_mode_btn" />
+        <Button
+            android:id="@+id/study_mode_subject_btn"
+            android:layout_width="135dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/cards_listView"
+            android:text="@string/Lernmodusknopf"
+            android:onClick="startStudyMode"
+            android:gravity="center" />
 
-    <TextView
-        android:id="@+id/topics_text_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:text="@string/Karten"
-        android:textAlignment="center"
-        android:textSize="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
 
-    <Button
-        android:id="@+id/change_sort_order_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Reihenfolge ändern"
-        android:textSize="12dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/back_to_start_btn" />
+        <Button
+            android:id="@+id/go_to_subject_btn"
+            android:layout_width="135dp"
+            android:layout_height="wrap_content"
+            android:onClick="editCard"
+            android:text="@string/IndieKarte"
+            android:gravity="center" />
 
-    <Button
-        android:id="@+id/delete_cards_btn"
-        android:layout_width="51dp"
-        android:layout_height="45dp"
-        android:layout_marginEnd="16dp"
-        android:onClick="deleteCard"
-        app:icon="@android:drawable/ic_menu_delete"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/create_card_btn" />
+    </LinearLayout>
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

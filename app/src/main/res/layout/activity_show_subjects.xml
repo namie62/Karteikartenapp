@@ -1,88 +1,149 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".overviewactivities.ShowSubjectsActivity">
 
-    <Button
-        android:id="@+id/create_topic_btn"
-        android:layout_width="51dp"
-        android:layout_height="51dp"
-        android:layout_marginEnd="16dp"
-        android:onClick = "newSubject"
-        app:icon="@android:drawable/ic_input_add"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <TextView
+        android:id="@+id/heading"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="10dp"
+        android:background="@android:color/darker_gray"
+        android:fontFamily="@font/roboto_regular"
+        android:gravity="center"
+        android:text="@string/Fächer"
+        android:textSize="25sp"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp"
+        android:layout_below="@id/heading" >
+
+        <Button
+            android:id="@+id/back_to_start_btn"
+            android:layout_width="65dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:background="@drawable/btn_custom"
+            android:gravity="center"
+            android:onClick="goToPrevious"
+            app:icon="@android:drawable/ic_menu_revert" />
+
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <Button
+            android:id="@+id/delete_subjects_btn"
+            android:layout_width="65dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/btn_custom"
+            android:onClick="deleteSubject"
+            app:icon="@android:drawable/ic_menu_delete"
+            app:iconGravity="start"/>
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <Button
+            android:id="@+id/edit_subjects_btn"
+            android:layout_width="65dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/btn_custom"
+            android:onClick="deleteSubject"
+            app:icon="@android:drawable/ic_menu_edit"
+            app:iconGravity="start" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <Button
+            android:id="@+id/create_topic_btn"
+            android:layout_width="65dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:background="@drawable/btn_custom"
+            android:gravity="center"
+            android:onClick="newSubject"
+            app:icon="@android:drawable/ic_menu_add" />
+
+
+    </LinearLayout>
+
+
 
     <ListView
         android:id="@+id/subjects_listView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/create_topic_btn"
-        />
+        android:layout_marginTop="20dp"
+        android:layout_below="@id/back_to_start_btn" />
 
-    <Button
-        android:id="@+id/quiz_subject_btn"
-        android:layout_width="wrap_content"
+    <View
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/Abfrageknopf"
-        android:onClick="startQuizMode"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/study_mode_subject_btn" />
+        android:orientation="horizontal"
+        android:layout_marginTop="20dp"
+        android:layout_gravity="bottom">
 
-    <Button
-        android:id="@+id/study_mode_subject_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/Lernmodusknopf"
-        android:onClick="startStudyMode"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        <Button
+            android:id="@+id/quiz_subject_btn"
+            android:layout_width="110dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/subjects_listView"
+            android:onClick="startTestMode"
+            android:text="@string/Abfrageknopf"
+            android:gravity="center" />
 
-    <Button
-        android:id="@+id/back_to_start_btn"
-        style="@style/Widget.AppCompat.Button"
-        android:layout_width="51dp"
-        android:layout_height="51dp"
-        android:onClick="goToPrevious"
-        app:icon="?attr/homeAsUpIndicator"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
 
-    <Button
-        android:id="@+id/go_to_subject_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="goToTopics"
-        android:text="@string/Vorwärtsknopf"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/quiz_subject_btn" />
+        <Button
+            android:id="@+id/study_mode_subject_btn"
+            android:layout_width="110dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/subjects_listView"
+            android:layout_gravity="center"
+            android:onClick="startStudyMode"
+            android:text="@string/Lernmodusknopf"
+            android:gravity="center" />
 
-    <TextView
-        android:id="@+id/heading"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:text="@string/Fächer"
-        android:textAlignment="center"
-        android:textSize="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <Button
+            android:id="@+id/go_to_subject_btn"
+            android:layout_width="110dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/subjects_listView"
+            android:layout_gravity="right"
+            android:onClick="goToTopics"
+            android:text="@string/Vorwärtsknopf" />
+
+    </LinearLayout>
 
 
-    <Button
-        android:id="@+id/delete_subjects_btn"
-        android:layout_width="51dp"
-        android:layout_height="45dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:onClick="deleteSubject"
-        app:icon="@android:drawable/ic_menu_delete"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/create_topic_btn" />
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>
