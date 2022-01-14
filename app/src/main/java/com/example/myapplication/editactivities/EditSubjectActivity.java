@@ -12,7 +12,6 @@ import android.widget.Toast;
 
 import com.example.myapplication.R;
 import com.example.myapplication.helperclasses.IntentHelper;
-import com.example.myapplication.objectclasses.Subject;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
