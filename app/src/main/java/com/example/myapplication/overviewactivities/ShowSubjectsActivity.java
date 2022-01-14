@@ -119,4 +119,8 @@ public class ShowSubjectsActivity extends AppCompatActivity {   //später dann d
         this.ds = new DeleteStuff(getApplicationContext(), reference, checkedSubjects);
         ds.deleteSubjects();
     }
+
+    public void checkForCards() {
+
+    }
 }

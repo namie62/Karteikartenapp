@@ -3,6 +3,7 @@ package com.example.myapplication.createactivities;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -21,6 +22,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class CreateTopicActivity extends AppCompatActivity {
     private TextInputEditText hintTextInputEditText;
@@ -29,6 +32,8 @@ public class CreateTopicActivity extends AppCompatActivity {
     private Spinner subjectSpinner;
     private IntentHelper ih;
     private String user;
+    private int sortOrder = 0;
+    Context c = this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,17 +60,33 @@ public class CreateTopicActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (newTopic.trim().length() > 0) {
-                    int sortOrder = (int) snapshot.child(selectedSubject).child("sorting").getChildrenCount();
-                    reference.child(selectedSubject).child("sorting").child(String.valueOf(sortOrder)).setValue(newTopic);
-                    ih.goToTopicOverview(checkedSubjects);
+                    if (!checkForIllegalCharacters(newTopic)) {
+                        Toast.makeText(c, "Nicht erlaubte Zeichen in Themabezeichnung:  . , $ , # , [ , ] , / ,", Toast.LENGTH_SHORT).show();
+                    } else {
+                        sortOrder = (int) snapshot.child(selectedSubject).child("sorting").getChildrenCount();
+                        reference.child(selectedSubject).child("sorting").child(String.valueOf(sortOrder)).setValue(newTopic);
+                    }
                 }
             }
             public void onCancelled(@NonNull DatabaseError error) {
                 Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
+        if (checkForIllegalCharacters(newTopic)) {
+            this.finish();
+        }
     }
     public void closeWindow(View view){
         ih.goToTopicOverview(checkedSubjects);
+    }
+
+    public boolean checkForIllegalCharacters(String s) {
+        List<String> illegalChars = Arrays.asList(".", "$", "[", "]" , "#", "/");
+        for (String c : illegalChars) {
+            if (s.contains(c)) {
+                return false;
+            }
+        }
+        return true;
     }
 }

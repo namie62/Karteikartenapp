@@ -3,6 +3,7 @@ package com.example.myapplication.createactivities;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -19,12 +20,15 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Objects;
 
 public class CreateSubjectActivity extends AppCompatActivity {
     private TextInputEditText hintTextInputEditText;
     private DatabaseReference reference;
     private int sortOrder = 0;
+    Context c = this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,8 +53,12 @@ public class CreateSubjectActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (newSubject.trim().length() > 0) {
-                    sortOrder = (int) (snapshot.child("subject_sorting").getChildrenCount());
-                    reference.child("subject_sorting").child(String.valueOf(sortOrder)).setValue(newSubject);
+                    if (!checkForIllegalCharacters(newSubject)) {
+                        Toast.makeText(c, "Nicht erlaubte Zeichen in Fachbezeichnung:  . , $ , # , [ , ] , / ,", Toast.LENGTH_SHORT).show();
+                    } else {
+                        sortOrder = (int) (snapshot.child("subject_sorting").getChildrenCount());
+                        reference.child("subject_sorting").child(String.valueOf(sortOrder)).setValue(newSubject);
+                    }
                 }
             }
 
@@ -58,6 +66,18 @@ public class CreateSubjectActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
-        this.finish();
+        if (checkForIllegalCharacters(newSubject)) {
+            this.finish();
+        }
+    }
+
+    public boolean checkForIllegalCharacters(String s) {
+        List<String> illegalChars = Arrays.asList(".", "$", "[", "]" , "#", "/");
+        for (String c : illegalChars) {
+            if (s.contains(c)) {
+                return false;
+            }
+        }
+        return true;
     }
 }
