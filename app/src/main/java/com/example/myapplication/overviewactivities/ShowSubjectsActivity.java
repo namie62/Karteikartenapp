@@ -62,6 +62,7 @@ public class ShowSubjectsActivity extends AppCompatActivity {   //später dann d
         reference.child("subject_sorting").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                checkedSubjects = new ArrayList<>();
                 showObjects.clear();
                 if (snapshot.exists()) {
                     int max = (int) snapshot.getChildrenCount();
@@ -119,6 +120,5 @@ public class ShowSubjectsActivity extends AppCompatActivity {   //später dann d
     public void deleteSubject(View view) {
         this.ds = new DeleteStuff(getApplicationContext(), reference, checkedSubjects);
         ds.deleteSubject();
-        ih.goToStartMenu();
     }
 }

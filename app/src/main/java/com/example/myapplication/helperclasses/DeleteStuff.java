@@ -79,6 +79,40 @@ public class DeleteStuff {
         });
     }
 
+    public void deleteTopic() {
+        reference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                ArrayList<String> cardsToDelete = new ArrayList<>();
+                for (String subject : checkedSubjects) {
+                    for (String topic : checkedTopics) {
+                        for (DataSnapshot cardSnapshot : snapshot.child(subject).child(topic).getChildren()) {
+                            cardsToDelete.add(cardSnapshot.getValue(String.class));
+                        }
+                        reference.child(subject).child(topic).removeValue();
+                        ArrayList<String> remainingTopics = new ArrayList<>();
+                        for (int i=0; i< (int) snapshot.child(subject).child("sorting").getChildrenCount(); i++) {
+                            if (!checkedTopics.contains(snapshot.child(subject).child("sorting").child(String.valueOf(i)).getValue(String.class))){
+                                remainingTopics.add(snapshot.child(subject).child("sorting").child(String.valueOf(i)).getValue(String.class));
+                            }
+                        }
+                        reference.child(subject).child("sorting").removeValue();
+                        for (int i=0; i<remainingTopics.size(); i++) {
+                            reference.child(subject).child("sorting").child(String.valueOf(i)).setValue(remainingTopics.get(i));
+                        }
+                    }
+                }
+                for (String cardpath : cardsToDelete) {
+                    reference.child("cards").child(cardpath).removeValue();
+                }
+            }
+
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(applicationContext, error.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+
     public void deleteeee() {
         reference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
