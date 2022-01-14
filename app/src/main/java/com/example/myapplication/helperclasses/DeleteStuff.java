@@ -45,6 +45,40 @@ public class DeleteStuff {
         this.applicationContext = applicationContext;
     }
 
+    public void deleteSubject() {
+        reference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                ArrayList<String> cardsToDelete = new ArrayList<>();
+                for (String subject : checkedSubjects) {
+                    for (DataSnapshot topicSnapshot : snapshot.child(subject).getChildren()) {
+                        for (DataSnapshot cardSnapshot : topicSnapshot.getChildren()) {
+                            cardsToDelete.add(cardSnapshot.getValue(String.class));
+                        }
+                    }
+                    reference.child(subject).removeValue();
+                    ArrayList<String> remainingSubjects = new ArrayList<>();
+                    for (int i=0; i< (int) snapshot.child("subject_sorting").getChildrenCount(); i++) {
+                        if (!checkedSubjects.contains(snapshot.child("subject_sorting").child(String.valueOf(i)).getValue(String.class))){
+                            remainingSubjects.add(snapshot.child("subject_sorting").child(String.valueOf(i)).getValue(String.class));
+                        }
+                    }
+                    reference.child("subject_sorting").removeValue();
+                    for (int i=0; i<remainingSubjects.size(); i++) {
+                        reference.child("subject_sorting").child(String.valueOf(i)).setValue(remainingSubjects.get(i));
+                    }
+                }
+                for (String cardpath : cardsToDelete) {
+                    reference.child("cards").child(cardpath).removeValue();
+                }
+            }
+
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(applicationContext, error.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+
     public void deleteeee() {
         reference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override

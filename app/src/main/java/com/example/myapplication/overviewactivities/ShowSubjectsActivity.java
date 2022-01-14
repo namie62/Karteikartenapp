@@ -22,7 +22,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class ShowSubjectsActivity extends AppCompatActivity {   //später dann durch DB iterieren um Fächer zu holen private static final int REQUESTCODE = 1;
     private ArrayList<String> checkedSubjects = new ArrayList<>();
@@ -32,7 +34,8 @@ public class ShowSubjectsActivity extends AppCompatActivity {   //später dann d
     private ArrayAdapter<String> adapter;
     private IntentHelper ih;
     private String user;
-    DatabaseReference reference;
+    private DatabaseReference reference;
+    private DeleteStuff ds;
     private ArrayList<String> sortedSubjects, sortedTopics, checkedCards, sortedCards, uniqueKeys;
 
 
@@ -51,6 +54,7 @@ public class ShowSubjectsActivity extends AppCompatActivity {   //später dann d
         this.listView = findViewById(R.id.subjects_listView);
         this.applicationContext = getApplicationContext();
         this.showObjects = new ArrayList<>();
+
 
         this.adapter = new ArrayAdapter<>(applicationContext, android.R.layout.simple_list_item_multiple_choice, showObjects);
 
@@ -113,7 +117,8 @@ public class ShowSubjectsActivity extends AppCompatActivity {   //später dann d
     }
 
     public void deleteSubject(View view) {
-        DeleteStuff ds = new DeleteStuff(getApplicationContext(), reference, checkedSubjects);
-        ds.deleteeee();
+        this.ds = new DeleteStuff(getApplicationContext(), reference, checkedSubjects);
+        ds.deleteSubject();
+        ih.goToStartMenu();
     }
 }

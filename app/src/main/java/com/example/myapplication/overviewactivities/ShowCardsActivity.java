@@ -63,7 +63,7 @@ public class ShowCardsActivity extends AppCompatActivity {
                             int max = (int) snapshot.child(subject).child(topic).getChildrenCount();
                             for (int i=0; i<max; i++) {
                                 String cardpath = snapshot.child(subject).child(topic).child(String.valueOf(i)).getValue(String.class);
-                                showObjects.add(snapshot.child(cardpath).child("front").getValue(String.class));
+                                showObjects.add(snapshot.child("cards").child(cardpath).child("front").getValue(String.class));
                                 keyList.add(cardpath);
                             }
                         }

@@ -80,7 +80,7 @@ public class StudyModeActivity extends AppCompatActivity {
                     }
 
                     for (String key : sortedCards) {
-                        Flashcard c = snapshot.child(key).getValue(Flashcard.class);
+                        Flashcard c = snapshot.child("cards").child(key).getValue(Flashcard.class);
                         cards.add(c);
                     }
                 }

@@ -97,7 +97,7 @@ public class CreateNewCardActivity extends AppCompatActivity {
     }
 
     public void showContent() {
-        reference.addListenerForSingleValueEvent(new ValueEventListener() {
+        reference.child("cards").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) {
@@ -120,13 +120,13 @@ public class CreateNewCardActivity extends AppCompatActivity {
                 if (snapshot.exists()) {
                     if (selectedCard == null) {
                         card.setSortOrder(sortOrder);
-                        String newUniqueKey = reference.push().getKey();
-                        reference.child(newUniqueKey).setValue(card);
+                        String newUniqueKey = reference.child("cards").push().getKey();
+                        reference.child("cards").child(newUniqueKey).setValue(card);
                         int sortOrder = (int) snapshot.child(selectedSubject).child(selectedTopic).getChildrenCount();
                         reference.child(selectedSubject).child(selectedTopic).child(String.valueOf(sortOrder)).setValue(newUniqueKey);
                     } else {
-                        reference.child(selectedCard).child("front").setValue(getFrontText());
-                        reference.child(selectedCard).child("back").setValue(getBackText());
+                        reference.child("cards").child(selectedCard).child("front").setValue(getFrontText());
+                        reference.child("cards").child(selectedCard).child("back").setValue(getBackText());
                     }
 
                     ih.goToCardOverview(checkedSubjects, checkedTopics);

@@ -84,7 +84,7 @@ public class QuizModeActivity extends AppCompatActivity {
                     }
 
                     for (String key : sortedCards) {
-                        Flashcard c = snapshot.child(key).getValue(Flashcard.class);
+                        Flashcard c = snapshot.child("cards").child(key).getValue(Flashcard.class);
                         c.setKey(key);
                         cards.add(c);
                     }
