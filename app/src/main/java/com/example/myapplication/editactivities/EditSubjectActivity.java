@@ -52,9 +52,10 @@ public class EditSubjectActivity extends AppCompatActivity {
         subjectNameEditText.setText(selectedSubject);
 
         subjectOldPositionTextView = findViewById(R.id.subject_old_position_textView);
-        subjectOldPositionTextView.setText(String.valueOf(oldIndex + 1));
+        subjectOldPositionTextView.setText(String.valueOf(oldIndex+1));
 
         subjectNewPositionEditText = findViewById(R.id.subject_new_position_editTextNumber);
+        subjectNewPositionEditText.setText(String.valueOf(oldIndex+1));
     }
 
     public void saveChanges(View view) {
@@ -63,18 +64,23 @@ public class EditSubjectActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 String newSubjectName = subjectNameEditText.getText().toString();
                 int newIndex =  Integer.parseInt(String.valueOf(subjectNewPositionEditText.getText())) - 1;
-                if (newIndex < allSubjects.size()) {
-                    if (newSubjectName.equals(selectedSubject)) {
-                        allSubjects.remove(selectedSubject);
-                        allSubjects.add(newIndex, selectedSubject);
-                        for (int i=0; i<allSubjects.size(); i++) {
-                            reference.child("subject_sorting").child(String.valueOf(i)).setValue(allSubjects.get(i));
-                        }
-                    } else {
-                        if (newIndex<allSubjects.size()) {
-                            reference.child(newSubjectName).setValue(snapshot.child(selectedSubject).getValue());
-                        }
+                if (newIndex >= allSubjects.size()) {
+                    newIndex = allSubjects.size() -1;
+                }
+                if (newSubjectName.equals(selectedSubject)) {
+                    allSubjects.remove(selectedSubject);
+                    allSubjects.add(newIndex, selectedSubject);
+                    for (int i=0; i<allSubjects.size(); i++) {
+                        reference.child("subject_sorting").child(String.valueOf(i)).setValue(allSubjects.get(i));
                     }
+                } else {
+                    reference.child(newSubjectName).setValue(snapshot.child(selectedSubject).getValue());
+                    reference.child(selectedSubject).removeValue();
+                    allSubjects.remove(selectedSubject);
+                    allSubjects.add(newIndex, newSubjectName);
+                }
+                for (int i=0; i<allSubjects.size(); i++) {
+                    reference.child("subject_sorting").child(String.valueOf(i)).setValue(allSubjects.get(i));
                 }
             }
 
@@ -82,6 +88,7 @@ public class EditSubjectActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
+        this.finish();
     }
 
 

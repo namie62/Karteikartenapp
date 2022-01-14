@@ -110,7 +110,7 @@
             android:layout_width="110dp"
             android:layout_height="wrap_content"
             android:layout_below="@id/subjects_listView"
-            android:onClick="startTestMode"
+            android:onClick="startQuizMode"
             android:text="@string/Abfrageknopf"
             android:gravity="center" />
 
