@@ -34,8 +34,6 @@ public class EditSubjectActivity extends AppCompatActivity {
         String user = getIntent().getExtras().getString("user");
         this.selectedSubject = getIntent().getExtras().getString("selectedSubject");
         this.allSubjects = getIntent().getExtras().getStringArrayList("checkedSubjects");
-        IntentHelper ih = new IntentHelper(this, user);
-
         FirebaseDatabase flashcardDB = FirebaseDatabase.getInstance("https://karteikar-default-rtdb.europe-west1.firebasedatabase.app/");
         this.reference = flashcardDB.getReference(user);
         int oldIndex = allSubjects.indexOf(selectedSubject);

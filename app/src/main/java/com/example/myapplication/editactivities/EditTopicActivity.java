@@ -21,36 +21,33 @@ import java.util.ArrayList;
 
 public class EditTopicActivity extends AppCompatActivity {
     private DatabaseReference reference;
-    private String selectedTopic, selectedSubject, user;
+    private String selectedTopic;
+    private String selectedSubject;
     private ArrayList<String> allTopics;
-    private IntentHelper ih;
     private EditText topicNameEditText, topicNewPositionEditText;
-    private TextView topicOldPositionTextView;
-    private int oldIndex;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_topic);
 
-        this.user = getIntent().getExtras().getString("user");
+        String user = getIntent().getExtras().getString("user");
         this.allTopics = getIntent().getStringArrayListExtra("allTopics");
         this.selectedSubject = getIntent().getExtras().getString("selectedSubject");
         this.selectedTopic = getIntent().getExtras().getString("selectedTopic");
-        this.ih = new IntentHelper(this, user);
 
         FirebaseDatabase flashcardDB = FirebaseDatabase.getInstance("https://karteikar-default-rtdb.europe-west1.firebasedatabase.app/");
         this.reference = flashcardDB.getReference(user);
-        this.oldIndex = allTopics.indexOf(selectedTopic);
+        int oldIndex = allTopics.indexOf(selectedTopic);
 
         topicNameEditText = findViewById(R.id.topic_name_editText);
         topicNameEditText.setText(selectedTopic);
 
-        topicOldPositionTextView = findViewById(R.id.topic_old_position_textView);
-        topicOldPositionTextView.setText(String.valueOf(oldIndex+1));
+        TextView topicOldPositionTextView = findViewById(R.id.topic_old_position_textView);
+        topicOldPositionTextView.setText(String.valueOf(oldIndex +1));
 
         topicNewPositionEditText = findViewById(R.id.topic_new_position_editTextNumber);
-        topicNewPositionEditText.setText(String.valueOf(oldIndex+1));
+        topicNewPositionEditText.setText(String.valueOf(oldIndex +1));
     }
 
     public void saveChanges(View view) {
