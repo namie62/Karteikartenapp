@@ -76,7 +76,8 @@ public class MainActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) {
                     if (snapshot.child("password").getValue(String.class).equals(password)) {
-                        ih.goToStartMenu(username);
+                        ih.setUser(username);
+                        ih.goToStartMenu();
                     }
                     else {
                         Toast.makeText(c, "Passwort inkorrekt!", Toast.LENGTH_SHORT).show();
