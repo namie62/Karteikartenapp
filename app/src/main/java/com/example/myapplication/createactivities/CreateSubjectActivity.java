@@ -20,12 +20,15 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
 public class CreateSubjectActivity extends AppCompatActivity {
     private TextInputEditText hintTextInputEditText;
+    ArrayList<String> allSubjects;
     private DatabaseReference reference;
     private int sortOrder = 0;
     Context c = this;
@@ -34,8 +37,8 @@ public class CreateSubjectActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_subject);
-
         String user = getIntent().getExtras().getString("user");
+
         FirebaseDatabase flashcardDB = FirebaseDatabase.getInstance("https://karteikar-default-rtdb.europe-west1.firebasedatabase.app/");
         this.reference = flashcardDB.getReference(user);
 
@@ -57,7 +60,15 @@ public class CreateSubjectActivity extends AppCompatActivity {
                         Toast.makeText(c, "Nicht erlaubte Zeichen in Fachbezeichnung:  . , $ , # , [ , ] , / ,", Toast.LENGTH_SHORT).show();
                     } else {
                         sortOrder = (int) (snapshot.child("subject_sorting").getChildrenCount());
-                        reference.child("subject_sorting").child(String.valueOf(sortOrder)).setValue(newSubject);
+                        allSubjects = new ArrayList<>();
+                        for (int i=0; i<sortOrder; i++) {
+                            allSubjects.add(snapshot.child("subject_sorting").child(String.valueOf(i)).getValue(String.class));
+                        }
+                        if (allSubjects.contains(newSubject)){
+                            Toast.makeText(c, "Fach existiert bereits!", Toast.LENGTH_SHORT).show();
+                        } else {
+                            reference.child("subject_sorting").child(String.valueOf(sortOrder)).setValue(newSubject);
+                        }
                     }
                 }
             }
