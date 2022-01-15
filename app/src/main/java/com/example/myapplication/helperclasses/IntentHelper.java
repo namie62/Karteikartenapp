@@ -150,11 +150,6 @@ public class IntentHelper {
         start(i, b);
     }
 
-    public void insertImg() {
-        Intent i = new Intent(this.packageContext, InsertImgHelperClassActivity.class);
-        packageContext.startActivity(i);
-    }
-
     public void putLists(Intent i, ArrayList<String> checkedSubjects){
         Bundle b = addLists(checkedSubjects);
         start(i, b);

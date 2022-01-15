@@ -15,6 +15,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.myapplication.R;
+import com.example.myapplication.helperclasses.InsertImgHelperClassActivity;
 import com.example.myapplication.helperclasses.IntentHelper;
 import com.example.myapplication.objectclasses.Flashcard;
 import com.google.firebase.database.DataSnapshot;
@@ -70,7 +71,9 @@ public class CreateNewCardActivity extends AppCompatActivity {
     }
 
     public void insertImg(View view) {
-        ih.insertImg();
+        final int RESULT_GALLERY = 1;
+        Intent i = new Intent(this, InsertImgHelperClassActivity.class);
+        startActivityForResult(i, RESULT_GALLERY);
     }
 
     @Override
