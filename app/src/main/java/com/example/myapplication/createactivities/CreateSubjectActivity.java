@@ -28,7 +28,7 @@ import java.util.Objects;
 
 public class CreateSubjectActivity extends AppCompatActivity {
     private TextInputEditText hintTextInputEditText;
-    ArrayList<String> allSubjects;
+    private ArrayList<String> allSubjects;
     private DatabaseReference reference;
     private int sortOrder = 0;
     Context c = this;
@@ -42,7 +42,7 @@ public class CreateSubjectActivity extends AppCompatActivity {
         FirebaseDatabase flashcardDB = FirebaseDatabase.getInstance("https://karteikar-default-rtdb.europe-west1.firebasedatabase.app/");
         this.reference = flashcardDB.getReference(user);
 
-        hintTextInputEditText = (TextInputEditText) findViewById(R.id.enterEditText);
+        hintTextInputEditText = findViewById(R.id.enterEditText);
     }
 
     public void closeWindow(View view){
@@ -50,7 +50,7 @@ public class CreateSubjectActivity extends AppCompatActivity {
     }
 
     public void saveSubject(View view){
-        String newSubject = (String) Objects.requireNonNull(hintTextInputEditText.getText()).toString();
+        String newSubject = Objects.requireNonNull(hintTextInputEditText.getText()).toString();
 
         reference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
