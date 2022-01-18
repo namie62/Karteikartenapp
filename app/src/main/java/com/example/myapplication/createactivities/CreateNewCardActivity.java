@@ -84,7 +84,7 @@ public class CreateNewCardActivity extends AppCompatActivity {
                     this.img = MediaStore.Images.Media.getBitmap(this.getContentResolver(), uri);
                     imageView.setImageBitmap(this.img);
                 } catch (Exception e) {
-                    System.out.println("Bild konnte nicht geparsed werden"); // Stattdessen Errormessage dialog
+                    Toast.makeText(getApplicationContext(), "Bild konnte nicht geparsed werden!", Toast.LENGTH_SHORT).show();
                 }
             }
         }
@@ -144,7 +144,7 @@ public class CreateNewCardActivity extends AppCompatActivity {
         ih.shareCard(getFrontText(), getBackText(), uriForDB);
     }
 
-    public String getFrontText(){    // Getter für speichereInhalt Methode
+    public String getFrontText(){ 
         EditText topicEditText = (EditText) findViewById(R.id.front_edit_text);
         String front = topicEditText.getText().toString();
         return front;
