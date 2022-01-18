@@ -6,6 +6,7 @@ import android.icu.text.Edits;
 import android.os.Bundle;
 
 import com.example.myapplication.MainActivity;
+import com.example.myapplication.editactivities.EditCardOrderActivity;
 import com.example.myapplication.editactivities.EditSubjectActivity;
 import com.example.myapplication.editactivities.EditTopicActivity;
 import com.example.myapplication.exportactivities.EmailExportActivity;
@@ -133,6 +134,16 @@ public class IntentHelper {
     public void editCard(ArrayList<String> checkedSubjects, ArrayList<String> checkedTopics, ArrayList<String> checkedKeys) {
         Intent i = new Intent(this.packageContext, CreateNewCardActivity.class);
         putLists(i, checkedSubjects, checkedTopics, checkedKeys);
+    }
+
+    public void editCardOrder(ArrayList<String> allCards, String selectedSubject, String selectedTopic, String selectedCard){
+        Intent i = new Intent(this.packageContext, EditCardOrderActivity.class);
+        Bundle b = new Bundle();
+        b.putStringArrayList("allCards", allCards);
+        b.putString("selectedSubject", selectedSubject);
+        b.putString("selectedTopic", selectedTopic);
+        b.putString("selectedCard", selectedCard);
+        start(i, b);
     }
 
     public void shareCard(String front, String back, String img) {

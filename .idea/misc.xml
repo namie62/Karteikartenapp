@@ -16,6 +16,7 @@
         <entry key="app/src/main/res/layout/activity_choose_subject_and_topic_for_new_card.xml" value="0.1265625" />
         <entry key="app/src/main/res/layout/activity_create_new_card.xml" value="0.165" />
         <entry key="app/src/main/res/layout/activity_create_topic.xml" value="0.12107396149949341" />
+        <entry key="app/src/main/res/layout/activity_edit_card_order.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_edit_subject.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_edit_topic.xml" value="0.1403985507246377" />
         <entry key="app/src/main/res/layout/activity_email_export.xml" value="0.22916666666666666" />

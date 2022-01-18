@@ -10,7 +10,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.myapplication.R;
-import com.example.myapplication.helperclasses.IntentHelper;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -19,51 +18,47 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-public class EditTopicActivity extends AppCompatActivity {
+public class EditCardOrderActivity extends AppCompatActivity {
     private DatabaseReference reference;
-    private String selectedTopic, selectedSubject;
-    private ArrayList<String> allTopics;
-    private EditText topicNameEditText, topicNewPositionEditText;
+    private String selectedTopic, selectedSubject, selectedCard;
+    private ArrayList<String> allCards;
+    private EditText cardNewPositionEditText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_edit_topic);
+        setContentView(R.layout.activity_edit_card_order);
 
         String user = getIntent().getExtras().getString("user");
-        this.allTopics = getIntent().getStringArrayListExtra("allTopics");
         this.selectedSubject = getIntent().getExtras().getString("selectedSubject");
         this.selectedTopic = getIntent().getExtras().getString("selectedTopic");
+        this.selectedCard = getIntent().getExtras().getString("selectedCard");
+        this.allCards = getIntent().getStringArrayListExtra("allCards");
 
         FirebaseDatabase flashcardDB = FirebaseDatabase.getInstance("https://karteikar-default-rtdb.europe-west1.firebasedatabase.app/");
         this.reference = flashcardDB.getReference(user);
-        int oldIndex = allTopics.indexOf(selectedTopic);
+        int oldIndex = allCards.indexOf(selectedCard);
 
-        topicNameEditText = findViewById(R.id.topic_name_editText);
-        topicNameEditText.setText(selectedTopic);
 
-        TextView topicOldPositionTextView = findViewById(R.id.topic_old_position_textView);
-        topicOldPositionTextView.setText(String.valueOf(oldIndex +1));
+        TextView cardOldPositionTextView = findViewById(R.id.card_old_position_textView);
+        cardOldPositionTextView.setText(String.valueOf(oldIndex +1));
 
-        topicNewPositionEditText = findViewById(R.id.topic_new_position_editTextNumber);
-        topicNewPositionEditText.setText(String.valueOf(oldIndex +1));
+        cardNewPositionEditText = findViewById(R.id.card_new_position_editTextNumber);
+        cardNewPositionEditText.setText(String.valueOf(oldIndex +1));
     }
 
     public void saveChanges(View view) {
         reference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                String newTopicName = topicNameEditText.getText().toString();
-                int newIndex =  Integer.parseInt(String.valueOf(topicNewPositionEditText.getText())) - 1;
-                if (newIndex >= allTopics.size()) {
-                    newIndex = allTopics.size()-1;
+                int newIndex =  Integer.parseInt(String.valueOf(cardNewPositionEditText.getText())) - 1;
+                if (newIndex >= allCards.size()) {
+                    newIndex = allCards.size()-1;
                 }
-                reference.child(selectedSubject).child(newTopicName).setValue(snapshot.child(selectedSubject).child(selectedTopic).getValue());
-                reference.child(selectedSubject).child(selectedTopic).removeValue();
-                allTopics.remove(selectedTopic);
-                allTopics.add(newIndex, newTopicName);
-                for (int i=0; i<allTopics.size(); i++) {
-                    reference.child(selectedSubject).child("sorting").child(String.valueOf(i)).setValue(allTopics.get(i));
+                allCards.remove(selectedCard);
+                allCards.add(newIndex, selectedCard);
+                for (int i=0; i<allCards.size(); i++) {
+                    reference.child(selectedSubject).child(selectedTopic).child(String.valueOf(i)).setValue(allCards.get(i));
                 }
             }
 
@@ -77,6 +72,4 @@ public class EditTopicActivity extends AppCompatActivity {
     public void cancel(View view) {
         this.finish();
     }
-
-
 }

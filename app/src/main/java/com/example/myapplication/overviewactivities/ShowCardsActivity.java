@@ -26,7 +26,7 @@ import java.util.ArrayList;
 
 public class ShowCardsActivity extends AppCompatActivity {
     private DatabaseReference reference;
-    private ArrayList<String> checkedSubjects, checkedTopics,checkedCards, showObjects, keyList;
+    private ArrayList<String> checkedSubjects, checkedTopics, checkedCards, showObjects, keyList;
     private ListView listView;
     private Context applicationContext;
     private ArrayAdapter<String> adapter;
@@ -118,5 +118,13 @@ public class ShowCardsActivity extends AppCompatActivity {
     public void deleteCard(View view) {
         DeleteStuff ds = new DeleteStuff(getApplicationContext(), reference, checkedSubjects, checkedTopics, checkedCards);
         ds.deleteCards();
+    }
+
+    public void editSortOrder(View view) {
+        if (checkedSubjects.size()==1 && checkedTopics.size() ==1 && checkedCards.size() ==1) {
+            ih.editCardOrder(keyList, checkedSubjects.get(0), checkedTopics.get(0), checkedCards.get(0));
+        } else {
+            Toast.makeText(this, "Bitte exakt 1 Fach, 1 Thema und 1 Karte auswählen!", Toast.LENGTH_SHORT).show();
+        }
     }
 }
