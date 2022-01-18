@@ -30,29 +30,20 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class CreateNewCardActivity extends AppCompatActivity {
-    private String selectedTopic;
-    private String selectedSubject;
+    private String selectedSubject, selectedTopic, selectedCard, uriForDB;
     private Bitmap img;
     private DatabaseReference reference;
-    private ArrayList<String> checkedSubjects, checkedTopics, checkedKeys;
+    private ArrayList<String> checkedSubjects, checkedTopics;
     private IntentHelper ih;
-    private String uriForDB = " ";
-    private String user;
-    private String selectedCard;
-    private String backImgFromDB;
-    private int sortOrder;
-    private int progress;
-    private EditText frontEditText;
-    private EditText backEditText;
+    private EditText frontEditText, backEditText;
     private ImageView imageView;
-    private Context c = this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_new_card);
 
-        this.user = getIntent().getExtras().getString("user");
+        String user = getIntent().getExtras().getString("user");
         FirebaseDatabase flashcardDB = FirebaseDatabase.getInstance("https://karteikar-default-rtdb.europe-west1.firebasedatabase.app/");
         this.reference = flashcardDB.getReference(user);
 
@@ -65,7 +56,7 @@ public class CreateNewCardActivity extends AppCompatActivity {
         this.selectedSubject = getIntent().getExtras().getString("selectedSubject");
         this.checkedSubjects = getIntent().getStringArrayListExtra("checkedSubjects");
         this.checkedTopics = getIntent().getStringArrayListExtra("checkedTopics");
-        this.checkedKeys = getIntent().getStringArrayListExtra("checkedCards");
+        ArrayList<String> checkedKeys = getIntent().getStringArrayListExtra("checkedCards");
         if (checkedKeys != null) {
             this.selectedCard = checkedKeys.get(0);
             showContent();
@@ -122,7 +113,7 @@ public class CreateNewCardActivity extends AppCompatActivity {
         });
     }
 
-    public void saveContent(View view){    // setzt die Inhalte in Klasse Karte und sichert damit das Abspeichern
+    public void saveContent(View view) {
         Flashcard card = new Flashcard(getFrontText(), getBackText(), uriForDB);
         reference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -147,7 +138,6 @@ public class CreateNewCardActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
-
     }
 
     public void share(View view) {
