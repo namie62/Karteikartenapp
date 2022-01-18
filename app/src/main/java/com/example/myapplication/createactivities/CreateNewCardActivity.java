@@ -1,5 +1,6 @@
 package com.example.myapplication.createactivities;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -24,6 +25,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class CreateNewCardActivity extends AppCompatActivity {
@@ -41,6 +44,8 @@ public class CreateNewCardActivity extends AppCompatActivity {
     private int progress;
     private EditText frontEditText;
     private EditText backEditText;
+    private ImageView imageView;
+    private Context c = this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +58,7 @@ public class CreateNewCardActivity extends AppCompatActivity {
 
         this.frontEditText = findViewById(R.id.front_edit_text);
         this.backEditText = findViewById(R.id.back_edit_text);
+        this.imageView = (ImageView) findViewById(R.id.imageView);
 
         this.ih = new IntentHelper(this, user);
         this.selectedTopic = getIntent().getExtras().getString("selectedTopic");
@@ -79,20 +85,14 @@ public class CreateNewCardActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        ImageView imageView = (ImageView) findViewById(R.id.imageView);
         if (requestCode == 1) {
             if (resultCode == RESULT_OK) {
                 try{
                     Uri uri = data.getParcelableExtra("pic");
                     uriForDB = uri.toString();
-                    if (uri != null){
                     this.img = MediaStore.Images.Media.getBitmap(this.getContentResolver(), uri);
                     imageView.setImageBitmap(this.img);
-                    }else {
-                        System.out.println("kein Bild ausgewählt");
-                    }
                 } catch (Exception e) {
-                    Bitmap bitmap = null;
                     System.out.println("Bild konnte nicht geparsed werden"); // Stattdessen Errormessage dialog
                 }
             }
@@ -104,6 +104,13 @@ public class CreateNewCardActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) {
+                    try {
+                        Uri uri = Uri.parse(snapshot.child(selectedCard).child("img_uri").getValue(String.class));
+                        img = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
+                        imageView.setImageBitmap(img);
+                    } catch (FileNotFoundException e) {
+                        Toast.makeText(getApplicationContext(), "Bild existiert nicht!", Toast.LENGTH_SHORT).show();
+                    } catch (IOException ignored) {}
                     frontEditText.setText(snapshot.child(selectedCard).child("front").getValue(String.class));
                     backEditText.setText(snapshot.child(selectedCard).child("back").getValue(String.class));
                 }
@@ -122,7 +129,6 @@ public class CreateNewCardActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) {
                     if (selectedCard == null) {
-                        card.setSortOrder(sortOrder);
                         String newUniqueKey = reference.child("cards").push().getKey();
                         reference.child("cards").child(newUniqueKey).setValue(card);
                         int sortOrder = (int) snapshot.child(selectedSubject).child(selectedTopic).getChildrenCount();
@@ -130,6 +136,7 @@ public class CreateNewCardActivity extends AppCompatActivity {
                     } else {
                         reference.child("cards").child(selectedCard).child("front").setValue(getFrontText());
                         reference.child("cards").child(selectedCard).child("back").setValue(getBackText());
+                        reference.child("cards").child(selectedCard).child("img_uri").setValue(getBackText());
                     }
 
                     ih.goToCardOverview(checkedSubjects, checkedTopics);
@@ -157,15 +164,5 @@ public class CreateNewCardActivity extends AppCompatActivity {
         EditText topicEditText = (EditText) findViewById(R.id.back_edit_text);
         String back = topicEditText.getText().toString();
         return back;
-    }
-
-    public Integer getProgress(){
-        Integer progress = 0;
-        return progress;
-    }
-
-    public Bitmap getImg(){
-        Bitmap img = this.img;
-        return img;
     }
 }

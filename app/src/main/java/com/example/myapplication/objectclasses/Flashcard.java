@@ -1,36 +1,26 @@
 package com.example.myapplication.objectclasses;
 
-import android.graphics.Bitmap;
-
 public class Flashcard {
     public String front;
     public String back;
-    public String backImg, key;
-    public int progress, sortOrder;
+    public String img_uri, key;
+    public int progress;
 
     public Flashcard() {}
 
     public Flashcard(String front, String back, String backImg) {
         this.front = front;
         this.back = back;
-        this.backImg = backImg;
+        this.img_uri = backImg;
         this.progress = 1;
     }
 
     public Flashcard(String front, String back, String backImg, int progress, String key) {
         this.front = front;
         this.back = back;
-        this.backImg = backImg;
+        this.img_uri = backImg;
         this.progress = progress;
         this.key = key;
-    }
-
-    public int getSortOrder() {
-        return sortOrder;
-    }
-
-    public void setSortOrder(int sortOrder) {
-        this.sortOrder = sortOrder;
     }
 
     public int getProgress() {
@@ -57,12 +47,12 @@ public class Flashcard {
         this.back = back;
     }
 
-    public String getBackImg() {
-        return backImg;
+    public String getImg_uri() {
+        return img_uri;
     }
 
-    public void setBackImg(String backImg) {
-        this.backImg = backImg;
+    public void setImg_uri(String backImg) {
+        this.img_uri = backImg;
     }
 
     @Override
