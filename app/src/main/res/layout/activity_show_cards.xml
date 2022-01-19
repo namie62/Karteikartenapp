@@ -104,7 +104,7 @@
 
         <Button
             android:id="@+id/quiz_mode_btn"
-            android:layout_width="135dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/cards_listView"
             android:text="@string/Abfrageknopf"
@@ -118,7 +118,7 @@
 
         <Button
             android:id="@+id/study_mode_subject_btn"
-            android:layout_width="135dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/cards_listView"
             android:text="@string/Lernmodusknopf"
@@ -132,7 +132,7 @@
 
         <Button
             android:id="@+id/go_to_subject_btn"
-            android:layout_width="135dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onClick="editCard"
             android:text="@string/IndieKarte"

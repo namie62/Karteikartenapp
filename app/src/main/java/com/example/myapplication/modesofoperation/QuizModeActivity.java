@@ -25,6 +25,7 @@ public class QuizModeActivity extends AppCompatActivity {
     private ArrayList<Flashcard> cards = new ArrayList<>();
     private ArrayList<Flashcard> allCards = new ArrayList<>();
     private int index = 0;
+    private TextView cardFront;
     DatabaseReference reference;
 
 
@@ -38,6 +39,7 @@ public class QuizModeActivity extends AppCompatActivity {
         this.reference = flashcardDB.getReference(user);
 
         this.ih = new IntentHelper(this, user);
+        cardFront = findViewById(R.id.card_front);
 
         Bundle b = getIntent().getExtras();
         this.checkedSubjects = b.getStringArrayList("checkedSubjects");
@@ -161,4 +163,5 @@ public class QuizModeActivity extends AppCompatActivity {
     public void partiallyRight(View view) {
         nextCard();
     }
+
 }

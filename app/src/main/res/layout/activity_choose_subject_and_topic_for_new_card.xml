@@ -1,86 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".createactivities.ChooseSubjectAndTopicForNewCardActivity">
-
-    <Spinner
-        android:id="@+id/select_topic_spinner"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/progress_text_view"
-        android:layout_marginTop="3dp"
-        android:spinnerMode="dropdown"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="0dp" />
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_gravity="top"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/roboto_regular"
         android:text="Fach auswählen:"
-        android:textSize="16sp"
-        tools:layout_editor_absoluteX="0dp" />
+        android:textSize="18sp" />
+
+    <Spinner
+        android:id="@+id/select_topic_spinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/textView"
+        android:spinnerMode="dropdown"
+        tools:ignore="MissingConstraints"
+        android:textSize="18sp" />
+
 
     <TextView
         android:id="@+id/progress_text_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/select_subject_spinner"
-        android:layout_gravity="top"
-        android:layout_marginTop="3dp"
+        android:layout_below="@+id/select_topic_spinner"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/roboto_regular"
         android:text="Thema auswählen:"
-        android:textSize="16sp"
-        tools:layout_editor_absoluteX="0dp" />
+        android:textSize="18sp" />
 
     <Spinner
         android:id="@+id/select_subject_spinner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:layout_marginBottom="48dp"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/progress_text_view"
         android:spinnerMode="dropdown"
         tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="0dp" />
+        android:textSize="18sp" />
 
-    <Button
-        android:id="@+id/cancel_btn"
-        android:layout_width="170dp"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/select_topic_spinner"
+        android:orientation="horizontal"
+        android:layout_below="@+id/select_subject_spinner"
+        android:layout_marginTop="10dp" >
 
-        android:layout_alignParentStart="true"
-        android:layout_gravity="left"
-        android:layout_marginStart="3dp"
-        android:layout_marginTop="0dp"
+        <Button
+            android:id="@+id/cancel_btn"
+            android:layout_width="170dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:gravity="center"
+            android:onClick="closeWindow"
+            android:text="Abbrechen" />
 
-        android:gravity="center"
-        android:onClick="closeWindow"
-        android:text="Abbrechen"
-        android:textColor="@color/black"
-        android:textSize="13sp"
-        tools:targetApi="s" />
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
 
-    <Button
-        android:id="@+id/create_card_btn"
-        android:layout_width="170dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/select_topic_spinner"
-        android:layout_alignParentEnd="true"
-        android:layout_gravity="right"
-        android:layout_marginTop="1dp"
-        android:layout_marginEnd="4dp"
+        <Button
+            android:id="@+id/create_card_btn"
+            android:layout_width="170dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:gravity="center"
+            android:onClick="createCard"
+            android:text="Erstellen" />
 
-        android:gravity="center"
-        android:onClick="createCard"
-        android:text="Karte erstellen"
-        android:textColor="@color/black"
-        android:textSize="13sp"
-        tools:targetApi="s" />
+    </LinearLayout>
 
-
-</RelativeLayout>
+</LinearLayout>

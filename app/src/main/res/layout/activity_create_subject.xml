@@ -49,7 +49,7 @@
             android:layout_gravity="right"
             android:gravity="center"
             android:onClick="saveSubject"
-            android:text="Fach erstellen" />
+            android:text="Erstellen" />
 
     </LinearLayout>
 

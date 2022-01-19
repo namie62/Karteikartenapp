@@ -107,7 +107,7 @@
 
         <Button
             android:id="@+id/quiz_subject_btn"
-            android:layout_width="110dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/subjects_listView"
             android:onClick="startQuizMode"
@@ -121,7 +121,7 @@
 
         <Button
             android:id="@+id/study_mode_subject_btn"
-            android:layout_width="110dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/subjects_listView"
             android:layout_gravity="center"
@@ -136,7 +136,7 @@
 
         <Button
             android:id="@+id/go_to_subject_btn"
-            android:layout_width="110dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/subjects_listView"
             android:layout_gravity="right"

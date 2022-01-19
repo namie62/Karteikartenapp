@@ -1,117 +1,149 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".createactivities.CreateNewCardActivity">
 
-    <Button
-        android:id="@+id/cancelBtn"
-        android:layout_width="153dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="23dp"
-        android:layout_marginBottom="-1dp"
-        android:onClick="cancelPopUp"
-        android:text="Abbrechen"
-        android:textColor="@color/black"
-        app:backgroundTint="@android:color/holo_red_dark"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.934" />
 
-
-    <Button
-        android:id="@+id/buttonspeichern"
-        android:layout_width="153dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="false"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginEnd="17dp"
-        android:layout_marginBottom="0dp"
-        android:onClick="saveContent"
-        android:text="Speichern"
-        android:textColor="@color/black"
-        app:backgroundTint="@android:color/holo_green_dark"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/TextInhalt"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="522dp"
-        android:layout_below="@id/TextThemengebiet"
-        android:textStyle="italic">
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/back_edit_text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:height="370dp"
-            android:fontFamily="@font/cairo"
-            android:hint="Inhalt"
-            android:maxHeight="370dp"
-            android:singleLine="false"
-            android:textColor="@color/black"
-            android:textSize="18sp" />
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/TextThemengebiet"
+            android:layout_width="280dp"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/front_edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:height="70dp"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/roboto_regular"
+                android:hint="Themengebiet"
+                android:background="@drawable/et_custom"
+                android:maxHeight="120dp"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:textStyle="italic" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <ImageButton
+            android:id="@+id/imageButton"
+            android:layout_width="80dp"
+            android:layout_height="70dp"
+            android:layout_marginTop="10dp"
+            android:layout_toRightOf="@id/TextThemengebiet"
+            android:background="@drawable/btn_custom"
+            android:onClick="insertImg"
+            app:srcCompat="@android:drawable/ic_menu_gallery" />
+
+    </LinearLayout>
 
 
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="238dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            tools:srcCompat="@tools:sample/avatars" />
 
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/TextThemengebiet"
-        android:layout_width="295dp"
-        android:layout_height="wrap_content">
-
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/front_edit_text"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:height="70dp"
-            android:fontFamily="@font/cairo"
-            android:hint="Themengebiet"
-            android:maxHeight="120dp"
-            android:textColor="@color/black"
-            android:textSize="18sp"
-            android:textStyle="italic" />
+            android:orientation="vertical" >
+
+            <ScrollView
+                android:id="@+id/ScrollView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/cancelBtn">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/TextInhalt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/TextThemengebiet"
+                android:textStyle="italic">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/back_edit_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/roboto_regular"
+                    android:hint="Inhalt"
+                    android:background="@drawable/et_custom"
+                    android:maxHeight="370dp"
+                    android:singleLine="false"
+                    android:textColor="@color/black"
+                    android:textSize="18sp" />
+
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                tools:srcCompat="@tools:sample/avatars" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
-    <ImageButton
-        android:id="@+id/imageButton"
-        android:layout_width="80dp"
-        android:layout_height="70dp"
-        android:layout_toRightOf="@id/TextThemengebiet"
-        android:background="@color/purple_500"
-        android:onClick="insertImg"
-        app:srcCompat="@android:drawable/ic_menu_gallery" />
+            </ScrollView>
+        </LinearLayout>
 
-    <Button
-        android:id="@+id/share_btn"
-        android:layout_width="55dp"
-        android:layout_height="45dp"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="7dp"
-        android:layout_marginEnd="3dp"
-        android:layout_marginBottom="2dp"
-        android:layout_toStartOf="@+id/buttonspeichern"
-        android:layout_toEndOf="@+id/cancelBtn"
-        android:onClick="share"
-        app:icon="?attr/actionModeShareDrawable" />
 
-</RelativeLayout>
+    <View
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="20dp"
+        android:layout_gravity="bottom" >
+
+            <Button
+                android:id="@+id/cancelBtn"
+                android:layout_width="135dp"
+                android:layout_height="wrap_content"
+                android:onClick="cancelPopUp"
+                android:text="Abbrechen"
+                android:gravity="center" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+
+            <Button
+                android:id="@+id/share_btn"
+                android:layout_width="65dp"
+                android:layout_height="wrap_content"
+                android:onClick="share"
+                app:icon="?attr/actionModeShareDrawable"
+                android:gravity="center"  />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+
+            <Button
+                android:id="@+id/buttonspeichern"
+                android:layout_width="135dp"
+                android:layout_height="wrap_content"
+                android:onClick="saveContent"
+                android:text="Speichern"
+                android:gravity="center" />
+
+    </LinearLayout>
+
+</LinearLayout>

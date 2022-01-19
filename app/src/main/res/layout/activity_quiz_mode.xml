@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -7,12 +7,58 @@
     android:layout_height="match_parent"
     tools:context=".modesofoperation.QuizModeActivity">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/back_btn"
+            android:layout_width="65dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/btn_custom"
+            android:layout_gravity="left"
+            android:gravity="center"
+            android:onClick = "goToPrevious"
+            app:icon="@android:drawable/ic_menu_revert" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <TextView
+            android:id="@+id/current_progress_textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Aktuelle Lernstufe: "
+            android:background="@android:color/darker_gray"
+            android:fontFamily="@font/roboto_regular"
+            android:gravity="center"
+            android:layout_marginTop="10dp"/>
+
+
+        <TextView
+            android:id="@+id/progress_textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            android:layout_marginTop="10dp"
+            android:background="@android:color/darker_gray"
+            android:fontFamily="@font/roboto_regular"
+            android:gravity="center" />
+
+    </LinearLayout>
+
+
     <com.wajahatkarim3.easyflipview.EasyFlipView
         android:id="@+id/easyFlipView"
-        android:layout_width="358dp"
-        android:layout_height="416dp"
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        android:layout_marginTop="10dp"
         android:layout_gravity="center"
         android:gravity="center"
+        android:scrollbars="vertical"
         app:flipDuration="400"
         app:flipEnabled="true"
         app:flipFrom="front"
@@ -28,83 +74,74 @@
             android:layout_height="500dp"
             android:background="@android:color/holo_green_dark"
             android:gravity="center"
+            android:scrollbars="vertical"
             android:text="Inhalt"
             android:textAlignment="center"
-            android:textSize="22sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:textSize="22sp" />
 
         <TextView
             android:id="@+id/card_back"
-            android:layout_width="359dp"
-            android:layout_height="534dp"
+            android:layout_width="match_parent"
+            android:layout_height="500dp"
             android:background="@android:color/holo_blue_dark"
             android:gravity="center"
+            android:scrollbars="vertical"
             android:text="Themengebiet"
             android:textAlignment="center"
-            android:textSize="22sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:textSize="22sp" />
 
     </com.wajahatkarim3.easyflipview.EasyFlipView>
 
-    <Button
-        android:id="@+id/back_btn"
-        android:layout_width="65dp"
-        android:layout_height="45dp"
-        android:onClick = "goToPrevious"
-        app:icon="?attr/actionModeCloseDrawable"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/wrong_btn"
-        android:layout_width="wrap_content"
+    <View
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:onClick="wrongAnswer"
-        app:icon="@android:drawable/ic_delete"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/partially_correct_btn"
-        app:layout_constraintVertical_bias="1.0" />
+        android:orientation="horizontal"
+        android:layout_gravity="bottom" >
 
-    <Button
-        android:id="@+id/correct_btn"
-        android:layout_width="97dp"
-        android:layout_height="49dp"
-        android:layout_marginEnd="32dp"
-        android:onClick="rightAnswer"
-        app:icon="@android:drawable/presence_online"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        <Button
+            android:id="@+id/wrong_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="wrongAnswer"
+            app:icon="@android:drawable/ic_delete"
+            android:gravity="center" />
 
-    <Button
-        android:id="@+id/partially_correct_btn"
-        android:layout_width="117dp"
-        android:layout_height="49dp"
-        android:onClick="partiallyRight"
-        android:text="teilweise"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/correct_btn"
-        app:layout_constraintHorizontal_bias="0.586"
-        app:layout_constraintStart_toEndOf="@+id/wrong_btn"
-        app:layout_constraintTop_toBottomOf="@+id/easyFlipView"
-        app:layout_constraintVertical_bias="0.976" />
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
 
-    <TextView
-        android:id="@+id/progress_textView"
-        android:layout_width="57dp"
-        android:layout_height="41dp"
-        android:text="TextView"
-        app:layout_constraintBottom_toTopOf="@+id/easyFlipView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.819"
-        app:layout_constraintStart_toEndOf="@+id/back_btn"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        <Button
+            android:id="@+id/partially_correct_btn"
+            android:layout_width="117dp"
+            android:layout_height="wrap_content"
+            android:onClick="partiallyRight"
+            android:text="teilweise"
+            android:gravity="center" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+
+        <Button
+            android:id="@+id/correct_btn"
+            android:layout_width="97dp"
+            android:layout_height="49dp"
+            android:onClick="rightAnswer"
+            app:icon="@android:drawable/presence_online"
+            android:gravity="center" />
+
+
+
+    </LinearLayout>
+
+
+</LinearLayout>
