@@ -1,7 +1,10 @@
 package com.example.myapplication.createactivities;
 
+import android.Manifest;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -16,6 +19,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import com.example.myapplication.R;
 import com.example.myapplication.helperclasses.InsertImgHelperClassActivity;
@@ -26,7 +31,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.io.FileDescriptor;
 import java.io.FileNotFoundException;
@@ -41,7 +45,7 @@ public class CreateNewCardActivity extends AppCompatActivity {
     private IntentHelper ih;
     private EditText frontEditText, backEditText;
     private ImageView imageView;
-    private FirebaseFirestore storage;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,11 +54,10 @@ public class CreateNewCardActivity extends AppCompatActivity {
         String user = getIntent().getExtras().getString("user");
         FirebaseDatabase flashcardDB = FirebaseDatabase.getInstance("https://karteikar-default-rtdb.europe-west1.firebasedatabase.app/");
         this.reference = flashcardDB.getReference(user);
-        this.storage = FirebaseFirestore.getInstance();
 
         this.frontEditText = findViewById(R.id.front_edit_text);
         this.backEditText = findViewById(R.id.back_edit_text);
-        this.imageView = findViewById(R.id.imageView);
+        this.imageView = (ImageView) findViewById(R.id.imageView);
 
         this.ih = new IntentHelper(this, user);
         this.selectedTopic = getIntent().getExtras().getString("selectedTopic");
@@ -100,13 +103,16 @@ public class CreateNewCardActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) {
-                    try {
-                        Uri uri = Uri.parse(snapshot.child(selectedCard).child("img_uri").getValue(String.class));
-                        img = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
+                    //try {
+
+                        //Uri uri = Uri.parse(snapshot.child(selectedCard).child("img_uri").getValue(String.class));
+
+
+                        /*img = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
                         imageView.setImageBitmap(img);
                     } catch (FileNotFoundException e) {
                         Toast.makeText(getApplicationContext(), "Bild existiert nicht!", Toast.LENGTH_SHORT).show();
-                    } catch (IOException ignored) {}
+                    } catch (IOException ignored) {}*/
                     frontEditText.setText(snapshot.child(selectedCard).child("front").getValue(String.class));
                     backEditText.setText(snapshot.child(selectedCard).child("back").getValue(String.class));
                 }
