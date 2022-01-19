@@ -8,6 +8,7 @@ import android.view.View;
 import android.webkit.MimeTypeMap;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ScrollView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -19,6 +20,7 @@ import com.example.myapplication.helperclasses.IntentHelper;
 import com.example.myapplication.objectclasses.Flashcard;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -30,6 +32,11 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
 
+import org.w3c.dom.Text;
+
+import java.io.FileDescriptor;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class CreateNewCardActivity extends AppCompatActivity {
@@ -39,6 +46,8 @@ public class CreateNewCardActivity extends AppCompatActivity {
     private IntentHelper ih;
     private EditText frontEditText, backEditText;
     private ImageView imageView;
+    private TextInputLayout TextContent;
+    private ScrollView ScrollView;
     private StorageReference storageReference;
     private Uri uri;
 
@@ -55,6 +64,9 @@ public class CreateNewCardActivity extends AppCompatActivity {
         this.frontEditText = findViewById(R.id.front_edit_text);
         this.backEditText = findViewById(R.id.back_edit_text);
         this.imageView = findViewById(R.id.imageView);
+        this.imageView = (ImageView) findViewById(R.id.imageView);
+        this.TextContent = findViewById(R.id.TextInhalt);
+        this.ScrollView = (ScrollView) findViewById(R.id.ScrollView);
 
         this.ih = new IntentHelper(this, user);
         this.selectedTopic = getIntent().getExtras().getString("selectedTopic");
@@ -186,5 +198,14 @@ public class CreateNewCardActivity extends AppCompatActivity {
         ContentResolver cr = getContentResolver();
         MimeTypeMap mime = MimeTypeMap.getSingleton();
         return mime.getExtensionFromMimeType(cr.getType(uri));
+    }
+
+
+    private void scrollToBottom() {
+        ScrollView.post(new Runnable() {
+            public void run() {
+                ScrollView.smoothScrollTo(0, TextContent.getBottom());
+            }
+        });
     }
 }

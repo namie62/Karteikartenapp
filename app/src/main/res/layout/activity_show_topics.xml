@@ -113,7 +113,7 @@
 
         <Button
             android:id="@+id/quiz_topic_btn"
-            android:layout_width="120dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/Abfrageknopf"
             android:onClick = "startQuizMode"
@@ -126,7 +126,7 @@
 
         <Button
             android:id="@+id/study_mode_btn"
-            android:layout_width="120dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Lernen"
             android:onClick="startStudyMode"
@@ -139,7 +139,7 @@
 
         <Button
             android:id="@+id/go_to_cards_btn"
-            android:layout_width="120dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/InsThema"
             android:onClick="goToCards"
