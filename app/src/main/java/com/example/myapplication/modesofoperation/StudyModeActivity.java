@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -15,6 +16,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -23,6 +25,7 @@ public class StudyModeActivity extends AppCompatActivity {
     private ArrayList<Flashcard> cards;
     private IntentHelper ih;
     private int index = 0;
+    private ImageView imageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +47,7 @@ public class StudyModeActivity extends AppCompatActivity {
         this.sortedCards = new ArrayList<>();
         this.cards = new ArrayList<>();
         ArrayList<Flashcard> allCards = new ArrayList<>();
+        this.imageView = findViewById(R.id.imageView2);
 
         reference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -87,6 +91,7 @@ public class StudyModeActivity extends AppCompatActivity {
                 Flashcard card = cards.get(index);
                 fillFrontTextView(card.getFront());
                 fillBackTextView(card.getBack());
+                Picasso.get().load(card.getImg_uri()).into(imageView);
                 setProgressTextView(card.getProgress());
             }
 
@@ -119,6 +124,7 @@ public class StudyModeActivity extends AppCompatActivity {
             Flashcard card = cards.get(index);
             fillFrontTextView(card.getFront());
             fillBackTextView(card.getBack());
+            Picasso.get().load(card.getImg_uri()).into(imageView);
         } else {
             ih.goToStartMenu();
         }
@@ -130,6 +136,7 @@ public class StudyModeActivity extends AppCompatActivity {
             Flashcard card = cards.get(index);
             fillFrontTextView(card.getFront());
             fillBackTextView(card.getBack());
+            Picasso.get().load(card.getImg_uri()).into(imageView);
         } else {
             ih.goToStartMenu();
         }

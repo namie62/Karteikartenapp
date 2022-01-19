@@ -93,7 +93,7 @@ public class ShowSubjectsActivity extends AppCompatActivity {
     }
 
     public void startStudyMode(View view){
-        reference.child("subject_sorting").addListenerForSingleValueEvent(new ValueEventListener() {
+        reference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 ArrayList<String> cardsInSubjects = new ArrayList<>();
@@ -120,7 +120,7 @@ public class ShowSubjectsActivity extends AppCompatActivity {
 
 
     public void startQuizMode(View view) {
-        reference.child("subject_sorting").addListenerForSingleValueEvent(new ValueEventListener() {
+        reference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 ArrayList<String> cardsInSubjects = new ArrayList<>();

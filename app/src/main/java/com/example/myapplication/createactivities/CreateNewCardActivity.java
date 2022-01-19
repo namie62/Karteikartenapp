@@ -2,7 +2,6 @@ package com.example.myapplication.createactivities;
 
 import android.content.ContentResolver;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
