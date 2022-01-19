@@ -33,7 +33,7 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 
 public class CreateNewCardActivity extends AppCompatActivity {
-    private String selectedSubject, selectedTopic, selectedCard;
+    private String selectedSubject, selectedTopic, selectedCard, uriFromDB;
     private DatabaseReference reference;
     private ArrayList<String> checkedSubjects, checkedTopics;
     private IntentHelper ih;
@@ -94,8 +94,8 @@ public class CreateNewCardActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) {
                     try {
-                        String uri = snapshot.child(selectedCard).child("img_uri").getValue(String.class);
-                        Picasso.get().load(uri).into(imageView);
+                        uriFromDB = snapshot.child(selectedCard).child("img_uri").getValue(String.class);
+                        Picasso.get().load(uriFromDB).into(imageView);
                     } catch (Exception ignored) {
                     }
                     frontEditText.setText(snapshot.child(selectedCard).child("front").getValue(String.class));
@@ -142,7 +142,7 @@ public class CreateNewCardActivity extends AppCompatActivity {
     }
 
     public void share(View view) {
-        ih.shareCard(getFrontText(), getBackText(), uri.toString());
+        ih.shareCard(getFrontText(), getBackText(), uriFromDB);
     }
 
     public String getFrontText(){
