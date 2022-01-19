@@ -41,7 +41,7 @@ public class CreateNewCardActivity extends AppCompatActivity {
     private EditText frontEditText, backEditText;
     private ImageView imageView;
     private StorageReference storageReference;
-    private Uri uri, uriForDB;
+    private Uri uri;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,7 +85,6 @@ public class CreateNewCardActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 2 && resultCode == RESULT_OK && data != null) {
             uri = data.getData();
-            uriForDB = uri;
             imageView.setImageURI(uri);
         }
     }
@@ -100,7 +99,6 @@ public class CreateNewCardActivity extends AppCompatActivity {
                         Picasso.get().load(uri).into(imageView);
                     } catch (Exception ignored) {
                     }
-
                     frontEditText.setText(snapshot.child(selectedCard).child("front").getValue(String.class));
                     backEditText.setText(snapshot.child(selectedCard).child("back").getValue(String.class));
                 }
@@ -113,7 +111,7 @@ public class CreateNewCardActivity extends AppCompatActivity {
     }
 
     public void saveContent(View view) {
-        Flashcard card = new Flashcard(getFrontText(), getBackText(), uriForDB.toString());
+        Flashcard card = new Flashcard(getFrontText(), getBackText());
         reference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -129,7 +127,9 @@ public class CreateNewCardActivity extends AppCompatActivity {
                     } else {
                         reference.child("cards").child(selectedCard).child("front").setValue(getFrontText());
                         reference.child("cards").child(selectedCard).child("back").setValue(getBackText());
-                        reference.child("cards").child(selectedCard).child("img_uri").setValue(getBackText());
+                        if (uri != null) {
+                            uploadToFirebase(selectedCard);
+                        }
                     }
 
                     ih.goToCardOverview(checkedSubjects, checkedTopics);
@@ -143,7 +143,7 @@ public class CreateNewCardActivity extends AppCompatActivity {
     }
 
     public void share(View view) {
-        ih.shareCard(getFrontText(), getBackText(), uriForDB.toString());
+        ih.shareCard(getFrontText(), getBackText(), uri.toString());
     }
 
     public String getFrontText(){

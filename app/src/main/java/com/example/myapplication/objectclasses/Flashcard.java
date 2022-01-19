@@ -1,27 +1,17 @@
 package com.example.myapplication.objectclasses;
 
 public class Flashcard {
-    public String front;
-    public String back;
-    public String img_uri, key;
+    public String front, back, img_uri, key;
     public int progress;
 
     public Flashcard() {}
 
-    public Flashcard(String front, String back, String backImg) {
+    public Flashcard(String front, String back) {
         this.front = front;
         this.back = back;
-        this.img_uri = backImg;
         this.progress = 1;
     }
 
-    public Flashcard(String front, String back, String backImg, int progress, String key) {
-        this.front = front;
-        this.back = back;
-        this.img_uri = backImg;
-        this.progress = progress;
-        this.key = key;
-    }
 
     public int getProgress() {
         return progress;
