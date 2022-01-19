@@ -55,8 +55,8 @@ public class PDFExport {
                             int max = (int) snapshot.child(subject).child(topic).getChildrenCount();
                             for (int i=0; i<max; i++) {
                                 String cardpath = snapshot.child(subject).child(topic).child(String.valueOf(i)).getValue(String.class);
-                                String nameFromDB = snapshot.child(cardpath).child("front").getValue(String.class);
-                                String valueFromDB = snapshot.child(cardpath).child("back").getValue(String.class);
+                                String nameFromDB = snapshot.child("cards").child(cardpath).child("front").getValue(String.class);
+                                String valueFromDB = snapshot.child("cards").child(cardpath).child("back").getValue(String.class);
                                 table.addCell(new Cell().add(new Paragraph(nameFromDB)));    // Themengebiet aus Db für Karte
                                 table.addCell(new Cell().add(new Paragraph(valueFromDB))); // Inhalt aus Db für Karte
                             }
