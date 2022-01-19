@@ -24,11 +24,11 @@ public class EmailExportActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_email_export);
 
-        String user = getIntent().getExtras().getString("user");
-        FirebaseDatabase flashcardDB = FirebaseDatabase.getInstance("https://karteikar-default-rtdb.europe-west1.firebasedatabase.app/");
-        DatabaseReference reference = flashcardDB.getReference(user);
-
-        IntentHelper ih = new IntentHelper(this, user);
+//        String user = getIntent().getExtras().getString("user");
+//        FirebaseDatabase flashcardDB = FirebaseDatabase.getInstance("https://karteikar-default-rtdb.europe-west1.firebasedatabase.app/");
+//        DatabaseReference reference = flashcardDB.getReference(user);
+//
+//        IntentHelper ih = new IntentHelper(this, user);
 
         this.front = getIntent().getExtras().getString("front");
         this.back = getIntent().getExtras().getString("back");

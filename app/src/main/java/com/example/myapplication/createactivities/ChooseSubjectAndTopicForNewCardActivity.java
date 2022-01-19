@@ -21,15 +21,11 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 
 public class ChooseSubjectAndTopicForNewCardActivity extends AppCompatActivity {
-    private Spinner subjectSpinner;
-    private Spinner topicSpinner;
-    private FirebaseDatabase flashcardDB;
+    private Spinner subjectSpinner, topicSpinner;
     private DatabaseReference reference;
-    private ArrayList<String> checkedSubjects;
-    private ArrayList<String> checkedTopics;
-    private String selectedSubject;
+    private ArrayList<String> checkedSubjects, checkedTopics;
+    private String user, selectedSubject;
     private IntentHelper ih;
-    private String user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

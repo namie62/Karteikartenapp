@@ -28,11 +28,10 @@ import java.util.ArrayList;
 public class ShowTopicsActivity extends AppCompatActivity {
     private ArrayList<String> checkedSubjects, checkedTopics, showObjects;
     private ListView listView;
-    private Context applicationContext;
     private ArrayAdapter<String> adapter;
     private IntentHelper ih;
     private String user;
-    DatabaseReference reference;
+    private DatabaseReference reference;
     private final Context c = this;
 
 
@@ -49,9 +48,8 @@ public class ShowTopicsActivity extends AppCompatActivity {
         this.checkedSubjects = getIntent().getExtras().getStringArrayList("checkedSubjects");
 
         this.listView = findViewById(R.id.topics_listView);
-        this.applicationContext = getApplicationContext();
         this.showObjects = new ArrayList<>();
-        this.adapter = new ArrayAdapter<>(applicationContext, android.R.layout.simple_list_item_multiple_choice, showObjects);
+        this.adapter = new ArrayAdapter<>(getApplicationContext(), android.R.layout.simple_list_item_multiple_choice, showObjects);
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -72,7 +70,7 @@ public class ShowTopicsActivity extends AppCompatActivity {
             }
 
             public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(applicationContext, error.getMessage(), Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
         TextView textView = findViewById(R.id.subject_name_textView);
@@ -114,7 +112,7 @@ public class ShowTopicsActivity extends AppCompatActivity {
                 }
             }
             public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(applicationContext, error.getMessage(), Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
     }
@@ -140,7 +138,7 @@ public class ShowTopicsActivity extends AppCompatActivity {
                 }
             }
             public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(applicationContext, error.getMessage(), Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
     }

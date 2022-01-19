@@ -25,12 +25,9 @@ import java.util.Arrays;
 import java.util.List;
 
 public class RegistrationActivity extends AppCompatActivity {
-
     FirebaseDatabase flashcardDB;
     IntentHelper ih = new IntentHelper(this);
-    EditText usernameEditText;
-    EditText passwordEditText;
-    Context c = this;
+    EditText usernameEditText, passwordEditText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +51,7 @@ public class RegistrationActivity extends AppCompatActivity {
         } else if (password.equals("")) {
             Toast.makeText(this, "Kein Passwort eingegeben!", Toast.LENGTH_SHORT).show();
         } else if (!checkForIllegalCharacters(username)) {
-            Toast.makeText(c, "Nicht erlaubte Zeichen in Benutzername:  . , $ , # , [ , ] , / ,", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Nicht erlaubte Zeichen in Benutzername:  . , $ , # , [ , ] , / ,", Toast.LENGTH_SHORT).show();
         } else {
             checkUsernameAvailability(username);
         }
@@ -66,7 +63,7 @@ public class RegistrationActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) {
-                    Toast.makeText(c, "Benutzername bereits vergeben!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Benutzername bereits vergeben!", Toast.LENGTH_SHORT).show();
                     usernameEditText = findViewById(R.id.username_editText);
                 } else {
                     reference.child("password").setValue(passwordEditText.getText().toString());

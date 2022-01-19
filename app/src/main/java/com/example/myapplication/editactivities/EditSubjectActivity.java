@@ -76,6 +76,4 @@ public class EditSubjectActivity extends AppCompatActivity {
     public void cancel(View view) {
         this.finish();
     }
-
-
 }

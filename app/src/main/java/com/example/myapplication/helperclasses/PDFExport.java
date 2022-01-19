@@ -32,12 +32,10 @@ public class PDFExport {
     private Document document;
 
     public void PDFExport(Context c, String user, ArrayList<String> checkedSubjects, ArrayList<String> checkedTopics) {
-
         FirebaseDatabase flashcardDB = FirebaseDatabase.getInstance("https://karteikar-default-rtdb.europe-west1.firebasedatabase.app/");
         DatabaseReference reference = flashcardDB.getReference(user);
 
-
-        try {    //versuchen Dokument zu erstellen und abzuspeichern
+        try {
             document = createDocument();
         } catch (FileNotFoundException e) {
             e.printStackTrace();

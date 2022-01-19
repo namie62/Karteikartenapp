@@ -19,9 +19,8 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 
 public class StudyModeActivity extends AppCompatActivity {
-    private ArrayList<String> checkedSubjects, sortedSubjects, checkedTopics, sortedTopics, checkedCards, sortedCards, uniqueKeys;
-    private ArrayList<Flashcard> cards = new ArrayList<>();
-    private ArrayList<Flashcard> allCards = new ArrayList<>();
+    private ArrayList<String> checkedSubjects, sortedSubjects, checkedTopics, sortedTopics, checkedCards, sortedCards;
+    private ArrayList<Flashcard> cards;
     private IntentHelper ih;
     private int index = 0;
 
@@ -40,10 +39,11 @@ public class StudyModeActivity extends AppCompatActivity {
         this.checkedSubjects = b.getStringArrayList("checkedSubjects");
         this.checkedTopics = b.getStringArrayList("checkedTopics");
         this.checkedCards = b.getStringArrayList("checkedCards");
-        sortedSubjects = new ArrayList<>();
-        sortedTopics = new ArrayList<>();
-        sortedCards = new ArrayList<>();
-        this.index = getIntent().getIntExtra("index", 0);
+        this.sortedSubjects = new ArrayList<>();
+        this.sortedTopics = new ArrayList<>();
+        this.sortedCards = new ArrayList<>();
+        this.cards = new ArrayList<>();
+        ArrayList<Flashcard> allCards = new ArrayList<>();
 
         reference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -58,7 +58,7 @@ public class StudyModeActivity extends AppCompatActivity {
                     }
                     for (String subject : sortedSubjects) {
                         int numberOfTopics = (int) snapshot.child(subject).child("sorting").getChildrenCount();
-                        for (int i = 0; i < numberOfTopics; i++) {
+                        for (int i=0; i < numberOfTopics; i++) {
                             String s = snapshot.child(subject).child("sorting").child(String.valueOf(i)).getValue(String.class);
                             if (checkedTopics == null) {
                                 sortedTopics.add(s);
@@ -98,12 +98,12 @@ public class StudyModeActivity extends AppCompatActivity {
     }
 
     public void fillBackTextView(String back){
-        TextView textView = (TextView) findViewById(R.id.back_text_view);
+        TextView textView = findViewById(R.id.back_text_view);
         textView.setText(back);
     }
 
     public void fillFrontTextView(String front){
-        TextView textview = (TextView) findViewById(R.id.front_text_view);
+        TextView textview = findViewById(R.id.front_text_view);
         textview.setText(front);
     }
 

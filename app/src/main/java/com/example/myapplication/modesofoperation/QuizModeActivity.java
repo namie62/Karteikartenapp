@@ -46,7 +46,6 @@ public class QuizModeActivity extends AppCompatActivity {
         sortedSubjects = new ArrayList<>();
         sortedTopics = new ArrayList<>();
         sortedCards = new ArrayList<>();
-        this.index = getIntent().getIntExtra("index", 0);
 
         reference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override

@@ -3,8 +3,10 @@ package com.example.myapplication.createactivities;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.ParcelFileDescriptor;
 import android.provider.MediaStore;
 import android.view.View;
 import android.widget.EditText;
@@ -25,6 +27,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.io.FileDescriptor;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -97,7 +100,8 @@ public class CreateNewCardActivity extends AppCompatActivity {
                 if (snapshot.exists()) {
                     try {
                         Uri uri = Uri.parse(snapshot.child(selectedCard).child("img_uri").getValue(String.class));
-                        img = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
+//                        img = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
+                        img = getBitmapFromUri(uri);
                         imageView.setImageBitmap(img);
                     } catch (FileNotFoundException e) {
                         Toast.makeText(getApplicationContext(), "Bild existiert nicht!", Toast.LENGTH_SHORT).show();
@@ -111,6 +115,14 @@ public class CreateNewCardActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
+    }
+
+    private Bitmap getBitmapFromUri(Uri uri) throws IOException {
+        ParcelFileDescriptor parcelFileDescriptor = getContentResolver().openFileDescriptor(uri, "r");
+        FileDescriptor fileDescriptor = parcelFileDescriptor.getFileDescriptor();
+        Bitmap image = BitmapFactory.decodeFileDescriptor(fileDescriptor);
+        parcelFileDescriptor.close();
+        return image;
     }
 
     public void saveContent(View view) {

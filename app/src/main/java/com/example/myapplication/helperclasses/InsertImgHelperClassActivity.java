@@ -15,7 +15,7 @@ public class InsertImgHelperClassActivity extends AppCompatActivity {
         openGalery();
     }
 
-    public void openGalery() {   // Öffnet Galerie und returnt dann ein Bild
+    public void openGalery() {
         final int RESULT_GALLERY = 1;
         Intent gallery = new Intent(Intent.ACTION_GET_CONTENT);
         gallery.setType("image/*");

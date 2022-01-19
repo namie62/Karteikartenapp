@@ -6,13 +6,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.myapplication.R;
-import com.example.myapplication.helperclasses.IntentHelper;
-import com.example.myapplication.helperclasses.ListviewHelperClass;
-import com.example.myapplication.objectclasses.Subject;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -20,7 +16,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -31,7 +26,6 @@ public class CreateSubjectActivity extends AppCompatActivity {
     private ArrayList<String> allSubjects;
     private DatabaseReference reference;
     private int sortOrder = 0;
-    Context c = this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,7 +51,7 @@ public class CreateSubjectActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (newSubject.trim().length() > 0) {
                     if (!checkForIllegalCharacters(newSubject)) {
-                        Toast.makeText(c, "Nicht erlaubte Zeichen in Fachbezeichnung:  . , $ , # , [ , ] , / ,", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "Nicht erlaubte Zeichen in Fachbezeichnung:  . , $ , # , [ , ] , / ,", Toast.LENGTH_SHORT).show();
                     } else {
                         sortOrder = (int) (snapshot.child("subject_sorting").getChildrenCount());
                         allSubjects = new ArrayList<>();
@@ -65,7 +59,7 @@ public class CreateSubjectActivity extends AppCompatActivity {
                             allSubjects.add(snapshot.child("subject_sorting").child(String.valueOf(i)).getValue(String.class));
                         }
                         if (allSubjects.contains(newSubject)){
-                            Toast.makeText(c, "Fach existiert bereits!", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), "Fach existiert bereits!", Toast.LENGTH_SHORT).show();
                         } else {
                             reference.child("subject_sorting").child(String.valueOf(sortOrder)).setValue(newSubject);
                         }

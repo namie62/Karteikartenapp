@@ -25,7 +25,7 @@ import com.example.myapplication.popups.HintPopUpActivity;
 import java.util.ArrayList;
 
 public class IntentHelper {
-    private Context packageContext;
+    private final Context packageContext;
     private String user;
     
     public IntentHelper(Context packageContext, String user) {

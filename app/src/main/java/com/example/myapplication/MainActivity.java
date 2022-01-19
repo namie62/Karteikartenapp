@@ -25,11 +25,9 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     private FirebaseDatabase flashcardDB;
-    private IntentHelper ih = new IntentHelper(this);
+    private final IntentHelper ih = new IntentHelper(this);
     private EditText usernameEditText;
     private EditText passwordEditText;
-    private Context c = this;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
         } else if (password.equals("")) {
             Toast.makeText(this, "Kein Passwort eingegeben!", Toast.LENGTH_SHORT).show();
         } else if (!checkForIllegalCharacters(username)) {
-            Toast.makeText(c, "Nicht erlaubte Zeichen in Benutzername:  . , $ , # , [ , ] , / ,", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Nicht erlaubte Zeichen in Benutzername:  . , $ , # , [ , ] , / ,", Toast.LENGTH_SHORT).show();
         } else {
             checkExistenceAndLogin(username, password);
         }
@@ -82,10 +80,10 @@ public class MainActivity extends AppCompatActivity {
                         ih.goToStartMenu();
                     }
                     else {
-                        Toast.makeText(c, "Passwort inkorrekt!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "Passwort inkorrekt!", Toast.LENGTH_SHORT).show();
                     }
                 } else {
-                    Toast.makeText(c, "Benutzername existiert nicht!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Benutzername existiert nicht!", Toast.LENGTH_SHORT).show();
                 }
             }
 

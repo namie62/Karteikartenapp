@@ -28,12 +28,11 @@ import java.util.List;
 public class CreateTopicActivity extends AppCompatActivity {
     private TextInputEditText hintTextInputEditText;
     private DatabaseReference reference;
-    private ArrayList<String> checkedSubjects, allTopics;
+    private ArrayList<String> checkedSubjects;
     private Spinner subjectSpinner;
     private IntentHelper ih;
     private String user;
-    private int sortOrder = 0;
-    Context c = this;
+    private int sortOrder;
     private Boolean duplicate;
 
     @Override
@@ -61,7 +60,6 @@ public class CreateTopicActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (newTopic.trim().length() > 0) {
-                    allTopics = new ArrayList<>();
                     duplicate = false;
                     for (DataSnapshot subjectSnapshot : snapshot.getChildren()) {
                         for (DataSnapshot topicSnapshot : subjectSnapshot.child("sorting").getChildren()) {
@@ -72,12 +70,12 @@ public class CreateTopicActivity extends AppCompatActivity {
                         }
                     }
                     if (!checkForIllegalCharacters(newTopic)) {
-                        Toast.makeText(c, "Nicht erlaubte Zeichen in Themabezeichnung:  . , $ , # , [ , ] , / ,", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "Nicht erlaubte Zeichen in Themabezeichnung:  . , $ , # , [ , ] , / ,", Toast.LENGTH_SHORT).show();
                     } else if (!duplicate){
                         sortOrder = (int) snapshot.child(selectedSubject).child("sorting").getChildrenCount();
                         reference.child(selectedSubject).child("sorting").child(String.valueOf(sortOrder)).setValue(newTopic);
                     } else {
-                        Toast.makeText(c, "Thema existiert bereits!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "Thema existiert bereits!", Toast.LENGTH_SHORT).show();
                     }
                 }
             }
