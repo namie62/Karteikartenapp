@@ -100,8 +100,7 @@ public class CreateNewCardActivity extends AppCompatActivity {
                 if (snapshot.exists()) {
                     try {
                         Uri uri = Uri.parse(snapshot.child(selectedCard).child("img_uri").getValue(String.class));
-//                        img = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
-                        img = getBitmapFromUri(uri);
+                        img = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
                         imageView.setImageBitmap(img);
                     } catch (FileNotFoundException e) {
                         Toast.makeText(getApplicationContext(), "Bild existiert nicht!", Toast.LENGTH_SHORT).show();
