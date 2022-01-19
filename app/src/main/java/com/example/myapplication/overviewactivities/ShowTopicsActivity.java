@@ -74,7 +74,8 @@ public class ShowTopicsActivity extends AppCompatActivity {
             }
         });
         TextView textView = findViewById(R.id.subject_name_textView);
-        textView.setText(checkedSubjects.toString()); //vlt noch hübscher machen
+        String heading = checkedSubjects.toString();
+        textView.setText(heading.substring(1, heading.length()-1));
     }
 
 
@@ -82,7 +83,7 @@ public class ShowTopicsActivity extends AppCompatActivity {
         ih.goToStartMenu();
     }
 
-    public void goToCards(View view) {  //öffnet Kartenerstellung
+    public void goToCards(View view) {
         if (checkedTopics.size() == 0) {
             Toast.makeText(this, "Bitte mindestens 1 Thema auswählen!", Toast.LENGTH_SHORT).show();
         }
@@ -92,7 +93,7 @@ public class ShowTopicsActivity extends AppCompatActivity {
     }
 
     public void startStudyMode(View view){
-        reference.child("subject_sorting").addListenerForSingleValueEvent(new ValueEventListener() {
+        reference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 ArrayList<String> cardsInTopics = new ArrayList<>();
@@ -118,7 +119,7 @@ public class ShowTopicsActivity extends AppCompatActivity {
     }
 
     public void startQuizMode(View view){
-        reference.child("subject_sorting").addListenerForSingleValueEvent(new ValueEventListener() {
+        reference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 ArrayList<String> cardsInTopics = new ArrayList<>();

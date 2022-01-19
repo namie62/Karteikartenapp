@@ -78,7 +78,8 @@ public class ShowCardsActivity extends AppCompatActivity {
             }
         });
         TextView textView = (TextView) findViewById(R.id.topics_text_view);
-        textView.setText(checkedTopics.toString());
+        String heading = checkedTopics.toString();
+        textView.setText(heading.substring(1, heading.length()-1));
     }
 
 

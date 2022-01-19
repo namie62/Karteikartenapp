@@ -25,7 +25,7 @@ public class QuizModeActivity extends AppCompatActivity {
     private ArrayList<Flashcard> cards = new ArrayList<>();
     private ArrayList<Flashcard> allCards = new ArrayList<>();
     private int index = 0;
-    DatabaseReference reference;
+    private DatabaseReference reference;
 
 
     @Override
