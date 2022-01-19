@@ -1,14 +1,12 @@
 package com.example.myapplication.createactivities;
 
-import android.content.Context;
+import android.content.ContentResolver;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.ParcelFileDescriptor;
-import android.provider.MediaStore;
 import android.view.View;
+import android.webkit.MimeTypeMap;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -18,31 +16,32 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.myapplication.R;
-import com.example.myapplication.helperclasses.InsertImgHelperClassActivity;
 import com.example.myapplication.helperclasses.IntentHelper;
 import com.example.myapplication.objectclasses.Flashcard;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.OnProgressListener;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
+import com.squareup.picasso.Picasso;
 
-import java.io.FileDescriptor;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.ArrayList;
 
 public class CreateNewCardActivity extends AppCompatActivity {
-    private String selectedSubject, selectedTopic, selectedCard, uriForDB;
-    private Bitmap img;
+    private String selectedSubject, selectedTopic, selectedCard;
     private DatabaseReference reference;
     private ArrayList<String> checkedSubjects, checkedTopics;
     private IntentHelper ih;
     private EditText frontEditText, backEditText;
     private ImageView imageView;
     private StorageReference storageReference;
+    private Uri uri, uriForDB;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,7 +55,7 @@ public class CreateNewCardActivity extends AppCompatActivity {
 
         this.frontEditText = findViewById(R.id.front_edit_text);
         this.backEditText = findViewById(R.id.back_edit_text);
-        this.imageView = (ImageView) findViewById(R.id.imageView);
+        this.imageView = findViewById(R.id.imageView);
 
         this.ih = new IntentHelper(this, user);
         this.selectedTopic = getIntent().getExtras().getString("selectedTopic");
@@ -75,25 +74,19 @@ public class CreateNewCardActivity extends AppCompatActivity {
     }
 
     public void insertImg(View view) {
-        final int RESULT_GALLERY = 1;
-        Intent i = new Intent(this, InsertImgHelperClassActivity.class);
-        startActivityForResult(i, RESULT_GALLERY);
+        Intent galleryIntent = new Intent();
+        galleryIntent.setAction(Intent.ACTION_GET_CONTENT);
+        galleryIntent.setType("image/*");
+        startActivityForResult(galleryIntent, 2);
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 1) {
-            if (resultCode == RESULT_OK) {
-                try{
-                    Uri uri = data.getParcelableExtra("pic");
-                    uriForDB = uri.toString();
-                    this.img = MediaStore.Images.Media.getBitmap(this.getContentResolver(), uri);
-                    imageView.setImageBitmap(this.img);
-                } catch (Exception e) {
-                    Toast.makeText(getApplicationContext(), "Bild konnte nicht geparsed werden!", Toast.LENGTH_SHORT).show();
-                }
-            }
+        if (requestCode == 2 && resultCode == RESULT_OK && data != null) {
+            uri = data.getData();
+            uriForDB = uri;
+            imageView.setImageURI(uri);
         }
     }
 
@@ -103,12 +96,11 @@ public class CreateNewCardActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) {
                     try {
-                        Uri uri = Uri.parse(snapshot.child(selectedCard).child("img_uri").getValue(String.class));
-                        img = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
-                        imageView.setImageBitmap(img);
-                    } catch (FileNotFoundException e) {
-                        Toast.makeText(getApplicationContext(), "Bild existiert nicht!", Toast.LENGTH_SHORT).show();
-                    } catch (IOException ignored) {}
+                        String uri = snapshot.child(selectedCard).child("img_uri").getValue(String.class);
+                        Picasso.get().load(uri).into(imageView);
+                    } catch (Exception ignored) {
+                    }
+
                     frontEditText.setText(snapshot.child(selectedCard).child("front").getValue(String.class));
                     backEditText.setText(snapshot.child(selectedCard).child("back").getValue(String.class));
                 }
@@ -120,16 +112,8 @@ public class CreateNewCardActivity extends AppCompatActivity {
         });
     }
 
-    private Bitmap getBitmapFromUri(Uri uri) throws IOException {
-        ParcelFileDescriptor parcelFileDescriptor = getContentResolver().openFileDescriptor(uri, "r");
-        FileDescriptor fileDescriptor = parcelFileDescriptor.getFileDescriptor();
-        Bitmap image = BitmapFactory.decodeFileDescriptor(fileDescriptor);
-        parcelFileDescriptor.close();
-        return image;
-    }
-
     public void saveContent(View view) {
-        Flashcard card = new Flashcard(getFrontText(), getBackText(), uriForDB);
+        Flashcard card = new Flashcard(getFrontText(), getBackText(), uriForDB.toString());
         reference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -139,6 +123,9 @@ public class CreateNewCardActivity extends AppCompatActivity {
                         reference.child("cards").child(newUniqueKey).setValue(card);
                         int sortOrder = (int) snapshot.child(selectedSubject).child(selectedTopic).getChildrenCount();
                         reference.child(selectedSubject).child(selectedTopic).child(String.valueOf(sortOrder)).setValue(newUniqueKey);
+                        if (uri != null) {
+                            uploadToFirebase(newUniqueKey);
+                        }
                     } else {
                         reference.child("cards").child(selectedCard).child("front").setValue(getFrontText());
                         reference.child("cards").child(selectedCard).child("back").setValue(getBackText());
@@ -156,18 +143,49 @@ public class CreateNewCardActivity extends AppCompatActivity {
     }
 
     public void share(View view) {
-        ih.shareCard(getFrontText(), getBackText(), uriForDB);
+        ih.shareCard(getFrontText(), getBackText(), uriForDB.toString());
     }
 
     public String getFrontText(){
-        EditText topicEditText = (EditText) findViewById(R.id.front_edit_text);
+        EditText topicEditText = findViewById(R.id.front_edit_text);
         String front = topicEditText.getText().toString();
         return front;
     }
 
     public String getBackText(){
-        EditText topicEditText = (EditText) findViewById(R.id.back_edit_text);
+        EditText topicEditText = findViewById(R.id.back_edit_text);
         String back = topicEditText.getText().toString();
         return back;
+    }
+
+    private void uploadToFirebase(String uniqueKey) {
+        StorageReference fileRef = storageReference.child(System.currentTimeMillis() + "." + getFileExtension());
+        fileRef.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                fileRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                    @Override
+                    public void onSuccess(Uri uri) {
+                        reference.child("cards").child(uniqueKey).child("img_uri").setValue(uri.toString());
+                    }
+                });
+            }
+        }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onProgress(@NonNull UploadTask.TaskSnapshot snapshot) {
+
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(getApplicationContext(), "Bildupload fehlgeschlagen!", Toast.LENGTH_SHORT);
+            }
+        });
+    }
+
+    private String getFileExtension() {
+        ContentResolver cr = getContentResolver();
+        MimeTypeMap mime = MimeTypeMap.getSingleton();
+        return mime.getExtensionFromMimeType(cr.getType(uri));
     }
 }
