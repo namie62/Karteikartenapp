@@ -26,7 +26,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.FirebaseStorage;
 
 import java.io.FileDescriptor;
 import java.io.FileNotFoundException;
@@ -41,7 +42,8 @@ public class CreateNewCardActivity extends AppCompatActivity {
     private IntentHelper ih;
     private EditText frontEditText, backEditText;
     private ImageView imageView;
-    private FirebaseFirestore storage;
+    private StorageReference storageReference;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,11 +52,11 @@ public class CreateNewCardActivity extends AppCompatActivity {
         String user = getIntent().getExtras().getString("user");
         FirebaseDatabase flashcardDB = FirebaseDatabase.getInstance("https://karteikar-default-rtdb.europe-west1.firebasedatabase.app/");
         this.reference = flashcardDB.getReference(user);
-        this.storage = FirebaseFirestore.getInstance();
+        this.storageReference = FirebaseStorage.getInstance().getReference();
 
         this.frontEditText = findViewById(R.id.front_edit_text);
         this.backEditText = findViewById(R.id.back_edit_text);
-        this.imageView = findViewById(R.id.imageView);
+        this.imageView = (ImageView) findViewById(R.id.imageView);
 
         this.ih = new IntentHelper(this, user);
         this.selectedTopic = getIntent().getExtras().getString("selectedTopic");
