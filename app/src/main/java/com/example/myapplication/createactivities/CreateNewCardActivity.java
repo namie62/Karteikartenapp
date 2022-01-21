@@ -1,6 +1,8 @@
 package com.example.myapplication.createactivities;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -75,7 +77,24 @@ public class CreateNewCardActivity extends AppCompatActivity {
     }
 
     public void cancelPopUp(View view) {
-        ih.cancelCardPopUp(checkedSubjects, checkedTopics);
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("Sind Sie sicher, dass Sie abbrechen möchten?");
+        builder.setPositiveButton("Ja", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                ih.goToCardOverview(checkedSubjects, checkedTopics);
+            }
+        });
+
+        builder.setNegativeButton("Nein", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) { }
+        });
+
+        builder.create();
+        builder.show();
+
     }
 
     public void insertImg(View view) {

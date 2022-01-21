@@ -49,9 +49,6 @@
             android:name=".modesofoperation.StudyModeActivity"
             android:exported="true" />
         <activity
-            android:name=".popups.CancelNewCardPopupActivity"
-            android:exported="true" />
-        <activity
             android:name=".overviewactivities.ShowCardsActivity"
             android:exported="true" />
         <activity

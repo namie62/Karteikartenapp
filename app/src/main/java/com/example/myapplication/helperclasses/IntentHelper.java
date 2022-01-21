@@ -2,7 +2,6 @@ package com.example.myapplication.helperclasses;
 
 import android.content.Context;
 import android.content.Intent;
-import android.icu.text.Edits;
 import android.os.Bundle;
 
 import com.example.myapplication.MainActivity;
@@ -19,8 +18,6 @@ import com.example.myapplication.modesofoperation.StudyModeActivity;
 import com.example.myapplication.overviewactivities.ShowCardsActivity;
 import com.example.myapplication.overviewactivities.ShowSubjectsActivity;
 import com.example.myapplication.overviewactivities.ShowTopicsActivity;
-import com.example.myapplication.popups.CancelNewCardPopupActivity;
-import com.example.myapplication.popups.HintPopUpActivity;
 
 import java.util.ArrayList;
 
