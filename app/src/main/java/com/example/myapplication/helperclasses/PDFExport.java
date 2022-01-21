@@ -1,6 +1,7 @@
 package com.example.myapplication.helperclasses;
 
 import android.content.Context;
+import android.media.Image;
 import android.os.Environment;
 import android.widget.Toast;
 
@@ -59,6 +60,17 @@ public class PDFExport {
                                 String valueFromDB = snapshot.child("cards").child(cardpath).child("back").getValue(String.class);
                                 table.addCell(new Cell().add(new Paragraph(nameFromDB)));    // Themengebiet aus Db für Karte
                                 table.addCell(new Cell().add(new Paragraph(valueFromDB))); // Inhalt aus Db für Karte
+                                //table.addCell(new Cell().add(new Image(img)));
+                                // get Pic and then:
+                                /*
+                                // start a page
+                                PdfDocument.Page page = document.startPage(pageInfo);
+
+                                // Draw the bitmap onto the page
+                                Canvas canvas = page.getCanvas();
+                                canvas.drawBitmap(bitmap, 0f, 0f, null);
+                                document.finishPage(page);
+                                document.add(myImg);*/
                             }
                             document.add(table);
                         }
@@ -73,7 +85,7 @@ public class PDFExport {
     }
 
     private Table createTable(){
-        float[] width = {100f, 100f};
+        float[] width = {250f, 250f};
         Table table = new Table(width);
         table.setHorizontalAlignment(HorizontalAlignment.CENTER);
         table.addCell(new Cell().add(new Paragraph("Thema")));
@@ -83,7 +95,9 @@ public class PDFExport {
 
     private Document createDocument() throws FileNotFoundException {
         String pdfPath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).toString();
-        File file = new File(pdfPath, "adf.pdf");
+        Long tsLong = System.currentTimeMillis()/1000;
+        String ts = tsLong.toString();
+        File file = new File(pdfPath, "Flashcards"+ts+".pdf");
         OutputStream outputStream = new FileOutputStream(file);
 
         PdfWriter writer = new PdfWriter(file);

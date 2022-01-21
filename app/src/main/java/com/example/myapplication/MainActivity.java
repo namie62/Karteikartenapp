@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
 
         this.usernameEditText = findViewById(R.id.username_editText);
         this.passwordEditText = findViewById(R.id.password_editText);
-        ih.setUser("J");
+        ih.setUser("P");
         ih.goToStartMenu();
 
         TextView login = (TextView)findViewById(R.id.lnkRegister);
