@@ -11,6 +11,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.StorageReference;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -20,6 +21,7 @@ public class DeleteStuff {
     private ArrayList<String> checkedSubjects, checkedTopics, checkedCards;
     private DatabaseReference reference;
     private Context applicationContext;
+    private StorageReference storageReference;
 
     public DeleteStuff(Context applicationContext, DatabaseReference reference, ArrayList<String> checkedSubjects, ArrayList<String> checkedTopics, ArrayList<String> checkedCards) {
         this.reference = reference;
@@ -129,6 +131,8 @@ public class DeleteStuff {
                     }
                 }
                 for (String card : checkedCards) {
+                    String picUrl = snapshot.child("cards").child(card).child("img_url").getValue(String.class);
+
                     reference.child("cards").child(card).removeValue();
                 }
             }
