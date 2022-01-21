@@ -143,16 +143,6 @@ public class IntentHelper {
         start(i, b);
     }
 
-    public void shareCard(String front, String back, String img) {
-        Intent i = new Intent(this.packageContext, EmailExportActivity.class);
-        Bundle b = new Bundle();
-        b.putString("front", front);
-        b.putString("back", back);
-        b.putString("img", img);
-        start(i,b);
-    }
-
-
     public void putLists(Intent i, ArrayList<String> checkedSubjects){
         Bundle b = addLists(checkedSubjects);
         start(i, b);
