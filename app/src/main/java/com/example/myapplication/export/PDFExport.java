@@ -1,9 +1,8 @@
-package com.example.myapplication.exportactivities;
+package com.example.myapplication.export;
 
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.media.Image;
 import android.os.Environment;
 import android.widget.Toast;
 

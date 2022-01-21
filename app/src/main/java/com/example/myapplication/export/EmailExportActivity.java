@@ -1,4 +1,4 @@
-package com.example.myapplication.exportactivities;
+package com.example.myapplication.export;
 
 import android.content.Intent;
 import android.graphics.Bitmap;

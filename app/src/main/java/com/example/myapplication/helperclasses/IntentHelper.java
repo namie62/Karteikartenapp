@@ -8,7 +8,6 @@ import com.example.myapplication.MainActivity;
 import com.example.myapplication.editactivities.EditCardOrderActivity;
 import com.example.myapplication.editactivities.EditSubjectActivity;
 import com.example.myapplication.editactivities.EditTopicActivity;
-import com.example.myapplication.exportactivities.EmailExportActivity;
 import com.example.myapplication.createactivities.ChooseSubjectAndTopicForNewCardActivity;
 import com.example.myapplication.createactivities.CreateNewCardActivity;
 import com.example.myapplication.createactivities.CreateSubjectActivity;
