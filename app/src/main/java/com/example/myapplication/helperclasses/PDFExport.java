@@ -1,6 +1,8 @@
 package com.example.myapplication.helperclasses;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.media.Image;
 import android.os.Environment;
 import android.widget.Toast;
@@ -25,7 +27,11 @@ import com.itextpdf.layout.property.TextAlignment;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 
 public class PDFExport {
@@ -58,19 +64,13 @@ public class PDFExport {
                                 String cardpath = snapshot.child(subject).child(topic).child(String.valueOf(i)).getValue(String.class);
                                 String nameFromDB = snapshot.child("cards").child(cardpath).child("front").getValue(String.class);
                                 String valueFromDB = snapshot.child("cards").child(cardpath).child("back").getValue(String.class);
+                                String uriFromDB = snapshot.child("cards").child(cardpath).child("img_uri").getValue(String.class);
                                 table.addCell(new Cell().add(new Paragraph(nameFromDB)));    // Themengebiet aus Db für Karte
-                                table.addCell(new Cell().add(new Paragraph(valueFromDB))); // Inhalt aus Db für Karte
-                                //table.addCell(new Cell().add(new Image(img)));
-                                // get Pic and then:
-                                /*
-                                // start a page
-                                PdfDocument.Page page = document.startPage(pageInfo);
+                                table.addCell(new Cell().add(new Paragraph(valueFromDB)));
+                                if (uriFromDB != null) {
+                                    Bitmap bitmap = getBitmapFromURL(uriFromDB);
+                                }
 
-                                // Draw the bitmap onto the page
-                                Canvas canvas = page.getCanvas();
-                                canvas.drawBitmap(bitmap, 0f, 0f, null);
-                                document.finishPage(page);
-                                document.add(myImg);*/
                             }
                             document.add(table);
                         }
@@ -107,5 +107,20 @@ public class PDFExport {
         pdfDocument.setDefaultPageSize(PageSize.A4);
         document.setMargins(0,0,0,0);
         return document;
+    }
+
+    public static Bitmap getBitmapFromURL(String src) {
+        try {
+            URL url = new URL(src);
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setDoInput(true);
+            connection.connect();
+            InputStream input = connection.getInputStream();
+            Bitmap myBitmap = BitmapFactory.decodeStream(input);
+            return myBitmap;
+        } catch (IOException e) {
+            // Log exception
+            return null;
+        }
     }
 }
