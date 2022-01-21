@@ -3,6 +3,8 @@ package com.example.myapplication.exportactivities;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
@@ -13,6 +15,10 @@ import com.example.myapplication.R;
 import com.example.myapplication.helperclasses.IntentHelper;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 
 public class EmailExportActivity extends AppCompatActivity {
     private EditText recipientEditText, subjectEditText, msgEditText;
@@ -28,12 +34,25 @@ public class EmailExportActivity extends AppCompatActivity {
         this.back = getIntent().getExtras().getString("back");
         String img = getIntent().getExtras().getString("img");
 
+        URL imageurl = null;
+        try {
+            imageurl = new URL(img);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+        try {
+            Bitmap bitmap = BitmapFactory.decodeStream(imageurl.openConnection().getInputStream());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         recipientEditText = findViewById(R.id.recipient_edit_text);
         subjectEditText = findViewById(R.id.subject_edit_text);
         msgEditText = findViewById(R.id.msg_edit_text);
 
         TextView frontTextView = findViewById(R.id.front_text_view);
         TextView backTextView = findViewById(R.id.back_text_view);
+
 
         frontTextView.setText(front);
         backTextView.setText(back);

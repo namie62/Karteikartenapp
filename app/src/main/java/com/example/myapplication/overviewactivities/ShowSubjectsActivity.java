@@ -31,7 +31,6 @@ public class ShowSubjectsActivity extends AppCompatActivity {
     private ArrayList<String> showObjects;
     private ArrayAdapter<String> adapter;
     private IntentHelper ih;
-    private String user;
     private DatabaseReference reference;
 
     @Override
@@ -39,7 +38,7 @@ public class ShowSubjectsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_subjects);
 
-        this.user = getIntent().getExtras().getString("user");
+        String user = getIntent().getExtras().getString("user");
         this.ih = new IntentHelper(this, user);
 
         FirebaseDatabase flashcardDB = FirebaseDatabase.getInstance("https://karteikar-default-rtdb.europe-west1.firebasedatabase.app/");
