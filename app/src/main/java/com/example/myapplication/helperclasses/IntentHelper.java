@@ -152,11 +152,6 @@ public class IntentHelper {
         start(i,b);
     }
 
-    public void cancelCardPopUp(ArrayList<String> checkedSubjects, ArrayList<String> checkedTopics) {
-        Intent i = new Intent(this.packageContext, CancelNewCardPopupActivity.class);
-        Bundle b = addLists( checkedSubjects, checkedTopics);
-        start(i, b);
-    }
 
     public void putLists(Intent i, ArrayList<String> checkedSubjects){
         Bundle b = addLists(checkedSubjects);
