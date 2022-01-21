@@ -167,17 +167,21 @@ public class CreateNewCardActivity extends AppCompatActivity {
     }
 
     public void share(View view) {
-//        ih.shareCard(getFrontText(), getBackText(), uriFromDB);
         if (selectedCard != null) {
-            BitmapDrawable bitmapDrawable = ((BitmapDrawable) imageView.getDrawable());
-            Bitmap bitmap = bitmapDrawable .getBitmap();
-            String bitmapPath = MediaStore.Images.Media.insertImage(getContentResolver(), bitmap,"test", null);
-            Uri bitmapUri = Uri.parse(bitmapPath);
-            Intent shareIntent=new Intent(Intent.ACTION_SEND);
-            shareIntent.setType("image/jpeg");
-            shareIntent.putExtra(Intent.EXTRA_STREAM, bitmapUri);
-            shareIntent.putExtra(android.content.Intent.EXTRA_TEXT, "Thema: " + getFrontText() + "\nInhalt: " + getBackText());
-            startActivity(Intent.createChooser(shareIntent,"Share Image"));
+            try {
+                BitmapDrawable bitmapDrawable = ((BitmapDrawable) imageView.getDrawable());
+                Bitmap bitmap = bitmapDrawable.getBitmap();
+                String bitmapPath = MediaStore.Images.Media.insertImage(getContentResolver(), bitmap,"test", null);
+                Uri bitmapUri = Uri.parse(bitmapPath);
+                Intent shareIntent=new Intent(Intent.ACTION_SEND);
+                shareIntent.setType("image/jpeg");
+                shareIntent.putExtra(Intent.EXTRA_STREAM, bitmapUri);
+                shareIntent.putExtra(android.content.Intent.EXTRA_TEXT, "Thema: " + getFrontText() + "\nInhalt: " + getBackText());
+                startActivity(Intent.createChooser(shareIntent,"Share Image"));
+            } catch (Exception e) {
+                Toast.makeText(this, "Karte hat noch nicht fertig geladen, bitte einen Moment Gedult oder Verbindung mit Internet überprüfen!", Toast.LENGTH_SHORT).show();
+            }
+
         } else {
             Toast.makeText(this, "Bitte Karte zuerst speichern!", Toast.LENGTH_SHORT).show();
         }
