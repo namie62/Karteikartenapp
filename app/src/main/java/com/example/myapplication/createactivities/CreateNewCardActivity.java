@@ -162,23 +162,25 @@ public class CreateNewCardActivity extends AppCompatActivity {
 
     public void share(View view) {
 //        ih.shareCard(getFrontText(), getBackText(), uriFromDB);
-        Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND);
-        emailIntent.setType("application/image");
-        emailIntent.putExtra(android.content.Intent.EXTRA_EMAIL, new String[]{"Thema: " + getFrontText() + "\nInhalt: " + getBackText()});
-        emailIntent.putExtra(Intent.EXTRA_STREAM, Uri.parse(uriFromDB));
-        startActivity(Intent.createChooser(emailIntent, "Send mail..."));
+        if (selectedCard != null) {
+            Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND);
+            emailIntent.setType("application/image");
+            emailIntent.putExtra(android.content.Intent.EXTRA_EMAIL, new String[]{"Thema: " + getFrontText() + "\nInhalt: " + getBackText()});
+            emailIntent.putExtra(Intent.EXTRA_STREAM, Uri.parse(uriFromDB));
+            startActivity(Intent.createChooser(emailIntent, "Send mail..."));
+        } else {
+            Toast.makeText(this, "Bitte Karte zuerst speichern!", Toast.LENGTH_SHORT).show();
+        }
     }
 
     public String getFrontText(){
         EditText topicEditText = findViewById(R.id.front_edit_text);
-        String front = topicEditText.getText().toString();
-        return front;
+        return topicEditText.getText().toString();
     }
 
     public String getBackText(){
         EditText topicEditText = findViewById(R.id.back_edit_text);
-        String back = topicEditText.getText().toString();
-        return back;
+        return topicEditText.getText().toString();
     }
 
     private void uploadToFirebase(String uniqueKey) {
@@ -201,7 +203,7 @@ public class CreateNewCardActivity extends AppCompatActivity {
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                Toast.makeText(getApplicationContext(), "Bildupload fehlgeschlagen!", Toast.LENGTH_SHORT);
+                Toast.makeText(getApplicationContext(), "Bildupload fehlgeschlagen!", Toast.LENGTH_SHORT).show();
             }
         });
     }
