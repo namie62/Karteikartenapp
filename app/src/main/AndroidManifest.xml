@@ -40,9 +40,6 @@
             android:name=".createactivities.CreateSubjectActivity"
             android:exported="true" />
         <activity
-            android:name=".popups.HintPopUpActivity"
-            android:exported="true" />
-        <activity
             android:name=".modesofoperation.QuizModeActivity"
             android:exported="true" />
         <activity
