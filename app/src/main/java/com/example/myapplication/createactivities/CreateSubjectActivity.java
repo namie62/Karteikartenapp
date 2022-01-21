@@ -1,12 +1,11 @@
 package com.example.myapplication.createactivities;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.myapplication.R;
 import com.google.android.material.textfield.TextInputEditText;
@@ -76,7 +75,7 @@ public class CreateSubjectActivity extends AppCompatActivity {
         }
     }
 
-    public boolean checkForIllegalCharacters(String s) {
+    private boolean checkForIllegalCharacters(String s) {
         List<String> illegalChars = Arrays.asList(".", "$", "[", "]" , "#", "/");
         for (String c : illegalChars) {
             if (s.contains(c)) {

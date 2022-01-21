@@ -1,15 +1,10 @@
 package com.example.myapplication.createactivities;
 
 import android.app.AlertDialog;
-import android.content.Context;
-import android.content.DialogInterface;
-import android.Manifest;
-import android.app.Activity;
 import android.content.ContentResolver;
+import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
@@ -24,8 +19,6 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 
 import com.example.myapplication.R;
 import com.example.myapplication.helperclasses.IntentHelper;
@@ -44,11 +37,6 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
 
-import org.w3c.dom.Text;
-
-import java.io.FileDescriptor;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.ArrayList;
 
 public class CreateNewCardActivity extends AppCompatActivity {
@@ -133,7 +121,7 @@ public class CreateNewCardActivity extends AppCompatActivity {
         }
     }
 
-    public void showContent() {
+    private void showContent() {
         reference.child("cards").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -207,12 +195,12 @@ public class CreateNewCardActivity extends AppCompatActivity {
         }
     }
 
-    public String getFrontText(){
+    private String getFrontText(){
         EditText topicEditText = findViewById(R.id.front_edit_text);
         return topicEditText.getText().toString();
     }
 
-    public String getBackText(){
+    private String getBackText(){
         EditText topicEditText = findViewById(R.id.back_edit_text);
         return topicEditText.getText().toString();
     }
@@ -247,7 +235,6 @@ public class CreateNewCardActivity extends AppCompatActivity {
         MimeTypeMap mime = MimeTypeMap.getSingleton();
         return mime.getExtensionFromMimeType(cr.getType(uri));
     }
-
 
     private void scrollToBottom() {
         ScrollView.post(new Runnable() {

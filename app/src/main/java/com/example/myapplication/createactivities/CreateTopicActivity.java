@@ -1,19 +1,16 @@
 package com.example.myapplication.createactivities;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.myapplication.R;
 import com.example.myapplication.helperclasses.IntentHelper;
-import com.example.myapplication.helperclasses.ListviewHelperClass;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -31,7 +28,6 @@ public class CreateTopicActivity extends AppCompatActivity {
     private ArrayList<String> checkedSubjects;
     private Spinner subjectSpinner;
     private IntentHelper ih;
-    private String user;
     private int sortOrder;
     private Boolean duplicate;
 
@@ -40,7 +36,7 @@ public class CreateTopicActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_topic);
 
-        this.user = getIntent().getExtras().getString("user");
+        String user = getIntent().getExtras().getString("user");
         FirebaseDatabase flashcardDB = FirebaseDatabase.getInstance("https://karteikar-default-rtdb.europe-west1.firebasedatabase.app/");
         this.reference = flashcardDB.getReference(user);
 
@@ -91,7 +87,7 @@ public class CreateTopicActivity extends AppCompatActivity {
         ih.goToTopicOverview(checkedSubjects);
     }
 
-    public boolean checkForIllegalCharacters(String s) {
+    private boolean checkForIllegalCharacters(String s) {
         List<String> illegalChars = Arrays.asList(".", "$", "[", "]" , "#", "/");
         for (String c : illegalChars) {
             if (s.contains(c)) {
