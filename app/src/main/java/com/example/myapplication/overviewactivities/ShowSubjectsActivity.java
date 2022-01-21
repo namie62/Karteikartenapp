@@ -26,12 +26,12 @@ import java.util.ArrayList;
 
 public class ShowSubjectsActivity extends AppCompatActivity {
     private ArrayList<String> checkedSubjects = new ArrayList<>();
-    private ArrayList<String> cardsInSubjects = new ArrayList<>();
     private ListView listView;
     private Context applicationContext;
     private ArrayList<String> showObjects;
     private ArrayAdapter<String> adapter;
     private IntentHelper ih;
+    private String user;
     private DatabaseReference reference;
 
     @Override
@@ -39,7 +39,7 @@ public class ShowSubjectsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_subjects);
 
-        String user = getIntent().getExtras().getString("user");
+        this.user = getIntent().getExtras().getString("user");
         this.ih = new IntentHelper(this, user);
 
         FirebaseDatabase flashcardDB = FirebaseDatabase.getInstance("https://karteikar-default-rtdb.europe-west1.firebasedatabase.app/");
@@ -49,7 +49,9 @@ public class ShowSubjectsActivity extends AppCompatActivity {
         this.applicationContext = getApplicationContext();
         this.showObjects = new ArrayList<>();
 
+
         this.adapter = new ArrayAdapter<>(applicationContext, android.R.layout.simple_list_item_multiple_choice, showObjects);
+
 
         reference.child("subject_sorting").addValueEventListener(new ValueEventListener() {
             @Override
@@ -66,13 +68,6 @@ public class ShowSubjectsActivity extends AppCompatActivity {
                     ListviewHelperClass subjectView = new ListviewHelperClass(listView, showObjects);
                     checkedSubjects = subjectView.getCheckeditems();
                 }
-//                for (String subject : checkedSubjects) {
-//                    for (DataSnapshot topicSnapshot : snapshot.child(subject).getChildren()) {
-//                        for (DataSnapshot cardSnapshot : topicSnapshot.getChildren()) {
-//                            cardsInSubjects.add(cardSnapshot.getValue(String.class));
-//                        }
-//                    }
-//                }
             }
 
             public void onCancelled(@NonNull DatabaseError error) {
@@ -101,8 +96,10 @@ public class ShowSubjectsActivity extends AppCompatActivity {
                 ArrayList<String> cardsInSubjects = new ArrayList<>();
                 for (String subject : checkedSubjects) {
                     for (DataSnapshot topicSnapshot : snapshot.child(subject).getChildren()) {
-                        for (DataSnapshot cardSnapshot : topicSnapshot.getChildren()) {
-                            cardsInSubjects.add(cardSnapshot.getValue(String.class));
+                        if (!topicSnapshot.getKey().equals("sorting")) {
+                            for (DataSnapshot cardSnapshot : topicSnapshot.getChildren()) {
+                                cardsInSubjects.add(cardSnapshot.getValue(String.class));
+                            }
                         }
                     }
                 }
@@ -128,8 +125,10 @@ public class ShowSubjectsActivity extends AppCompatActivity {
                 ArrayList<String> cardsInSubjects = new ArrayList<>();
                 for (String subject : checkedSubjects) {
                     for (DataSnapshot topicSnapshot : snapshot.child(subject).getChildren()) {
-                        for (DataSnapshot cardSnapshot : topicSnapshot.getChildren()) {
-                            cardsInSubjects.add(cardSnapshot.getValue(String.class));
+                        if (!topicSnapshot.getKey().equals("sorting")) {
+                            for (DataSnapshot cardSnapshot : topicSnapshot.getChildren()) {
+                                cardsInSubjects.add(cardSnapshot.getValue(String.class));
+                            }
                         }
                     }
                 }
