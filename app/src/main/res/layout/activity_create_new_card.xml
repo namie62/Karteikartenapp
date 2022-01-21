@@ -25,7 +25,7 @@
                 android:height="70dp"
                 android:layout_marginTop="10dp"
                 android:fontFamily="@font/roboto_regular"
-                android:hint="Themengebiet"
+                android:hint="Vorderseite"
                 android:background="@drawable/et_custom"
                 android:maxHeight="120dp"
                 android:textColor="@color/black"
@@ -80,7 +80,7 @@
                         android:layout_marginTop="10dp"
                         android:background="@drawable/et_custom"
                         android:fontFamily="@font/roboto_regular"
-                        android:hint="Inhalt"
+                        android:hint="Rückseite"
                         android:maxHeight="370dp"
                         android:singleLine="false"
                         android:textColor="@color/black"
@@ -97,6 +97,7 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
             </ScrollView>
+
         </LinearLayout>
 
 
