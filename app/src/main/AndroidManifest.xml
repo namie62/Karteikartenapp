@@ -28,9 +28,6 @@
             android:exported="false"
             android:label="Registration" />
         <activity
-            android:name=".export.EmailExportActivity"
-            android:exported="false" />
-        <activity
             android:name=".createactivities.ChooseSubjectAndTopicForNewCardActivity"
             android:exported="true" />
         <activity
