@@ -161,7 +161,12 @@ public class CreateNewCardActivity extends AppCompatActivity {
     }
 
     public void share(View view) {
-        ih.shareCard(getFrontText(), getBackText(), uriFromDB);
+//        ih.shareCard(getFrontText(), getBackText(), uriFromDB);
+        Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND);
+        emailIntent.setType("application/image");
+        emailIntent.putExtra(android.content.Intent.EXTRA_EMAIL, new String[]{"Thema: " + getFrontText() + "\nInhalt: " + getBackText()});
+        emailIntent.putExtra(Intent.EXTRA_STREAM, Uri.parse(uriFromDB));
+        startActivity(Intent.createChooser(emailIntent, "Send mail..."));
     }
 
     public String getFrontText(){
