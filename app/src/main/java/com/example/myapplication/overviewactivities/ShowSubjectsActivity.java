@@ -26,23 +26,20 @@ import java.util.ArrayList;
 
 public class ShowSubjectsActivity extends AppCompatActivity {
     private ArrayList<String> checkedSubjects = new ArrayList<>();
+    private ArrayList<String> cardsInSubjects = new ArrayList<>();
     private ListView listView;
     private Context applicationContext;
     private ArrayList<String> showObjects;
     private ArrayAdapter<String> adapter;
     private IntentHelper ih;
-    private String user;
     private DatabaseReference reference;
-    private final Context c = this;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_subjects);
 
-        this.user = getIntent().getExtras().getString("user");
+        String user = getIntent().getExtras().getString("user");
         this.ih = new IntentHelper(this, user);
 
         FirebaseDatabase flashcardDB = FirebaseDatabase.getInstance("https://karteikar-default-rtdb.europe-west1.firebasedatabase.app/");
@@ -52,9 +49,7 @@ public class ShowSubjectsActivity extends AppCompatActivity {
         this.applicationContext = getApplicationContext();
         this.showObjects = new ArrayList<>();
 
-
         this.adapter = new ArrayAdapter<>(applicationContext, android.R.layout.simple_list_item_multiple_choice, showObjects);
-
 
         reference.child("subject_sorting").addValueEventListener(new ValueEventListener() {
             @Override
@@ -71,6 +66,13 @@ public class ShowSubjectsActivity extends AppCompatActivity {
                     ListviewHelperClass subjectView = new ListviewHelperClass(listView, showObjects);
                     checkedSubjects = subjectView.getCheckeditems();
                 }
+//                for (String subject : checkedSubjects) {
+//                    for (DataSnapshot topicSnapshot : snapshot.child(subject).getChildren()) {
+//                        for (DataSnapshot cardSnapshot : topicSnapshot.getChildren()) {
+//                            cardsInSubjects.add(cardSnapshot.getValue(String.class));
+//                        }
+//                    }
+//                }
             }
 
             public void onCancelled(@NonNull DatabaseError error) {
@@ -86,7 +88,7 @@ public class ShowSubjectsActivity extends AppCompatActivity {
 
     public void goToTopics(View view) {
         if (checkedSubjects.size() == 0) {
-            Toast.makeText(c, "Bitte ein Fach auswählen!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Bitte ein Fach auswählen!", Toast.LENGTH_SHORT).show();
         } else {
             ih.goToTopicOverview(checkedSubjects);
         }
@@ -105,11 +107,11 @@ public class ShowSubjectsActivity extends AppCompatActivity {
                     }
                 }
                 if (cardsInSubjects.isEmpty()) {
-                    Toast.makeText(c, "Keine Karten in ausgewählten Fächern gefunden!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Keine Karten in ausgewählten Fächern gefunden!", Toast.LENGTH_SHORT).show();
                 } else if (checkedSubjects.size() != 0) {
                     ih.startStudyMode(checkedSubjects);
                 } else {
-                    Toast.makeText(c, "Bitte ein Fach auswählen!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Bitte ein Fach auswählen!", Toast.LENGTH_SHORT).show();
                 }
             }
             public void onCancelled(@NonNull DatabaseError error) {
@@ -132,11 +134,11 @@ public class ShowSubjectsActivity extends AppCompatActivity {
                     }
                 }
                 if (cardsInSubjects.isEmpty()) {
-                    Toast.makeText(c, "Keine Karten in ausgewählten Fächern gefunden!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Keine Karten in ausgewählten Fächern gefunden!", Toast.LENGTH_SHORT).show();
                 } else if (checkedSubjects.size() != 0) {
                         ih.startQuizmode(checkedSubjects);
                 } else {
-                    Toast.makeText(c, "Bitte ein Fach auswählen!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Bitte ein Fach auswählen!", Toast.LENGTH_SHORT).show();
                 }
             }
             public void onCancelled(@NonNull DatabaseError error) {
@@ -153,7 +155,7 @@ public class ShowSubjectsActivity extends AppCompatActivity {
         if (checkedSubjects.size() == 1) {
             ih.editSubject(showObjects, checkedSubjects.get(0));
         } else {
-            Toast.makeText(c, "Bitte exakt 1 Fach auswählen!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Bitte exakt 1 Fach auswählen!", Toast.LENGTH_SHORT).show();
         }
     }
 
