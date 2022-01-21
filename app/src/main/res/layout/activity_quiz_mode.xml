@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".modesofoperation.QuizModeActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal" >
+        android:orientation="horizontal">
 
         <Button
             android:id="@+id/back_btn"
             android:layout_width="65dp"
             android:layout_height="wrap_content"
-            android:background="@drawable/btn_custom"
             android:layout_gravity="left"
+            android:background="@drawable/btn_custom"
             android:gravity="center"
-            android:onClick = "goToPrevious"
+            android:onClick="goToPrevious"
             app:icon="@android:drawable/ic_menu_revert" />
 
         <View
@@ -31,117 +31,141 @@
             android:id="@+id/current_progress_textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Aktuelle Lernstufe: "
+            android:layout_marginTop="10dp"
             android:background="@android:color/darker_gray"
             android:fontFamily="@font/roboto_regular"
             android:gravity="center"
-            android:layout_marginTop="10dp"/>
+            android:text="Aktuelle Lernstufe: " />
 
 
         <TextView
             android:id="@+id/progress_textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="TextView"
             android:layout_marginTop="10dp"
             android:background="@android:color/darker_gray"
             android:fontFamily="@font/roboto_regular"
-            android:gravity="center" />
+            android:gravity="center"
+            android:text="TextView" />
 
     </LinearLayout>
 
-
-    <com.wajahatkarim3.easyflipview.EasyFlipView
-        android:id="@+id/easyFlipView"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="400dp"
-        android:layout_marginTop="10dp"
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:scrollbars="vertical"
-        app:flipDuration="400"
-        app:flipEnabled="true"
-        app:flipFrom="front"
-        app:flipOnTouch="true"
-        app:flipType="horizontal"
-        app:layout_constraintTop_toBottomOf="@+id/back_btn"
-        tools:layout_editor_absoluteX="1dp"
-        tools:ignore="MissingConstraints">
+        android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/card_front"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="500dp"
-            android:background="@android:color/holo_green_dark"
-            android:gravity="center"
-            android:scrollbars="vertical"
-            android:text="Inhalt"
-            android:textAlignment="center"
-            android:textSize="22sp" />
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/card_back"
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <com.wajahatkarim3.easyflipview.EasyFlipView
+                    android:id="@+id/easyFlipView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center"
+                    android:scrollbars="vertical"
+                    app:flipDuration="400"
+                    app:flipEnabled="true"
+                    app:flipFrom="front"
+                    app:flipOnTouch="true"
+                    app:flipType="horizontal"
+                    app:layout_constraintTop_toBottomOf="@+id/back_btn"
+                    tools:ignore="MissingConstraints"
+                    tools:layout_editor_absoluteX="1dp">
+
+                    <TextView
+                        android:id="@+id/card_front"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@android:color/holo_green_dark"
+                        android:gravity="center"
+                        android:scrollbars="vertical"
+                        android:text="Inhalt"
+                        android:textAlignment="center"
+                        android:textSize="22sp" />
+
+                    <TextView
+                        android:id="@+id/card_back"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@android:color/holo_blue_dark"
+                        android:gravity="center"
+                        android:scrollbars="vertical"
+                        android:text="Themengebiet"
+                        android:textAlignment="center"
+                        android:textSize="22sp" />
+
+
+                    <ImageView
+                        android:id="@+id/imageView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        tools:srcCompat="@tools:sample/avatars" />
+
+                </com.wajahatkarim3.easyflipview.EasyFlipView>
+
+            </ScrollView>
+
+        </LinearLayout>
+
+
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="500dp"
-            android:background="@android:color/holo_blue_dark"
-            android:gravity="center"
-            android:scrollbars="vertical"
-            android:text="Themengebiet"
-            android:textAlignment="center"
-            android:textSize="22sp" />
-
-    </com.wajahatkarim3.easyflipview.EasyFlipView>
-
-
-    <View
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_weight="1" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_gravity="bottom" >
-
-        <Button
-            android:id="@+id/wrong_btn"
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:onClick="wrongAnswer"
-            app:icon="@android:drawable/ic_delete"
-            android:gravity="center" />
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal">
 
-        <View
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_weight="1" />
-
-        <Button
-            android:id="@+id/partially_correct_btn"
-            android:layout_width="117dp"
-            android:layout_height="wrap_content"
-            android:onClick="partiallyRight"
-            android:text="teilweise"
-            android:gravity="center" />
-
-        <View
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_weight="1" />
+            <Button
+                android:id="@+id/wrong_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/easyFlipView"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginRight="22dp"
+                android:layout_toLeftOf="@+id/partially_correct_btn"
+                android:gravity="center"
+                android:onClick="wrongAnswer"
+                app:icon="@android:drawable/ic_delete"
+                tools:ignore="NotSibling" />
 
 
-        <Button
-            android:id="@+id/correct_btn"
-            android:layout_width="97dp"
-            android:layout_height="49dp"
-            android:onClick="rightAnswer"
-            app:icon="@android:drawable/presence_online"
-            android:gravity="center" />
+            <Button
+                android:id="@+id/partially_correct_btn"
+                android:layout_width="117dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/easyFlipView"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:gravity="center"
+                android:onClick="partiallyRight"
+                android:text="teilweise"
+                tools:ignore="NotSibling" />
 
 
+            <Button
+                android:id="@+id/correct_btn"
+                android:layout_width="97dp"
+                android:layout_height="49dp"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginLeft="22dp"
+                android:layout_toRightOf="@+id/partially_correct_btn"
+                android:gravity="center"
+                android:onClick="rightAnswer"
+                app:icon="@android:drawable/presence_online" />
 
-    </LinearLayout>
 
+        </RelativeLayout>
+
+    </FrameLayout>
 
 </LinearLayout>
