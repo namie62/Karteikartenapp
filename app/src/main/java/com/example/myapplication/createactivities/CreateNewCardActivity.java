@@ -7,8 +7,10 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.View;
 import android.webkit.MimeTypeMap;
 import android.widget.EditText;
@@ -57,6 +59,7 @@ public class CreateNewCardActivity extends AppCompatActivity {
     private ScrollView ScrollView;
     private StorageReference storageReference;
     private Uri uri;
+    private boolean newPicture = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,6 +95,9 @@ public class CreateNewCardActivity extends AppCompatActivity {
     }
 
     public void insertImg(View view) {
+        if (selectedCard != null) {
+            newPicture = true;
+        }
         Intent galleryIntent = new Intent();
         galleryIntent.setAction(Intent.ACTION_GET_CONTENT);
         galleryIntent.setType("image/*");
@@ -145,7 +151,7 @@ public class CreateNewCardActivity extends AppCompatActivity {
                     } else {
                         reference.child("cards").child(selectedCard).child("front").setValue(getFrontText());
                         reference.child("cards").child(selectedCard).child("back").setValue(getBackText());
-                        if (uri != null) {
+                        if (uri != null && newPicture) {
                             uploadToFirebase(selectedCard);
                         }
                     }
@@ -163,11 +169,15 @@ public class CreateNewCardActivity extends AppCompatActivity {
     public void share(View view) {
 //        ih.shareCard(getFrontText(), getBackText(), uriFromDB);
         if (selectedCard != null) {
-            Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND);
-            emailIntent.setType("application/image");
-            emailIntent.putExtra(android.content.Intent.EXTRA_EMAIL, new String[]{"Thema: " + getFrontText() + "\nInhalt: " + getBackText()});
-            emailIntent.putExtra(Intent.EXTRA_STREAM, Uri.parse(uriFromDB));
-            startActivity(Intent.createChooser(emailIntent, "Send mail..."));
+            BitmapDrawable bitmapDrawable = ((BitmapDrawable) imageView.getDrawable());
+            Bitmap bitmap = bitmapDrawable .getBitmap();
+            String bitmapPath = MediaStore.Images.Media.insertImage(getContentResolver(), bitmap,"test", null);
+            Uri bitmapUri = Uri.parse(bitmapPath);
+            Intent shareIntent=new Intent(Intent.ACTION_SEND);
+            shareIntent.setType("image/jpeg");
+            shareIntent.putExtra(Intent.EXTRA_STREAM, bitmapUri);
+            shareIntent.putExtra(android.content.Intent.EXTRA_TEXT, "Thema: " + getFrontText() + "\nInhalt: " + getBackText());
+            startActivity(Intent.createChooser(shareIntent,"Share Image"));
         } else {
             Toast.makeText(this, "Bitte Karte zuerst speichern!", Toast.LENGTH_SHORT).show();
         }
