@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".loginactivities.Registration">
+    tools:context=".loginactivities.RegistrationActivity">
 
 
     <TextView
@@ -20,22 +20,7 @@
         android:layout_gravity="center"/>
 
     <EditText
-        android:id="@+id/txtName"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:hint="@string/your_name"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginTop="30dp"
-        android:padding="15dp"
-        android:inputType="textPersonName"
-        android:fontFamily="@font/roboto_regular"
-        android:background="@drawable/et_custom"
-        android:layout_above="@id/txtEmail"
-        android:textSize="15sp" />
-
-    <EditText
-        android:id="@+id/txtEmail"
+        android:id="@+id/username_editText"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:hint="@string/username"
@@ -46,11 +31,11 @@
         android:fontFamily="@font/roboto_regular"
         android:inputType="textEmailAddress"
         android:background="@drawable/et_custom"
-        android:layout_above="@id/txtPwd"
+        android:layout_above="@id/password_editText"
         android:textSize="15sp" />
 
     <EditText
-        android:id="@+id/txtPwd"
+        android:id="@+id/password_editText"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:hint="@string/password"
@@ -72,14 +57,15 @@
             android:id="@+id/btnRegistration"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/roboto_regular"
-            android:background="@drawable/btn_custom"
+            android:layout_centerInParent="true"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:layout_marginBottom="30dp"
-            android:layout_centerInParent="true"
-            android:textColor="@android:color/white"
-            android:text="@string/register"/>
+            android:background="@drawable/btn_custom"
+            android:fontFamily="@font/roboto_regular"
+            android:onClick="register"
+            android:text="@string/register"
+            android:textColor="@android:color/white" />
 
         <TextView android:id="@+id/lnkLogin"
             android:layout_width="wrap_content"

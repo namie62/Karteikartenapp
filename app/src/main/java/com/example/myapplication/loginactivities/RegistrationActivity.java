@@ -44,7 +44,7 @@ public class RegistrationActivity extends AppCompatActivity {
     }
 
     public void register(View view) {
-        String username = usernameEditText.getEditableText().toString();
+        String username = usernameEditText.getText().toString();
         String password = passwordEditText.getText().toString();
         if (username.equals("")) {
             Toast.makeText(this, "Kein Benutzername eingegeben!", Toast.LENGTH_SHORT).show();

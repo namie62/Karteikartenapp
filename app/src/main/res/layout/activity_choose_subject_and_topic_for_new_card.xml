@@ -17,7 +17,7 @@
         android:textSize="18sp" />
 
     <Spinner
-        android:id="@+id/select_topic_spinner"
+        android:id="@+id/select_subject_spinner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
@@ -31,14 +31,14 @@
         android:id="@+id/progress_text_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/select_topic_spinner"
+        android:layout_below="@+id/select_subject_spinner"
         android:layout_marginTop="10dp"
         android:fontFamily="@font/roboto_regular"
         android:text="Thema auswählen:"
         android:textSize="18sp" />
 
     <Spinner
-        android:id="@+id/select_subject_spinner"
+        android:id="@+id/select_topic_spinner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
