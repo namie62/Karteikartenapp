@@ -15,6 +15,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication">
         <activity
+            android:name=".modesofoperation.StudyModeWithScroll"
+            android:exported="false" />
+        <activity
             android:name=".editactivities.EditCardOrderActivity"
             android:exported="false" />
         <activity
