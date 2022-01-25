@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".modesofoperation.StudyModeActivity">
+    tools:context=".modesofoperation.QuizModeActivity">
 
 
     <LinearLayout
@@ -14,13 +14,13 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/go_to_previous_btn"
+            android:id="@+id/back_btn"
             android:layout_width="65dp"
             android:layout_height="wrap_content"
             android:layout_gravity="left"
             android:background="@drawable/btn_custom"
             android:gravity="center"
-            android:onClick="previous"
+            android:onClick="goToPrevious"
             app:icon="@android:drawable/ic_menu_revert"
             tools:ignore="SpeakableTextPresentCheck" />
 
@@ -39,7 +39,7 @@
             android:text="Aktuelle Lernstufe: " />
 
         <TextView
-            android:id="@+id/progress_study_textView"
+            android:id="@+id/progress_textView"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:background="@android:color/darker_gray"
@@ -62,23 +62,19 @@
             android:layout_marginBottom="5dp"
             android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/front_text_view"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="TextView" />
 
-            <TextView
-                android:id="@+id/back_text_view"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="TextView" />
+                <TextView
+                    android:id="@+id/card_textView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="TextView" />
 
-            <ImageView
-                android:id="@+id/imageView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                tools:srcCompat="@tools:sample/avatars" />
+
+                <ImageView
+                    android:id="@+id/imageView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    tools:srcCompat="@tools:sample/avatars" />
 
         </LinearLayout>
     </ScrollView>
@@ -95,11 +91,24 @@
 
         <Button
             android:id="@+id/wrong_btn"
-            android:layout_width="185dp"
+            android:layout_width="65dp"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:onClick="previousCard"
-            android:text="Vorherige Karte" />
+            android:onClick="wrongAnswer"
+            app:icon="@android:drawable/ic_delete" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <Button
+            android:id="@+id/partially_correct_btn"
+            android:layout_width="117dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:onClick="partiallyRight"
+            android:text="teilweise" />
 
         <View
             android:layout_width="0dp"
@@ -108,11 +117,12 @@
 
         <Button
             android:id="@+id/correct_btn"
-            android:layout_width="185dp"
+            android:layout_width="65dp"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:onClick="nextCard"
-            android:text="Nächste Karte" />
+            android:onClick="rightAnswer"
+            app:icon="@android:drawable/presence_online" />
+
     </LinearLayout>
 
 </LinearLayout>

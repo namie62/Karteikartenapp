@@ -32,14 +32,14 @@ public class QuizModeActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_quiz_mode);
+        setContentView(R.layout.activity_quiz_mode_new_with_scroll);
 
         String user = getIntent().getExtras().getString("user");
         FirebaseDatabase flashcardDB = FirebaseDatabase.getInstance("https://karteikar-default-rtdb.europe-west1.firebasedatabase.app/");
         this.reference = flashcardDB.getReference(user);
 
         this.ih = new IntentHelper(this, user);
-        cardFront = findViewById(R.id.card_front);
+        cardFront = findViewById(R.id.card_textView);
 
         Bundle b = getIntent().getExtras();
         this.checkedSubjects = b.getStringArrayList("checkedSubjects");
@@ -110,7 +110,7 @@ public class QuizModeActivity extends AppCompatActivity {
     }
 
     public void setBackTextView(String back){
-        TextView textView = findViewById(R.id.card_front);
+        TextView textView = findViewById(R.id.card_textView);
         textView.setText(back);
     }
 

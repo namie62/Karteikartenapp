@@ -30,8 +30,7 @@
         <TextView
             android:id="@+id/current_progress_textView"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_height="match_parent"
             android:background="@android:color/darker_gray"
             android:fontFamily="@font/roboto_regular"
             android:gravity="center"
@@ -41,8 +40,7 @@
         <TextView
             android:id="@+id/progress_textView"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_height="match_parent"
             android:background="@android:color/darker_gray"
             android:fontFamily="@font/roboto_regular"
             android:gravity="center"
@@ -50,18 +48,18 @@
 
     </LinearLayout>
 
-    <FrameLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="0dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:layout_weight="2" >
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
             android:orientation="vertical">
-
-            <ScrollView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
 
                 <com.wajahatkarim3.easyflipview.EasyFlipView
                     android:id="@+id/easyFlipView"
@@ -81,7 +79,7 @@
                     tools:layout_editor_absoluteX="1dp">
 
                     <TextView
-                        android:id="@+id/card_front"
+                        android:id="@+id/card_textView"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@android:color/holo_green_dark"
@@ -111,61 +109,57 @@
                         tools:srcCompat="@tools:sample/avatars" />
 
                 </com.wajahatkarim3.easyflipview.EasyFlipView>
-
-            </ScrollView>
-
         </LinearLayout>
 
+    </ScrollView>
 
-        <RelativeLayout
-            android:layout_width="match_parent"
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginBottom="5dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/wrong_btn"
+            android:layout_width="65dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:orientation="horizontal">
+            android:gravity="center"
+            android:onClick="wrongAnswer"
+            app:icon="@android:drawable/ic_delete" />
 
-            <Button
-                android:id="@+id/wrong_btn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/easyFlipView"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentBottom="true"
-                android:layout_marginRight="22dp"
-                android:layout_toLeftOf="@+id/partially_correct_btn"
-                android:gravity="center"
-                android:onClick="wrongAnswer"
-                app:icon="@android:drawable/ic_delete"
-                tools:ignore="NotSibling" />
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
 
+        <Button
+            android:id="@+id/partially_correct_btn"
+            android:layout_width="117dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:onClick="partiallyRight"
+            android:text="teilweise" />
 
-            <Button
-                android:id="@+id/partially_correct_btn"
-                android:layout_width="117dp"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/easyFlipView"
-                android:layout_alignParentBottom="true"
-                android:layout_centerHorizontal="true"
-                android:gravity="center"
-                android:onClick="partiallyRight"
-                android:text="teilweise"
-                tools:ignore="NotSibling" />
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
 
 
-            <Button
+
+        <Button
                 android:id="@+id/correct_btn"
-                android:layout_width="97dp"
-                android:layout_height="49dp"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentBottom="true"
-                android:layout_marginLeft="22dp"
-                android:layout_toRightOf="@+id/partially_correct_btn"
+                android:layout_width="65dp"
+                android:layout_height="wrap_content"
                 android:gravity="center"
                 android:onClick="rightAnswer"
                 app:icon="@android:drawable/presence_online" />
 
 
-        </RelativeLayout>
-
-    </FrameLayout>
+    </LinearLayout>
 
 </LinearLayout>
