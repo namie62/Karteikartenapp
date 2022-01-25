@@ -154,7 +154,7 @@ public class QuizModeActivity extends AppCompatActivity {
         int progress = flashcard.getProgress();
         String key = flashcard.getKey();
         if (progress < 5 ) {
-            reference.child(key).child("progress").setValue(progress+1);
+            reference.child("cards").child(key).child("progress").setValue(progress+1);
         }
         nextCard();
     }
@@ -163,8 +163,8 @@ public class QuizModeActivity extends AppCompatActivity {
         Flashcard flashcard = cards.get(index);
         int progress = flashcard.getProgress();
         String key = flashcard.getKey();
-        if (progress > 0) {
-            reference.child(key).child("progress").setValue(0);
+        if (progress > 1) {
+            reference.child("cards").child(key).child("progress").setValue(1);
         }
         nextCard();
     }
