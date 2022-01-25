@@ -10,7 +10,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.myapplication.R;
-import com.example.myapplication.helperclasses.IntentHelper;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -39,7 +38,7 @@ public class EditTopicActivity extends AppCompatActivity {
         this.reference = flashcardDB.getReference(user);
         int oldIndex = allTopics.indexOf(selectedTopic);
 
-        topicNameEditText = findViewById(R.id.topic_name_editText);
+        topicNameEditText = findViewById(R.id.topic_name);
         topicNameEditText.setText(selectedTopic);
 
         TextView topicOldPositionTextView = findViewById(R.id.topic_old_position_textView);
