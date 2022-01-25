@@ -38,20 +38,17 @@ public class MainActivity extends AppCompatActivity {
 
         this.usernameEditText = findViewById(R.id.username_editText);
         this.passwordEditText = findViewById(R.id.password_editText);
-//        ih.setUser("P");
-//        ih.goToStartMenu();
+        ih.setUser("MaxMustermann");
+        ih.goToStartMenu();
 
         TextView login = (TextView)findViewById(R.id.lnkRegister);
         login.setMovementMethod(LinkMovementMethod.getInstance());
 
         TextView register = (TextView)findViewById(R.id.lnkRegister);
         register.setMovementMethod(LinkMovementMethod.getInstance());
-        register.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, RegistrationActivity.class);
-                startActivity(intent);
-            }
+        register.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, RegistrationActivity.class);
+            startActivity(intent);
         });
     }
 

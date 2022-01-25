@@ -126,10 +126,9 @@ public class CreateNewCardActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) {
-                    try {
-                        uriFromDB = snapshot.child(selectedCard).child("img_uri").getValue(String.class);
+                    uriFromDB = snapshot.child(selectedCard).child("img_uri").getValue(String.class);
+                    if (uriFromDB!=null) {
                         Picasso.get().load(uriFromDB).into(imageView);
-                    } catch (Exception ignored) {
                     }
                     frontEditText.setText(snapshot.child(selectedCard).child("front").getValue(String.class));
                     backEditText.setText(snapshot.child(selectedCard).child("back").getValue(String.class));
@@ -178,12 +177,14 @@ public class CreateNewCardActivity extends AppCompatActivity {
         if (selectedCard != null) {
             try {
                 BitmapDrawable bitmapDrawable = ((BitmapDrawable) imageView.getDrawable());
-                Bitmap bitmap = bitmapDrawable.getBitmap();
-                String bitmapPath = MediaStore.Images.Media.insertImage(getContentResolver(), bitmap,"test", null);
-                Uri bitmapUri = Uri.parse(bitmapPath);
                 Intent shareIntent=new Intent(Intent.ACTION_SEND);
                 shareIntent.setType("image/jpeg");
-                shareIntent.putExtra(Intent.EXTRA_STREAM, bitmapUri);
+                if (uriFromDB!=null) {
+                    Bitmap bitmap = bitmapDrawable.getBitmap();
+                    String bitmapPath = MediaStore.Images.Media.insertImage(getContentResolver(), bitmap,"test", null);
+                    Uri bitmapUri = Uri.parse(bitmapPath);
+                    shareIntent.putExtra(Intent.EXTRA_STREAM, bitmapUri);
+                }
                 shareIntent.putExtra(android.content.Intent.EXTRA_TEXT, "Thema: " + getFrontText() + "\nInhalt: " + getBackText());
                 startActivity(Intent.createChooser(shareIntent,"Share Image"));
             } catch (Exception e) {
