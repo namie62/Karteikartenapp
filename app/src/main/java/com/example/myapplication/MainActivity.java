@@ -38,11 +38,8 @@ public class MainActivity extends AppCompatActivity {
 
         this.usernameEditText = findViewById(R.id.username_editText);
         this.passwordEditText = findViewById(R.id.password_editText);
-//        ih.setUser("MaxMustermann");
-//        ih.goToStartMenu();
-
-//        TextView login = (TextView)findViewById(R.id.lnkRegister);
-//        login.setMovementMethod(LinkMovementMethod.getInstance());
+        ih.setUser("MaxMustermann");
+        ih.goToStartMenu();
 
         TextView register = (TextView)findViewById(R.id.lnkRegister);
         register.setMovementMethod(LinkMovementMethod.getInstance());
