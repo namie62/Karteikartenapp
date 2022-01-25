@@ -67,17 +67,18 @@
             android:text="@string/register"
             android:textColor="@android:color/white" />
 
-        <TextView android:id="@+id/lnkLogin"
+        <TextView
+            android:id="@+id/lnkLogin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
-            android:text="Bereits registriert? Hier zum Login"
-            android:gravity="center"
-            android:layout_gravity="center"
-            android:textSize="20dp"
-            android:fontFamily="@font/roboto_regular"
             android:layout_centerHorizontal="true"
-            android:onClick="test"/>
+            android:layout_gravity="center"
+            android:layout_marginTop="40dp"
+            android:fontFamily="@font/roboto_regular"
+            android:gravity="center"
+            android:onClick="goBack"
+            android:text="Bereits registriert? Hier zum Login"
+            android:textSize="20dp" />
     </RelativeLayout>
 
 
