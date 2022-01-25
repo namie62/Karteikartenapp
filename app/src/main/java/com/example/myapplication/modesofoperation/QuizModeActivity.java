@@ -117,11 +117,13 @@ public class QuizModeActivity extends AppCompatActivity {
     public void switchFrontBack(View view){
         if (front) {
             textView.setText(card.getBack());
+            imageView.setVisibility(View.VISIBLE);
             Picasso.get().load(card.getImg_uri()).into(imageView);
             front = false;
         } else {
             textView.setText(card.getFront());
-            imageView.setImageResource(android.R.color.transparent);
+//            imageView.setImageResource(android.R.color.transparent);
+            imageView.setVisibility(View.GONE);
             front = true;
         }
     }

@@ -69,7 +69,6 @@
             android:fillViewport="true"
             android:layout_marginBottom="5dp"
             android:onClick="switchFrontBack"
-            android:layout_weight="1"
             android:orientation="vertical">
 
 
