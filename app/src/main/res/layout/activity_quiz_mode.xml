@@ -4,8 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_margin="5dp"
     android:orientation="vertical"
     tools:context=".modesofoperation.QuizModeActivity">
+
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -20,7 +22,8 @@
             android:background="@drawable/btn_custom"
             android:gravity="center"
             android:onClick="goToPrevious"
-            app:icon="@android:drawable/ic_menu_revert" />
+            app:icon="@android:drawable/ic_menu_revert"
+            tools:ignore="SpeakableTextPresentCheck" />
 
         <View
             android:layout_width="0dp"
@@ -34,8 +37,9 @@
             android:background="@android:color/darker_gray"
             android:fontFamily="@font/roboto_regular"
             android:gravity="center"
-            android:text="Aktuelle Lernstufe: " />
-
+            android:text="Aktuelle Lernstufe: "
+            android:textColor="@color/black"
+            android:textSize="20sp" />
 
         <TextView
             android:id="@+id/progress_textView"
@@ -44,7 +48,8 @@
             android:background="@android:color/darker_gray"
             android:fontFamily="@font/roboto_regular"
             android:gravity="center"
-            android:text="TextView" />
+            android:textColor="@color/black"
+            android:textSize="20sp"/>
 
     </LinearLayout>
 
@@ -53,74 +58,43 @@
         android:layout_height="0dp"
         android:layout_marginTop="5dp"
         android:layout_marginBottom="5dp"
-        android:layout_weight="2" >
+        android:layout_weight="1"
+        android:fillViewport="true"
+        android:layout_gravity="center"
+        android:background="@drawable/bg_round">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
+            android:fillViewport="true"
             android:layout_marginBottom="5dp"
+            android:onClick="switchFrontBack"
+            android:layout_weight="1"
             android:orientation="vertical">
 
-                <com.wajahatkarim3.easyflipview.EasyFlipView
-                    android:id="@+id/easyFlipView"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="10dp"
-                    android:gravity="center"
-                    android:scrollbars="vertical"
-                    app:flipDuration="400"
-                    app:flipEnabled="true"
-                    app:flipFrom="front"
-                    app:flipOnTouch="true"
-                    app:flipType="horizontal"
-                    app:layout_constraintTop_toBottomOf="@+id/back_btn"
-                    tools:ignore="MissingConstraints"
-                    tools:layout_editor_absoluteX="1dp">
 
-                    <TextView
-                        android:id="@+id/card_textView"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@android:color/holo_green_dark"
-                        android:gravity="center"
-                        android:scrollbars="vertical"
-                        android:text="Inhalt"
-                        android:textAlignment="center"
-                        android:textSize="22sp" />
+            <TextView
+                android:id="@+id/card_textView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:gravity="center_horizontal|center_vertical"
+                />
 
-                    <TextView
-                        android:id="@+id/card_back"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@android:color/holo_blue_dark"
-                        android:gravity="center"
-                        android:scrollbars="vertical"
-                        android:text="Themengebiet"
-                        android:textAlignment="center"
-                        android:textSize="22sp" />
-
-
-                    <ImageView
-                        android:id="@+id/imageView"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        tools:srcCompat="@tools:sample/avatars" />
-
-                </com.wajahatkarim3.easyflipview.EasyFlipView>
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:srcCompat="@tools:sample/avatars" />
         </LinearLayout>
-
     </ScrollView>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        android:layout_marginLeft="5dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginRight="5dp"
-        android:layout_marginBottom="5dp"
         android:orientation="horizontal">
 
         <Button
@@ -149,16 +123,13 @@
             android:layout_height="0dp"
             android:layout_weight="1" />
 
-
-
         <Button
-                android:id="@+id/correct_btn"
-                android:layout_width="65dp"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:onClick="rightAnswer"
-                app:icon="@android:drawable/presence_online" />
-
+            android:id="@+id/correct_btn"
+            android:layout_width="65dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:onClick="rightAnswer"
+            app:icon="@android:drawable/presence_online" />
 
     </LinearLayout>
 

@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -15,6 +16,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -25,21 +27,25 @@ public class QuizModeActivity extends AppCompatActivity {
     private ArrayList<Flashcard> cards = new ArrayList<>();
     private ArrayList<Flashcard> allCards = new ArrayList<>();
     private int index = 0;
-    private TextView cardFront;
-    DatabaseReference reference;
-
+    private TextView textView;
+    private DatabaseReference reference;
+    private boolean front = true;
+    private Flashcard card;
+    private ImageView imageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_quiz_mode_new_with_scroll);
+        setContentView(R.layout.activity_quiz_mode);
 
         String user = getIntent().getExtras().getString("user");
         FirebaseDatabase flashcardDB = FirebaseDatabase.getInstance("https://karteikar-default-rtdb.europe-west1.firebasedatabase.app/");
         this.reference = flashcardDB.getReference(user);
 
         this.ih = new IntentHelper(this, user);
-        cardFront = findViewById(R.id.card_textView);
+        textView = findViewById(R.id.card_textView);
+        this.imageView = findViewById(R.id.imageView);
+
 
         Bundle b = getIntent().getExtras();
         this.checkedSubjects = b.getStringArrayList("checkedSubjects");
@@ -90,10 +96,9 @@ public class QuizModeActivity extends AppCompatActivity {
                     }
                 }
                 Collections.shuffle(cards);
-                Flashcard card = cards.get(index);
+                card = cards.get(index);
                 if (card.getProgress() < 5) {
-                    setFrontTextView(card.getFront());
-                    setBackTextView(card.getBack());
+                    textView.setText(card.getFront());
                     setProgressTextView(card.getProgress());
                 } else {
                     nextCard();
@@ -109,14 +114,16 @@ public class QuizModeActivity extends AppCompatActivity {
 
     }
 
-    public void setBackTextView(String back){
-        TextView textView = findViewById(R.id.card_textView);
-        textView.setText(back);
-    }
-
-    public void setFrontTextView(String front){
-        TextView textview = findViewById(R.id.card_back);
-        textview.setText(front);
+    public void switchFrontBack(View view){
+        if (front) {
+            textView.setText(card.getBack());
+            Picasso.get().load(card.getImg_uri()).into(imageView);
+            front = false;
+        } else {
+            textView.setText(card.getFront());
+            imageView.setImageResource(android.R.color.transparent);
+            front = true;
+        }
     }
 
     public void setProgressTextView(int progress) {
@@ -128,9 +135,9 @@ public class QuizModeActivity extends AppCompatActivity {
         int max = cards.size();
         if (index < max-1) {
             index += 1;
-            Flashcard card = cards.get(index);
-            setFrontTextView(card.getFront());
-            setBackTextView(card.getBack());
+            card = cards.get(index);
+            textView.setText(card.getFront());
+            imageView.setImageResource(android.R.color.transparent);
         } else {
             ih.goToStartMenu();
         }
