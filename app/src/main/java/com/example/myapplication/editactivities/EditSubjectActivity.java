@@ -6,12 +6,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.myapplication.R;
-import com.example.myapplication.helperclasses.IntentHelper;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -38,7 +36,7 @@ public class EditSubjectActivity extends AppCompatActivity {
         this.reference = flashcardDB.getReference(user);
         int oldIndex = allSubjects.indexOf(selectedSubject);
 
-        subjectNameEditText = findViewById(R.id.subject_name_editText);
+        subjectNameEditText = findViewById(R.id.subject_name);
         subjectNameEditText.setText(selectedSubject);
 
         TextView subjectOldPositionTextView = findViewById(R.id.subject_old_position_textView);
