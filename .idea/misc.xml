@@ -4,18 +4,9 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="../../../../../layout/custom_preview.xml" value="0.13958333333333334" />
-        <entry key="..\:/ADSEProjekt/25.01/Karteikartenapp/app/src/main/res/layout/activity_create_new_card.xml" value="0.1" />
-        <entry key="..\:/ADSEProjekt/25.01/Karteikartenapp/app/src/main/res/layout/activity_create_subject.xml" value="0.15172101449275363" />
-        <entry key="..\:/ADSEProjekt/25.01/Karteikartenapp/app/src/main/res/layout/activity_create_topic.xml" value="0.14666666666666667" />
-        <entry key="..\:/ADSEProjekt/25.01/Karteikartenapp/app/src/main/res/layout/activity_edit_card_order.xml" value="0.1" />
-        <entry key="..\:/ADSEProjekt/25.01/Karteikartenapp/app/src/main/res/layout/activity_edit_subject.xml" value="0.1" />
-        <entry key="..\:/ADSEProjekt/25.01/Karteikartenapp/app/src/main/res/layout/activity_edit_topic.xml" value="0.1796875" />
-        <entry key="..\:/ADSEProjekt/25.01/Karteikartenapp/app/src/main/res/layout/activity_quiz_mode.xml" value="0.8104838709677419" />
-        <entry key="..\:/ADSEProjekt/25.01/Karteikartenapp/app/src/main/res/layout/activity_quiz_mode_new_with_scroll.xml" value="0.1" />
-        <entry key="..\:/ADSEProjekt/25.01/Karteikartenapp/app/src/main/res/layout/activity_quiz_mode_with_scroll.xml" value="0.1" />
-        <entry key="..\:/ADSEProjekt/25.01/Karteikartenapp/app/src/main/res/layout/activity_study_mode_with_scroll.xml" value="0.1" />
         <entry key="..\:/Users/namie/AndroidStudioProjects/TEst/Karteikartenapp/app/src/main/res/layout/activity_main.xml" value="0.13020833333333334" />
         <entry key="app/src/main/res/layout/activity_choose_subject_and_topic_for_new_card.xml" value="0.24583333333333332" />
+        <entry key="app/src/main/res/layout/activity_edit_subject.xml" value="0.335" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_quiz_mode.xml" value="2.5" />
         <entry key="app/src/main/res/layout/activity_quiz_mode_new_with_scroll.xml" value="0.335" />

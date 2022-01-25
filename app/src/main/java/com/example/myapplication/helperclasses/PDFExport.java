@@ -52,26 +52,23 @@ public class PDFExport {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) {
                     for (String subject : checkedSubjects) {
-                        Paragraph selectedSubject = new Paragraph("Fach:" + subject).setBold().setFontSize(24).setTextAlignment(TextAlignment.CENTER);
+                        Paragraph selectedSubject = new Paragraph("Fach: " + subject).setBold().setFontSize(24).setTextAlignment(TextAlignment.CENTER);
                         document.add(selectedSubject);
                         for (String topic : checkedTopics) {
-                            Table table = createTable();
-                            Paragraph selectedTopic = new Paragraph("Thema: " + topic).setUnderline().setFontSize(22).setTextAlignment(TextAlignment.CENTER);
-                            document.add(selectedTopic);
-                            int max = (int) snapshot.child(subject).child(topic).getChildrenCount();
-                            for (int i=0; i<max; i++) {
-                                String cardpath = snapshot.child(subject).child(topic).child(String.valueOf(i)).getValue(String.class);
-                                String nameFromDB = snapshot.child("cards").child(cardpath).child("front").getValue(String.class);
-                                String valueFromDB = snapshot.child("cards").child(cardpath).child("back").getValue(String.class);
-//                                String uriFromDB = snapshot.child("cards").child(cardpath).child("img_uri").getValue(String.class);
-                                table.addCell(new Cell().add(new Paragraph(nameFromDB)));    // Themengebiet aus Db für Karte
-                                table.addCell(new Cell().add(new Paragraph(valueFromDB)));
-//                                if (uriFromDB != null) {
-//                                    Bitmap bitmap = getBitmapFromURL(uriFromDB);
-//                                }
-
+                            if (snapshot.child(subject).child(topic).getChildrenCount() > 0) {
+                                Table table = createTable();
+                                Paragraph selectedTopic = new Paragraph("Thema: " + topic).setUnderline().setFontSize(22).setTextAlignment(TextAlignment.CENTER);
+                                document.add(selectedTopic);
+                                int max = (int) snapshot.child(subject).child(topic).getChildrenCount();
+                                for (int i=0; i<max; i++) {
+                                    String cardpath = snapshot.child(subject).child(topic).child(String.valueOf(i)).getValue(String.class);
+                                    String nameFromDB = snapshot.child("cards").child(cardpath).child("front").getValue(String.class);
+                                    String valueFromDB = snapshot.child("cards").child(cardpath).child("back").getValue(String.class);
+                                    table.addCell(new Cell().add(new Paragraph(nameFromDB)));
+                                    table.addCell(new Cell().add(new Paragraph(valueFromDB)));
+                                }
+                                document.add(table);
                             }
-                            document.add(table);
                         }
                     }
                 }
