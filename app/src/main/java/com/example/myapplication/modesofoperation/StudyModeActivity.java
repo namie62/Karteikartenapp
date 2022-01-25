@@ -30,7 +30,7 @@ public class StudyModeActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_study_mode);
+        setContentView(R.layout.activity_study_mode_with_scroll);
 
         String user = getIntent().getExtras().getString("user");
         FirebaseDatabase flashcardDB = FirebaseDatabase.getInstance("https://karteikar-default-rtdb.europe-west1.firebasedatabase.app/");
@@ -47,7 +47,7 @@ public class StudyModeActivity extends AppCompatActivity {
         this.sortedCards = new ArrayList<>();
         this.cards = new ArrayList<>();
         ArrayList<Flashcard> allCards = new ArrayList<>();
-        this.imageView = findViewById(R.id.imageView2);
+        this.imageView = findViewById(R.id.imageView);
 
         reference.addValueEventListener(new ValueEventListener() {
             @Override

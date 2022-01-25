@@ -63,15 +63,16 @@
             <ScrollView
                 android:id="@+id/ScrollView"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_above="@+id/cancelBtn">
+                android:layout_height="0dp"
+                android:layout_above="@+id/cancelBtn"
+                android:layout_weight="2" >
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/TextInhalt"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/TextThemengebiet"
-                    android:textStyle="italic">
+                    android:textStyle="italic" >
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/back_edit_text"
@@ -84,7 +85,8 @@
                         android:maxHeight="370dp"
                         android:singleLine="false"
                         android:textColor="@color/black"
-                        android:textSize="18sp" />
+                        android:textSize="18sp"
+                        android:layout_weight="1" />
 
 
                     <ImageView
