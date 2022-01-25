@@ -52,7 +52,7 @@ public class PDFExport {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) {
                     for (String subject : checkedSubjects) {
-                        Paragraph selectedSubject = new Paragraph("Fach: " + subject).setBold().setFontSize(24).setTextAlignment(TextAlignment.CENTER);
+                        Paragraph selectedSubject = new Paragraph("Fach:" + subject).setBold().setFontSize(24).setTextAlignment(TextAlignment.CENTER);
                         document.add(selectedSubject);
                         for (String topic : checkedTopics) {
                             if (snapshot.child(subject).child(topic).getChildrenCount() > 0) {
