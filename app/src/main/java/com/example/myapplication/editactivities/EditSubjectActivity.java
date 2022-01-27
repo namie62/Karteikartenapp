@@ -17,6 +17,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class EditSubjectActivity extends AppCompatActivity {
     private DatabaseReference reference;
@@ -55,12 +57,18 @@ public class EditSubjectActivity extends AppCompatActivity {
                 if (newIndex >= allSubjects.size()) {
                     newIndex = allSubjects.size() -1;
                 }
-                reference.child(newSubjectName).setValue(snapshot.child(selectedSubject).getValue());
-                reference.child(selectedSubject).removeValue();
-                allSubjects.remove(selectedSubject);
-                allSubjects.add(newIndex, newSubjectName);
-                for (int i=0; i<allSubjects.size(); i++) {
-                    reference.child("subject_sorting").child(String.valueOf(i)).setValue(allSubjects.get(i));
+                if (checkForIllegalCharacters(newSubjectName)) {
+                    allSubjects.remove(selectedSubject);
+                    allSubjects.add(newIndex, newSubjectName);
+                    for (int i = 0; i < allSubjects.size(); i++) {
+                        reference.child("subject_sorting").child(String.valueOf(i)).setValue(allSubjects.get(i));
+                    }
+                    if (!selectedSubject.equals(newSubjectName)) {
+                        reference.child(newSubjectName).setValue(snapshot.child(selectedSubject).getValue());
+                        reference.child(selectedSubject).removeValue();
+                    }
+                } else {
+                    Toast.makeText(getApplicationContext(), "Nicht erlaubte Zeichen in Fachbezeichnung:  . , $ , # , [ , ] , / ,", Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -69,6 +77,16 @@ public class EditSubjectActivity extends AppCompatActivity {
             }
         });
         this.finish();
+    }
+
+    private boolean checkForIllegalCharacters(String s) {
+        List<String> illegalChars = Arrays.asList(".", "$", "[", "]" , "#", "/");
+        for (String c : illegalChars) {
+            if (s.contains(c)) {
+                return false;
+            }
+        }
+        return true;
     }
 
     public void cancel(View view) {

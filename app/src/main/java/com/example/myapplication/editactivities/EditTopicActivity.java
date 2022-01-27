@@ -16,8 +16,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class EditTopicActivity extends AppCompatActivity {
     private DatabaseReference reference;
@@ -58,19 +59,18 @@ public class EditTopicActivity extends AppCompatActivity {
                 if (newIndex >= allTopics.size()) {
                     newIndex = allTopics.size()-1;
                 }
-                ArrayList<String> allCards = new ArrayList<>();
-                for (DataSnapshot dataSnapshot : snapshot.child(selectedSubject).child(selectedTopic).getChildren()){
-                    allCards.add(dataSnapshot.getValue(String.class));
-                }
-                reference.child(selectedSubject).child(selectedTopic).removeValue();
-                for (int i=0; i<allCards.size(); i++) {
-                    reference.child(selectedSubject).child(newTopicName).child(String.valueOf(i)).setValue(allCards.get(i));
-                }
-                allTopics.remove(selectedTopic);
-                allTopics.add(newIndex, newTopicName);
-                reference.child(selectedSubject).child("sorting").removeValue();
-                for (int i=0; i<allTopics.size(); i++) {
-                    reference.child(selectedSubject).child("sorting").child(String.valueOf(i)).setValue(allTopics.get(i));
+                if (checkForIllegalCharacters(newTopicName)){
+                    allTopics.remove(selectedTopic);
+                    allTopics.add(newIndex, newTopicName);
+                    for (int i=0; i<allTopics.size(); i++) {
+                        reference.child(selectedSubject).child("sorting").child(String.valueOf(i)).setValue(allTopics.get(i));
+                    }
+                    if (!selectedTopic.equals(newTopicName) && checkForIllegalCharacters(newTopicName)) {
+                        reference.child(selectedSubject).child(newTopicName).setValue(snapshot.child(selectedSubject).child(selectedTopic).getValue());
+                        reference.child(selectedSubject).child(selectedTopic).removeValue();
+                    }
+                } else {
+                    Toast.makeText(getApplicationContext(), "Nicht erlaubte Zeichen in Themabezeichnung:  . , $ , # , [ , ] , / ,", Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -81,9 +81,17 @@ public class EditTopicActivity extends AppCompatActivity {
         this.finish();
     }
 
+    private boolean checkForIllegalCharacters(String s) {
+        List<String> illegalChars = Arrays.asList(".", "$", "[", "]" , "#", "/");
+        for (String c : illegalChars) {
+            if (s.contains(c)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     public void cancel(View view) {
         this.finish();
     }
-
-
 }
