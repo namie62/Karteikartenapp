@@ -54,6 +54,7 @@ public class ShowCardsActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 showObjects.clear();
+                keyList.clear();
                 checkedCards = new ArrayList<>();
                 if (snapshot.exists()) {
                     for (String subject : checkedSubjects) {

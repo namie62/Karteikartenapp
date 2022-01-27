@@ -33,7 +33,7 @@ public class EditCardOrderActivity extends AppCompatActivity {
         this.selectedSubject = getIntent().getExtras().getString("selectedSubject");
         this.selectedTopic = getIntent().getExtras().getString("selectedTopic");
         this.selectedCard = getIntent().getExtras().getString("selectedCard");
-        this.allCards = getIntent().getStringArrayListExtra("allCards");
+        this.allCards = getIntent().getExtras().getStringArrayList("allCards");
 
         FirebaseDatabase flashcardDB = FirebaseDatabase.getInstance("https://karteikar-default-rtdb.europe-west1.firebasedatabase.app/");
         this.reference = flashcardDB.getReference(user);
@@ -48,24 +48,17 @@ public class EditCardOrderActivity extends AppCompatActivity {
     }
 
     public void saveChanges(View view) {
-        reference.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                int newIndex =  Integer.parseInt(String.valueOf(cardNewPositionEditText.getText())) - 1;
-                if (newIndex >= allCards.size()) {
-                    newIndex = allCards.size()-1;
-                }
-                allCards.remove(selectedCard);
-                allCards.add(newIndex, selectedCard);
-                for (int i=0; i<allCards.size(); i++) {
-                    reference.child(selectedSubject).child(selectedTopic).child(String.valueOf(i)).setValue(allCards.get(i));
-                }
-            }
-
-            public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_LONG).show();
-            }
-        });
+        int newIndex =  Integer.parseInt(String.valueOf(cardNewPositionEditText.getText())) - 1;
+        allCards.remove(selectedCard);
+        if (newIndex >= allCards.size()) {
+            allCards.add(selectedCard);;
+        } else {
+            allCards.add(newIndex, selectedCard);
+        }
+        reference.child(selectedSubject).child(selectedTopic).removeValue();
+        for (int i=0; i<allCards.size(); i++) {
+            reference.child(selectedSubject).child(selectedTopic).child(String.valueOf(i)).setValue(allCards.get(i));
+        }
         this.finish();
     }
 
