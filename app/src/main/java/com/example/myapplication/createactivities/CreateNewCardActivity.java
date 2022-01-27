@@ -1,9 +1,11 @@
 package com.example.myapplication.createactivities;
 
+import android.Manifest;
 import android.app.AlertDialog;
 import android.content.ContentResolver;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
@@ -19,6 +21,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import com.example.myapplication.R;
 import com.example.myapplication.helperclasses.IntentHelper;
@@ -169,6 +173,12 @@ public class CreateNewCardActivity extends AppCompatActivity {
     }
 
     public void share(View view) {
+        boolean hasPermission = (ContextCompat.checkSelfPermission(CreateNewCardActivity.this,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED);
+        if ( !hasPermission) {
+            ActivityCompat.requestPermissions(CreateNewCardActivity.this,
+                    new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},99);
+        }
         if (selectedCard != null) {
             try {
                 BitmapDrawable bitmapDrawable = ((BitmapDrawable) imageView.getDrawable());
