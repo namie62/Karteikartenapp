@@ -6,16 +6,18 @@
     android:layout_height="match_parent"
     android:layout_margin="5dp"
     android:orientation="vertical"
+    android:background="@drawable/et_custom"
     tools:context=".editactivities.EditTopicActivity">
 
     <EditText
         android:id="@+id/topic_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:background="@drawable/et_custom_light"
         android:fontFamily="@font/roboto_regular"
         android:inputType="textPersonName"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
+        android:padding="10dp"
         android:textSize="22sp"
         android:textStyle="bold" />
 
@@ -30,8 +32,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/roboto_regular"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
+            android:padding="10dp"
             android:text="Aktuelle Position: "
             android:textSize="18sp" />
 
@@ -42,9 +43,12 @@
 
         <TextView
             android:id="@+id/topic_old_position_textView"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="73dp"
+            android:layout_marginRight="10dp"
+            android:layout_weight="1"
+            android:gravity="right"
+            android:padding="10dp"
             android:fontFamily="@font/roboto_regular"
             android:textSize="18sp" />
 
@@ -61,25 +65,25 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/roboto_regular"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
+            android:padding="10dp"
             android:text="Neue Position: "
             android:textSize="18sp" />
 
         <View
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_weight="1" />
+            android:layout_weight="2" />
 
         <EditText
             android:id="@+id/topic_new_position_editTextNumber"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="70dp"
+            android:layout_marginRight="10dp"
+            android:layout_weight="1"
+            android:background="@drawable/et_custom_light"
             android:fontFamily="@font/roboto_regular"
             android:inputType="number"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
+            android:padding="10dp"
             android:textAlignment="viewEnd"
             android:textSize="18sp" />
 
