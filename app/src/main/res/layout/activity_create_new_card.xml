@@ -73,9 +73,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
-                android:layout_weight="1"
                 android:background="@drawable/et_custom"
-                android:fillViewport="true"
                 android:fontFamily="@font/roboto_regular"
                 android:gravity="left"
                 android:hint="Rückseite"
@@ -92,11 +90,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_weight="1"
                 android:background="@drawable/et_custom"
                 android:gravity="center"
-                android:paddingTop="15dp"
-                android:paddingBottom="15dp"
                 tools:srcCompat="@tools:sample/avatars" />
         </LinearLayout>
     </ScrollView>
