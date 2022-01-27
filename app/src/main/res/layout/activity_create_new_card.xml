@@ -15,40 +15,32 @@
         android:orientation="horizontal"
         android:layout_marginBottom="10dp">
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/TextThemengebiet"
-            android:layout_width="280dp"
-            android:layout_height="wrap_content">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/front_edit_text"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="10dp"
-                android:height="70dp"
-                android:background="@drawable/et_custom"
-                android:fontFamily="@font/roboto_regular"
-                android:hint="Vorderseite"
-                android:maxHeight="120dp"
-                android:textColor="@color/black"
-                android:textSize="18sp"
-                android:textStyle="italic" />
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <View
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/front_edit_text"
             android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_weight="1" />
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fillViewport="true"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"
+            android:height="70dp"
+            android:background="@drawable/et_custom"
+            android:fontFamily="@font/roboto_regular"
+            android:hint="Vorderseite"
+            android:maxHeight="120dp"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:textStyle="italic" />
 
         <ImageButton
             android:id="@+id/imageButton"
-            android:layout_width="80dp"
-            android:layout_height="70dp"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
             android:layout_marginTop="10dp"
-            android:layout_toRightOf="@id/TextThemengebiet"
             android:background="@drawable/btn_custom"
             android:onClick="insertImg"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
             app:srcCompat="@android:drawable/ic_menu_gallery" />
 
     </LinearLayout>

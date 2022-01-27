@@ -52,7 +52,7 @@
                 android:textSize="20sp" />
 
             <TextView
-                android:id="@+id/progress_study_textView"
+                android:id="@+id/progress_textView"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_gravity="end"
@@ -89,10 +89,13 @@
             <TextView
                 android:id="@+id/card_textView"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_horizontal|center_vertical"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:fillViewport="true"
+                android:gravity="center"
                 android:padding="10dp"
                 android:paddingRight="10dp"
+                android:text="test"
                 android:textColor="@color/black"
                 android:textSize="20sp" />
 
@@ -100,6 +103,8 @@
                 android:id="@+id/imageView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_gravity="bottom"
                 tools:srcCompat="@tools:sample/avatars" />
         </LinearLayout>
     </ScrollView>
