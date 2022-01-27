@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.myapplication.R;
 import com.example.myapplication.helperclasses.IntentHelper;
+import com.example.myapplication.helperclasses.CheckForIllegalChars;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -19,8 +20,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 public class CreateTopicActivity extends AppCompatActivity {
     private TextInputEditText hintTextInputEditText;
@@ -65,7 +64,7 @@ public class CreateTopicActivity extends AppCompatActivity {
                             }
                         }
                     }
-                    if (!checkForIllegalCharacters(newTopic)) {
+                    if (!CheckForIllegalChars.checkForIllegalCharacters(newTopic)) {
                         Toast.makeText(getApplicationContext(), "Nicht erlaubte Zeichen in Themabezeichnung:  . , $ , # , [ , ] , / ,", Toast.LENGTH_SHORT).show();
                     } else if (!duplicate){
                         sortOrder = (int) snapshot.child(selectedSubject).child("sorting").getChildrenCount();
@@ -79,21 +78,11 @@ public class CreateTopicActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
-        if (checkForIllegalCharacters(newTopic)) {
+        if (CheckForIllegalChars.checkForIllegalCharacters(newTopic)) {
             this.finish();
         }
     }
     public void closeWindow(View view){
         ih.goToTopicOverview(checkedSubjects);
-    }
-
-    private boolean checkForIllegalCharacters(String s) {
-        List<String> illegalChars = Arrays.asList(".", "$", "[", "]" , "#", "/");
-        for (String c : illegalChars) {
-            if (s.contains(c)) {
-                return false;
-            }
-        }
-        return true;
     }
 }

@@ -8,6 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.myapplication.R;
+import com.example.myapplication.helperclasses.CheckForIllegalChars;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -16,8 +17,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.Objects;
 
 public class CreateSubjectActivity extends AppCompatActivity {
@@ -49,7 +48,7 @@ public class CreateSubjectActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (newSubject.trim().length() > 0) {
-                    if (!checkForIllegalCharacters(newSubject)) {
+                    if (!CheckForIllegalChars.checkForIllegalCharacters(newSubject)) {
                         Toast.makeText(getApplicationContext(), "Nicht erlaubte Zeichen in Fachbezeichnung:  . , $ , # , [ , ] , / ,", Toast.LENGTH_SHORT).show();
                     } else {
                         sortOrder = (int) (snapshot.child("subject_sorting").getChildrenCount());
@@ -70,18 +69,8 @@ public class CreateSubjectActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
-        if (checkForIllegalCharacters(newSubject)) {
+        if (CheckForIllegalChars.checkForIllegalCharacters(newSubject)) {
             this.finish();
         }
-    }
-
-    private boolean checkForIllegalCharacters(String s) {
-        List<String> illegalChars = Arrays.asList(".", "$", "[", "]" , "#", "/");
-        for (String c : illegalChars) {
-            if (s.contains(c)) {
-                return false;
-            }
-        }
-        return true;
     }
 }

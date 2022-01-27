@@ -10,6 +10,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.myapplication.R;
+import com.example.myapplication.helperclasses.CheckForIllegalChars;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -17,8 +18,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 public class EditTopicActivity extends AppCompatActivity {
     private DatabaseReference reference;
@@ -59,13 +58,13 @@ public class EditTopicActivity extends AppCompatActivity {
                 if (newIndex >= allTopics.size()) {
                     newIndex = allTopics.size()-1;
                 }
-                if (checkForIllegalCharacters(newTopicName)){
+                if (CheckForIllegalChars.checkForIllegalCharacters(newTopicName)){
                     allTopics.remove(selectedTopic);
                     allTopics.add(newIndex, newTopicName);
                     for (int i=0; i<allTopics.size(); i++) {
                         reference.child(selectedSubject).child("sorting").child(String.valueOf(i)).setValue(allTopics.get(i));
                     }
-                    if (!selectedTopic.equals(newTopicName) && checkForIllegalCharacters(newTopicName)) {
+                    if (!selectedTopic.equals(newTopicName) && CheckForIllegalChars.checkForIllegalCharacters(newTopicName)) {
                         reference.child(selectedSubject).child(newTopicName).setValue(snapshot.child(selectedSubject).child(selectedTopic).getValue());
                         reference.child(selectedSubject).child(selectedTopic).removeValue();
                     }
@@ -79,16 +78,6 @@ public class EditTopicActivity extends AppCompatActivity {
             }
         });
         this.finish();
-    }
-
-    private boolean checkForIllegalCharacters(String s) {
-        List<String> illegalChars = Arrays.asList(".", "$", "[", "]" , "#", "/");
-        for (String c : illegalChars) {
-            if (s.contains(c)) {
-                return false;
-            }
-        }
-        return true;
     }
 
     public void cancel(View view) {

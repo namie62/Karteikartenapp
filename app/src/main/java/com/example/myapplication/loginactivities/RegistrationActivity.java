@@ -1,8 +1,6 @@
 package com.example.myapplication.loginactivities;
 
-import android.content.Context;
 import android.os.Bundle;
-import android.text.Editable;
 import android.text.method.LinkMovementMethod;
 import android.view.View;
 import android.widget.EditText;
@@ -14,15 +12,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.myapplication.R;
 import com.example.myapplication.helperclasses.IntentHelper;
+import com.example.myapplication.helperclasses.CheckForIllegalChars;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 public class RegistrationActivity extends AppCompatActivity {
     FirebaseDatabase flashcardDB;
@@ -50,7 +45,7 @@ public class RegistrationActivity extends AppCompatActivity {
             Toast.makeText(this, "Kein Benutzername eingegeben!", Toast.LENGTH_SHORT).show();
         } else if (password.equals("")) {
             Toast.makeText(this, "Kein Passwort eingegeben!", Toast.LENGTH_SHORT).show();
-        } else if (!checkForIllegalCharacters(username)) {
+        } else if (!CheckForIllegalChars.checkForIllegalCharacters(username)) {
             Toast.makeText(getApplicationContext(), "Nicht erlaubte Zeichen in Benutzername:  . , $ , # , [ , ] , / ,", Toast.LENGTH_SHORT).show();
         } else {
             checkUsernameAvailability(username);
@@ -76,16 +71,6 @@ public class RegistrationActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
-    }
-
-    public boolean checkForIllegalCharacters(String s) {
-        List<String> illegalChars = Arrays.asList(".", "$", "[", "]" , "#", "/");
-        for (String c : illegalChars) {
-            if (s.contains(c)) {
-                return false;
-            }
-        }
-        return true;
     }
 
     public void goBack(View view){

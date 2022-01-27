@@ -10,6 +10,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.myapplication.R;
+import com.example.myapplication.helperclasses.CheckForIllegalChars;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -17,8 +18,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 public class EditSubjectActivity extends AppCompatActivity {
     private DatabaseReference reference;
@@ -57,7 +56,7 @@ public class EditSubjectActivity extends AppCompatActivity {
                 if (newIndex >= allSubjects.size()) {
                     newIndex = allSubjects.size() -1;
                 }
-                if (checkForIllegalCharacters(newSubjectName)) {
+                if (CheckForIllegalChars.checkForIllegalCharacters(newSubjectName)) {
                     allSubjects.remove(selectedSubject);
                     allSubjects.add(newIndex, newSubjectName);
                     for (int i = 0; i < allSubjects.size(); i++) {
@@ -77,16 +76,6 @@ public class EditSubjectActivity extends AppCompatActivity {
             }
         });
         this.finish();
-    }
-
-    private boolean checkForIllegalCharacters(String s) {
-        List<String> illegalChars = Arrays.asList(".", "$", "[", "]" , "#", "/");
-        for (String c : illegalChars) {
-            if (s.contains(c)) {
-                return false;
-            }
-        }
-        return true;
     }
 
     public void cancel(View view) {
