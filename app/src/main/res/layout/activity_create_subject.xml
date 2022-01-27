@@ -34,8 +34,9 @@
 
         <Button
             android:id="@+id/cancel_btn"
-            android:layout_width="170dp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight="2"
             android:layout_gravity="right"
             android:gravity="center"
             android:onClick="closeWindow"
@@ -48,8 +49,9 @@
 
         <Button
             android:id="@+id/create_topic_btn"
-            android:layout_width="170dp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight="2"
             android:layout_gravity="right"
             android:gravity="center"
             android:onClick="saveSubject"
