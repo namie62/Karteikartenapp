@@ -46,8 +46,6 @@ public class CreateNewCardActivity extends AppCompatActivity {
     private IntentHelper ih;
     private EditText frontEditText, backEditText;
     private ImageView imageView;
-    private TextInputLayout TextContent;
-    private ScrollView ScrollView;
     private StorageReference storageReference;
     private Uri uri;
     private boolean newPicture = false;
@@ -65,9 +63,6 @@ public class CreateNewCardActivity extends AppCompatActivity {
         this.frontEditText = findViewById(R.id.front_edit_text);
         this.backEditText = findViewById(R.id.back_edit_text);
         this.imageView = findViewById(R.id.imageView);
-        this.TextContent = findViewById(R.id.TextInhalt);
-        this.ScrollView = (ScrollView) findViewById(R.id.ScrollView);
-        this.imageView = (ImageView) findViewById(R.id.imageView);
 
         this.ih = new IntentHelper(this, user);
         this.selectedTopic = getIntent().getExtras().getString("selectedTopic");
@@ -235,13 +230,5 @@ public class CreateNewCardActivity extends AppCompatActivity {
         ContentResolver cr = getContentResolver();
         MimeTypeMap mime = MimeTypeMap.getSingleton();
         return mime.getExtensionFromMimeType(cr.getType(uri));
-    }
-
-    private void scrollToBottom() {
-        ScrollView.post(new Runnable() {
-            public void run() {
-                ScrollView.smoothScrollTo(0, TextContent.getBottom());
-            }
-        });
     }
 }

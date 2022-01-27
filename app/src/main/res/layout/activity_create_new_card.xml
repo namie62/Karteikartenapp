@@ -5,13 +5,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:layout_margin="5dp"
     tools:context=".createactivities.CreateNewCardActivity">
 
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal" >
+        android:orientation="horizontal"
+        android:layout_marginBottom="10dp">
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/TextThemengebiet"
@@ -22,11 +24,11 @@
                 android:id="@+id/front_edit_text"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:height="70dp"
                 android:layout_marginTop="10dp"
+                android:height="70dp"
+                android:background="@drawable/et_custom"
                 android:fontFamily="@font/roboto_regular"
                 android:hint="Vorderseite"
-                android:background="@drawable/et_custom"
                 android:maxHeight="120dp"
                 android:textColor="@color/black"
                 android:textSize="18sp"
@@ -51,108 +53,93 @@
 
     </LinearLayout>
 
-    <FrameLayout
+    <ScrollView
+        android:id="@+id/ScrollView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="0dp"
+        android:layout_above="@+id/cancel_btn"
+        android:layout_weight="2"
+        android:layout_gravity="center"
+        android:fillViewport="true">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
+            android:fillViewport="true"
             android:orientation="vertical">
 
-            <ScrollView
-                android:id="@+id/ScrollView"
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/back_edit_text"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_above="@+id/cancelBtn"
-                android:layout_weight="2" >
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_weight="1"
+                android:background="@drawable/et_custom"
+                android:fillViewport="true"
+                android:fontFamily="@font/roboto_regular"
+                android:gravity="left"
+                android:hint="Rückseite"
+                android:paddingLeft="15dp"
+                android:paddingTop="10dp"
+                android:paddingRight="15dp"
+                android:paddingBottom="10dp"
+                android:singleLine="false"
+                android:textColor="@color/black"
+                android:textSize="18sp" />
 
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/TextInhalt"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/TextThemengebiet"
-                    android:textStyle="italic" >
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/back_edit_text"
-                        android:layout_width="match_parent"
-                        android:layout_height="300dp"
-                        android:layout_marginTop="10dp"
-                        android:background="@drawable/et_custom"
-                        android:fontFamily="@font/roboto_regular"
-                        android:hint="Rückseite"
-                        android:maxHeight="370dp"
-                        android:singleLine="false"
-                        android:textColor="@color/black"
-                        android:textSize="18sp"
-                        android:layout_weight="1" />
-
-
-                    <ImageView
-                        android:id="@+id/imageView"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        tools:srcCompat="@tools:sample/avatars" />
-
-                </com.google.android.material.textfield.TextInputLayout>
-
-            </ScrollView>
-
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:background="@drawable/et_custom"
+                android:gravity="center"
+                android:paddingTop="15dp"
+                android:paddingBottom="15dp"
+                tools:srcCompat="@tools:sample/avatars" />
         </LinearLayout>
+    </ScrollView>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fillViewport="true"
+        android:layout_gravity="bottom"
+        android:layout_marginTop="5dp"
+        android:orientation="horizontal">
 
-
-        <RelativeLayout
-            android:layout_width="match_parent"
+        <Button
+            android:id="@+id/save_btn"
+            android:layout_width="0dp"
+            android:layout_weight="2"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="20dp" >
+            android:gravity="center"
+            android:onClick="saveContent"
+            android:text="Speichern" />
 
-            <Button
-                android:id="@+id/cancelBtn"
-                android:layout_width="120dp"
-                android:layout_height="wrap_content"
-                android:onClick="cancelPopUp"
-                android:text="Abbrechen"
-                android:gravity="center"
-                android:layout_below="@+id/imageView"
-                tools:ignore="NotSibling"
-                android:layout_toLeftOf="@+id/share_btn"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentBottom="true"
-                android:layout_marginRight="22dp"/>
+        <Button
+            android:id="@+id/share_btn"
+            android:layout_width="65dp"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:onClick="share"
+            app:icon="?attr/actionModeShareDrawable"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            app:iconPadding="0dp"
+            tools:ignore="NotSibling" />
 
+        <Button
+            android:id="@+id/cancel_btn"
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:onClick="cancelPopUp"
+            android:text="Abbrechen"
+            tools:ignore="NotSibling" />
 
-
-            <Button
-                android:id="@+id/share_btn"
-                android:layout_width="65dp"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/imageView"
-                android:layout_centerHorizontal="true"
-                android:layout_alignParentBottom="true"
-                android:onClick="share"
-                app:icon="?attr/actionModeShareDrawable"
-                tools:ignore="NotSibling" />
-
-
-
-            <Button
-                android:id="@+id/buttonspeichern"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_toRightOf="@+id/share_btn"
-                android:layout_alignParentRight="true"
-                android:gravity="center"
-                android:onClick="saveContent"
-                android:text="Speichern"
-                android:layout_marginLeft="22dp"/>
-
-        </RelativeLayout>
-
-    </FrameLayout>
+    </LinearLayout>
 
 </LinearLayout>
