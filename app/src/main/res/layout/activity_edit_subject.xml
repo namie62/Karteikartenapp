@@ -29,7 +29,8 @@
 
         <TextView
             android:id="@+id/current_Position_textView"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="3"
             android:layout_height="wrap_content"
             android:fontFamily="@font/roboto_regular"
             android:padding="10dp"
@@ -50,7 +51,6 @@
             android:fontFamily="@font/roboto_regular"
             android:gravity="right"
             android:padding="10dp"
-            android:text="pos"
             android:textSize="18sp" />
 
     </LinearLayout>
@@ -63,7 +63,8 @@
 
         <TextView
             android:id="@+id/new_Position_textView"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="3"
             android:layout_height="wrap_content"
             android:fontFamily="@font/roboto_regular"
             android:padding="10dp"
@@ -86,33 +87,36 @@
             android:gravity="right"
             android:inputType="number"
             android:padding="10dp"
-            android:text="pos"
             android:textSize="18sp" />
 
     </LinearLayout>
 
+    <View
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_margin="10dp"
         android:orientation="horizontal"
         android:layout_marginTop="10dp" >
 
-
         <Button
             android:id="@+id/cancel_btn"
-            android:layout_width="170dp"
+            android:layout_width="0dp"
+            android:layout_weight="1"
             android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
             android:onClick="cancel"
             android:text="Abbrechen" />
 
-        <View
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_weight="1" />
-
         <Button
             android:id="@+id/save_btn"
-            android:layout_width="170dp"
+            android:layout_width="0dp"
+            android:layout_weight="1"
             android:layout_height="wrap_content"
             android:onClick="saveChanges"
             android:text="Speichern" />
