@@ -5,16 +5,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:layout_margin="5dp"
     tools:context=".createactivities.CreateTopicActivity">
 
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:fontFamily="@font/roboto_regular"
-            android:text="Fach auswählen:"
-            android:textSize="18sp" />
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/roboto_regular"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:text="Fach auswählen:"
+        android:textSize="18sp" />
 
         <Spinner
             android:id="@+id/select_subject_spinner"
@@ -31,12 +33,14 @@
         android:id="@+id/enterEditText"
         android:layout_width="match_parent"
         android:layout_height="74dp"
+        android:layout_below="@+id/select_subject_spinner"
         android:layout_marginTop="10dp"
+        android:background="@drawable/et_custom"
         android:fontFamily="@font/roboto_regular"
         android:hint="Neues Thema eingeben"
-        android:layout_below="@+id/select_subject_spinner"
-        android:background="@drawable/et_custom"
         android:maxHeight="120dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
         android:textColor="@color/black"
         android:textSize="18sp"
         android:textStyle="italic"

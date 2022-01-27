@@ -5,14 +5,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:layout_margin="5dp"
     tools:context=".createactivities.ChooseSubjectAndTopicForNewCardActivity">
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
         android:fontFamily="@font/roboto_regular"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
         android:text="Fach auswählen:"
         android:textSize="18sp" />
 
@@ -34,6 +36,8 @@
         android:layout_below="@+id/select_subject_spinner"
         android:layout_marginTop="10dp"
         android:fontFamily="@font/roboto_regular"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
         android:text="Thema auswählen:"
         android:textSize="18sp" />
 
