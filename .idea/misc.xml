@@ -5,6 +5,7 @@
       <map>
         <entry key="../../../../../layout/custom_preview.xml" value="0.13958333333333334" />
         <entry key="..\:/Users/namie/AndroidStudioProjects/TEst/Karteikartenapp/app/src/main/res/layout/activity_main.xml" value="0.13020833333333334" />
+        <entry key="app/src/main/res/drawable/et_custom_dark.xml" value="0.15462962962962962" />
         <entry key="app/src/main/res/layout/activity_choose_subject_and_topic_for_new_card.xml" value="0.24583333333333332" />
         <entry key="app/src/main/res/layout/activity_create_new_card.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_create_subject.xml" value="0.12708333333333333" />
@@ -18,7 +19,7 @@
         <entry key="app/src/main/res/layout/activity_quiz_mode_with_scroll.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_registration.xml" value="0.335" />
         <entry key="app/src/main/res/layout/activity_show_cards.xml" value="0.12708333333333333" />
-        <entry key="app/src/main/res/layout/activity_study_mode.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_study_mode.xml" value="0.165" />
         <entry key="app/src/main/res/layout/activity_study_mode_with_scroll.xml" value="0.25" />
       </map>
     </option>

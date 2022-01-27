@@ -24,33 +24,46 @@
             android:onClick="previous"
             app:icon="@android:drawable/ic_menu_revert"
             tools:ignore="SpeakableTextPresentCheck" />
-
         <View
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_weight="1" />
 
-        <TextView
-            android:id="@+id/current_progress_textView"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:background="@android:color/darker_gray"
-            android:fontFamily="@font/roboto_regular"
-            android:gravity="center"
-            android:text="Aktuelle Lernstufe: "
-            android:textColor="@color/black"
-            android:textSize="20sp"/>
+            android:fillViewport="true"
+            android:orientation="horizontal"
+            android:layout_gravity="end"
+            android:background="@drawable/et_custom_dark">
 
-        <TextView
-            android:id="@+id/progress_study_textView"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:background="@android:color/darker_gray"
-            android:fontFamily="@font/roboto_regular"
-            android:gravity="center"
-            android:text="TextView"
-            android:textColor="@color/black"
-            android:textSize="20sp"/>
+            <TextView
+                android:id="@+id/current_progress_textView"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="end"
+                android:fontFamily="@font/roboto_regular"
+                android:gravity="center"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:text="Aktuelle Lernstufe: "
+                android:textColor="@color/black"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/progress_study_textView"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="end"
+                android:fontFamily="@font/roboto_regular"
+                android:gravity="center"
+                android:paddingLeft="10dp"
+                android:paddingEnd="10dp"
+                android:paddingRight="10dp"
+                android:text="TextView"
+                android:textColor="@color/black"
+                android:textSize="20sp" />
+        </LinearLayout>
 
     </LinearLayout>
 
@@ -73,11 +86,13 @@
                 android:id="@+id/front_text_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@drawable/et_custom"
+                android:padding="10dp"
                 android:text="TextView"
                 android:textColor="@color/black"
                 android:textSize="20sp"
-                android:background="@drawable/bg_round"
-                android:layout_gravity="center"/>
+                android:layout_marginBottom="5dp"/>
 
 
             <LinearLayout
@@ -86,15 +101,17 @@
                 android:layout_weight="1"
                 android:orientation="vertical"
                 android:fillViewport="true"
-                android:background="@drawable/bg_round"
+                android:background="@drawable/et_custom"
                 android:layout_gravity="center">
+
                 <TextView
                     android:id="@+id/back_text_view"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:padding="10dp"
                     android:textColor="@color/black"
-                    android:textSize="20sp"
-                    android:layout_gravity="center"/>
+                    android:textSize="20sp" />
 
                 <ImageView
                     android:id="@+id/imageView"
