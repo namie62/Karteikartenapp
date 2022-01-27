@@ -16,6 +16,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class EditTopicActivity extends AppCompatActivity {
@@ -57,10 +58,17 @@ public class EditTopicActivity extends AppCompatActivity {
                 if (newIndex >= allTopics.size()) {
                     newIndex = allTopics.size()-1;
                 }
-                reference.child(selectedSubject).child(newTopicName).setValue(snapshot.child(selectedSubject).child(selectedTopic).getValue());
+                ArrayList<String> allCards = new ArrayList<>();
+                for (DataSnapshot dataSnapshot : snapshot.child(selectedSubject).child(selectedTopic).getChildren()){
+                    allCards.add(dataSnapshot.getValue(String.class));
+                }
                 reference.child(selectedSubject).child(selectedTopic).removeValue();
+                for (int i=0; i<allCards.size(); i++) {
+                    reference.child(selectedSubject).child(newTopicName).child(String.valueOf(i)).setValue(allCards.get(i));
+                }
                 allTopics.remove(selectedTopic);
                 allTopics.add(newIndex, newTopicName);
+                reference.child(selectedSubject).child("sorting").removeValue();
                 for (int i=0; i<allTopics.size(); i++) {
                     reference.child(selectedSubject).child("sorting").child(String.valueOf(i)).setValue(allTopics.get(i));
                 }

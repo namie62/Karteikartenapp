@@ -30,8 +30,6 @@ public class ShowTopicsActivity extends AppCompatActivity {
     private IntentHelper ih;
     private String user;
     private DatabaseReference reference;
-    private final Context c = this;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -103,11 +101,11 @@ public class ShowTopicsActivity extends AppCompatActivity {
                     }
                 }
                 if (cardsInTopics.isEmpty()) {
-                    Toast.makeText(c, "Keine Karten in ausgewählten Themen gefunden!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Keine Karten in ausgewählten Themen gefunden!", Toast.LENGTH_SHORT).show();
                 } else if (checkedTopics.size() != 0) {
                     ih.startStudyMode(checkedSubjects, checkedTopics);
                 } else {
-                    Toast.makeText(c, "Bitte ein Thema auswählen!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Bitte ein Thema auswählen!", Toast.LENGTH_SHORT).show();
                 }
             }
             public void onCancelled(@NonNull DatabaseError error) {
@@ -129,11 +127,11 @@ public class ShowTopicsActivity extends AppCompatActivity {
                     }
                 }
                 if (cardsInTopics.isEmpty()) {
-                    Toast.makeText(c, "Keine Karten in ausgewählten Themen gefunden!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Keine Karten in ausgewählten Themen gefunden!", Toast.LENGTH_SHORT).show();
                 } else if (checkedTopics.size() != 0) {
                     ih.startQuizmode(checkedSubjects, checkedTopics);
                 } else {
-                    Toast.makeText(c, "Bitte ein Thema auswählen!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Bitte ein Thema auswählen!", Toast.LENGTH_SHORT).show();
                 }
             }
             public void onCancelled(@NonNull DatabaseError error) {
@@ -150,7 +148,7 @@ public class ShowTopicsActivity extends AppCompatActivity {
         if(checkedSubjects.size() == 1 && checkedTopics.size() ==1) {
             ih.editTopic(showObjects, checkedSubjects.get(0), checkedTopics.get(0));
         } else {
-            Toast.makeText(c, "Bitte exakt 1 Fach und exakt 1 Thema auswählen!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Bitte exakt 1 Fach und exakt 1 Thema auswählen!", Toast.LENGTH_SHORT).show();
         }
     }
 
