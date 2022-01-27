@@ -40,7 +40,7 @@
             android:background="@drawable/btn_custom"
             android:onClick="insertImg"
             android:paddingLeft="20dp"
-            android:paddingRight="20dp"
+            android:paddingRight="15dp"
             app:srcCompat="@android:drawable/ic_menu_gallery" />
 
     </LinearLayout>
@@ -69,10 +69,7 @@
                 android:fontFamily="@font/roboto_regular"
                 android:gravity="left"
                 android:hint="Rückseite"
-                android:paddingLeft="15dp"
-                android:paddingTop="10dp"
-                android:paddingRight="15dp"
-                android:paddingBottom="10dp"
+                android:padding="15dp"
                 android:singleLine="false"
                 android:textColor="@color/black"
                 android:textSize="18sp" />
