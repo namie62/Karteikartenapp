@@ -30,27 +30,41 @@
             android:layout_height="0dp"
             android:layout_weight="1" />
 
-        <TextView
-            android:id="@+id/current_progress_textView"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:background="@android:color/darker_gray"
-            android:fontFamily="@font/roboto_regular"
-            android:gravity="center"
-            android:text="Aktuelle Lernstufe: "
-            android:textColor="@color/black"
-            android:textSize="20sp" />
+            android:fillViewport="true"
+            android:orientation="horizontal"
+            android:layout_gravity="end"
+            android:background="@drawable/et_custom_dark">
 
-        <TextView
-            android:id="@+id/progress_textView"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:background="@android:color/darker_gray"
-            android:fontFamily="@font/roboto_regular"
-            android:gravity="center"
-            android:textColor="@color/black"
-            android:textSize="20sp"/>
+            <TextView
+                android:id="@+id/current_progress_textView"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="end"
+                android:fontFamily="@font/roboto_regular"
+                android:gravity="center"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:text="Aktuelle Lernstufe: "
+                android:textColor="@color/black"
+                android:textSize="20sp" />
 
+            <TextView
+                android:id="@+id/progress_study_textView"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="end"
+                android:fontFamily="@font/roboto_regular"
+                android:gravity="center"
+                android:paddingLeft="10dp"
+                android:paddingEnd="10dp"
+                android:paddingRight="10dp"
+                android:text="TextView"
+                android:textColor="@color/black"
+                android:textSize="20sp" />
+        </LinearLayout>
     </LinearLayout>
 
     <ScrollView
