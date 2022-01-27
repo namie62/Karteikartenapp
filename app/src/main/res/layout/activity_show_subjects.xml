@@ -5,13 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:layout_margin="5dp"
     tools:context=".overviewactivities.ShowSubjectsActivity">
 
     <TextView
         android:id="@+id/heading"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_marginTop="10dp"
         android:background="@android:color/darker_gray"
         android:fontFamily="@font/roboto_regular"
         android:gravity="center"
