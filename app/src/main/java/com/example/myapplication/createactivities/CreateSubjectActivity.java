@@ -8,7 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.myapplication.R;
-import com.example.myapplication.helperclasses.CheckForIllegalChars;
+import com.example.myapplication.helperclasses.CheckStuff;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -48,7 +48,7 @@ public class CreateSubjectActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (newSubject.trim().length() > 0) {
-                    if (!CheckForIllegalChars.checkForIllegalCharacters(newSubject)) {
+                    if (!CheckStuff.checkForIllegalCharacters(newSubject)) {
                         Toast.makeText(getApplicationContext(), "Nicht erlaubte Zeichen in Fachbezeichnung:  . , $ , # , [ , ] , / ,", Toast.LENGTH_SHORT).show();
                     } else {
                         sortOrder = (int) (snapshot.child("subject_sorting").getChildrenCount());
@@ -69,7 +69,7 @@ public class CreateSubjectActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
-        if (CheckForIllegalChars.checkForIllegalCharacters(newSubject)) {
+        if (CheckStuff.checkForIllegalCharacters(newSubject)) {
             this.finish();
         }
     }

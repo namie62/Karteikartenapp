@@ -11,7 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.myapplication.R;
 import com.example.myapplication.helperclasses.IntentHelper;
-import com.example.myapplication.helperclasses.CheckForIllegalChars;
+import com.example.myapplication.helperclasses.CheckStuff;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -64,7 +64,7 @@ public class CreateTopicActivity extends AppCompatActivity {
                             }
                         }
                     }
-                    if (!CheckForIllegalChars.checkForIllegalCharacters(newTopic)) {
+                    if (!CheckStuff.checkForIllegalCharacters(newTopic)) {
                         Toast.makeText(getApplicationContext(), "Nicht erlaubte Zeichen in Themabezeichnung:  . , $ , # , [ , ] , / ,", Toast.LENGTH_SHORT).show();
                     } else if (!duplicate){
                         sortOrder = (int) snapshot.child(selectedSubject).child("sorting").getChildrenCount();
@@ -78,7 +78,7 @@ public class CreateTopicActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
-        if (CheckForIllegalChars.checkForIllegalCharacters(newTopic)) {
+        if (CheckStuff.checkForIllegalCharacters(newTopic)) {
             this.finish();
         }
     }

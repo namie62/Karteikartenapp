@@ -12,7 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.myapplication.helperclasses.IntentHelper;
-import com.example.myapplication.helperclasses.CheckForIllegalChars;
+import com.example.myapplication.helperclasses.CheckStuff;
 import com.example.myapplication.loginactivities.RegistrationActivity;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(this, "Kein Benutzername eingegeben!", Toast.LENGTH_SHORT).show();
         } else if (password.equals("")) {
             Toast.makeText(this, "Kein Passwort eingegeben!", Toast.LENGTH_SHORT).show();
-        } else if (!CheckForIllegalChars.checkForIllegalCharacters(username)) {
+        } else if (!CheckStuff.checkForIllegalCharacters(username)) {
             Toast.makeText(this, "Nicht erlaubte Zeichen in Benutzername:  . , $ , # , [ , ] , / ,", Toast.LENGTH_SHORT).show();
         } else {
             checkExistenceAndLogin(username, password);

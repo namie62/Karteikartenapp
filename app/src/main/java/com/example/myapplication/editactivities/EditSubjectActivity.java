@@ -10,7 +10,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.myapplication.R;
-import com.example.myapplication.helperclasses.CheckForIllegalChars;
+import com.example.myapplication.helperclasses.CheckStuff;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -24,6 +24,7 @@ public class EditSubjectActivity extends AppCompatActivity {
     private String selectedSubject;
     private EditText subjectNameEditText, subjectNewPositionEditText;
     private ArrayList<String> allSubjects;
+    private int oldIndex;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +36,7 @@ public class EditSubjectActivity extends AppCompatActivity {
         this.allSubjects = getIntent().getExtras().getStringArrayList("checkedSubjects");
         FirebaseDatabase flashcardDB = FirebaseDatabase.getInstance("https://karteikar-default-rtdb.europe-west1.firebasedatabase.app/");
         this.reference = flashcardDB.getReference(user);
-        int oldIndex = allSubjects.indexOf(selectedSubject);
+        oldIndex = allSubjects.indexOf(selectedSubject);
 
         subjectNameEditText = findViewById(R.id.subject_name);
         subjectNameEditText.setText(selectedSubject);
@@ -52,11 +53,16 @@ public class EditSubjectActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 String newSubjectName = subjectNameEditText.getText().toString();
-                int newIndex =  Integer.parseInt(String.valueOf(subjectNewPositionEditText.getText())) - 1;
-                if (newIndex >= allSubjects.size()) {
-                    newIndex = allSubjects.size() -1;
+                int newIndex;
+                try {
+                    newIndex =  Integer.parseInt(String.valueOf(subjectNewPositionEditText.getText())) - 1;
+                    if (newIndex >= allSubjects.size()) {
+                        newIndex = allSubjects.size() -1;
+                    }
+                } catch (Exception e) {
+                    newIndex = oldIndex;
                 }
-                if (CheckForIllegalChars.checkForIllegalCharacters(newSubjectName)) {
+                if (CheckStuff.checkForIllegalCharacters(newSubjectName)) {
                     allSubjects.remove(selectedSubject);
                     allSubjects.add(newIndex, newSubjectName);
                     for (int i = 0; i < allSubjects.size(); i++) {

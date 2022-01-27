@@ -3,7 +3,7 @@ package com.example.myapplication.helperclasses;
 import java.util.Arrays;
 import java.util.List;
 
-public class CheckForIllegalChars {
+public class CheckStuff {
 
     public static boolean checkForIllegalCharacters(String s) {
         List<String> illegalChars = Arrays.asList(".", "$", "[", "]" , "#", "/");

@@ -23,6 +23,7 @@ public class EditCardOrderActivity extends AppCompatActivity {
     private String selectedTopic, selectedSubject, selectedCard;
     private ArrayList<String> allCards;
     private EditText cardNewPositionEditText;
+    private int oldIndex;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +38,7 @@ public class EditCardOrderActivity extends AppCompatActivity {
 
         FirebaseDatabase flashcardDB = FirebaseDatabase.getInstance("https://karteikar-default-rtdb.europe-west1.firebasedatabase.app/");
         this.reference = flashcardDB.getReference(user);
-        int oldIndex = allCards.indexOf(selectedCard);
+        oldIndex = allCards.indexOf(selectedCard);
 
 
         TextView cardOldPositionTextView = findViewById(R.id.card_old_position_textView);
@@ -48,7 +49,13 @@ public class EditCardOrderActivity extends AppCompatActivity {
     }
 
     public void saveChanges(View view) {
-        int newIndex =  Integer.parseInt(String.valueOf(cardNewPositionEditText.getText())) - 1;
+        int newIndex;
+        try {
+            newIndex =  Integer.parseInt(String.valueOf(cardNewPositionEditText.getText())) - 1;
+        } catch (Exception e) {
+            newIndex = oldIndex;
+        }
+
         allCards.remove(selectedCard);
         if (newIndex >= allCards.size()) {
             allCards.add(selectedCard);;

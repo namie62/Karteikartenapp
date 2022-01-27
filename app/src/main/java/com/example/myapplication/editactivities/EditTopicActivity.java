@@ -10,7 +10,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.myapplication.R;
-import com.example.myapplication.helperclasses.CheckForIllegalChars;
+import com.example.myapplication.helperclasses.CheckStuff;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -24,6 +24,7 @@ public class EditTopicActivity extends AppCompatActivity {
     private String selectedTopic, selectedSubject;
     private ArrayList<String> allTopics;
     private EditText topicNameEditText, topicNewPositionEditText;
+    private int oldIndex;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +38,7 @@ public class EditTopicActivity extends AppCompatActivity {
 
         FirebaseDatabase flashcardDB = FirebaseDatabase.getInstance("https://karteikar-default-rtdb.europe-west1.firebasedatabase.app/");
         this.reference = flashcardDB.getReference(user);
-        int oldIndex = allTopics.indexOf(selectedTopic);
+        oldIndex = allTopics.indexOf(selectedTopic);
 
         topicNameEditText = findViewById(R.id.topic_name);
         topicNameEditText.setText(selectedTopic);
@@ -54,17 +55,22 @@ public class EditTopicActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 String newTopicName = topicNameEditText.getText().toString();
-                int newIndex =  Integer.parseInt(String.valueOf(topicNewPositionEditText.getText())) - 1;
-                if (newIndex >= allTopics.size()) {
-                    newIndex = allTopics.size()-1;
+                int newIndex;
+                try {
+                    newIndex =  Integer.parseInt(String.valueOf(topicNewPositionEditText.getText())) - 1;
+                    if (newIndex >= allTopics.size()) {
+                        newIndex = allTopics.size()-1;
+                    }
+                } catch (Exception e) {
+                    newIndex = oldIndex;
                 }
-                if (CheckForIllegalChars.checkForIllegalCharacters(newTopicName)){
+                if (CheckStuff.checkForIllegalCharacters(newTopicName)){
                     allTopics.remove(selectedTopic);
                     allTopics.add(newIndex, newTopicName);
                     for (int i=0; i<allTopics.size(); i++) {
                         reference.child(selectedSubject).child("sorting").child(String.valueOf(i)).setValue(allTopics.get(i));
                     }
-                    if (!selectedTopic.equals(newTopicName) && CheckForIllegalChars.checkForIllegalCharacters(newTopicName)) {
+                    if (!selectedTopic.equals(newTopicName) && CheckStuff.checkForIllegalCharacters(newTopicName)) {
                         reference.child(selectedSubject).child(newTopicName).setValue(snapshot.child(selectedSubject).child(selectedTopic).getValue());
                         reference.child(selectedSubject).child(selectedTopic).removeValue();
                     }
