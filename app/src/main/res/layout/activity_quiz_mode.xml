@@ -146,7 +146,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:onClick="rightAnswer"
-            app:icon="@android:drawable/presence_online" />
+            app:icon="?android:attr/textCheckMark" />
 
     </LinearLayout>
 

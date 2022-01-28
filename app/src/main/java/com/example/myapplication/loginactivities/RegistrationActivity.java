@@ -63,6 +63,7 @@ public class RegistrationActivity extends AppCompatActivity {
                 } else {
                     reference.child("password").setValue(passwordEditText.getText().toString());
                     ih.setUser(usernameEditText.getText().toString());
+                    Toast.makeText(getApplicationContext(), "Registrierung erfolgreich, bitte loggen Sie sich  nun ein!", Toast.LENGTH_SHORT).show();
                     ih.goToLogin();
                 }
             }
