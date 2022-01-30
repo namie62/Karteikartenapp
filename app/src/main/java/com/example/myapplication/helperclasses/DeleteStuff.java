@@ -31,20 +31,7 @@ public class DeleteStuff {
         this.applicationContext = applicationContext;
     }
 
-    public DeleteStuff(Context applicationContext, DatabaseReference reference, ArrayList<String> checkedSubjects, ArrayList<String> checkedTopics) {
-        this.reference = reference;
-        this.checkedSubjects = checkedSubjects;
-        this.checkedTopics = checkedTopics;
-        this.applicationContext = applicationContext;
-    }
-
-    public DeleteStuff(Context applicationContext, DatabaseReference reference, ArrayList<String> checkedSubjects) {
-        this.reference = reference;
-        this.checkedSubjects = checkedSubjects;
-        this.applicationContext = applicationContext;
-    }
-
-    public void deleteSubjects() {
+    public static void deleteSubjects(Context applicationContext, DatabaseReference reference, ArrayList<String> checkedSubjects) {
         reference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -78,7 +65,7 @@ public class DeleteStuff {
         });
     }
 
-    public void deleteTopics() {
+    public static void deleteTopics(Context applicationContext, DatabaseReference reference, ArrayList<String> checkedSubjects, ArrayList<String> checkedTopics) {
         reference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -112,7 +99,7 @@ public class DeleteStuff {
         });
     }
 
-    public void deleteCards() {
+    public static void deleteCards(Context applicationContext, DatabaseReference reference, ArrayList<String> checkedSubjects, ArrayList<String> checkedTopics, ArrayList<String> checkedCards) {
         reference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
