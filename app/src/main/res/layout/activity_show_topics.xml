@@ -108,35 +108,32 @@
 
         <Button
             android:id="@+id/quiz_topic_btn"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:layout_marginRight="5dp"
             android:text="@string/Abfrageknopf"
             android:onClick = "startQuizMode"
             android:gravity="center" />
 
-        <View
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_weight="1" />
 
         <Button
             android:id="@+id/study_mode_btn"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:layout_marginRight="5dp"
             android:text="Lernen"
             android:onClick="startStudyMode"
             android:gravity="center" />
 
-        <View
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_weight="1" />
 
         <Button
             android:id="@+id/go_to_cards_btn"
-            android:layout_width="wrap_content"
+            android:layout_width="50dp"
             android:layout_height="wrap_content"
-            android:text="@string/InsThema"
+            app:icon="@drawable/baseline_arrow_forward_ios_20"
+            app:iconTint="#FFFFFF"
             android:onClick="goToCards"
             android:gravity="center" />
 

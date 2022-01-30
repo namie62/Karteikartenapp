@@ -116,11 +116,11 @@
 
         <Button
             android:id="@+id/wrong_btn"
-            android:layout_width="65dp"
+            android:layout_width="50dp"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:onClick="wrongAnswer"
-            app:icon="@android:drawable/ic_delete" />
+            app:icon="@drawable/baseline_close_24" />
 
         <View
             android:layout_width="0dp"
@@ -142,11 +142,11 @@
 
         <Button
             android:id="@+id/correct_btn"
-            android:layout_width="65dp"
+            android:layout_width="50dp"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:onClick="rightAnswer"
-            app:icon="?android:attr/textCheckMark" />
+            app:icon="@drawable/outline_done_24" />
 
     </LinearLayout>
 
