@@ -158,7 +158,6 @@ public class ShowSubjectsActivity extends AppCompatActivity {
     }
 
     public void deleteSubject(View view) {
-        DeleteStuff ds = new DeleteStuff(getApplicationContext(), reference, checkedSubjects);
-        ds.deleteSubjects();
+        DeleteStuff.deleteSubjects(getApplicationContext(), reference, checkedSubjects);
     }
 }

@@ -117,8 +117,7 @@ public class ShowCardsActivity extends AppCompatActivity {
     }
 
     public void deleteCard(View view) {
-        DeleteStuff ds = new DeleteStuff(getApplicationContext(), reference, checkedSubjects, checkedTopics, checkedCards);
-        ds.deleteCards();
+        DeleteStuff.deleteCards(getApplicationContext(), reference, checkedSubjects, checkedTopics, checkedCards);
     }
 
     public void editSortOrder(View view) {
