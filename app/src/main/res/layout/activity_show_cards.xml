@@ -118,7 +118,7 @@
             android:layout_below="@+id/cards_listView"
             android:text="@string/Lernmodusknopf"
             android:onClick="startStudyMode"
-            android:layout_marginRight="5dp"
+            android:layout_marginRight="10dp"
             android:gravity="center" />
 
 
