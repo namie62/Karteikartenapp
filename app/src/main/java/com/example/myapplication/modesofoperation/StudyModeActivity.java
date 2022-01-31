@@ -49,7 +49,7 @@ public class StudyModeActivity extends AppCompatActivity {
         ArrayList<Flashcard> allCards = new ArrayList<>();
         this.imageView = findViewById(R.id.imageView);
 
-        reference.addValueEventListener(new ValueEventListener() {
+        reference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) {
@@ -124,6 +124,7 @@ public class StudyModeActivity extends AppCompatActivity {
             Flashcard card = cards.get(index);
             fillFrontTextView(card.getFront());
             fillBackTextView(card.getBack());
+            setProgressTextView(card.getProgress());
             Picasso.get().load(card.getImg_uri()).into(imageView);
         } else {
             ih.goToStartMenu();
@@ -136,6 +137,7 @@ public class StudyModeActivity extends AppCompatActivity {
             Flashcard card = cards.get(index);
             fillFrontTextView(card.getFront());
             fillBackTextView(card.getBack());
+            setProgressTextView(card.getProgress());
             Picasso.get().load(card.getImg_uri()).into(imageView);
         } else {
             ih.goToStartMenu();

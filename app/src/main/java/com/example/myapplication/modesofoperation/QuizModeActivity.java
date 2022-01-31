@@ -139,6 +139,7 @@ public class QuizModeActivity extends AppCompatActivity {
             index += 1;
             card = cards.get(index);
             textView.setText(card.getFront());
+            setProgressTextView(card.getProgress());
             imageView.setImageResource(android.R.color.transparent);
         } else {
             ih.goToStartMenu();
@@ -151,10 +152,10 @@ public class QuizModeActivity extends AppCompatActivity {
 
     public void rightAnswer(View view) {
         Flashcard flashcard = cards.get(index);
-        int progress = flashcard.getProgress();
+        int progress = flashcard.getProgress() +1;
         String key = flashcard.getKey();
         if (progress < 5 ) {
-            reference.child("cards").child(key).child("progress").setValue(progress+1);
+            reference.child("cards").child(key).child("progress").setValue(progress);
         }
         nextCard();
     }

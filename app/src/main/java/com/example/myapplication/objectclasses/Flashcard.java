@@ -12,7 +12,6 @@ public class Flashcard {
         this.progress = 1;
     }
 
-
     public int getProgress() {
         return progress;
     }
